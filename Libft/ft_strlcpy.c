@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 11:48:59 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/07/31 12:40:49 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/07/31 22:22:05 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ size_t	ft_strlcpy(char *dst, char *src, size_t dstsize)
 	size_t	i;
 
 	if (!src || !dst)
-		return (NULL);
+		return (0);
 	if (dstsize > 0)
 	{
 		i = 0;

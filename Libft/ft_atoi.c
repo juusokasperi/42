@@ -1,30 +1,50 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/31 11:07:00 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/07/31 22:22:34 by jrinta-          ###   ########.fr       */
+/*   Created: 2024/07/31 23:11:39 by jrinta-           #+#    #+#             */
+/*   Updated: 2024/07/31 23:42:08 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memcpy(void *dst, const void *src, size_t n)
+static int	isspace(int c)
 {
-	unsigned char	*dst_p;
-	unsigned char	*src_p;
-	size_t			i;
+	return (c == ' ' || (c >= 9 && c <= 13));
+}
 
-	dst_p = (unsigned char *)dst;
-	src_p = (unsigned char *)src;
-	i = 0;
-	while (i < n)
+static int	issign(int c, int *s)
+{
+	if (c == '-' || c == '+')
 	{
-		dst_p[i] = src_p[i];
+		if (c == '-')
+			*s = -(*s);
+		return (1);
+	}
+	return (0);
+}
+
+int	ft_atoi(const char *str)
+{
+	int	i;
+	int	s;
+	int	res;
+
+	s = 1;
+	i = 0;
+	res = 0;
+	while (isspace(str[i]))
+		i++;
+	if (issign(str[i], &s))
+		i++;
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		res = res * 10 + (str[i] - '0');
 		i++;
 	}
-	return (dst);
+	return (s * res);
 }

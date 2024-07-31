@@ -1,30 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/31 11:07:00 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/07/31 22:22:34 by jrinta-          ###   ########.fr       */
+/*   Created: 2024/07/31 22:48:25 by jrinta-           #+#    #+#             */
+/*   Updated: 2024/07/31 23:08:26 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memcpy(void *dst, const void *src, size_t n)
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
-	unsigned char	*dst_p;
-	unsigned char	*src_p;
-	size_t			i;
+	size_t  i;
+	size_t  j;
 
-	dst_p = (unsigned char *)dst;
-	src_p = (unsigned char *)src;
+	if (!*needle)
+		return ((char *)haystack);
 	i = 0;
-	while (i < n)
+	while (haystack[i] && i < len)
 	{
-		dst_p[i] = src_p[i];
+		j = 0;
+		while (haystack[i + j] == needle[j] && i + j < len)
+		{
+			if (!needle[j + 1])
+				return((char *)&haystack[i]);
+			j++;
+		}
 		i++;
 	}
-	return (dst);
+	return (NULL);
 }
