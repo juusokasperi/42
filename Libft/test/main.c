@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 10:37:22 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/08/01 12:06:39 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/08/01 18:34:38 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,13 +98,104 @@ void	test_strnstr(void)
 void	test_substr(void)
 {
 	char str[12] = "TestiString.";
-	char substr[6] = ft_substr(str, 5, 6);
+	char *substr = ft_substr(str, 5, 6);
 	printf("---------------------------\n");
 	printf("FT_SUBSTR:\n");
 	printf("\"%s\" to substr, start index 5, length 6\n", str);
 	printf("\"%s\" substr\n", substr);
 	printf("---------------------------\n\n");
 	free(substr);
+}
+
+void	test_strtrim(void)
+{
+	char *str = "abababCS2 kelpaa pelata baaban vierelläbabababa";
+	char *str_trimmed = ft_strtrim(str, "ab");
+	printf("---------------------------\n");
+	printf("FT_STRTRIM:\n");
+	printf("\"%s\" to strtrim with charset \"ab\"\n", str);
+	printf("\"%s\"\n", str_trimmed);
+	printf("---------------------------\n\n");
+	free(str_trimmed);
+}
+
+void	test_split(void)
+{
+	int	i;
+
+	i = 0;
+	printf("---------------------------\n");
+	printf("FT_SPLIT:\n");
+	char **array = ft_split("BTestiBStringBHuomenta", 'B');
+	printf("Test1: \"BTestiBStringBHuomenta\", 'B'\n");
+	while (array[i])
+	{
+		printf("%s\n", array[i]);
+		free(array[i]);
+		i++;
+	}
+	free(array[i]);
+	free(array);
+	i = 0;
+	printf("\n");
+	array = ft_split("Testi!Stringi!Homma!", '!');
+	printf("Test2: \"Testi!Stringi!Homma!\", '!'\n");
+	while (array[i])
+	{
+		printf("%s\n", array[i]);
+		free(array[i]);
+		i++;
+	}
+	free(array[i]);
+	free(array);
+		i = 0;
+	printf("\n");
+	array = ft_split("BBBBBB", 'B');
+	printf("Test3: \"BBBBBB\", 'B'\n");
+	while (array[i])
+	{
+		printf("%s\n", array[i]);
+		free(array[i]);
+		i++;
+	}
+	free(array[i]);
+	free(array);
+	printf("---------------------------\n\n");
+}
+
+void	test_itoa(void)
+{
+	char *itoa;
+
+	itoa = ft_itoa(-2147483648);
+	printf("---------------------------\n");
+	printf("FT_ITOA:\n");
+	printf("Digit: %li, string: %s\n", -2147483648, itoa);
+	free(itoa);
+	itoa = ft_itoa(0);
+	printf("Digit: %i, string: %s\n", 0, itoa);
+	free(itoa);
+	itoa = ft_itoa(2147483647);
+	printf("Digit: %i, string: %s\n", 2147483647, itoa);
+	free(itoa);
+	printf("---------------------------\n\n");
+}
+
+void	test_putnbrfd(void)
+{
+	printf("---------------------------\n");
+	printf("FT_PUTNBR_FD:\n");
+	ft_putnbr_fd(-2147483648, 1);
+	write(1, "\n", 1);
+	ft_putnbr_fd(-50, 1);
+	write(1, "\n", 1);
+	ft_putnbr_fd(0, 1);
+	write(1, "\n", 1);
+	ft_putnbr_fd(50, 1);
+	write(1, "\n", 1);
+	ft_putnbr_fd(2147483647, 1);
+	write(1, "\n", 1);
+	printf("---------------------------\n\n");
 }
 
 int	main(void)
@@ -117,4 +208,8 @@ int	main(void)
 	test_memchr();
 	test_strnstr();
 	test_substr();
+	test_strtrim();
+	test_split();
+	test_itoa();
+	test_putnbrfd();
 }
