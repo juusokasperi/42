@@ -6,7 +6,13 @@ S := ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c \
 	ft_strlcpy.c ft_strlen.c ft_strmapi.c ft_strncmp.c ft_strnstr.c \
 	ft_strrchr.c ft_strtrim.c ft_substr.c ft_tolower.c ft_toupper.c
 
+S_BONUS := ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c \
+		ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c \
+		ft_lstmap.c
+
 O := $(S:.c=.o)
+
+O_BONUS := $(S_BONUS:.c=.o)
 
 H := libft.h
 
@@ -23,11 +29,14 @@ all: $(NAME)
 %.o: %.c $H
 	$(CC) $(CFLAGS) -c $< -o $@
 
+bonus: $(O_BONUS)
+	ar $(ARFLAGS) $(NAME) $^
+
 $(NAME): $O
-	ar $(ARFLAGS) $(NAME) $O
+	ar $(ARFLAGS) $(NAME) $^
 
 clean:
-	rm -f $O
+	rm -f $O $(O_BONUS)
 
 fclean: clean
 	rm  -f $(NAME)
