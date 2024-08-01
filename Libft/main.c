@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 10:37:22 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/07/31 23:11:29 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/08/01 12:06:39 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 void	test_strlen(void)
 {
 	printf("---------------------------\n");
-	size_t i = ft_strlen("Test");
 	printf("FT_STRLEN:\n");
-	printf("Length of \"Test\" is %zu\n", i);
+	printf("Length of \"Test\" is %zu\n", ft_strlen("Test"));
+	printf("Length of \"\" is %zu\n", ft_strlen(""));
 	printf("---------------------------\n\n");
 }
 
@@ -93,7 +93,18 @@ void	test_strnstr(void)
 	else
 		printf("Substring not found\n");
 	printf("---------------------------\n\n");
+}
 
+void	test_substr(void)
+{
+	char str[12] = "TestiString.";
+	char substr[6] = ft_substr(str, 5, 6);
+	printf("---------------------------\n");
+	printf("FT_SUBSTR:\n");
+	printf("\"%s\" to substr, start index 5, length 6\n", str);
+	printf("\"%s\" substr\n", substr);
+	printf("---------------------------\n\n");
+	free(substr);
 }
 
 int	main(void)
@@ -105,4 +116,5 @@ int	main(void)
 	test_strncmp();
 	test_memchr();
 	test_strnstr();
+	test_substr();
 }
