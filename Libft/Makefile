@@ -32,6 +32,10 @@ all: $(NAME)
 bonus: $(O_BONUS)
 	ar $(ARFLAGS) $(NAME) $^
 
+test: all bonus
+	cp $(NAME) ./test/
+	$(CC) $(CFLAGS) ./test/main.c -o ./test/test -L./test/ -lft
+
 $(NAME): $O
 	ar $(ARFLAGS) $(NAME) $^
 
