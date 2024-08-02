@@ -1,6 +1,6 @@
 # My 42 projects
-<details>
 ## Libft
+<details>
 <summary>Notes</summary>
 _Started 2024/07/31_
 - To compile main.c for testing, run `make test`
