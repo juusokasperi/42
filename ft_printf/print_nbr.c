@@ -6,12 +6,11 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 20:26:24 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/08/07 20:40:48 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/08/07 22:10:02 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
 
 int	print_nbr_recursion(int nbr)
 {
