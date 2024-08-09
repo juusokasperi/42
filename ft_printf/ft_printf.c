@@ -6,40 +6,59 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 19:06:48 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/08/07 20:48:41 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/08/09 21:30:40 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	type_handler(char c, va_list *args, int *i)
+void	init_flags(t_flags *flags)
+{
+	flags->specifier = 0;
+	flags->width = 0;
+	flags->precision = -1;
+	flags->zero_pad = 0;
+	flags->left_align = 0;
+	flags->space = 0;
+	flags->plus = 0;
+	flags->hash = 0;
+	flags->star = 0;
+}
+
+int	type_handler(char c, va_list *args, t_flags flags)
 {
 	int	count;
 
+	(void)flags;
 	count = 0;
 	if (c == '%')
-		count += print_char('%');
+		count += print_char('%', flags);
 	else if (c == 'c')
-		count += print_char(va_arg(*args, int));
+		count += print_char(va_arg(*args, int), flags);
 	else if (c == 's')
-		count += print_str(va_arg(*args, const char *));
+		count += print_str(va_arg(*args, const char *), flags);
 	else if (c == 'p')
-		count += print_ptr((unsigned long int)va_arg(*args, void *));
+		count += print_ptr((unsigned long int)va_arg(*args, void *), flags);
 	else if (c == 'i' || c == 'd')
-		count += print_nbr(va_arg(*args, int));
+		count += print_nbr(va_arg(*args, int), flags);
 	else if (c == 'u')
-		count += print_unsigned(va_arg(*args, unsigned int));
+		count += print_unsigned(va_arg(*args, unsigned int), flags);
 	else if (c == 'x')
-		count += print_hex(va_arg(*args, unsigned int), 0);
+		count += print_hex(va_arg(*args, unsigned int), 0, flags);
 	else if (c == 'X')
-		count += print_hex(va_arg(*args, unsigned int), 1);
-	(*i)++;
+		count += print_hex(va_arg(*args, unsigned int), 1, flags);
 	return (count);
 }
+
+//	nyt width toimii c, s, p, nbr, u, x, X
+//	tsekaa viela tarkemmin miten "SPACE" jos on jo "+"
+//	muutenki tsekkaa kaikki flagit tarkemmin
+//	puuttuu viela #, * ja .
 
 int	ft_printf(const char *format, ...)
 {
 	va_list	args;
+	t_flags	flags;
 	int		i;
 	int		count;
 
@@ -50,26 +69,16 @@ int	ft_printf(const char *format, ...)
 	va_start(args, format);
 	while (format[i])
 	{
+		init_flags(&flags);
 		if (format[i] == '%' && format[i + 1])
-			count += type_handler(format[i + 1], &args, &i);
+			parse_flags(format, &flags, args, &i);
+		if (flags.specifier > 0 && is_type(format[i]))
+			count += type_handler(format[i], &args, flags);
 		else if (format[i] == '%' && !(format[i + 1]))
 			return (count);
 		else
-			count += print_char(format[i]);
+			count += print_c(format[i]);
 		i++;
 	}
 	return (count);
-}
-
-int	main(void)
-{
-	int	i;
-	int	j;
-	int	ptr;
-
-	ptr = 5;
-	i = ft_printf("%c %s %p %i %d %u %x %X\n", 'a', "string", &ptr, 15454, 15454, 15454, 15454, 15454);
-	j = printf("%c %s %p %i %d %u %x %X\n", 'a', "string", &ptr, 15454, 15454, 15454, 15454, 15454);
-	printf("ft_printf returns %i and printf returns %i\n", i, j);
-	return (0);
 }
