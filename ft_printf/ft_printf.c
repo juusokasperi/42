@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 19:06:48 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/08/09 21:30:40 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/08/10 15:42:37 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ void	init_flags(t_flags *flags)
 	flags->precision = -1;
 	flags->zero_pad = 0;
 	flags->left_align = 0;
-	flags->space = 0;
-	flags->plus = 0;
+	flags->positive_sign = 0;
 	flags->hash = 0;
 	flags->star = 0;
+	flags->negative = 0;
 }
 
 int	type_handler(char c, va_list *args, t_flags flags)
@@ -40,9 +40,9 @@ int	type_handler(char c, va_list *args, t_flags flags)
 	else if (c == 'p')
 		count += print_ptr((unsigned long int)va_arg(*args, void *), flags);
 	else if (c == 'i' || c == 'd')
-		count += print_nbr(va_arg(*args, int), flags);
+		count += print_nbr_handler(va_arg(*args, int), &flags);
 	else if (c == 'u')
-		count += print_unsigned(va_arg(*args, unsigned int), flags);
+		count += print_unsigned_handler(va_arg(*args, unsigned int), flags);
 	else if (c == 'x')
 		count += print_hex(va_arg(*args, unsigned int), 0, flags);
 	else if (c == 'X')

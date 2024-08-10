@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 17:12:27 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/08/09 20:17:18 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/08/10 14:06:24 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,15 +69,13 @@ static void	reverse_digit(char *itoa)
 	}
 }
 
-char	*ft_itoa(int n)
+char	*ft_itoa(long n)
 {
 	char	*itoa;
 	size_t	i;
 
 	if (n == 0)
 		return (ft_strdup("0"));
-	if (n == -2147483648)
-		return (ft_strdup("-2147483648"));
 	itoa = (char *)malloc((count_len(n) + 1));
 	if (!itoa)
 		return (NULL);

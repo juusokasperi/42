@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 19:07:43 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/08/09 20:16:50 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/08/10 15:42:26 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ typedef struct s_flags {
 	int		precision;
 	int		zero_pad;
 	int		left_align;
-	int		space;
-	int		plus;
+	char	positive_sign;
 	int		hash;
 	int		star;
+	int		negative;
 }		t_flags;
 
 size_t	ft_strlen(const char *s);
@@ -42,11 +42,11 @@ int		is_flag(char c);
 int		print_hex(unsigned int nbr, int capital, t_flags flags);
 int		print_char(char c, t_flags flags);
 int		print_ptr(unsigned long int n, t_flags flags);
-int		print_unsigned(unsigned int nbr, t_flags flags);
-int		print_nbr(int nbr, t_flags flags);
+int		print_unsigned_handler(unsigned int nbr, t_flags flags);
+int		print_nbr_handler(int nbr, t_flags *flags);
 int		print_str(const char *str, t_flags flags);
 int		print_s(const char *str);
 int		ft_printf(const char *, ...);
-char	*ft_itoa(int n);
+char	*ft_itoa(long n);
 
 #endif

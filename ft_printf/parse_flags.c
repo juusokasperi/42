@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 19:51:20 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/08/09 17:27:36 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/08/10 15:13:03 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int	flag_precision(const char *format, int i, va_list args, t_flags *flags)
 	int	j;
 
 	j = i;
+	flags->zero_pad = 0;
 	if (format[j] == '*')
 	{
 		flags->precision = va_arg(args, int);
@@ -67,14 +68,15 @@ void	parse_flags(const char *format, t_flags *flags, va_list args, int *i)
 	{
 		if (format[*i] == '-')
 			flag_left(flags);
-		if (format[*i] == '0' && flags->left_align == 0 && flags->width == 0)
+		if (format[*i] == '0' && flags->precision == -1
+			&& flags->left_align == 0 && flags->width == 0)
 			flags->zero_pad = 1;
 		if (format[*i] == '#')
 			flags->hash = 1;
-		if (format[*i] == ' ')
-			flags->space = 1;
+		if (format[*i] == ' ' && !flags->positive_sign)
+			flags->positive_sign = ' ';
 		if (format[*i] == '+')
-			flags->plus = 1;
+			flags->positive_sign = '+';
 		if (format[*i] == '*')
 			flag_width(args, flags);
 		if (format[*i] == '.')
