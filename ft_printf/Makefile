@@ -1,7 +1,7 @@
-S := ft_printf.c ft_itoa.c parse_flags.c print_hex.c print_nbr.c print_ptr.c \
-	print_strchar.c print_unsigned.c helper_functions.c
+S := ft_printf.c ft_itoa.c ft_xtoa.c parse_flags.c print_hex.c print_nbr.c \
+	print_ptr.c print_strchar.c print_unsigned.c helper_functions.c
 
-TEST_S := tests/test.c tests/int.c tests/unsigned.c
+TEST_S := tests/test.c tests/int.c tests/unsigned.c tests/hex.c tests/ptr.c
 
 O := $(S:.c=.o)
 TEST_O := $(TEST_S:.c=.o)

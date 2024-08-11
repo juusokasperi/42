@@ -7,8 +7,8 @@ _Started 2024/07/31_
 
 ## Ft_printf
 _Started 2024/08/07_
-- Bonuses work-ISH. Now integers and unsigned seem to handle all flags correctly,
-  next up implement the same approach to hex and pointer.
+- Bonuses work-ISH. Now integers, unsigned, hex seem to handle all flags correctly,
+  next up implement the same approach to pointer, character, string.
 
 ## Born2beroot
 - Better do this in the clusters.

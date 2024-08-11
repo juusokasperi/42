@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 19:06:48 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/08/10 15:42:37 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/08/12 01:27:38 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,15 @@ int	type_handler(char c, va_list *args, t_flags flags)
 	else if (c == 's')
 		count += print_str(va_arg(*args, const char *), flags);
 	else if (c == 'p')
-		count += print_ptr((unsigned long int)va_arg(*args, void *), flags);
+		count += print_ptr_handler((unsigned long int)va_arg(*args, void *), flags);
 	else if (c == 'i' || c == 'd')
 		count += print_nbr_handler(va_arg(*args, int), &flags);
 	else if (c == 'u')
 		count += print_unsigned_handler(va_arg(*args, unsigned int), flags);
 	else if (c == 'x')
-		count += print_hex(va_arg(*args, unsigned int), 0, flags);
+		count += print_hex_handler(va_arg(*args, unsigned int), 0, &flags);
 	else if (c == 'X')
-		count += print_hex(va_arg(*args, unsigned int), 1, flags);
+		count += print_hex_handler(va_arg(*args, unsigned int), 1, &flags);
 	return (count);
 }
 

@@ -6,68 +6,77 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 20:23:34 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/08/09 12:06:44 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/08/12 01:25:22 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_hexlen(unsigned int n)
+static int	print_hash(int capital)
 {
-	int	len;
-
-	len = 0;
-	if (n == 0)
-		return (1);
-	while (n >= 1)
-	{
-		len++;
-		n /= 16;
-	}
-	return (len);
+	if (capital)
+		return (print_s("0X"));
+	return (print_s("0x"));
 }
 
-int	print_hex_recursion(unsigned long int n, char c)
+static int	print_x(char *hex_xtoa, int hex_len, t_flags flags, int capital)
 {
 	int	count;
 
 	count = 0;
-	if (n >= 16)
-	{
-		count += print_hex_recursion(n / 16, c);
-		n = n % 16;
-	}
-	if (n < 10)
-		count += print_c(n + '0');
-	else
-		count += print_c((n - 10) + c);
+	if (flags.hash && capital && !flags.zero_pad)
+		count += print_hash(1);
+	else if (flags.hash && !flags.zero_pad)
+		count += print_hash(0);
+	if (flags.precision >= 0)
+		count += pad_width(flags.precision - 1, hex_len - 1, 1);
+	count += print_s(hex_xtoa);
 	return (count);
 }
 
-int	print_hex(unsigned int nbr, int capital, t_flags flags)
+static int	print_hex(char *hex_xtoa, t_flags flags, int capital)
 {
-	char	c;
-	int		len;
-	int		count;
+	int	count;
+	int	hex_len;
 
-	c = 'a';
-	len = ft_hexlen(nbr);
-	if (flags.hash)
-		len += 2;
 	count = 0;
-	if (capital)
-		c = 'A';
-	if (flags.left_align == 0)
-		count += pad_width(flags.width, len, flags.zero_pad);
-	if (flags.hash)
-	{
-		if (capital)
-			count += print_s("0X");
-		else
-			count += print_s("0x");
-	}
-	count += print_hex_recursion(nbr, c);
+	hex_len = ft_strlen(hex_xtoa);
 	if (flags.left_align == 1)
-		count += pad_width(flags.width, len, flags.zero_pad);
+		count += print_x(hex_xtoa, hex_len, flags, capital);
+	if (flags.precision >= 0 && flags.precision < hex_len)
+		flags.precision = hex_len;
+	if (flags.precision >= 0)
+	{
+		if (flags.hash)
+			flags.width -= 2;
+		flags.width -= flags.precision;
+		count += pad_width(flags.width, 0, 0);
+	}
+	else
+	{
+		if (flags.zero_pad && flags.hash)
+			count += print_hash(capital);
+		count += pad_width(flags.width - (flags.hash), hex_len, flags.zero_pad);
+	}
+	if (flags.left_align == 0)
+		count += print_x(hex_xtoa, hex_len, flags, capital);
+	return (count);
+}
+
+int	print_hex_handler(unsigned int nbr, int capital, t_flags *flags)
+{
+	int		count;
+	char	*hex_xtoa;
+
+	count = 0;
+	if (flags->precision == 0 && nbr == 0)
+		return (pad_width(flags->width, 0, 0));
+	if (nbr == 0 && flags->hash)
+		flags->hash = 0;
+	hex_xtoa = ft_xtoa(nbr, capital);
+	if (!hex_xtoa)
+		return (0);
+	count += print_hex(hex_xtoa, *flags, capital);
+	free(hex_xtoa);
 	return (count);
 }

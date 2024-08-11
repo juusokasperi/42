@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 19:51:20 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/08/10 15:13:03 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/08/11 21:11:25 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	parse_flags(const char *format, t_flags *flags, va_list args, int *i)
 			&& flags->left_align == 0 && flags->width == 0)
 			flags->zero_pad = 1;
 		if (format[*i] == '#')
-			flags->hash = 1;
+			flags->hash = 2;
 		if (format[*i] == ' ' && !flags->positive_sign)
 			flags->positive_sign = ' ';
 		if (format[*i] == '+')
