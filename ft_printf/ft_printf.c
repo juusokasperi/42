@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 19:06:48 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/08/12 01:27:38 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/08/12 20:15:38 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int	type_handler(char c, va_list *args, t_flags flags)
 {
 	int	count;
 
-	(void)flags;
 	count = 0;
 	if (c == '%')
 		count += print_char('%', flags);
@@ -49,11 +48,6 @@ int	type_handler(char c, va_list *args, t_flags flags)
 		count += print_hex_handler(va_arg(*args, unsigned int), 1, &flags);
 	return (count);
 }
-
-//	nyt width toimii c, s, p, nbr, u, x, X
-//	tsekaa viela tarkemmin miten "SPACE" jos on jo "+"
-//	muutenki tsekkaa kaikki flagit tarkemmin
-//	puuttuu viela #, * ja .
 
 int	ft_printf(const char *format, ...)
 {

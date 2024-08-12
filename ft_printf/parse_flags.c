@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 19:51:20 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/08/11 21:11:25 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/08/12 20:10:47 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,6 @@ void	flag_width(va_list args, t_flags *flags)
 		flags->width *= -1;
 	}
 }
-
-// precisionille lähetetaan i, joka pointtaa ekaan '.' jälkeiseen kohtaan
-// jos se on *, asetetaan precisionin va_argilla ja palautetaan i+1, joka
-// osoittaa seuraavaan kohtaan precisionin jalkeen.
-// jos ei oo tähti, lasketaan kuinka iso precision on määritelty
-// seuraavaksi pitas tsekata precisionin kaytto print_nbr funktiossa
 
 int	flag_precision(const char *format, int i, va_list args, t_flags *flags)
 {
