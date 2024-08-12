@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 20:26:53 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/08/12 20:15:29 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/08/12 20:27:48 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	print_s(const char *str)
 	return (i);
 }
 
-int	print_str(const char *str, t_flags flags)
+int	print_str_handler(const char *str, t_flags flags)
 {
 	int	i;
 	int	len;

@@ -6,19 +6,19 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 19:51:20 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/08/12 20:10:47 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/08/12 20:29:09 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	flag_left(t_flags *flags)
+static void	flag_left(t_flags *flags)
 {
 	flags->left_align = 1;
 	flags->zero_pad = 0;
 }
 
-void	flag_width(va_list args, t_flags *flags)
+static void	flag_width(va_list args, t_flags *flags)
 {
 	flags->star = 1;
 	flags->width = va_arg(args, int);
@@ -29,7 +29,7 @@ void	flag_width(va_list args, t_flags *flags)
 	}
 }
 
-int	flag_precision(const char *format, int i, va_list args, t_flags *flags)
+static int	flag_precision(const char *format, int i, va_list args, t_flags *flags)
 {
 	int	j;
 
@@ -49,7 +49,7 @@ int	flag_precision(const char *format, int i, va_list args, t_flags *flags)
 	return (i);
 }
 
-void	flag_digit(char c, t_flags *flags)
+static void	flag_digit(char c, t_flags *flags)
 {
 	if (flags->star == 1)
 		flags->width = 0;
