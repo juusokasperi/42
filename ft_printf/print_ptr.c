@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 20:24:51 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/08/12 01:27:02 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/08/12 16:08:37 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,16 @@ static int	print_ptr(char *ptr_xtoa, t_flags flags)
 
 int	print_ptr_handler(unsigned long int nbr, t_flags flags)
 {
-	int	count;
-	int	*ptr_xtoa;
+	int		count;
+	char	*ptr_xtoa;
 
 	count = 0;
+	flags.width -= 2;
+	if (flags.precision == 0 && nbr == 0)
+	{
+		count += print_s("0x");
+		return (count += pad_width(flags.width, 0, 0));
+	}
 	ptr_xtoa = ft_xtoa(nbr, 0);
 	if (!ptr_xtoa)
 		return (0);

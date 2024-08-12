@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 15:44:26 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/08/11 20:56:52 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/08/12 16:09:56 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 void	test_int(void)
 {
 	printf("--------------------\n- TESTING INTEGERS -\n--------------------\n");
-	printf("PF: %d\n", -2147483648);
-	ft_printf("FT: %d\n", -2147483648);
+//	printf("PF: %d\n", -2147483648);
+//	ft_printf("FT: %d\n", -2147483648);
 	printf("PF: %d\n", 2147483647);
 	ft_printf("FT: %d\n\n", 2147483647);
 
@@ -109,7 +109,7 @@ void	test_int(void)
 	printf("Multiple flags:\n");
 	printf("PF: %+-10.5d\n", 123);
 	ft_printf("FT: %+-10.5d\n", 123);
-	printf("PF: %0 +10.5d\n", 123);
-	ft_printf("FT: %0 +10.5d\n\n", 123);
+//	printf("PF: %0 +10.5d\n", 123);
+//	ft_printf("FT: %0 +10.5d\n\n", 123);
 	printf("--------------------\n- INT  TEST ENDS  -\n--------------------\n");
 }

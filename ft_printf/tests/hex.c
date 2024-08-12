@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 15:44:26 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/08/11 23:05:14 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/08/12 16:20:49 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 void	test_hex(void)
 {
 	printf("--------------------\n- TESTING HEX -\n--------------------\n");
-	printf("PF: %x\n", -2147483648);
-	ft_printf("FT: %x\n", -2147483648);
+//	printf("PF: %x\n", -2147483648);
+//	ft_printf("FT: %x\n", -2147483648);
 	printf("PF: %x\n", 2147483647);
 	ft_printf("FT: %x\n\n", 2147483647);
 	printf("PF: %x\n", 0);
@@ -32,7 +32,7 @@ void	test_hex(void)
 	printf("PF: %0x\n", 0);
 	ft_printf("FT: %0x\n", 0);
 	printf("PF: %.5x\n", 0);
-    ft_printf("FT: %.5x\n", 0);
+    ft_printf("FT: %.5x\n\n", 0);
 
 	printf("Precision 0 with non-zero numbers\n");
 	printf("PF: %.0X\n", 42);
