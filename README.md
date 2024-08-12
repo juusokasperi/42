@@ -7,8 +7,7 @@ _Started 2024/07/31_
 
 ## Ft_printf
 _Started 2024/08/07_
-- Bonuses work-ISH. Now integers, unsigned, hex, ptr handle all flags correctly,
-  next up implement the same approach to character, string.
+- Bonuses work afaik.
 - Check how %s and %c behave with `0` flag w/ linux -- in macOS, prints 0, but in some
   online compilers the 0 is just ignored. In my current implementation the flag is ignored,
   but can be easily changed by replacing `pad_width(flags.width, len, 0);` with `pad_width(flags.width, len, flags.zero_pad);`
