@@ -7,13 +7,14 @@ _Started 2024/07/31_
 
 ## Ft_printf
 _Started 2024/08/07_
-- Bonuses work afaik.
+- Printf works afaik.
 - Check how %s and %c behave with `0` flag w/ linux -- in macOS, prints 0, but in some
   online compilers the 0 is just ignored. In my current implementation the flag is ignored,
   but can be easily changed by replacing `pad_width(flags.width, len, 0);` with `pad_width(flags.width, len, flags.zero_pad);`
   in function print_str.
-- Now it seems everything works, but the concern is if user tries to run the program with false parameters, f.ex.
-  ft_printf("%s\n", 'b'); which leads to a segfault.
+- If user tries to run the program with false parameters, f.ex. ft_printf("%s\n", 'b'); leads to a segfault, 
+  since va_arg leads to undefined behaviour if it tries to read a character as a string. Probably ok, since regular
+  printf doesn't work with false flags either.
 
 ## Born2beroot
 - Better do this in the clusters.
