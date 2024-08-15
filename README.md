@@ -16,5 +16,9 @@ _Started 2024/08/07_
   since va_arg leads to undefined behaviour if it tries to read a character as a string. Probably ok, since regular
   printf doesn't work with false flags either.
 
+## Get_next_line
+_Started 2024/08/12_
+- Works, bonus works too (really simple addition really).
+
 ## Born2beroot
 - Better do this in the clusters.

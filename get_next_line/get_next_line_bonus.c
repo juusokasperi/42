@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 21:26:33 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/08/15 21:27:51 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/08/15 21:47:43 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 void	to_linked_list(t_list **list, char *buffer)
 {
@@ -92,15 +92,15 @@ void	clean_list(t_list **list)
 
 char *get_next_line(int fd)
 {
-	static t_list	*list = NULL;
+	static t_list	*list[FD_MAX];
 	char 			*next_line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd > FD_MAX - 1)
 		return (NULL);
-	init_list(&list, fd);
-	if (!list)
+	init_list(&list[fd - 1], fd);
+	if (!list[fd - 1])
 		return (NULL);
-	next_line = fetch_line(list);
-	clean_list(&list);
+	next_line = fetch_line(list[fd - 1]);
+	clean_list(&list[fd - 1]);
 	return (next_line);
 }
