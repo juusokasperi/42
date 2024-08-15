@@ -1,7 +1,7 @@
 # My 42 projects
 ## Rank 00
 
-# Libft
+### Libft
 _Started 2024/07/31_
 - To compile main.c for testing, run `make test`
 - Everything should be functional.
@@ -9,7 +9,7 @@ _Started 2024/07/31_
 
 ## Rank 01
 
-# Ft_printf
+### Ft_printf
 _Started 2024/08/07_
 - Printf works afaik.
 - Check how %s and %c behave with `0` flag w/ linux -- in macOS, prints 0, but in some
@@ -20,18 +20,18 @@ _Started 2024/08/07_
   since va_arg leads to undefined behaviour if it tries to read a character as a string. Probably ok, since regular
   printf doesn't work with false flags either.
 
-# Get_next_line
+### Get_next_line
 _Started 2024/08/12_
 - Works, bonus works too (really simple addition really).
 
-# Born2beroot
+### Born2beroot
 - Better do this in the clusters.
 
 ## Rank 02
 
-# FdF
-# fract-oi
-# minitalk
-# pipex
-# push_swap
-# so_long
+### FdF
+### fract-oi
+### minitalk
+### pipex
+### push_swap
+### so_long
