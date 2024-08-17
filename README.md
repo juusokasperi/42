@@ -32,6 +32,10 @@ _Started 2024/08/12_
 ### FdF
 ### fract-oi
 ### minitalk
+- Works
+- Server answers back to client 
+- No unicode support
+
 ### pipex
 ### push_swap
 ### so_long
