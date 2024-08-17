@@ -32,9 +32,8 @@ _Started 2024/08/12_
 ### FdF
 ### fract-oi
 ### minitalk
-- Works
-- Server answers back to client 
-- No unicode support
+- To test, run `cat ./text.txt|xargs -0 ./client <SERVER_PID>`
+- Everything else works but unicode support (2nd bonus)
 
 ### pipex
 ### push_swap
