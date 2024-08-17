@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 20:26:24 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/08/10 15:42:55 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/08/17 20:03:20 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	print_nbr_handler(int nbr, t_flags *flags)
 	}
 	if (flags->precision == 0 && long_nbr == 0)
 		return (pad_width(flags->width, 0, 0));
-	nbr_itoa = ft_itoa(long_nbr);
+	nbr_itoa = ft_ltoa(long_nbr);
 	if (!nbr_itoa)
 		return (0);
 	count += print_int(nbr_itoa, *flags);

@@ -16,7 +16,7 @@ O_BONUS := $(S_BONUS:.c=.o)
 
 H := libft.h
 
-CC := cc
+CC := gcc
 
 CFLAGS += -Wall -Wextra -Werror -I./
 

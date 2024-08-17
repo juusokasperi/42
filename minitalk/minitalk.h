@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   minitalk.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/31 23:32:51 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/08/17 18:16:39 by jrinta-          ###   ########.fr       */
+/*   Created: 2024/08/17 19:36:39 by jrinta-           #+#    #+#             */
+/*   Updated: 2024/08/17 21:51:35 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef MINITALK_H
+# define MINITALK_H
 
-void	*ft_calloc(size_t count, size_t size)
-{
-	char	*s;
+# include "ft_printf.h"
+# include "libft.h"
+# include <stdlib.h>
+# include <unistd.h>
+# include <signal.h>
 
-	s = malloc(count * size);
-	if (!s)
-		return (NULL);
-	ft_bzero(s, count * size);
-	return (s);
-}
+#endif

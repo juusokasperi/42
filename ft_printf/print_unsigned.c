@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 20:25:54 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/08/12 20:27:50 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/08/17 20:03:24 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	print_unsigned_handler(unsigned int nbr, t_flags flags)
 	count = 0;
 	if (flags.precision == 0 && nbr == 0)
 		return (pad_width(flags.width, 0, 0));
-	nbr_itoa = ft_itoa(nbr);
+	nbr_itoa = ft_ltoa(nbr);
 	if (!nbr_itoa)
 		return (0);
 	count += print_unsigned_int(nbr_itoa, flags);
