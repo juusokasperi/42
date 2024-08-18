@@ -41,16 +41,12 @@ clean:
 	rm -f $(C_OBJS) $(S_OBJS)
 	@echo "$(RED)✅ MINITALK: Clean complete.$(ENDCOLOR)"
 
-fclean: clean
+fclean:
 	@make -C libft fclean
 	@make -C ft_printf fclean
-	rm  -f client server
+	rm  -f $(C_OBJS) $(S_OBJS) client server
 	@echo "$(RED)✅ MINITALK: FClean complete.$(ENDCOLOR)"
 
 re: fclean all
 
-.PHONY: clean fclean re all
-
-
-
-
+.PHONY: clean fclean re all libs

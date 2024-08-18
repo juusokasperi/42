@@ -28,8 +28,8 @@ clean:
 	rm -f $O
 	@echo "$(RED)✅ FT_PRINTF: Clean complete.$(ENDCOLOR)"
 
-fclean: clean
-	rm  -f $(NAME)
+fclean:
+	rm  -f $O $(NAME)
 	@echo "$(RED)✅ FT_PRINTF: FClean complete.$(ENDCOLOR)"
 
 re: fclean all

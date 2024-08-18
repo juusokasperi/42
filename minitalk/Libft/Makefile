@@ -47,8 +47,8 @@ clean:
 	rm -f $O $(O_BONUS)
 	@echo "$(RED)✅ LIBFT: Clean complete.$(ENDCOLOR)"
 
-fclean: clean
-	rm  -f $(NAME)
+fclean:
+	rm  -f $O $(O_BONUS) $(NAME)
 	@echo "$(RED)✅ LIBFT: FClean complete.$(ENDCOLOR)"
 
 re: fclean all
