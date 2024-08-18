@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 18:11:42 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/08/17 21:50:05 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/08/18 16:03:05 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,10 @@ int	main(int argc, char **argv)
 	int					server_id;
 
 	if (argc != 3)
-		return (printf("ERROR: Usage %s <PID> <MESSAGE>\n", argv[0]));
+		return (ft_printf("ERROR: Usage %s <PID> <MESSAGE>\n", argv[0]));
 	server_id = ft_atoi(argv[1]);
 	if (!server_id)
-		return (printf("ERROR: First argument (%s) false.\n", argv[1]));
+		return (ft_printf("ERROR: First argument (%s) false.\n", argv[1]));
 	sigemptyset(&sa.sa_mask);
 	sa.sa_sigaction = signal_handler;
 	sa.sa_flags = SA_RESTART | SA_SIGINFO;

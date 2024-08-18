@@ -31,17 +31,17 @@ all: $(NAME)
 
 bonus: $(O_BONUS)
 	ar $(ARFLAGS) $(NAME) $^
-	@echo "$(GREEN)✅ LIBFT: Bonus compilation done!$(ENDCOLOR)"
+	@echo "$(GREEN)✅ LIBFT: Bonus functions compilation complete!$(ENDCOLOR)"
 
 test: all bonus
 	cp $(NAME) ./test/
 	$(CC) $(CFLAGS) ./test/main.c -o ./test/test -L./test/ -lft
-	@echo "$(GREEN)✅ LIBFT: Tester compilation done!$(ENDCOLOR)"
+	@echo "$(GREEN)✅ LIBFT: Tester compilation complete!$(ENDCOLOR)"
 
 
 $(NAME): $O
 	ar $(ARFLAGS) $(NAME) $^
-	@echo "$(GREEN)✅ LIBFT: Mandatory compilation done!$(ENDCOLOR)"
+	@echo "$(GREEN)✅ LIBFT: Mandatory functions compilation complete!$(ENDCOLOR)"
 
 clean:
 	rm -f $O $(O_BONUS)
@@ -49,7 +49,7 @@ clean:
 
 fclean: clean
 	rm  -f $(NAME)
-	@echo "$(RED)✅ LIBFT: Fclean complete.$(ENDCOLOR)"
+	@echo "$(RED)✅ LIBFT: FClean complete.$(ENDCOLOR)"
 
 re: fclean all
 
