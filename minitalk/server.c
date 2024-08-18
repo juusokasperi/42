@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 19:49:27 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/08/17 21:50:15 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/08/17 22:23:58 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ int	main(void)
 	sigemptyset(&sa.sa_mask);
 	sa.sa_sigaction = signal_handler;
 	sa.sa_flags = SA_RESTART | SA_SIGINFO;
-
 	if (sigaction(SIGUSR1, &sa, NULL) == -1
 		|| sigaction(SIGUSR2, &sa, NULL) == -1)
 	{

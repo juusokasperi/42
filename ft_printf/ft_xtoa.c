@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 17:12:27 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/08/11 21:23:14 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/08/18 12:34:33 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 // Append to string array one at a time with nbr % 10 + '0',
 // after which nbr / 10. After done, reverse the string.
 
-#include "ft_printf.h"
+#include "libftprintf.h"
 
 static int	count_len(unsigned long int n)
 {
@@ -38,7 +38,7 @@ static void	reverse_digit(char *xtoa)
 	int		j;
 
 	i = 0;
-	j = ft_strlen(xtoa) - 1;
+	j = str_len(xtoa) - 1;
 	while (i < j)
 	{
 		temp = xtoa[i];
@@ -60,7 +60,7 @@ char	*ft_xtoa(unsigned long int n, int capital)
 	else
 		digits = "0123456789abcdef";
 	if (n == 0)
-		return (ft_strdup("0"));
+		return (str_dup("0"));
 	xtoa = (char *)malloc(count_len(n) + 1);
 	if (!xtoa)
 		return (NULL);

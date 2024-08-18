@@ -6,21 +6,11 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 20:26:53 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/08/12 20:27:48 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/08/18 12:35:34 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-
-size_t	ft_strlen(const char *s)
-{
-	size_t	len;
-
-	len = 0;
-	while (*s++)
-		len++;
-	return (len);
-}
+#include "libftprintf.h"
 
 int	print_char(char c, t_flags flags)
 {
@@ -59,7 +49,7 @@ int	print_str_handler(const char *str, t_flags flags)
 
 	i = 0;
 	count = 0;
-	len = ft_strlen(str);
+	len = str_len(str);
 	if (flags.precision >= 0 && flags.precision < len)
 		len = flags.precision;
 	if (flags.left_align == 0)

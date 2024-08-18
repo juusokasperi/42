@@ -6,11 +6,11 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 20:24:51 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/08/12 20:27:58 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/08/18 12:33:19 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libftprintf.h"
 
 static int	print_x(char *ptr_xtoa, int ptr_len, t_flags flags)
 {
@@ -31,7 +31,7 @@ static int	print_ptr(char *ptr_xtoa, t_flags flags)
 	int	ptr_len;
 
 	count = 0;
-	ptr_len = ft_strlen(ptr_xtoa);
+	ptr_len = str_len(ptr_xtoa);
 	if (flags.left_align == 1)
 		count += print_x(ptr_xtoa, ptr_len, flags);
 	if (flags.precision >= 0 && flags.precision < ptr_len)

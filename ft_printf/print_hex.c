@@ -6,11 +6,11 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 20:23:34 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/08/12 15:24:26 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/08/18 12:33:32 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libftprintf.h"
 
 static int	print_hash(int capital)
 {
@@ -40,7 +40,7 @@ static int	print_hex(char *hex_xtoa, t_flags flags, int capital)
 	int	hex_len;
 
 	count = 0;
-	hex_len = ft_strlen(hex_xtoa);
+	hex_len = str_len(hex_xtoa);
 	if (flags.left_align == 1)
 		count += print_x(hex_xtoa, hex_len, flags, capital);
 	if (flags.precision >= 0 && flags.precision < hex_len)

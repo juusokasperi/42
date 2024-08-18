@@ -6,11 +6,11 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 19:51:20 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/08/12 20:29:09 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/08/18 12:27:41 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libftprintf.h"
 
 static void	flag_left(t_flags *flags)
 {

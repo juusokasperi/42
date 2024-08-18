@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   libftprintf.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 19:07:43 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/08/17 20:11:49 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/08/18 12:38:37 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#ifndef LIBFTPRINTF_H
+# define LIBFTPRINTF_H
 
 # include <stdarg.h>
 # include <unistd.h>
@@ -30,9 +30,8 @@ typedef struct s_flags {
 	int		negative;
 }		t_flags;
 
-size_t	ft_strlen(const char *s);
-char	*ft_strdup(const char *s1);
-int		ft_ptrlen(unsigned long int n);
+size_t	str_len(const char *s);
+char	*str_dup(const char *s1);
 void	parse_flags(const char *format, t_flags *flags, va_list args, int *i);
 int		pad_width(int width, int size, int zero_pad);
 int		print_c(char c);

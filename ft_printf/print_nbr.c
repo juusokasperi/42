@@ -6,11 +6,11 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 20:26:24 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/08/17 20:03:20 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/08/18 12:33:27 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libftprintf.h"
 
 static int	print_sign(t_flags *flags)
 {
@@ -51,7 +51,7 @@ static int	print_int(char *nbr_itoa, t_flags flags)
 	int	nbr_len;
 
 	count = 0;
-	nbr_len = ft_strlen(nbr_itoa);
+	nbr_len = str_len(nbr_itoa);
 	if (flags.zero_pad == 1)
 		count += print_sign(&flags);
 	if (flags.left_align == 1)

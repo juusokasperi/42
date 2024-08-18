@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 17:12:27 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/08/17 20:11:53 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/08/18 12:35:20 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,7 @@
 // Append to string array one at a time with nbr % 10 + '0',
 // after which nbr / 10. After done, reverse the string.
 
-#include "ft_printf.h"
-
-char	*ft_strdup(const char *s1)
-{
-	char	*dest;
-	char	*dest_ptr;
-
-	dest = (char *)malloc((ft_strlen(s1) + 1));
-	if (!dest)
-		return (NULL);
-	dest_ptr = dest;
-	while (*s1)
-		*dest_ptr++ = *s1++;
-	*dest_ptr = '\0';
-	return (dest);
-}
+#include "libftprintf.h"
 
 static int	count_len(int n)
 {
@@ -56,7 +41,7 @@ static void	reverse_digit(char *itoa)
 	int		j;
 
 	i = 0;
-	j = ft_strlen(itoa) - 1;
+	j = str_len(itoa) - 1;
 	if (itoa[i] == '-')
 		i++;
 	while (itoa[i] && j > i)
@@ -75,7 +60,7 @@ char	*ft_ltoa(long n)
 	size_t	i;
 
 	if (n == 0)
-		return (ft_strdup("0"));
+		return (str_dup("0"));
 	itoa = (char *)malloc((count_len(n) + 1));
 	if (!itoa)
 		return (NULL);

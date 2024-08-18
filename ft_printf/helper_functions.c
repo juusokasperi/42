@@ -6,11 +6,11 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 20:45:13 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/08/09 17:24:21 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/08/18 12:27:37 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libftprintf.h"
 
 int	pad_width(int width, int size, int zero_pad)
 {
