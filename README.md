@@ -32,6 +32,7 @@ _Started 2024/08/12_
 ### FdF
 ### fract-oi
 ### minitalk
+_Wrote 2024/08/16-17_
 - To test, run `cat ./text.txt|xargs -0 ./client <SERVER_PID>`
 - Everything else works but unicode support (2nd bonus)
 
