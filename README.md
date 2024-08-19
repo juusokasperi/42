@@ -1,4 +1,8 @@
 # My 42 projects
+
+### myLibft
+- This is the libft with additions such as ft_printf and get_next_line
+
 ## Rank 00
 
 ### Libft
