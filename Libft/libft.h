@@ -6,15 +6,13 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 10:35:59 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/08/17 18:16:48 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/08/19 12:21:54 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
-# include <string.h>
-# include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
 

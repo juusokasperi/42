@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 19:07:43 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/08/18 12:38:37 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/08/19 12:23:25 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include <stdarg.h>
 # include <unistd.h>
-# include <stdio.h>
 # include <stdlib.h>
 
 typedef struct s_flags {

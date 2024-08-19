@@ -6,11 +6,11 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 20:24:51 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/08/18 12:33:19 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/08/19 15:03:18 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ftprintf.h"
 
 static int	print_x(char *ptr_xtoa, int ptr_len, t_flags flags)
 {

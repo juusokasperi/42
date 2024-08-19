@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 18:11:42 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/08/18 18:33:05 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/08/19 15:47:57 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	if (!argv[2][0])
-		return (printf("ERROR: Second argument is empty.\n"));
+		return (ft_printf("ERROR: Second argument is empty.\n"));
 	send_signal(server_id, argv[2]);
 	return (0);
 }

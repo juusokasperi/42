@@ -6,11 +6,13 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 10:37:22 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/08/01 18:34:38 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/08/19 12:22:14 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <string.h>
+#include <stdio.h>
 
 void	test_strlen(void)
 {
