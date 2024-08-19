@@ -33,12 +33,6 @@ bonus: $(O_BONUS)
 	ar $(ARFLAGS) $(NAME) $^
 	@echo "$(GREEN)✅ LIBFT: Bonus compilation done!$(ENDCOLOR)"
 
-test: all bonus
-	cp $(NAME) ./test/
-	$(CC) $(CFLAGS) ./test/main.c -o ./test/test -L./test/ -lft
-	@echo "$(GREEN)✅ LIBFT: Tester compilation done!$(ENDCOLOR)"
-
-
 $(NAME): $O
 	ar $(ARFLAGS) $(NAME) $^
 	@echo "$(GREEN)✅ LIBFT: Mandatory compilation done!$(ENDCOLOR)"

@@ -11,35 +11,35 @@ LDFLAGS = -L./ -lftprintf
 
 NAME := test
 
-all: $(NAME)
-
-$(LIB):
-	@make -C ../
-	cp ../$(LIB) ./
-	cp ../$H ./
-	@make -C ../ fclean
-
-$(OBJ): $(LIB)
-
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
-
 GREEN = \033[0;92m
 RED = \033[0;91m
 ENDCOLOR = \033[0m
 
-$(NAME): $(OBJ) $H
+all: $(NAME)
+
+$(LIB) $H:
+	@make -C ../
+	@cp ../$(LIB) ./
+	@cp ../$H ./
+	@make -C ../ fclean
+
+$(OBJ): $(LIB) $H
+
+%.o: %.c $H
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(NAME): $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) $(LDFLAGS) -o $@
 	@echo "$(GREEN)✅ FT_PRINTF: Test compilation complete.$(ENDCOLOR)"
 
 clean:
 	rm -f $(OBJ)
-	@echo "$(GREEN)✅ FT_PRINTF: Test clean complete.$(ENDCOLOR)"
+	@echo "$(RED)✅ FT_PRINTF: Test clean complete.$(ENDCOLOR)"
 
 fclean:
 	rm -f $(OBJ) $(NAME) $(LIB) $(H)
-	@echo "$(GREEN)✅ FT_PRINTF: Test fclean complete.$(ENDCOLOR)"
+	@echo "$(RED)✅ FT_PRINTF: Test fclean complete.$(ENDCOLOR)"
 
 re: fclean all
 
-.PHONY: all clean fclean ref
+.PHONY: all clean fclean re

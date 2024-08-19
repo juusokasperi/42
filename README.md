@@ -7,7 +7,7 @@
 
 ### Libft
 _Started 2024/07/31_
-- To compile main.c for testing, run `make test`
+- To compile main.c for testing, run `make` inside tests/ folder
 - Everything should be functional.
 - Next up write thorough tests for the functions.
 
