@@ -6,11 +6,12 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 15:44:26 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/08/12 16:12:06 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/08/19 16:12:20 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libftprintf.h"
+#include <stdio.h>
 
 void	test_unsigned(void)
 {
