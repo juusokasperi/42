@@ -23,6 +23,7 @@ _Started 2024/08/07_
 - If user tries to run the program with false parameters, f.ex. ft_printf("%s\n", 'b'); leads to a segfault, 
   since va_arg leads to undefined behaviour if it tries to read a character as a string. Probably ok, since regular
   printf doesn't work with false flags either.
+- To compile for testing, run `make` inside tests/ folder.
 
 ### Get_next_line
 _Started 2024/08/12_
