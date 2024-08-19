@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 19:49:27 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/08/17 22:23:58 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/08/19 11:46:38 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	signal_handler(int signum, siginfo_t *info, void *context)
 		client_pid = info->si_pid;
 	(void)context;
 	if (signum == SIGUSR1)
-		received_char |= (1 << bit_count);
+		received_char |= (1 << (7 - bit_count));
 	bit_count++;
 	if (bit_count == 8)
 	{

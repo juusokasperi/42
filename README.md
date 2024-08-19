@@ -33,8 +33,8 @@ _Started 2024/08/12_
 ### fract-oi
 ### minitalk
 _Wrote 2024/08/16-17_
-- To test, run `cat ./text.txt|xargs -0 ./client <SERVER_PID>`
-- Everything else works but unicode support (2nd bonus)
+- To test with a really long string, run `cat ./text.txt|xargs -0 ./client <SERVER_PID>`
+- To test unicode support, `make bonus`. There's a txt file with different unicode characters in the project folder, run `cat ./textunicode.txt|xargs -0 ./client_bonus <SERVER_PID>`
 
 ### pipex
 ### push_swap

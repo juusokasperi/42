@@ -1,14 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   client_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 18:11:42 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/08/18 18:33:05 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/08/19 11:46:21 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+/* Add UTF-8 support! */
 
 #include "minitalk.h"
 
@@ -43,24 +45,26 @@ void	wait_server(void)
 	}
 	g_i = 0;
 }
+
 void	send_signal(int pid, char *message)
 {
-	int	i;
-	int	j;
+	int				i;
+	int				j;
+	unsigned char	byte;
 
-	i = 0;
-	while (message[i])
+	i = -1;
+	while (message[++i])
 	{
-		j = -1;
-		while (++j < 8)
+		byte = (unsigned char)message[i];
+		j = 8;
+		while (--j >= 0)
 		{
-			if ((message[i] & (1 << j)))
+			if ((byte >> j) & 1)
 				kill(pid, SIGUSR1);
 			else
 				kill(pid, SIGUSR2);
 			wait_server();
 		}
-		i++;
 	}
 	i = 0;
 	while (i++ < 8)
@@ -70,27 +74,36 @@ void	send_signal(int pid, char *message)
 	}
 }
 
+int	init(int argc, char **argv, int *server_id, struct sigaction *sa)
+{
+	if (argc != 3)
+		ft_printf("ERROR: Usage %s <PID> <MESSAGE>\n", argv[0]);
+	*server_id = ft_atoi(argv[1]);
+	if (!(*server_id))
+		ft_printf("ERROR: First argument (%s) false.\n", argv[1]);
+	if (!argv[2][0])
+		ft_printf("ERROR: Second argument is empty.\n");
+	sigemptyset(&sa->sa_mask);
+	sa->sa_sigaction = signal_handler;
+	sa->sa_flags = SA_RESTART | SA_SIGINFO;
+	if (sigaction(SIGUSR1, sa, NULL) == -1
+		|| sigaction(SIGUSR2, sa, NULL) == -1)
+		ft_printf("Error setting up handlers.\n");
+	if (argc != 3 || !server_id || !argv[2][0]
+		|| sigaction(SIGUSR1, sa, NULL) == -1
+		|| sigaction(SIGUSR2, sa, NULL) == -1)
+		return (0);
+	else
+		return (1);
+}
+
 int	main(int argc, char **argv)
 {
 	struct sigaction	sa;
 	int					server_id;
 
-	if (argc != 3)
-		return (ft_printf("ERROR: Usage %s <PID> <MESSAGE>\n", argv[0]));
-	server_id = ft_atoi(argv[1]);
-	if (!server_id)
-		return (ft_printf("ERROR: First argument (%s) false.\n", argv[1]));
-	sigemptyset(&sa.sa_mask);
-	sa.sa_sigaction = signal_handler;
-	sa.sa_flags = SA_RESTART | SA_SIGINFO;
-	if (sigaction(SIGUSR1, &sa, NULL) == -1
-		|| sigaction(SIGUSR2, &sa, NULL) == -1)
-	{
-		ft_printf("Error setting up handlers.\n");
+	if (!init(argc, argv, &server_id, &sa))
 		return (1);
-	}
-	if (!argv[2][0])
-		return (printf("ERROR: Second argument is empty.\n"));
 	send_signal(server_id, argv[2]);
 	return (0);
 }

@@ -1,8 +1,12 @@
 C_SRCS := client.c
 S_SRCS := server.c
-
 C_OBJS := $(C_SRCS:.c=.o)
 S_OBJS := $(S_SRCS:.c=.o)
+
+BONUS_C_SRCS := client_bonus.c
+BONUS_S_SRCS := server_bonus.c
+BONUS_C_OBJS := $(BONUS_C_SRCS:.c=.o)
+BONUS_S_OBJS := $(BONUS_S_SRCS:.c=.o)
 
 H := minitalk.h
 
@@ -38,15 +42,26 @@ server: libs $(S_OBJS)
 clean:
 	@make -C libft clean
 	@make -C ft_printf clean
-	rm -f $(C_OBJS) $(S_OBJS)
+	rm -f $(C_OBJS) $(S_OBJS) $(BONUS_C_OBJS) $(BONUS_S_OBJS)
 	@echo "$(RED)✅ MINITALK: Clean complete.$(ENDCOLOR)"
 
 fclean:
 	@make -C libft fclean
 	@make -C ft_printf fclean
-	rm  -f $(C_OBJS) $(S_OBJS) client server
+	rm  -f $(C_OBJS) $(S_OBJS) $(BONUS_C_OBJS) $(BONUS_S_OBJS) \
+	client server client_bonus server_bonus
 	@echo "$(RED)✅ MINITALK: FClean complete.$(ENDCOLOR)"
+
+bonus: server_bonus client_bonus
+
+client_bonus: libs $(BONUS_C_OBJS)
+	$(CC) $(CFLAGS) $(BONUS_C_OBJS) $(LDFLAGS) -o $@
+	@echo "$(GREEN)✅ MINITALK: Bonus client compilation complete!$(ENDCOLOR)"
+
+server_bonus: libs $(BONUS_S_OBJS)
+	$(CC) $(CFLAGS) $(BONUS_S_OBJS) $(LDFLAGS) -o $@
+	@echo "$(GREEN)✅ MINITALK: Bonus server compilation complete!$(ENDCOLOR)"
 
 re: fclean all
 
-.PHONY: clean fclean re all libs
+.PHONY: clean fclean re all libs client server bonus server_bonus client_bonus
