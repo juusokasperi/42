@@ -1,32 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/26 18:18:01 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/10/27 19:45:06 by jrinta-          ###   ########.fr       */
+/*   Created: 2024/10/26 18:05:50 by jrinta-           #+#    #+#             */
+/*   Updated: 2024/10/26 18:06:49 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
-
-char	*ft_strdup(char *src);
-
-int	main(void)
+int	ft_strlen(char *str)
 {
-	char	*str = "Testi String.";
-	char	*cpy;
+	int	i;
 
-	cpy = ft_strdup(str);
-	if (cpy)
-	{
-		printf("Cpy is %s\n", cpy);
-		free(cpy);
-	}
-	else
-		printf("Malloc failed.\n");
-	return (1);
+	i = 0;
+	while (*str++)
+		i++;
+	return (i);
 }

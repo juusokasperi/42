@@ -1,32 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/26 18:18:01 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/10/27 19:45:06 by jrinta-          ###   ########.fr       */
+/*   Created: 2024/10/26 15:52:54 by jrinta-           #+#    #+#             */
+/*   Updated: 2024/10/26 16:00:30 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
-
-char	*ft_strdup(char *src);
-
-int	main(void)
+int	ft_strcmp(char *s1, char *s2)
 {
-	char	*str = "Testi String.";
-	char	*cpy;
-
-	cpy = ft_strdup(str);
-	if (cpy)
+	while (*s1 && *s2)
 	{
-		printf("Cpy is %s\n", cpy);
-		free(cpy);
+		if (*s1 != *s2)
+			return (*s1 - *s2);
+		s1++;
+		s2++;
 	}
-	else
-		printf("Malloc failed.\n");
-	return (1);
+	return (*s1 - *s2);
 }

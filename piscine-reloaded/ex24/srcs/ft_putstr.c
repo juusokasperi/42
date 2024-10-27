@@ -1,32 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/26 18:18:01 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/10/27 19:45:06 by jrinta-          ###   ########.fr       */
+/*   Created: 2024/10/26 17:49:03 by jrinta-           #+#    #+#             */
+/*   Updated: 2024/10/27 14:34:57 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
+void	ft_putchar(char c);
 
-char	*ft_strdup(char *src);
-
-int	main(void)
+void	ft_putstr(char *str)
 {
-	char	*str = "Testi String.";
-	char	*cpy;
-
-	cpy = ft_strdup(str);
-	if (cpy)
-	{
-		printf("Cpy is %s\n", cpy);
-		free(cpy);
-	}
-	else
-		printf("Malloc failed.\n");
-	return (1);
+	while (*str)
+		ft_putchar(*str++);
 }

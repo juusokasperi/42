@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 18:15:26 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/10/26 18:21:28 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/10/27 19:45:26 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ int	ft_strlen(char *str)
 	return (i);
 }
 
-char *ft_strdup(char *src)
+char	*ft_strdup(char *src)
 {
-	char *str;
-	int	i;
+	char	*str;
+	int		i;
 
 	i = 0;
 	str = malloc((ft_strlen(src) + 1) * sizeof(char));

@@ -1,32 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_count_if.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/26 18:18:01 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/10/27 19:45:06 by jrinta-          ###   ########.fr       */
+/*   Created: 2024/10/27 18:26:49 by jrinta-           #+#    #+#             */
+/*   Updated: 2024/10/27 19:13:34 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include <stdlib.h>
 
-char	*ft_strdup(char *src);
-
-int	main(void)
+int	ft_count_if(char **tab, int (*f)(char*))
 {
-	char	*str = "Testi String.";
-	char	*cpy;
+	int	count;
 
-	cpy = ft_strdup(str);
-	if (cpy)
+	count = 0;
+	while (*tab)
 	{
-		printf("Cpy is %s\n", cpy);
-		free(cpy);
+		printf("%s\n", *tab);
+		if (f(*tab) == 1)
+			count++;
+		tab++;
 	}
-	else
-		printf("Malloc failed.\n");
-	return (1);
+	return (count);
 }

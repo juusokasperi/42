@@ -1,32 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_point.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/26 18:18:01 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/10/27 19:45:06 by jrinta-          ###   ########.fr       */
+/*   Created: 2024/10/27 14:22:32 by jrinta-           #+#    #+#             */
+/*   Updated: 2024/10/27 14:23:30 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
+#ifndef FT_POINT_H
+# define FT_POINT_H
 
-char	*ft_strdup(char *src);
-
-int	main(void)
+typedef struct s_point
 {
-	char	*str = "Testi String.";
-	char	*cpy;
+	int	x;
+	int	y;
+}	t_point;
 
-	cpy = ft_strdup(str);
-	if (cpy)
-	{
-		printf("Cpy is %s\n", cpy);
-		free(cpy);
-	}
-	else
-		printf("Malloc failed.\n");
-	return (1);
-}
+#endif

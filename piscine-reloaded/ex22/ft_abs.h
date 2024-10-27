@@ -1,32 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_abs.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/26 18:18:01 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/10/27 19:45:06 by jrinta-          ###   ########.fr       */
+/*   Created: 2024/10/27 14:14:32 by jrinta-           #+#    #+#             */
+/*   Updated: 2024/10/27 14:16:48 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
+#ifndef FT_ABS_H
+# define FT_ABS_H
 
-char	*ft_strdup(char *src);
+# define ABS(Value) (((Value) >= 0 ? (Value) : -(Value)))
 
-int	main(void)
-{
-	char	*str = "Testi String.";
-	char	*cpy;
-
-	cpy = ft_strdup(str);
-	if (cpy)
-	{
-		printf("Cpy is %s\n", cpy);
-		free(cpy);
-	}
-	else
-		printf("Malloc failed.\n");
-	return (1);
-}
+#endif
