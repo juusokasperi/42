@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 10:37:22 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/10/29 16:05:49 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/10/29 22:43:39 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,13 @@
 
 int	main(int argc, char **argv)
 {
+	if (argc > 2)
+	{
+		printf("Usage: \"%s\" or \"%s bonus\"\n", argv[0], argv[0]);
+		return (1);
+	}
+	else if (argc == 1)
+	{
 	test_isalpha();
 	test_isdigit();
 	test_isalnum();
@@ -42,9 +49,21 @@ int	main(int argc, char **argv)
 	test_itoa();
 	test_strmapi();
 	test_striteri();
-	if (argc == 2 && ft_strlen(argv[1]) == 5
+	}
+	else if (argc == 2 && ft_strlen(argv[1]) == 5
 		&& ft_strncmp(argv[1], "bonus", 5) == 0)
 	{
-		printf("Doing bonus tests..");
+		printf("---------------------------\n");
+		printf("---------- BONUS ----------\n\n");
+		test_lstnew();
+		test_lstaddfront();
+		test_lstsize();
+		test_lstlast();
+		test_lstaddback();
+		test_lstdelone();
+		test_lstclear();
+		test_lstiter();
+		test_lstmap();
 	}
+	return (0);
 }

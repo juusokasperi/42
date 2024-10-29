@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 20:27:47 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/08/01 20:36:01 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/10/29 23:16:35 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 
 	if (!lst || !f || !del)
 		return (NULL);
+	new_lst = NULL;
 	while (lst)
 	{
 		new_elem = ft_lstnew(f(lst->content));

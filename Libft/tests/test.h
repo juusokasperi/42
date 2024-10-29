@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 12:22:07 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/10/29 15:58:35 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/10/29 22:41:53 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,14 @@ void	test_split(void);
 void	test_itoa(void);
 void	test_strmapi(void);
 void	test_striteri(void);
+void	test_lstnew(void);
+void	test_lstaddfront(void);
+void	test_lstsize(void);
+void	test_lstlast(void);
+void	test_lstaddback(void);
+void	test_lstdelone(void);
+void	test_lstclear(void);
+void	test_lstiter(void);
+void	test_lstmap(void);
 
 #endif

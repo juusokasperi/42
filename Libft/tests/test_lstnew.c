@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
+/*   test_lstnew.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/01 20:08:02 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/10/29 23:14:35 by jrinta-          ###   ########.fr       */
+/*   Created: 2024/10/29 21:37:11 by jrinta-           #+#    #+#             */
+/*   Updated: 2024/10/29 22:11:15 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "test.h"
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+void	test_lstnew(void)
 {
-	t_list	*last;
+	t_list *lst;
 
-	last = ft_lstlast(*lst);
-	if (!last)
-		*lst = new;
-	else
-		last->next = new;
+	printf("---------------------------\n");
+	printf("FT_LSTNEW:\n");
+	lst = ft_lstnew(strdup("This is a linked list."));
+	printf("Lst content is \"%s\"\n", (char *)lst->content);
+	ft_lstdelone(lst, free);
+	printf("---------------------------\n\n");
 }
