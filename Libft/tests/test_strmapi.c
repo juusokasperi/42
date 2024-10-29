@@ -1,24 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   test_strmapi.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/31 23:32:51 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/10/29 15:21:21 by jrinta-          ###   ########.fr       */
+/*   Created: 2024/10/29 15:42:54 by jrinta-           #+#    #+#             */
+/*   Updated: 2024/10/29 16:00:01 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "test.h"
 
-void	*ft_calloc(size_t nmemb, size_t size)
+static char	capitalize_c(unsigned int i, char c)
 {
-	char	*s;
+	(void)i;
+	return ft_toupper(c);
+}
 
-	s = malloc(nmemb * size);
-	if (!s)
-		return (NULL);
-	ft_bzero(s, nmemb * size);
-	return (s);
+
+void	test_strmapi(void)
+{
+	char	*str = "testattava string 1234.";
+	char	*str2;
+
+	printf("---------------------------\n");
+	printf("FT_STRMAPI:\n");
+	str2 = ft_strmapi(str, capitalize_c);
+	printf("Str is %s and str2 is %s\n", str, str2);
+	printf("---------------------------\n\n");
 }

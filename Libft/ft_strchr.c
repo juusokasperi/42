@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 12:35:56 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/07/31 12:43:25 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/10/29 14:27:07 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*ft_strchr(const char *s, int c)
 {
-	while (*s != '\0')
+	while (*s)
 	{
 		if (*s == (char)c)
 			return ((char *)s);

@@ -1,24 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   test_calloc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/31 23:32:51 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/10/29 15:21:21 by jrinta-          ###   ########.fr       */
+/*   Created: 2024/10/29 15:03:31 by jrinta-           #+#    #+#             */
+/*   Updated: 2024/10/29 15:21:19 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "test.h"
 
-void	*ft_calloc(size_t nmemb, size_t size)
+void	test_calloc(void)
 {
-	char	*s;
+	printf("---------------------------\n");
+	printf("FT_CALLOC:\n");
+	char	*str;
+	printf("Attempting to calloc 15 * sizeof(char)..\n");
+	str = calloc(15, sizeof(char));
+	if (str)
+		printf("	Calloc successful.\n");
+	else
+	{
+		printf("	Calloc failed.\n");
+		return ;
+	}
+	printf("---------------------------\n\n");
 
-	s = malloc(nmemb * size);
-	if (!s)
-		return (NULL);
-	ft_bzero(s, nmemb * size);
-	return (s);
 }

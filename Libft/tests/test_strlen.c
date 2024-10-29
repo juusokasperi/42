@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   test_strlen.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/31 23:32:51 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/10/29 15:21:21 by jrinta-          ###   ########.fr       */
+/*   Created: 2024/10/29 12:38:05 by jrinta-           #+#    #+#             */
+/*   Updated: 2024/10/29 12:38:19 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "test.h"
 
-void	*ft_calloc(size_t nmemb, size_t size)
+void	test_strlen(void)
 {
-	char	*s;
-
-	s = malloc(nmemb * size);
-	if (!s)
-		return (NULL);
-	ft_bzero(s, nmemb * size);
-	return (s);
+	printf("---------------------------\n");
+	printf("FT_STRLEN:\n");
+	printf("Length of \"Test\" is %zu\n", ft_strlen("Test"));
+	printf("Length of \"\" is %zu\n", ft_strlen(""));
+	printf("---------------------------\n\n");
 }

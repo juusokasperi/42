@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   test_isdigit.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/31 23:32:51 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/10/29 15:21:21 by jrinta-          ###   ########.fr       */
+/*   Created: 2024/10/29 12:16:09 by jrinta-           #+#    #+#             */
+/*   Updated: 2024/10/29 12:30:01 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "test.h"
 
-void	*ft_calloc(size_t nmemb, size_t size)
+void	test_isdigit(void)
 {
-	char	*s;
-
-	s = malloc(nmemb * size);
-	if (!s)
-		return (NULL);
-	ft_bzero(s, nmemb * size);
-	return (s);
+	printf("---------------------------\n");
+	printf("FT_ISDIGIT:\n");
+	printf("Char 0 isdigit return value: %i\n", ft_isdigit('0'));
+	printf("Char 9 isdigit return value: %i\n", ft_isdigit('9'));
+	printf("Char a isdigit return value: %i\n", ft_isdigit('a'));
+	printf("Char @ isdigit return value: %i\n", ft_isdigit('@'));
+	printf("---------------------------\n\n");
 }

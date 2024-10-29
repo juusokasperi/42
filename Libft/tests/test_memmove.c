@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   test_memmove.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/31 23:32:51 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/10/29 15:21:21 by jrinta-          ###   ########.fr       */
+/*   Created: 2024/10/29 12:49:58 by jrinta-           #+#    #+#             */
+/*   Updated: 2024/10/29 12:53:08 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "test.h"
 
-void	*ft_calloc(size_t nmemb, size_t size)
+void	test_memmove(void)
 {
-	char	*s;
-
-	s = malloc(nmemb * size);
-	if (!s)
-		return (NULL);
-	ft_bzero(s, nmemb * size);
-	return (s);
+	char dest[20] = "TestiString.";
+	char src[20] = "TestStringy.";
+	printf("---------------------------\n");
+	printf("FT_MEMMOVE:\n");
+	printf("Before memmove dest is %s and src is %s\n", dest, src);
+	ft_memmove(dest, src, 20);
+	printf("After memmove dest is %s and src is %s\n", dest, src);
+	printf("---------------------------\n\n");
 }

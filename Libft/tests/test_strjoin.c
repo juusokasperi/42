@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   test_strjoin.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/31 23:32:51 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/10/29 15:21:21 by jrinta-          ###   ########.fr       */
+/*   Created: 2024/10/29 15:29:07 by jrinta-           #+#    #+#             */
+/*   Updated: 2024/10/29 15:35:34 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "test.h"
 
-void	*ft_calloc(size_t nmemb, size_t size)
+void	test_strjoin(void)
 {
-	char	*s;
-
-	s = malloc(nmemb * size);
-	if (!s)
-		return (NULL);
-	ft_bzero(s, nmemb * size);
-	return (s);
+	char str[12] = "TestiString.";
+	char str2[8] = "Testing";
+	char *strs_joined = ft_strjoin(str, str2);
+	printf("---------------------------\n");
+	printf("FT_SUBSTR:\n");
+	printf("Joining \"%s\" and \"%s\", result is \"%s\"\n", str, str2, strs_joined);
+	printf("---------------------------\n\n");
+	free(strs_joined);
 }

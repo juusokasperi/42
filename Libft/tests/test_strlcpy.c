@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   test_strlcpy.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/31 23:32:51 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/10/29 15:21:21 by jrinta-          ###   ########.fr       */
+/*   Created: 2024/10/29 12:59:52 by jrinta-           #+#    #+#             */
+/*   Updated: 2024/10/29 14:02:09 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "test.h"
 
-void	*ft_calloc(size_t nmemb, size_t size)
+void	test_strlcpy(void)
 {
-	char	*s;
-
-	s = malloc(nmemb * size);
-	if (!s)
-		return (NULL);
-	ft_bzero(s, nmemb * size);
-	return (s);
+	char src[6] = "Testi";
+	char dest[6] = "";
+	printf("---------------------------\n");
+	printf("FT_STRLCPY:\n");
+	printf("Src is \"%s\" and dest is \"%s\". Running strlcpy, length of 6.\n", src, dest);
+	ft_strlcpy(dest, src, 6);
+	printf("After strlcpy dest is: \"%s\" and src is \"%s\"\n", dest, src);
+	printf("---------------------------\n\n");
 }

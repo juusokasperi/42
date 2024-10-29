@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   test_strtrim.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/31 23:32:51 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/10/29 15:21:21 by jrinta-          ###   ########.fr       */
+/*   Created: 2024/10/29 15:36:03 by jrinta-           #+#    #+#             */
+/*   Updated: 2024/10/29 15:36:13 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "test.h"
 
-void	*ft_calloc(size_t nmemb, size_t size)
+void	test_strtrim(void)
 {
-	char	*s;
-
-	s = malloc(nmemb * size);
-	if (!s)
-		return (NULL);
-	ft_bzero(s, nmemb * size);
-	return (s);
+	char *str = "abababCS2 kelpaa pelata baaban vierelläbabababa";
+	char *str_trimmed = ft_strtrim(str, "ab");
+	printf("---------------------------\n");
+	printf("FT_STRTRIM:\n");
+	printf("\"%s\" to strtrim with charset \"ab\"\n", str);
+	printf("\"%s\"\n", str_trimmed);
+	printf("---------------------------\n\n");
+	free(str_trimmed);
 }

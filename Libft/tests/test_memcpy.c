@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   test_memcpy.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/31 23:32:51 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/10/29 15:21:21 by jrinta-          ###   ########.fr       */
+/*   Created: 2024/10/29 12:41:10 by jrinta-           #+#    #+#             */
+/*   Updated: 2024/10/29 12:59:12 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "test.h"
 
-void	*ft_calloc(size_t nmemb, size_t size)
+void	test_memcpy(void)
 {
-	char	*s;
-
-	s = malloc(nmemb * size);
-	if (!s)
-		return (NULL);
-	ft_bzero(s, nmemb * size);
-	return (s);
+	char dest[10] = "Testi";
+	char src[10] = "Roflmao";
+	printf("---------------------------\n");
+	printf("FT_MEMCPY:\n");
+	printf("Src is \"%s\" and dest is \"%s\". Running memcpy, length of 7.\n", src, dest);
+	ft_memcpy(dest, src, 7);
+	printf("After memcpy dest is: \"%s\" and src is \"%s\"\n", dest, src);
+	printf("---------------------------\n\n");
 }
