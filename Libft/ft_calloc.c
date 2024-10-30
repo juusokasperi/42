@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 23:32:51 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/10/29 15:21:21 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/10/30 09:39:33 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,12 @@
 
 void	*ft_calloc(size_t nmemb, size_t size)
 {
-	char	*s;
+	void	*s;
 
+	if (nmemb == 0 || size == 0)
+		return (malloc(0));
+	if (size && nmemb > SIZE_MAX / size)
+		return (NULL);
 	s = malloc(nmemb * size);
 	if (!s)
 		return (NULL);

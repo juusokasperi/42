@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 14:27:54 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/10/29 14:34:13 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/10/30 16:41:33 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,11 @@ void	test_strrchr(void)
 	printf("Looking for '\\0', ptr points to %s\n", ptr);
 	ptr = ft_strrchr(str, 'X');
 	printf("Looking for 'X', ptr points to %s\n", ptr);
+	ptr = ft_strrchr(str, 'T');
+	printf("Looking for 'T', ptr points to %s\n", ptr);
+	ptr = ft_strrchr("", 'Y');
+	printf("Looking for 'Y' from an empty string, ptr points to %s\n", ptr);
+	ptr = ft_strrchr("Y", 'Y');
+	printf("Looking for 'Y' from a string with only that character, ptr points to %s\n", ptr);
 	printf("---------------------------\n\n");
-
 }

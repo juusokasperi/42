@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 15:03:31 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/10/29 15:21:19 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/10/30 17:03:27 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,23 @@ void	test_calloc(void)
 	printf("Attempting to calloc 15 * sizeof(char)..\n");
 	str = calloc(15, sizeof(char));
 	if (str)
-		printf("	Calloc successful.\n");
+		printf("\tCalloc successful.\n");
 	else
 	{
-		printf("	Calloc failed.\n");
+		printf("\tCalloc failed.\n");
 		return ;
 	}
+
+	printf("Attempting to calloc 0 * sizeof(char)..\n");
+	str = calloc(0, sizeof(char));
+	if (str)
+		printf("\tCalloc successful.\n");
+	else
+	{
+		printf("\tCalloc failed.\n");
+		return ;
+	}
+
 	printf("---------------------------\n\n");
 
 }

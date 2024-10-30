@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 14:56:23 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/10/29 15:01:35 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/10/30 16:41:07 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@ void	test_atoi(void)
 {
 	printf("---------------------------\n");
 	printf("FT_ATOI:\n");
+	printf("Sending \"%s\" to atoi, result is \"%i\"\n", "       -2147483648", ft_atoi("       -2147483648"));
+	printf("Sending \"%s\" to atoi, result is \"%i\"\n", "       2147483647", ft_atoi("       2147483647"));
+	printf("Sending \"%s\" to atoi, result is \"%i\"\n", "       2147483648", ft_atoi("       2147483648"));
 	printf("Sending \"%s\" to atoi, result is \"%i\"\n", "       +500X40", ft_atoi("       +500X40"));
 	printf("Sending \"%s\" to atoi, result is \"%i\"\n", "       +-500X40", ft_atoi("       +-500X40"));
 	printf("Sending \"%s\" to atoi, result is \"%i\"\n", "       +5Y500X40", ft_atoi("       +5Y500X40"));

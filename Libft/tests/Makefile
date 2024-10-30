@@ -43,11 +43,11 @@ $(NAME): $O
 
 clean:
 	rm -f $O
-	@echo "$(GREEN)✅ LIBFT: Clean complete.$(ENDCOLOR)"
+	@echo "$(GREEN)✅ LIBFT: Test clean complete.$(ENDCOLOR)"
 
 fclean:
 	rm -f $O $H $(LIB) $(NAME)
-	@echo "$(GREEN)✅ LIBFT: Fclean complete.$(ENDCOLOR)"
+	@echo "$(GREEN)✅ LIBFT: Test fclean complete.$(ENDCOLOR)"
 
 re: fclean all
 
