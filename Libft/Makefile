@@ -19,8 +19,8 @@ CC := gcc
 CFLAGS += -Wall -Wextra -Werror -I./
 ARFLAGS := -rcs
 
-RED = \033[0;91m
-GREEN = \033[0;92m
+RED = \033[0;31m
+GREEN = \033[0;32m
 ENDCOLOR = \033[0m
 
 NAME := libft.a

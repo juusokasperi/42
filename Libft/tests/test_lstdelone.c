@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 21:45:24 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/10/29 22:33:05 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/10/31 12:01:06 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,15 @@ void	test_lstdelone(void)
 	ft_lstdelone(lst3, free);
 	lst2->next = NULL;
 	printf("\nAfter lstdelone on lst3, whole linked list is as follows:\n");
+	current = lst;
+	while (current)
+	{
+		printf("%s\n", (char *)current->content);
+		current = current->next;
+	}
+	ft_lstdelone(lst, free);
+	lst = lst2;
+	printf("\nAfter lstdelone on lst, whole linked list is as follows:\n");
 	current = lst;
 	while (current)
 	{

@@ -15,12 +15,12 @@ LIB := libft.a
 
 CC = gcc
 CFLAGS += -Wall -Wextra -Werror -I./
-LDFLAGS = -L./ -lft
+LDFLAGS = -L./ -lft -lbsd
 
 NAME := test
 
-GREEN := \033[0;92m
-RED := \033[0;91m
+GREEN := \033[0;32m
+RED := \033[0;31m
 ENDCOLOR := \033[0m
 
 all: $(NAME)
