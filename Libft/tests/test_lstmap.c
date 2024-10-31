@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 21:45:24 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/10/29 23:18:25 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/10/31 13:22:55 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,11 @@ static void	*capitalize(void *str)
 		i++;
 	}
 	return (new_str);
+}
+
+static void	ft_free(void *content)
+{
+	free(content);
 }
 
 void	test_lstmap(void)
@@ -55,7 +60,7 @@ void	test_lstmap(void)
 		current = current->next;
 	}
 	printf("\nAfter lstmap on lst, new linked list is as follows:\n");
-	new_lst = ft_lstmap(lst, capitalize, free);
+	new_lst = ft_lstmap(lst, capitalize, ft_free);
 	current = new_lst;
 	while (current)
 	{
@@ -69,7 +74,7 @@ void	test_lstmap(void)
 		printf("%s\n", (char *)current->content);
 		current = current->next;
 	}
-	ft_lstclear(&lst, free);
-	ft_lstclear(&new_lst, free);
+	ft_lstclear(&lst, ft_free);
+	ft_lstclear(&new_lst, ft_free);
 	printf("---------------------------\n\n");
 }
