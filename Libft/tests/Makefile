@@ -15,7 +15,7 @@ LIB := libft.a
 
 CC = gcc
 CFLAGS += -Wall -Wextra -Werror -I./
-LDFLAGS = -L./ -lft -lbsd
+LDFLAGS = -L./ -lft
 
 NAME := test
 
