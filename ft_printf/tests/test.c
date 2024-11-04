@@ -6,11 +6,11 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 21:30:28 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/08/19 16:55:10 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/10/31 20:27:23 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 #include <stdio.h>
 
 void	test_int(void);

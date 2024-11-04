@@ -6,11 +6,11 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 19:06:48 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/08/18 12:27:19 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/10/31 20:24:57 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 void	init_flags(t_flags *flags)
 {
@@ -37,7 +37,8 @@ int	type_handler(char c, va_list *args, t_flags flags)
 	else if (c == 's')
 		count += print_str_handler(va_arg(*args, const char *), flags);
 	else if (c == 'p')
-		count += print_ptr_handler((unsigned long int)va_arg(*args, void *), flags);
+		count += print_ptr_handler((unsigned long int)va_arg(*args, void *),
+				flags);
 	else if (c == 'i' || c == 'd')
 		count += print_nbr_handler(va_arg(*args, int), &flags);
 	else if (c == 'u')

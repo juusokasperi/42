@@ -6,11 +6,11 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 20:23:34 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/08/18 12:33:32 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/10/31 20:25:43 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 static int	print_hash(int capital)
 {

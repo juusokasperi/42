@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 21:26:33 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/08/15 21:47:43 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/03 00:21:21 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,8 @@ char *get_next_line(int fd)
 	static t_list	*list[FD_MAX];
 	char 			*next_line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || fd > FD_MAX - 1)
+	if (fd < 0 || BUFFER_SIZE <= 0
+		|| read(fd, 0, 0) < 0 || fd > FD_MAX - 1)
 		return (NULL);
 	init_list(&list[fd - 1], fd);
 	if (!list[fd - 1])

@@ -6,11 +6,11 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 19:51:20 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/08/18 12:27:41 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/10/31 20:25:38 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 static void	flag_left(t_flags *flags)
 {
@@ -29,7 +29,8 @@ static void	flag_width(va_list args, t_flags *flags)
 	}
 }
 
-static int	flag_precision(const char *format, int i, va_list args, t_flags *flags)
+static int	flag_precision(const char *format,
+	int i, va_list args, t_flags *flags)
 {
 	int	j;
 

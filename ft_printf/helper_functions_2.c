@@ -6,11 +6,11 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 12:35:10 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/08/18 12:39:05 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/10/31 20:25:15 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 char	*str_dup(const char *s1)
 {

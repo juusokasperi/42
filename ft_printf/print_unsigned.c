@@ -6,11 +6,11 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 20:25:54 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/08/18 12:32:45 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/10/31 20:26:05 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 static int	print_i(char *nbr_itoa, int nbr_len, t_flags flags)
 {

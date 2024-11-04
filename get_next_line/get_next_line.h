@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 17:22:08 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/08/15 21:39:21 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/01 19:09:03 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ typedef struct	s_list
 	struct s_list	*next;
 }				t_list;
 
-char *get_next_line(int fd);
+char	*get_next_line(int fd);
 int		has_newline(t_list *list);
 t_list	*find_last_node(t_list *list);
-int	len_to_newline(t_list *list);
+int		len_to_newline(t_list *list);
 void	dealloc(t_list **list, t_list *cleaned_node, char *buffer);
-void copy_str(t_list *list, char *next_str);
+void 	copy_str(t_list *list, char *next_str);
 
 #endif

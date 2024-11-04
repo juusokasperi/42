@@ -6,11 +6,11 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 20:59:10 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/08/19 16:12:31 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/10/31 20:26:15 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 #include <stdio.h>
 
 void	test_eval(void)

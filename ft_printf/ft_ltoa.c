@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 17:12:27 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/08/18 12:35:20 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/01 12:54:12 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,14 @@
 // Append to string array one at a time with nbr % 10 + '0',
 // after which nbr / 10. After done, reverse the string.
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
-static int	count_len(int n)
+static int	count_len(long n)
 {
 	int	i;
 
+	if (n == 0)
+		return (1);
 	i = 0;
 	if (n < 0)
 	{

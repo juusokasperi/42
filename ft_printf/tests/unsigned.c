@@ -6,18 +6,19 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 15:44:26 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/08/19 16:12:20 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/01 12:54:17 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 #include <stdio.h>
 
 void	test_unsigned(void)
 {
 	printf("--------------------\n- TESTING UNSIGNED -\n--------------------\n");
-//	printf("PF: %u\n", -2147483648);
-//	ft_printf("FT: %u\n", -2147483648);
+	printf("PF: %u\n", -10);
+	ft_printf("FT: %u\n", -10);
+
 	printf("PF: %u\n", 2147483647);
 	ft_printf("FT: %u\n\n", 2147483647);
 

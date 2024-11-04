@@ -1,7 +1,7 @@
 SRCS := char.c eval.c hex.c int.c ptr.c str.c test.c unsigned.c
 OBJ := $(SRCS:.c=.o)
 
-H := libftprintf.h
+H := ft_printf.h
 LIB := libftprintf.a
 
 CC := gcc

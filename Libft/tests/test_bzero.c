@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 12:40:26 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/10/31 13:07:59 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/01 12:58:01 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	test_bzero(void)
 	char	str[20] = "TestiString.";
 	char	str2[5] = "\0\0\0\0\0";
 	char	str3[5];
+	char	str4[5] = "ABCDE";
 
 	printf("---------------------------\n");
 	printf("FT_BZERO:\n");
@@ -29,5 +30,7 @@ void	test_bzero(void)
 	printf("Str2[5] is filled with \"\\0\\0\\0\\0\\0\". ");
 	printf("Running ft_bzero(str3, 5) and ft_memcmp(str2, str3, 5).\n");
 	printf("Return value is %d\n", ft_memcmp(str2, str3, 5));
+	ft_bzero(str4, 0);
+	printf("Str4 contains ABCDE, running bzero with length 0 and it is: %s\n", str4);
 	printf("---------------------------\n\n");
 }

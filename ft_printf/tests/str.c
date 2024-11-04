@@ -6,16 +6,19 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 15:44:26 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/08/19 16:12:19 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/10/31 20:27:21 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 #include <stdio.h>
 
 void	test_str(void)
 {
 	printf("--------------------\n-  TESTING STRING  -\n--------------------\n");
+	printf("PF: %s\n", (char *)NULL);
+	ft_printf("FT: %s\n\n", (char *)NULL);
+
 	char *str = "Test String";
 	printf("PF: %s\n", str);
 	ft_printf("FT: %s\n\n", str);

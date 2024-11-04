@@ -17,6 +17,8 @@ NAME := libftprintf.a
 
 all: $(NAME)
 
+bonus: all
+
 %.o: %.c $H
 	$(CC) $(CFLAGS) -c $< -o $@
 

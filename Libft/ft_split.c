@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 16:24:12 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/10/30 14:41:16 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/01 17:29:12 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ static int	fill_array(char **array, const char *s, char c)
 	int		cell;
 
 	cell = 0;
-	i = 0;
 	while (*s)
 	{
 		if (!is_separator(*s, c))
@@ -68,7 +67,11 @@ static int	fill_array(char **array, const char *s, char c)
 				i++;
 			array[cell] = copy_str(s, i);
 			if (!array[cell])
+			{
+				while (cell > 0)
+					free(array[--cell]);
 				return (0);
+			}
 			cell++;
 			s += i;
 		}
@@ -91,8 +94,6 @@ char	**ft_split(char const *s, char c)
 		return (NULL);
 	if (!fill_array(array, s, c))
 	{
-		while (substr_count)
-			free(array[--substr_count]);
 		free (array);
 		return (NULL);
 	}
