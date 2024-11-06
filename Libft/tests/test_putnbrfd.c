@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 17:57:21 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/06 18:08:11 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/06 21:50:57 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	test_putnbrfd(void)
 	printf("\n\nInt '-2147483640' to stdout:\n");
 	ft_putnbr_fd(-2147483640, 1);
 	printf("\n\nInt '3003003000' to stdout:\n");
-	ft_putnbr_fd(3003003000, 1);
+	ft_putnbr_fd((int)3003003000, 1);
 	printf("\n\nInt '2147483647' to stdout:\n");
 	ft_putnbr_fd(2147483647, 1);
 	printf("\n\nInt '0' to stdout:\n");

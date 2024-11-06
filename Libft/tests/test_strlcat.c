@@ -6,12 +6,11 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 12:59:52 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/06 17:33:03 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/06 21:50:15 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "test.h"
-#include <bsd/string.h>
 
 void	test_strlcat(void)
 {

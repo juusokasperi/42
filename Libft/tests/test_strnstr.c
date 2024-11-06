@@ -6,12 +6,11 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 14:51:10 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/06 19:36:33 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/06 21:50:06 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "test.h"
-#include <bsd/string.h>
 
 void	test_strnstr(void)
 {

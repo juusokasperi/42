@@ -6,12 +6,11 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 14:34:38 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/06 19:27:39 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/06 21:50:10 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "test.h"
-#include <bsd/string.h>
 
 void	test_strncmp(void)
 {
