@@ -6,7 +6,7 @@ SRC := main.c test_isalpha.c test_isdigit.c test_isalnum.c test_isascii.c \
 	test_substr.c test_strjoin.c test_strtrim.c test_split.c test_itoa.c \
 	test_strmapi.c test_striteri.c test_lstnew.c test_lstaddfront.c \
 	test_lstsize.c test_lstlast.c test_lstaddback.c test_lstdelone.c \
-	test_lstclear.c test_lstiter.c test_lstmap.c
+	test_lstclear.c test_lstiter.c test_lstmap.c test_putnbrfd.c
 
 O := $(SRC:.c=.o)
 
@@ -15,7 +15,7 @@ LIB := libft.a
 
 CC = gcc
 CFLAGS += -Wall -Wextra -Werror -I./
-LDFLAGS = -L./ -lft
+LDFLAGS = -L./ -lft -lbsd
 
 NAME := test
 

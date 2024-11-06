@@ -6,13 +6,9 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 17:12:27 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/10/29 23:23:51 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/06 17:37:58 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-// Count the digits, check for minus.
-// Append to string array one at a time with nbr % 10 + '0',
-// after which nbr / 10. After done, reverse the string.
 
 #include "libft.h"
 

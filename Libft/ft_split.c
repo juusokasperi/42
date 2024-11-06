@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 16:24:12 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/01 17:29:12 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/06 19:27:02 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ char	**ft_split(char const *s, char c)
 		return (NULL);
 	if (!fill_array(array, s, c))
 	{
-		free (array);
+		free(array);
 		return (NULL);
 	}
 	array[substr_count] = NULL;
