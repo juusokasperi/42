@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 14:51:10 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/06 21:50:06 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/07 22:44:15 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,12 @@ void	test_strnstr(void)
 	printf("FT_STRNSTR:\n");
 	printf("\"%s\" and \"ring\" to strnstr, length of 12\n", str);
 	char *ptr = ft_strnstr(str, "ring", 12);
+	if (ptr)
+		printf("	Substring found: %s\n", ptr);
+	else
+		printf("	Substring not found\n");
+	printf("\"%s\" and \"ring\" to strnstr, length of 10\n", str);
+	*ptr = ft_strnstr(str, "ring", 12);
 	if (ptr)
 		printf("	Substring found: %s\n", ptr);
 	else

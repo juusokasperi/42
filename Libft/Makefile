@@ -30,8 +30,8 @@ all: $(NAME)
 %.o: %.c $H
 	$(CC) $(CFLAGS) -c $< -o $@
 
-bonus: $(O_BONUS)
-	ar $(ARFLAGS) $(NAME) $^
+bonus: $(NAME) $(O_BONUS)
+	ar $(ARFLAGS) $(NAME) $(O_BONUS)
 	@echo "$(GREEN)✅ LIBFT: Bonus compilation done!$(ENDCOLOR)"
 
 $(NAME): $O

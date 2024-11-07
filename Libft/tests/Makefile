@@ -13,7 +13,7 @@ O := $(SRC:.c=.o)
 H := libft.h
 LIB := libft.a
 
-CC = gcc
+CC = cc
 CFLAGS += -Wall -Wextra -Werror -I./
 LDFLAGS = -L./ -lft -lbsd
 
@@ -26,7 +26,6 @@ ENDCOLOR := \033[0m
 all: $(NAME)
 
 $(LIB) $H:
-	@make -C ../
 	@make -C ../ bonus
 	@cp ../$(LIB) ./
 	@cp ../$H ./
