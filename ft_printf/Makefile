@@ -1,6 +1,9 @@
-S := ft_printf.c ft_ltoa.c ft_xtoa.c parse_flags.c print_hex.c print_nbr.c \
+S := ft_printf.c ft_ltoa.c ft_xtoa.c print_hex.c print_nbr.c \
 	print_ptr.c print_strchar.c print_unsigned.c helper_functions.c \
 	helper_functions_2.c
+
+S_BONUS := ft_printf_bonus.c helper_functions_bonus.c parse_flags_bonus.c
+
 O := $(S:.c=.o)
 H := ft_printf.h
 
@@ -16,8 +19,6 @@ ARFLAGS = rcs
 NAME := libftprintf.a
 
 all: $(NAME)
-
-bonus: all
 
 %.o: %.c $H
 	$(CC) $(CFLAGS) -c $< -o $@

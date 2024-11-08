@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 15:44:26 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/10/31 20:27:21 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/08 20:11:34 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,8 @@ void	test_str(void)
 	ft_printf("FT: %20.10s\n", str);
 	printf("PF: %-20.10sx\n", str);
 	ft_printf("FT: %-20.10sx\n", str);
+
+	int i =	printf("\001\002\007\v\010\f\r\n");
+	printf("%i\n", i);
 	printf("--------------------\n- STRING TEST ENDS -\n--------------------\n");
 }
