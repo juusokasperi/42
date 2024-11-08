@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 22:48:25 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/08 11:28:51 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/08 16:24:22 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 	size_t	i;
 	size_t	j;
 
+	if (!(char *)big && len == 0)
+		return (NULL);
 	if (!*little)
 		return ((char *)big);
 	i = 0;

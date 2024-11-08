@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 12:59:52 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/08 11:58:10 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/08 16:22:06 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ void	test_strlcat(void)
 	char	s_dest2[10];
 	char	dest3[12] = "Kissa\0Koira";
 	char	s_dest3[12] = "Kissa\0Koira";
-//	char *dest4 = NULL;
-//	char *s_dest4 = NULL;
 
 	printf("---------------------------\n");
 	printf("FT_STRLCAT:\n");
@@ -43,5 +41,13 @@ void	test_strlcat(void)
 	printf("FT: Src is %s, dest[12] is \"Kissa\\0Koira\", len 10 is %s\n", "0123456789", dest3);
 	printf("STRLCAT: Src is %s, dest[12] is \"Kissa\\0Koira\", len 10 is %s\n", "0123456789", s_dest3);
 
+	char b[15] = "nyan !";
+	printf("ORIG: Src is %s, sze 0, dest null pointer: %zu\n", strlcat(((void*)0), b, 0));
+	printf("FT: Src is %s, sze 0, dest null pointer: %zu\n", ft_strlcat(((void*)0), b, 0));
+//	These are supposed to segfault:
+//	printf("ORIG: Src is %s, sze 10, dest null pointer: %zu\n", b, strlcat(((void*)0), b, 10));
+//	printf("FT: Src is %s, sze 10, dest null pointer: %zu\n", b, ft_strlcat(((void*)0), b, 10));
+//	printf("ORIG: Src is null ptr, sze 0, dest %s: %zu\n", b, strlcat(b, ((void*)0), 0));
+//	printf("FT: Src is null ptr, sze 0, dest %s: %zu\n", b, ft_strlcat(b, ((void*)0), 0));
 	printf("---------------------------\n\n");
 }

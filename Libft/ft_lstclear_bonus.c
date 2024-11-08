@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 20:19:45 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/08 11:33:09 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/08 16:43:56 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
 	t_list	*tmp;
 
+	if (!lst || !del)
+		return ;
 	while (*lst)
 	{
 		tmp = (*lst)->next;

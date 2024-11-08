@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 17:59:46 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/08 15:20:19 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/08 16:44:37 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
 	unsigned int	i;
 
+	if (!s || !*f)
+		return ;
 	i = 0;
 	while (s[i])
 	{
