@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 10:37:22 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/06 18:06:43 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/08 12:12:55 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int	main(int argc, char **argv)
 		test_strmapi();
 		test_striteri();
 		test_putnbrfd();
+		test_putcharfd();
 		return (0);
 	}
 	if (ft_strncmp(argv[1], "isalpha", ft_strlen("isalpha")) == 0)
@@ -132,6 +133,10 @@ int	main(int argc, char **argv)
 		test_lstmap();
 	if (ft_strncmp(argv[1], "putnbrfd", ft_strlen("putnbrfd")) == 0)
 		test_putnbrfd();
+	if (ft_strncmp(argv[1], "putcharfd", ft_strlen("putcharfd")) == 0)
+		test_putcharfd();
+	if (ft_strncmp(argv[1], "putendlfd", ft_strlen("putendlfd")) == 0)
+		test_putendlfd();
 	if (ft_strncmp(argv[1], "bonus", 5) == 0)
 	{
 		printf("---------------------------\n");

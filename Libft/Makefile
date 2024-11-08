@@ -15,13 +15,9 @@ O_BONUS := $(S_BONUS:.c=.o)
 
 H := libft.h
 
-CC := gcc
+CC := cc
 CFLAGS += -Wall -Wextra -Werror -I./
 ARFLAGS := -rcs
-
-RED = \033[0;31m
-GREEN = \033[0;32m
-ENDCOLOR = \033[0m
 
 NAME := libft.a
 
@@ -31,21 +27,17 @@ all: $(NAME)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 bonus: $(NAME) $(O_BONUS)
-	ar $(ARFLAGS) $(NAME) $(O_BONUS)
-	@echo "$(GREEN)✅ LIBFT: Bonus compilation done!$(ENDCOLOR)"
+	@ar $(ARFLAGS) $(NAME) $(O_BONUS)
 
 $(NAME): $O
-	ar $(ARFLAGS) $(NAME) $^
-	@echo "$(GREEN)✅ LIBFT: Mandatory compilation done!$(ENDCOLOR)"
+	@ar $(ARFLAGS) $(NAME) $^
 
 clean:
 	rm -f $O $(O_BONUS)
-	@echo "$(RED)✅ LIBFT: Clean complete.$(ENDCOLOR)"
 
 fclean: clean
 	rm  -f $(NAME)
-	@echo "$(RED)✅ LIBFT: Fclean complete.$(ENDCOLOR)"
 
 re: fclean all
 
-.PHONY: clean fclean re all
+.PHONY: clean fclean re all bonus

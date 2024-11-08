@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 12:22:07 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/06 21:53:04 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/08 12:13:15 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,7 @@ void	test_lstclear(void);
 void	test_lstiter(void);
 void	test_lstmap(void);
 void	test_putnbrfd(void);
+void	test_putcharfd(void);
+void	test_putendlfd(void);
 
 #endif

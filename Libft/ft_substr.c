@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 10:49:08 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/06 19:45:31 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/08 13:51:01 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		return (ft_strdup(""));
 	if (len > ft_strlen(s + start))
 		len = ft_strlen(s + start);
-	substr = (char *)malloc(len * sizeof(char));
+	substr = (char *)malloc((len + 1) * sizeof(char));
 	if (!substr)
 		return (NULL);
 	i = 0;
