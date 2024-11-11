@@ -5,7 +5,7 @@ H := ft_printf.h
 LIB := libftprintf.a
 
 CC := gcc
-CFLAGS += -Wall -Wextra -Werror -I./
+CFLAGS += -I./
 
 LDFLAGS = -L./ -lftprintf
 
