@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_strchar.c                                    :+:      :+:    :+:   */
+/*   print_strchar_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 20:26:53 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/01 13:47:04 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/09 12:20:17 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "ft_printf_bonus.h"
 
 int	print_char(char c, t_flags flags)
 {
@@ -57,9 +57,7 @@ int	print_str_handler(const char *str, t_flags flags)
 	if (flags.left_align == 0)
 		count += pad_width(flags.width, len, 0);
 	while (i < len)
-	{
 		count += print_c(str[i++]);
-	}
 	if (flags.left_align == 1)
 		count += pad_width(flags.width, len, 0);
 	return (count);

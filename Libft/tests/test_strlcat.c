@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 12:59:52 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/08 16:22:06 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/09 12:10:26 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ void	test_strlcat(void)
 	printf("STRLCAT: Src is %s, dest[12] is \"Kissa\\0Koira\", len 10 is %s\n", "0123456789", s_dest3);
 
 	char b[15] = "nyan !";
-	printf("ORIG: Src is %s, sze 0, dest null pointer: %zu\n", strlcat(((void*)0), b, 0));
-	printf("FT: Src is %s, sze 0, dest null pointer: %zu\n", ft_strlcat(((void*)0), b, 0));
+	printf("ORIG: Src is %s, sze 0, dest null pointer: %zu\n", b, strlcat(((void*)0), b, 0));
+	printf("FT: Src is %s, sze 0, dest null pointer: %zu\n", b, ft_strlcat(((void*)0), b, 0));
 //	These are supposed to segfault:
 //	printf("ORIG: Src is %s, sze 10, dest null pointer: %zu\n", b, strlcat(((void*)0), b, 10));
 //	printf("FT: Src is %s, sze 10, dest null pointer: %zu\n", b, ft_strlcat(((void*)0), b, 10));
