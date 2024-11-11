@@ -6,50 +6,61 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 15:44:26 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/11 11:47:37 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/11 15:28:59 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include <stdio.h>
+#include "test.h"
 
 void	test_str(void)
 {
-	printf("--------------------\n-  TESTING STRING  -\n--------------------\n");
-	printf("PF: %s\n", (char *)NULL);
-	ft_printf("FT: %s\n\n", (char *)NULL);
+	int	ret;
+	int	ret_ft;
+	printf("%s--------------------\n-  TESTING STRING  -\n--------------------\n%s", KYEL, KNRM);
+	ret = printf("PF: %s\n", (char *)NULL);
+	ret_ft = ft_printf("FT: %s\n", (char *)NULL);
+	cmp(ret, ret_ft);
 
 	char *str = "Test String";
-	printf("PF: %s\n", str);
-	ft_printf("FT: %s\n\n", str);
+	ret = printf("PF: %s\n", str);
+	ret_ft = ft_printf("FT: %s\n", str);
+	cmp(ret, ret_ft);
 
-	printf("Width flag:\n");
-//	printf("PF: x%020s\n", str);
-//	ft_printf("FT: x%020s\n", str);
-	printf("PF: %5s\n", str);
-	ft_printf("FT: %5s\n\n", str);
+	printf("%s--------------------\nWidth flag:\n%s", KBLU, KNRM);
+	ret = printf("PF: x%020s\n", str);
+	ret_ft = ft_printf("FT: x%020s\n", str);
+	cmp(ret, ret_ft);
+	ret = printf("PF: %5s\n", str);
+	ret_ft = ft_printf("FT: %5s\n", str);
+	cmp(ret, ret_ft);
 
-	printf("Left-align\n");
-	printf("PF: %-20sx\n", str);
-	ft_printf("FT: %-20sx\n\n", str);
+	printf("%s--------------------\nLeft-align\n%s", KBLU, KNRM);
+	ret = printf("PF: %-20sx\n", str);
+	ret_ft = ft_printf("FT: %-20sx\n", str);
+	cmp(ret, ret_ft);
 
-	printf("Precision 0\n");
-	printf("PF: %.0s\n", str);
-    ft_printf("FT: %.0s\n\n", str);
+	printf("%s--------------------\nPrecision 0\n%s", KBLU, KNRM);
+	ret = printf("PF: %.0s\n", str);
+	ret_ft = ft_printf("FT: %.0s\n", str);
+	cmp(ret, ret_ft);
 
-	printf("Other precision and combinations\n");
-	printf("PF: %.5s\n", str);
-	ft_printf("FT: %.5s\n", str);
-	printf("PF: %.50s\n", str);
-	ft_printf("FT: %.50s\n", str);
-	printf("PF: %20.10s\n", str);
-	ft_printf("FT: %20.10s\n", str);
-	printf("PF: %-20.10sx\n", str);
-	ft_printf("FT: %-20.10sx\n", str);
+	printf("%s--------------------\nOther precision and combinations\n%s", KBLU, KNRM);
+	ret = printf("PF: %.5s\n", str);
+	ret_ft = ft_printf("FT: %.5s\n", str);
+	cmp(ret, ret_ft);
+	ret = printf("PF: %.50s\n", str);
+	ret_ft = ft_printf("FT: %.50s\n", str);
+	cmp(ret, ret_ft);
+	ret = printf("PF: %20.10s\n", str);
+	ret_ft = ft_printf("FT: %20.10s\n", str);
+	cmp(ret, ret_ft);
+	ret = printf("PF: %-20.10sx\n", str);
+	ret_ft = ft_printf("FT: %-20.10sx\n", str);
+	cmp(ret, ret_ft);
 
-	int i =	printf("ORIG: \001\002\007\v\010\f\r\n");
-	printf("%i\n", i);
-	i =	ft_printf("FT: \001\002\007\v\010\f\r\n");
-	printf("%i\n", i);
-	printf("--------------------\n- STRING TEST ENDS -\n--------------------\n");
+	printf("%s--------------------\nUnprintables\n%s", KBLU, KNRM);
+	ret = printf("PF: \001\002\007\v\010\f\r\n");
+	ret_ft = ft_printf("FT: \001\002\007\v\010\f\r\n");
+	cmp(ret, ret_ft);
+	printf("%s--------------------\n- STRING TEST ENDS -\n--------------------\n%s", KYEL, KNRM);
 }

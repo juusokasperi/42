@@ -6,25 +6,23 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 21:30:28 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/10/31 20:27:23 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/11 14:25:38 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include <stdio.h>
+#include "test.h"
 
-void	test_int(void);
-void	test_unsigned(void);
-void	test_hex(void);
-void	test_ptr(void);
-void	test_str(void);
-void	test_char(void);
-void	test_false(void);
-void	test_eval(void);
+void	cmp(int ret, int ret_ft)
+{
+	if (ret == ret_ft)
+		printf("%s✅ Return values match (%i)%s\n\n", KGRN, ret, KNRM);
+	else
+		printf("%s❌ Return values don't match: (PF: %i, FT: %i)%s\n\n", KRED, ret, ret_ft, KNRM);
+}
 
 int	main(int argc, char **argv)
 {
-	if (argc != 2 || str_len(argv[1]) != 1)
+	if (argc != 2 || ft_strlen(argv[1]) != 1)
 		return (ft_printf("Usage: ./test <i, d, u, s, c, p, x, X>\n"));
 	if (argv[1][0] == 'i' || argv[1][0] == 'd')
 		test_int();

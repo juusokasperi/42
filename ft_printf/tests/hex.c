@@ -6,107 +6,144 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 15:44:26 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/10/31 20:26:23 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/11 13:49:41 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include <stdio.h>
+#include "test.h"
 
 void	test_hex(void)
 {
-	printf("--------------------\n- TESTING HEX -\n--------------------\n");
-//	printf("PF: %x\n", -2147483648);
-//	ft_printf("FT: %x\n", -2147483648);
-	printf("PF: %x\n", 2147483647);
-	ft_printf("FT: %x\n\n", 2147483647);
-	printf("PF: %x\n", 0);
-	ft_printf("FT: %x\n\n", 0);
+	int ret;
+	int ret_ft;
+	printf("%s--------------------\n- TESTING HEX -\n--------------------%s\n\n", KYEL, KNRM);
+	ret = printf("PF: %x\n", -2147483648);
+	ret_ft = ft_printf("FT: %x\n", -2147483648);
+	cmp(ret, ret_ft);
+	ret = printf("PF: %x\n", 2147483647);
+	ret_ft = ft_printf("FT: %x\n", 2147483647);
+	cmp(ret, ret_ft);
+	ret = printf("PF: %x\n", 0);
+	ret_ft = ft_printf("FT: %x\n", 0);
+	cmp(ret, ret_ft);
 
-	printf("Test 0 with various flags\n");
-	printf("PF: %.0x\n", 0);
-	ft_printf("FT: %.0x\n", 0);
-	printf("PF: %#x\n", 0);
-	ft_printf("FT: %#x\n", 0);
-	printf("PF: %x\n", 0);
-	ft_printf("FT: %x\n", 0);
-	printf("PF: %0x\n", 0);
-	ft_printf("FT: %0x\n", 0);
-	printf("PF: %.5x\n", 0);
-    ft_printf("FT: %.5x\n\n", 0);
+	printf("%s--------------------\nTest 0 with various flags%s\n", KBLU, KNRM);
+	ret = printf("PF: %.0x\n", 0);
+	ret_ft = ft_printf("FT: %.0x\n", 0);
+	cmp(ret, ret_ft);
+	ret = printf("PF: %#x\n", 0);
+	ret_ft = ft_printf("FT: %#x\n", 0);
+	cmp(ret, ret_ft);
+	ret = printf("PF: %x\n", 0);
+	ret_ft = ft_printf("FT: %x\n", 0);
+	cmp(ret, ret_ft);
+	ret = printf("PF: %0x\n", 0);
+	ret_ft = ft_printf("FT: %0x\n", 0);
+	cmp(ret, ret_ft);
+	ret = printf("PF: %.5x\n", 0);
+    ret_ft = ft_printf("FT: %.5x\n", 0);
+	cmp(ret, ret_ft);
 
-	printf("Precision 0 with non-zero numbers\n");
-	printf("PF: %.0X\n", 42);
-    ft_printf("FT: %.0X\n", 42);
-    printf("PF: %.0X\n", -42);
-    ft_printf("FT: %.0X\n\n", -42);
+	printf("%s--------------------\nPrecision 0 with non-zero numbers:%s\n", KBLU, KNRM);
+	ret = printf("PF: %.0X\n", 42);
+	ret_ft = ft_printf("FT: %.0X\n", 42);
+	cmp(ret, ret_ft);
+	ret = printf("PF: %.0X\n", -42);
+	ret_ft = ft_printf("FT: %.0X\n", -42);
+	cmp(ret, ret_ft);
 
-	printf("Width flag:\n");
-	printf("PF: %10x\n", -10);
-	ft_printf("FT: %10x\n", -10);
-	printf("PF: %10x\n", 10);
-	ft_printf("FT: %10x\n", 10);
-	printf("PF: %#10x\n", 10);
-	ft_printf("FT: %#10x\n\n", 10);
+	printf("%s--------------------\nWidth flag:%s\n", KBLU, KNRM);
+	ret = printf("PF: %10x\n", -10);
+	ret_ft = ft_printf("FT: %10x\n", -10);
+	cmp(ret, ret_ft);
+	ret = printf("PF: %10x\n", 10);
+	ret_ft = ft_printf("FT: %10x\n", 10);
+	cmp(ret, ret_ft);
+	ret = printf("PF: %#10x\n", 10);
+	ret_ft = ft_printf("FT: %#10x\n", 10);
+	cmp(ret, ret_ft);
 
-	printf("Width flag with 0 padding\n");
-	printf("PF: %010x\n", -10);
-	ft_printf("FT: %010x\n", -10);
-	printf("PF: %010x\n", 10);
-	ft_printf("FT: %010x\n", 10);
-	printf("PF: %0#10x\n", 10);
-	ft_printf("FT: %0#10x\n", 10);
-	printf("PF: %010X\n", 10);
-	ft_printf("FT: %010X\n", 10);
-	printf("PF: %#010X\n", 2147483647);
-	ft_printf("FT: %#010X\n\n", 2147483647);
+	printf("%s--------------------\nWidth flag with 0 padding:%s\n", KBLU, KNRM);
+	ret = printf("PF: %010x\n", -10);
+	ret_ft = ft_printf("FT: %010x\n", -10);
+	cmp(ret, ret_ft);
+	ret = printf("PF: %010x\n", 10);
+	ret_ft = ft_printf("FT: %010x\n", 10);
+	cmp(ret, ret_ft);
+	ret = printf("PF: %0#10x\n", 10);
+	ret_ft = ft_printf("FT: %0#10x\n", 10);
+	cmp(ret, ret_ft);
+	ret = printf("PF: %010X\n", 10);
+	ret_ft = ft_printf("FT: %010X\n", 10);
+	cmp(ret, ret_ft);
+	ret = printf("PF: %#010X\n", 2147483647);
+	ret_ft = ft_printf("FT: %#010X\n", 2147483647);
+	cmp(ret, ret_ft);
 
-	printf("Left-align\n");
-	printf("PF: %-10Xx\n", -10);
-	ft_printf("FT: %-10Xx\n", -10);
-	printf("PF: %-10xx\n", 10);
-	ft_printf("FT: %-10xx\n", 10);
-	printf("PF: %-#10Xx\n", 10);
-	ft_printf("FT: %-#10Xx\n", 10);
-	printf("PF: %-#10xx\n", 10);
-	ft_printf("FT: %-#10xx\n\n", 10);
+	printf("%s--------------------\nLeft-align:%s\n", KBLU, KNRM);
+	ret = printf("PF: %-10Xx\n", -10);
+	ret_ft = ft_printf("FT: %-10Xx\n", -10);
+	cmp(ret, ret_ft);
+	ret = printf("PF: %-10xx\n", 10);
+	ret_ft = ft_printf("FT: %-10xx\n", 10);
+	cmp(ret, ret_ft);
+	ret = printf("PF: %-#10Xx\n", 10);
+	ret_ft = ft_printf("FT: %-#10Xx\n", 10);
+	cmp(ret, ret_ft);
+	ret = printf("PF: %-#10xx\n", 10);
+	ret_ft = ft_printf("FT: %-#10xx\n", 10);
+	cmp(ret, ret_ft);
 
-	printf("Precision\n");
-	printf("PF: %.0x\n", 15454);
-	ft_printf("FT: %.0x\n", 15454);
-	printf("PF: %.0x\n", -15454);
-	ft_printf("FT: %.0x\n", -15454);
-	printf("PF: %.10x\n", 15454);
-	ft_printf("FT: %.10x\n", 15454);
-	printf("PF: %.10x\n", -15454);
-	ft_printf("FT: %.10x\n", -15454);
-	printf("PF: %20.10X\n", -15454);
-	ft_printf("FT: %20.10X\n", -15454);
-	printf("PF: %-20.10xx\n", -15454);
-	ft_printf("FT: %-20.10xx\n", -15454);
-	printf("PF: %.2x\n", 123);
-	ft_printf("FT: %.2x\n", 123);
-	printf("PF: %#010.5X\n", 123);
-    ft_printf("FT: %#010.5X\n\n", 123);
+	printf("%s--------------------\nPrecision:%s\n", KBLU, KNRM);
+	ret = printf("PF: %.0x\n", 15454);
+	ret_ft = ft_printf("FT: %.0x\n", 15454);
+	cmp(ret, ret_ft);
+	ret = printf("PF: %.0x\n", -15454);
+	ret_ft = ft_printf("FT: %.0x\n", -15454);
+	cmp(ret, ret_ft);
+	ret = printf("PF: %.10x\n", 15454);
+	ret_ft = ft_printf("FT: %.10x\n", 15454);
+	cmp(ret, ret_ft);
+	ret = printf("PF: %.10x\n", -15454);
+	ret_ft = ft_printf("FT: %.10x\n", -15454);
+	cmp(ret, ret_ft);
+	ret = printf("PF: %20.10X\n", -15454);
+	ret_ft = ft_printf("FT: %20.10X\n", -15454);
+	cmp(ret, ret_ft);
+	ret = printf("PF: %-20.10xx\n", -15454);
+	ret_ft = ft_printf("FT: %-20.10xx\n", -15454);
+	cmp(ret, ret_ft);
+	ret = printf("PF: %.2x\n", 123);
+	ret_ft = ft_printf("FT: %.2x\n", 123);
+	cmp(ret, ret_ft);
+	ret = printf("PF: %#010.5X\n", 123);
+	ret_ft = ft_printf("FT: %#010.5X\n", 123);
+	cmp(ret, ret_ft);
 
-	printf("Combining width, precision, flags\n");
-	printf("PF: %#08.5x\n", 123);
-	ft_printf("FT: %#08.5x\n", 123);
-	printf("PF: %#10.5X\n", -123);
-	ft_printf("FT: %#10.5X\n\n", -123);
+	printf("%s--------------------\nCombining width, precision, flags:%s\n", KBLU, KNRM);
+	ret = printf("PF: %#08.5x\n", 123);
+	ret_ft = ft_printf("FT: %#08.5x\n", 123);
+	cmp(ret, ret_ft);
+	ret = printf("PF: %#10.5X\n", -123);
+	ret_ft = ft_printf("FT: %#10.5X\n", -123);
+	cmp(ret, ret_ft);
 
-	printf("Large width and precision:\n");
-	printf("PF: %50.30X\n", 123456);
-	ft_printf("FT: %50.30X\n\n", 123456);
+	printf("%s--------------------\nLarge width and precision:%s\n", KBLU, KNRM);
+	ret = printf("PF: %50.30X\n", 123456);
+	ret_ft = ft_printf("FT: %50.30X\n", 123456);
+	cmp(ret, ret_ft);
 
-	printf("Negative width:\n");
-	printf("PF: %-10x\n", 42);
-	ft_printf("FT: %-10x\n\n", 42);
+	printf("%s--------------------\nNegative width:%s\n", KBLU, KNRM);
+	ret = printf("PF: %-10x\n", 42);
+	ret_ft = ft_printf("FT: %-10x\n", 42);
+	cmp(ret, ret_ft);
 
-	printf("Multiple flags:\n");
-	printf("PF: %#-10.5x\n", 123);
-	ft_printf("FT: %#-10.5x\n", 123);
-	printf("PF: %0#10.5X\n", 123);
-	ft_printf("FT: %0#10.5X\n\n", 123);
-	printf("--------------------\n-  HEX  TEST  ENDS -\n--------------------\n");
+	printf("%s--------------------\nMultiple flags:%s\n", KBLU, KNRM);
+	ret = printf("PF: %#-10.5x\n", 123);
+	ret_ft = ft_printf("FT: %#-10.5x\n", 123);
+	cmp(ret, ret_ft);
+	ret = printf("PF: %0#10.5X\n", 123);
+	ret_ft = ft_printf("FT: %0#10.5X\n", 123);
+	cmp(ret, ret_ft);
+	printf("%s--------------------\n-  HEX  TEST  ENDS -\n--------------------%s\n", KYEL, KNRM);
 }

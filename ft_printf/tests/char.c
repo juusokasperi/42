@@ -6,28 +6,35 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 15:44:26 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/10/31 20:26:11 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/11 13:41:58 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include <stdio.h>
+#include "test.h"
 
 void	test_char(void)
 {
-	printf("--------------------\n-   TESTING CHAR   -\n--------------------\n");
+	int ret;
+	int ret_ft;
+	printf("%s--------------------\n-   TESTING CHAR   -\n--------------------%s\n\n",
+		KYEL, KNRM);
 	char c = 'c';
-	printf("PF: %c\n", c);
-	ft_printf("FT: %c\n\n", c);
+	ret = printf("PF: %c\n", c);
+	ret_ft = ft_printf("FT: %c\n", c);
+	cmp(ret, ret_ft);
 
 	printf("Width flag:\n");
-	printf("PF: x%20c\n", c);
-	ft_printf("FT: x%20c\n", c);
-	printf("PF: x%5c\n", c);
-	ft_printf("FT: x%5c\n\n", c);
+	ret = printf("PF: x%20c\n", c);
+	ret_ft = ft_printf("FT: x%20c\n", c);
+	cmp(ret, ret_ft);
+	ret = printf("PF: x%5c\n", c);
+	ret_ft = ft_printf("FT: x%5c\n", c);
+	cmp(ret, ret_ft);
 
 	printf("Left-align\n");
-	printf("PF: %-20cx\n", c);
-	ft_printf("FT: %-20cx\n", c);
-	printf("--------------------\n-  CHAR TEST ENDS  -\n--------------------\n");
+	ret = printf("PF: %-20cx\n", c);
+	ret_ft = ft_printf("FT: %-20cx\n", c);
+	cmp(ret, ret_ft);
+	printf("%s--------------------\n-  CHAR TEST ENDS  -\n--------------------%s\n",
+		KYEL, KNRM);
 }

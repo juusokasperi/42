@@ -6,112 +6,150 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 15:44:26 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/01 12:54:17 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/11 15:33:44 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include <stdio.h>
+#include "test.h"
 
 void	test_unsigned(void)
 {
-	printf("--------------------\n- TESTING UNSIGNED -\n--------------------\n");
-	printf("PF: %u\n", -10);
-	ft_printf("FT: %u\n", -10);
+	int	ret;
+	int	ret_ft;
+	printf("%s--------------------\n- TESTING UNSIGNED -\n--------------------\n%s", KYEL, KNRM);
+	ret = printf("PF: %u\n", -10);
+	ret_ft = ft_printf("FT: %u\n", -10);
+	cmp(ret, ret_ft);
 
-	printf("PF: %u\n", 2147483647);
-	ft_printf("FT: %u\n\n", 2147483647);
+	ret = printf("PF: %u\n", 2147483647);
+	ret_ft = ft_printf("FT: %u\n", 2147483647);
+	cmp(ret, ret_ft);
 
-	printf("Test 0 with various flags\n");
-	printf("PF: %.0u\n", 0);
-	ft_printf("FT: %.0u\n", 0);
-//	printf("PF: %+u\n", 0);
-//	ft_printf("FT: %+u\n", 0);
-//	printf("PF: % u\n", 0);
-//	ft_printf("FT: % u\n", 0);
-	printf("PF: %0u\n", 0);
-	ft_printf("FT: %0u\n", 0);
-//	printf("PF: %+.5u\n", 0);
-//  ft_printf("FT: %+.5u\n", 0);
-//	printf("PF: % .5u\n", 0);
-//	ft_printf("FT: % .5u\n\n", 0);
+	printf("%s--------------------\nTest 0 with various flags\n%s", KBLU, KNRM);
+	ret = printf("PF: %.0u\n", 0);
+	ret_ft = ft_printf("FT: %.0u\n", 0);
+	cmp(ret, ret_ft);
+	ret = printf("PF: %+u\n", 0);
+	ret_ft = ft_printf("FT: %+u\n", 0);
+	cmp(ret, ret_ft);
+	ret = printf("PF: % u\n", 0);
+	ret_ft = ft_printf("FT: % u\n", 0);
+	cmp(ret, ret_ft);
+	ret = printf("PF: %0u\n", 0);
+	ret_ft = ft_printf("FT: %0u\n", 0);
+	cmp(ret, ret_ft);
+	ret = printf("PF: %+.5u\n", 0);
+	ret_ft = ft_printf("FT: %+.5u\n", 0);
+	cmp(ret, ret_ft);
+	ret = printf("PF: % .5u\n", 0);
+	ret_ft = ft_printf("FT: % .5u\n", 0);
+	cmp(ret, ret_ft);
 
-	printf("Precision 0 with non-zero numbers\n");
-	printf("PF: %.0u\n", 42);
-	ft_printf("FT: %.0u\n", 42);
-	printf("PF: %.0u\n", -42);
-	ft_printf("FT: %.0u\n\n", -42);
+	printf("%s--------------------\nPrecision 0 with non-zero numbers\n%s", KBLU, KNRM);
+	ret = printf("PF: %.0u\n", 42);
+	ret_ft = ft_printf("FT: %.0u\n", 42);
+	cmp(ret, ret_ft);
+	ret = printf("PF: %.0u\n", -42);
+	ret_ft = ft_printf("FT: %.0u\n", -42);
+	cmp(ret, ret_ft);
 
-	printf("Printing just ints with no flags\n");
-	printf("PF: %u\n", 0);
-	ft_printf("FT: %u\n\n", 0);
+	printf("%s--------------------\nPrinting just ints with no flags\n%s", KBLU, KNRM);
+	ret = printf("PF: %u\n", 0);
+	ret_ft = ft_printf("FT: %u\n", 0);
+	cmp(ret, ret_ft);
 
-	printf("Width flag:\n");
-	printf("PF: %10u\n", -10);
-	ft_printf("FT: %10u\n", -10);
-	printf("PF: %10u\n", 10);
-	ft_printf("FT: %10u\n", 10);
-//	printf("PF: %+10u\n", 10);
-//	ft_printf("FT: %+10u\n\n", 10);
+	printf("%s--------------------\nWidth flag:\n");
+	ret = printf("PF: %10u\n", -10);
+	ret_ft = ft_printf("FT: %10u\n", -10);
+	cmp(ret, ret_ft);
+	ret = printf("PF: %10u\n", 10);
+	ret_ft = ft_printf("FT: %10u\n", 10);
+	cmp(ret, ret_ft);
+	ret = printf("PF: %+10u\n", 10);
+	ret_ft = ft_printf("FT: %+10u\n", 10);
+	cmp(ret, ret_ft);
 
-	printf("Width flag with 0 padding\n");
-	printf("PF: %010u\n", -10);
-	ft_printf("FT: %010u\n", -10);
-//	printf("PF: %0 10u\n", 10);
-//	ft_printf("FT: %0 10u\n", 10);
-//	printf("PF: %0+10u\n", 10);
-//	ft_printf("FT: %0+10u\n", 10);
-	printf("PF: %010u\n", 10);
-	ft_printf("FT: %010u\n", 10);
-	printf("PF: %010u\n", 2147483647);
-	ft_printf("FT: %010u\n\n", 2147483647);
+	printf("%s--------------------\nWidth flag with 0 padding\n%s", KBLU, KNRM);
+	ret = printf("PF: %010u\n", -10);
+	ret_ft = ft_printf("FT: %010u\n", -10);
+	cmp(ret, ret_ft);
+	ret = printf("PF: %0 10u\n", 10);
+	ret_ft = ft_printf("FT: %0 10u\n", 10);
+	cmp(ret, ret_ft);
+	ret = printf("PF: %0+10u\n", 10);
+	ret_ft = ft_printf("FT: %0+10u\n", 10);
+	cmp(ret, ret_ft);
+	ret = printf("PF: %010u\n", 10);
+	ret_ft = ft_printf("FT: %010u\n", 10);
+	cmp(ret, ret_ft);
+	ret = printf("PF: %010u\n", 2147483647);
+	ret_ft = ft_printf("FT: %010u\n", 2147483647);
+	cmp(ret, ret_ft);
 
-	printf("Left-align\n");
-	printf("PF: %-10ux\n", -10);
-	ft_printf("FT: %-10ux\n", -10);
-	printf("PF: %-10ux\n", 10);
-	ft_printf("FT: %-10ux\n", 10);
-//	printf("PF: %- 10ux\n", 10);
-//	ft_printf("FT: %- 10ux\n", 10);
-//	printf("PF: %-+10ux\n", 10);
-//	ft_printf("FT: %-+10ux\n\n", 10);
+	printf("%s--------------------\nLeft-align\n%s", KBLU, KNRM);
+	ret = printf("PF: %-10ux\n", -10);
+	ret_ft = ft_printf("FT: %-10ux\n", -10);
+	cmp(ret, ret_ft);
+	ret = printf("PF: %-10ux\n", 10);
+	ret_ft = ft_printf("FT: %-10ux\n", 10);
+	cmp(ret, ret_ft);
+	ret = printf("PF: %- 10ux\n", 10);
+	ret_ft = ft_printf("FT: %- 10ux\n", 10);
+	cmp(ret, ret_ft);
+	ret = printf("PF: %-+10ux\n", 10);
+	ret_ft = ft_printf("FT: %-+10ux\n", 10);
+	cmp(ret, ret_ft);
 
-	printf("Precision\n");
-	printf("PF: %.0u\n", 15454);
-	ft_printf("FT: %.0u\n", 15454);
-	printf("PF: %.0u\n", -15454);
-	ft_printf("FT: %.0u\n", -15454);
-	printf("PF: %.10u\n", 15454);
-	ft_printf("FT: %.10u\n", 15454);
-	printf("PF: %.10u\n", -15454);
-	ft_printf("FT: %.10u\n", -15454);
-	printf("PF: %20.10u\n", -15454);
-	ft_printf("FT: %20.10u\n", -15454);
-	printf("PF: %-20.10ux\n", -15454);
-	ft_printf("FT: %-20.10ux\n", -15454);
-	printf("PF: %.2u\n", 123);
-	ft_printf("FT: %.2u\n", 123);
-	printf("PF: %010.5u\n", 123);
-    ft_printf("FT: %010.5u\n\n", 123);
+	printf("%s--------------------\nPrecision\n%s", KBLU, KNRM);
+	ret = printf("PF: %.0u\n", 15454);
+	ret_ft = ft_printf("FT: %.0u\n", 15454);
+	cmp(ret, ret_ft);
+	ret = printf("PF: %.0u\n", -15454);
+	ret_ft = ft_printf("FT: %.0u\n", -15454);
+	cmp(ret, ret_ft);
+	ret = printf("PF: %.10u\n", 15454);
+	ret_ft = ft_printf("FT: %.10u\n", 15454);
+	cmp(ret, ret_ft);
+	ret = printf("PF: %.10u\n", -15454);
+	ret_ft = ft_printf("FT: %.10u\n", -15454);
+	cmp(ret, ret_ft);
+	ret = printf("PF: %20.10u\n", -15454);
+	ret_ft = ft_printf("FT: %20.10u\n", -15454);
+	cmp(ret, ret_ft);
+	ret = printf("PF: %-20.10ux\n", -15454);
+	ret_ft = ft_printf("FT: %-20.10ux\n", -15454);
+	cmp(ret, ret_ft);
+	ret = printf("PF: %.2u\n", 123);
+	ret_ft = ft_printf("FT: %.2u\n", 123);
+	cmp(ret, ret_ft);
+	ret = printf("PF: %010.5u\n", 123);
+    ret_ft = ft_printf("FT: %010.5u\n", 123);
+	cmp(ret, ret_ft);
 
-//	printf("Combining width, precision, flags\n");
-//	printf("PF: %+08.5u\n", 123);
-//	ft_printf("FT: %+08.5u\n", 123);
-//	printf("PF: % 10.5u\n", -123);
-//	ft_printf("FT: % 10.5u\n\n", -123);
+	printf("%s--------------------\nCombining width, precision, flags\n%s", KBLU, KNRM);
+	ret = printf("PF: %+08.5u\n", 123);
+	ret_ft = ft_printf("FT: %+08.5u\n", 123);
+	cmp(ret, ret_ft);
+	ret = printf("PF: % 10.5u\n", -123);
+	ret_ft = ft_printf("FT: % 10.5u\n", -123);
+	cmp(ret, ret_ft);
 
-	printf("Large width and precision:\n");
-	printf("PF: %50.30u\n", 123456);
-	ft_printf("FT: %50.30u\n\n", 123456);
+	printf("%s--------------------\nLarge width and precision:\n%s", KBLU, KNRM);
+	ret = printf("PF: %50.30u\n", 123456);
+	ret_ft = ft_printf("FT: %50.30u\n", 123456);
+	cmp(ret, ret_ft);
 
-	printf("Negative width:\n");
-	printf("PF: %-10u\n", 42);
-	ft_printf("FT: %-10u\n\n", 42);
+	printf("%s--------------------\nNegative width:\n%s", KBLU, KNRM);
+	ret = printf("PF: %-10u\n", 42);
+	ret_ft = ft_printf("FT: %-10u\n", 42);
+	cmp(ret, ret_ft);
 
-//	printf("Multiple flags:\n");
-//	printf("PF: %+-10.5u\n", 123);
-//	ft_printf("FT: %+-10.5u\n", 123);
-//	printf("PF: %0 +10.5u\n", 123);
-//	ft_printf("FT: %0 +10.5u\n\n", 123);
-	printf("--------------------\n- UNSIGN TEST ENDS -\n--------------------\n");
+	printf("%s--------------------\nMultiple flags:\n%s", KBLU, KNRM);
+	ret = printf("PF: %+-10.5u\n", 123);
+	ret_ft = ft_printf("FT: %+-10.5u\n", 123);
+	cmp(ret, ret_ft);
+	ret = printf("PF: %0 +10.5u\n", 123);
+	ret_ft = ft_printf("FT: %0 +10.5u\n", 123);
+	cmp(ret, ret_ft);
+	printf("%s--------------------\n- UNSIGN TEST ENDS -\n--------------------\n%s", KYEL, KNRM);
 }

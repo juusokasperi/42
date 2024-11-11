@@ -1,25 +1,15 @@
 S := ft_printf.c ft_ltoa.c ft_xtoa.c print_hex.c print_nbr.c \
 	print_ptr.c print_strchar.c print_unsigned.c helper_functions.c \
-	helper_functions_2.c
-S_PATH := $(addprefix ./base/, $S)
+	parse_flags.c
+O := $(S:.c=.o)
 
-O := $(S_PATH:.c=.o)
 H := ft_printf.h
-
-S_BONUS := ft_printf_bonus.c ft_ltoa_bonus.c ft_xtoa_bonus.c \
-	print_hex_bonus.c print_nbr_bonus.c print_ptr_bonus.c \
-	print_strchar_bonus.c print_unsigned_bonus.c helper_functions_bonus.c \
-	helper_functions_2_bonus.c parse_flags_bonus.c
-
-O_BONUS := $(S_BONUS:.c=.o)
-H_BONUS := ft_printf_bonus.h
-
 
 GREEN = \033[0;92m
 RED = \033[0;91m
 ENDCOLOR = \033[0m
 
-CC := gcc
+CC := cc
 CFLAGS += -Wall -Wextra -Werror -I./
 
 ARFLAGS = rcs
@@ -28,37 +18,34 @@ LIBFT := libft.a
 LIBFT_H := libft.h
 
 NAME := libftprintf.a
-BONUS_NAME := libftprintf_bonus.a
 
 all: $(NAME)
 
-$(LIBFT) $(H):
+$(LIBFT) $H:
 	@make -C ./Libft
 	@cp ./Libft/$(LIBFT) ./
 	@cp ./Libft/$(LIBFT_H) ./
 	@make -C ./Libft fclean
 
-bonus: $(BONUS_NAME)
+bonus: all
 
-$(BONUS_NAME): $(LIBFT) $(O_BONUS)
-	ar $(ARFLAGS) libftprintf_bonus.a $(O_BONUS)
-	@echo "$(GREEN)✅ FT_PRINTF: Bonus compilation complete!$(ENDCOLOR)"
+$O: $(LIBFT) $H
 
 %.o: %.c $H
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(LIBFT) $O
-	ar $(ARFLAGS) $@ $O
+	@ar $(ARFLAGS) $@ $O
 	@echo "$(GREEN)✅ FT_PRINTF: Library compilation complete!$(ENDCOLOR)"
 
 clean:
-	rm -f $O
+	@rm -f $O $(O_BONUS)
 	@echo "$(RED)✅ FT_PRINTF: Clean complete.$(ENDCOLOR)"
 
 fclean: clean
-	rm  -f $(NAME)
+	@rm  -f $(NAME) $(LIBFT) $(LIBFT_H)
 	@echo "$(RED)✅ FT_PRINTF: FClean complete.$(ENDCOLOR)"
 
 re: fclean all
 
-.PHONY: clean fclean re all
+.PHONY: clean fclean re all bonus

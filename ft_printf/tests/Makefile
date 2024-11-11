@@ -4,10 +4,10 @@ OBJ := $(SRCS:.c=.o)
 H := ft_printf.h
 LIB := libftprintf.a
 
-CC := gcc
-CFLAGS += -I./
+CC := cc
+CFLAGS += -g -Wno-format -I./
 
-LDFLAGS = -L./ -lftprintf
+LDFLAGS = -L./ -lftprintf -lft
 
 NAME := test
 
@@ -18,7 +18,9 @@ ENDCOLOR = \033[0m
 all: $(NAME)
 
 $(LIB) $H:
-	@make -C ../
+	@make -C ../ bonus
+	@cp ../libft.a ./
+	@cp ../libft.h ./
 	@cp ../$(LIB) ./
 	@cp ../$H ./
 	@make -C ../ fclean
@@ -37,7 +39,7 @@ clean:
 	@echo "$(RED)✅ FT_PRINTF: Test clean complete.$(ENDCOLOR)"
 
 fclean:
-	rm -f $(OBJ) $(NAME) $(LIB) $(H)
+	rm -f $(OBJ) $(NAME) $(LIB) $(H) libft.a libft.h
 	@echo "$(RED)✅ FT_PRINTF: Test fclean complete.$(ENDCOLOR)"
 
 re: fclean all
