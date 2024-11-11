@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 15:44:26 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/11 13:41:58 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/11 16:44:52 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	test_char(void)
 	ret_ft = ft_printf("FT: %c\n", c);
 	cmp(ret, ret_ft);
 
-	printf("Width flag:\n");
+	printf("%s--------------------\nWidth flag:\n%s", KBLU, KNRM);
 	ret = printf("PF: x%20c\n", c);
 	ret_ft = ft_printf("FT: x%20c\n", c);
 	cmp(ret, ret_ft);
@@ -31,9 +31,14 @@ void	test_char(void)
 	ret_ft = ft_printf("FT: x%5c\n", c);
 	cmp(ret, ret_ft);
 
-	printf("Left-align\n");
+	printf("%s--------------------\nLeft-align\n%s", KBLU, KNRM);
 	ret = printf("PF: %-20cx\n", c);
 	ret_ft = ft_printf("FT: %-20cx\n", c);
+	cmp(ret, ret_ft);
+
+	printf("%s--------------------\nFlag 0\n%s", KBLU, KNRM);
+	ret = printf("PF: %0cx\n", c);
+	ret_ft = ft_printf("FT: %0cx\n", c);
 	cmp(ret, ret_ft);
 	printf("%s--------------------\n-  CHAR TEST ENDS  -\n--------------------%s\n",
 		KYEL, KNRM);
