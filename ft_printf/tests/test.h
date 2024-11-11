@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 13:33:28 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/11 14:28:08 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/11 16:21:03 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@
 
 void	test_int(void);
 void	test_unsigned(void);
-void	test_hex(void);
+void	test_upper_hex(void);
+void	test_lower_hex(void);
 void	test_ptr(void);
 void	test_str(void);
 void	test_char(void);

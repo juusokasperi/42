@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 21:30:28 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/11 14:25:38 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/11 16:22:41 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,10 @@ int	main(int argc, char **argv)
 		test_int();
 	else if (argv[1][0] == 'u')
 		test_unsigned();
-	else if (argv[1][0] == 'x' || argv[1][0] == 'X')
-		test_hex();
+	else if (argv[1][0] == 'x')
+		test_lower_hex();
+	else if (argv[1][0] == 'X')
+		test_upper_hex();
 	else if (argv[1][0] == 'p')
 		test_ptr();
 	else if (argv[1][0] == 's')

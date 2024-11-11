@@ -10,26 +10,24 @@ RED = \033[0;91m
 ENDCOLOR = \033[0m
 
 CC := cc
-CFLAGS += -Wall -Wextra -Werror -I./
+CFLAGS = -Wall -Wextra -Werror -I./ -I./Libft
 
 ARFLAGS = rcs
 
-LIBFT := libft.a
-LIBFT_H := libft.h
+LIBFT := Libft/libft.a
+LIBFT_H := Libft/libft.h
 
 NAME := libftprintf.a
 
 all: $(NAME)
 
-$(LIBFT) $H:
+$(LIBFT) $(LIBFT_H):
 	@make -C ./Libft
-	@cp ./Libft/$(LIBFT) ./
-	@cp ./Libft/$(LIBFT_H) ./
-	@make -C ./Libft fclean
+	@make -C ./Libft clean
 
 bonus: all
 
-$O: $(LIBFT) $H
+$O: $(LIBFT) $(LIBFT_H)
 
 %.o: %.c $H
 	@$(CC) $(CFLAGS) -c $< -o $@
@@ -43,7 +41,7 @@ clean:
 	@echo "$(RED)✅ FT_PRINTF: Clean complete.$(ENDCOLOR)"
 
 fclean: clean
-	@rm  -f $(NAME) $(LIBFT) $(LIBFT_H)
+	@rm  -f $(NAME) $(LIBFT)
 	@echo "$(RED)✅ FT_PRINTF: FClean complete.$(ENDCOLOR)"
 
 re: fclean all
