@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 15:44:26 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/11 13:42:02 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/13 14:51:16 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,18 @@ void	test_ptr(void)
 	int ret_ft;
 	int i = 500;
 	void	*p = NULL;
+	void	*p2 = (void*)0x1234567890ABCDEF;
 	printf("%s--------------------\n- TESTING PTR -\n--------------------%s\n\n", KYEL, KNRM);
 	ret = printf("PF: %p\n", &i);
 	ret_ft = ft_printf("FT: %p\n", &i);
 	cmp(ret, ret_ft);
 	ret = printf("PF: %p\n", p);
 	ret_ft = ft_printf("FT: %p\n", p);
+	cmp(ret, ret_ft);
+
+	printf("%s-------------------\nTest w 64-bit ptr%s\n", KBLU, KNRM);
+	ret = printf("PF: %p\n", p2);
+	ret_ft = ft_printf("FT: %p\n", p2);
 	cmp(ret, ret_ft);
 
 	printf("%s-------------------\nTest 0 with various flags%s\n", KBLU, KNRM);

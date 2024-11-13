@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 17:12:27 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/11 16:26:03 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/13 14:47:37 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 #include "ft_printf.h"
 
-static int	count_len(unsigned long int n)
+static int	count_len(uintptr_t n)
 {
 	int	i;
 
@@ -49,7 +49,7 @@ static void	reverse_digit(char *xtoa)
 	}
 }
 
-char	*ft_xtoa(unsigned long int n, int capital)
+char	*ft_xtoa(uintptr_t n, int capital)
 {
 	char	*xtoa;
 	int		i;

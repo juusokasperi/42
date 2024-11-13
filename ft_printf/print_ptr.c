@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 20:24:51 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/11 16:25:58 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/13 14:52:11 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static int	print_ptr(char *ptr_xtoa, t_flags flags)
 	return (count);
 }
 
-int	print_ptr_handler(unsigned long int nbr, t_flags flags)
+int	print_ptr_handler(uintptr_t nbr, t_flags flags)
 {
 	int		count;
 	char	*ptr_xtoa;
