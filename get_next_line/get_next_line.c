@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 21:26:33 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/01 20:15:13 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/13 17:34:57 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	to_linked_list(t_list **list, char *buffer)
 {
-	t_list *new_node;
-	t_list *last_node;
+	t_list	*new_node;
+	t_list	*last_node;
 
 	last_node = find_last_node(*list);
 	new_node = malloc(sizeof(t_list));
@@ -50,10 +50,10 @@ void	init_list(t_list **list, int fd)
 	}
 }
 
-char *fetch_line(t_list *list)
+char	*fetch_line(t_list *list)
 {
-	int	str_len;
-	char *next_str;
+	int		str_len;
+	char	*next_str;
 
 	if (!list)
 		return (NULL);
@@ -74,9 +74,11 @@ void	clean_list(t_list **list)
 	char	*buffer;
 
 	buffer = malloc(BUFFER_SIZE + 1);
+	if (!buffer)
+		return ;
 	cleaned_node = malloc(sizeof(t_list));
-	if (!cleaned_node || !buffer)
-		return (free(buffer), free(cleaned_node));
+	if (!cleaned_node)
+		return (free(buffer));
 	last_node = find_last_node(*list);
 	i = 0;
 	j = 0;
@@ -90,10 +92,10 @@ void	clean_list(t_list **list)
 	dealloc(list, cleaned_node, buffer);
 }
 
-char *get_next_line(int fd)
+char	*get_next_line(int fd)
 {
 	static t_list	*list = NULL;
-	char 			*next_line;
+	char			*next_line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0
 		|| read(fd, 0, 0) < 0)

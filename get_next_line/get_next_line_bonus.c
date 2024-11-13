@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 21:26:33 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/03 00:21:21 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/13 18:03:01 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	to_linked_list(t_list **list, char *buffer)
 {
-	t_list *new_node;
-	t_list *last_node;
+	t_list	*new_node;
+	t_list	*last_node;
 
 	last_node = find_last_node(*list);
 	new_node = malloc(sizeof(t_list));
@@ -50,10 +50,10 @@ void	init_list(t_list **list, int fd)
 	}
 }
 
-char *fetch_line(t_list *list)
+char	*fetch_line(t_list *list)
 {
-	int	str_len;
-	char *next_str;
+	int		str_len;
+	char	*next_str;
 
 	if (!list)
 		return (NULL);
@@ -90,18 +90,18 @@ void	clean_list(t_list **list)
 	dealloc(list, cleaned_node, buffer);
 }
 
-char *get_next_line(int fd)
+char	*get_next_line(int fd)
 {
 	static t_list	*list[FD_MAX];
-	char 			*next_line;
+	char			*next_line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0
-		|| read(fd, 0, 0) < 0 || fd > FD_MAX - 1)
+		|| read(fd, 0, 0) < 0 || fd > FD_MAX)
 		return (NULL);
-	init_list(&list[fd - 1], fd);
-	if (!list[fd - 1])
+	init_list(&list[fd], fd);
+	if (!list[fd])
 		return (NULL);
-	next_line = fetch_line(list[fd - 1]);
-	clean_list(&list[fd - 1]);
+	next_line = fetch_line(list[fd]);
+	clean_list(&list[fd]);
 	return (next_line);
 }

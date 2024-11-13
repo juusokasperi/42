@@ -35,6 +35,7 @@ clean:
 	@echo "$(RED)✅ FT_PRINTF: Test clean complete.$(ENDCOLOR)"
 
 fclean:
+	@make -C ../ fclean
 	rm -f $(OBJ) $(NAME)
 	@echo "$(RED)✅ FT_PRINTF: Test fclean complete.$(ENDCOLOR)"
 

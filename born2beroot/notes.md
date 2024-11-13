@@ -8,10 +8,10 @@ Hostname jrinta-42
 Username jrinta-
 
 Set up encrypted LVM
-Separate /home partition
+Separate /home, var... partitions
 Erasing datan voi cancelata
 Encryption key born2ber00t42 esim
-Partition disks: max
+Partition disks: jata tilaa /srv/ ja /var/log partitioneille
 Proxy saa olla blank, no popularity contest
 Deselect ssh server
 Jos kysyy GRUB, Yes. (/dev/sda)

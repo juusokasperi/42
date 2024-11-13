@@ -6,13 +6,13 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 18:55:36 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/08/15 21:22:53 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/13 17:35:35 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int		has_newline(t_list *list)
+int	has_newline(t_list *list)
 {
 	int	i;
 
@@ -55,7 +55,7 @@ int	len_to_newline(t_list *list)
 		while (list->str_buf[i])
 		{
 			if (list->str_buf[i] == '\n')
-			return (len + 1);
+				return (len + 1);
 			i++;
 			len++;
 		}
@@ -64,7 +64,7 @@ int	len_to_newline(t_list *list)
 	return (len);
 }
 
-void copy_str(t_list *list, char *next_str)
+void	copy_str(t_list *list, char *next_str)
 {
 	int	i;
 	int	j;
@@ -92,7 +92,7 @@ void copy_str(t_list *list, char *next_str)
 
 void	dealloc(t_list **list, t_list *cleaned_node, char *buffer)
 {
-	t_list *tmp;
+	t_list	*tmp;
 
 	if (!(*list))
 		return ;
