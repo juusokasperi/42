@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 19:07:43 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/14 11:07:57 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/14 18:46:41 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int		print_unsigned_handler(unsigned int nbr);
 int		print_nbr_handler(int nbr);
 int		print_str_handler(const char *str);
 int		print_str(const char *str);
-int		ft_printf(const char *, ...);
+int		ft_printf(const char *format, ...);
 char	*ft_ltoa(long n);
 char	*ft_xtoa(uintptr_t n, int capital, int is_ptr);
 

@@ -16,7 +16,7 @@ _Started 2024/07/31_
 ### Ft_printf
 _Started 2024/08/07_
 - The base/ Printf works.
-- Bonus printf %s and %c work already, but the rest is unfinished..
+- Bonus printf %s and %c work already, but the rest is very much broken.
 - Check how %s and %c behave with `0` flag w/ linux -- in macOS, prints 0, but in some
   online compilers the 0 is just ignored. In my current implementation the flag is ignored,
   but can be easily changed by replacing `pad_width(flags.width, len, 0);` with `pad_width(flags.width, len, flags.zero_pad);`
@@ -31,6 +31,7 @@ _Started 2024/08/07_
 _Started 2024/08/12_
 - Works almost, bonus works too (really simple addition really).
 - Still needs some further testing.
+- Remake is better.
 
 ### Born2beroot
 - Will finish in the clusters, but the concept and implementation ok.

@@ -2,7 +2,7 @@
 	print_ptr.c print_str.c print_unsigned.c helper_functions.c \
 	parse_flags.c print_char.c
 S := ft_printf.c print_str.c helper_functions.c \
-	parse_flags.c print_char.c
+	parse_flags.c print_char.c print_ptr.c ft_xtoa.c
 O := $(S:.c=.o)
 
 H := ft_printf.h

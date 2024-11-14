@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 21:26:33 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/13 18:03:01 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/14 20:30:52 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,11 +92,11 @@ void	clean_list(t_list **list)
 
 char	*get_next_line(int fd)
 {
-	static t_list	*list[FD_MAX];
+	static t_list	*list[OPEN_MAX];
 	char			*next_line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0
-		|| read(fd, 0, 0) < 0 || fd > FD_MAX)
+		|| read(fd, 0, 0) < 0 || fd > OPEN_MAX)
 		return (NULL);
 	init_list(&list[fd], fd);
 	if (!list[fd])
