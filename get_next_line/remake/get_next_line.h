@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 17:22:08 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/14 21:54:06 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/14 22:03:28 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@
 # include <limits.h>
 
 char	*get_next_line(int fd);
+char	*read_buffer(int fd, char *str);
+char	*fetch_line(char *str);
+char	*clean_str(char *str);
+char	*join_strs(char *s1, char *s2);
 size_t	ft_strlen(const char *s);
 char	*ft_free(char **str);
 char	*ft_strdup(const char *s);
