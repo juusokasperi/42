@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 21:26:33 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/14 21:55:31 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/14 21:59:46 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ char	*join_strs(char *s1, char *s2)
 
 	if (!s1)
 	{
-		s1 = malloc(sizeof(char) + 1);
+		s1 = (char *)malloc(1);
 		if (!s1)
 			return (0);
 		s1[0] = 0;
 	}
-	str = (char *)malloc(sizeof(char) * ft_strlen(s1) + ft_strlen(s2) + 1);
+	str = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
 	if (!str)
 		return (ft_free(&s1));
 	i = -1;
@@ -82,7 +82,7 @@ char	*read_buffer(int fd, char *str)
 	char	*buffer;
 
 	i = 1;
-	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	buffer = (char *)malloc(BUFFER_SIZE + 1);
 	if (!buffer)
 		return (ft_free(&str));
 	buffer[0] = '\0';

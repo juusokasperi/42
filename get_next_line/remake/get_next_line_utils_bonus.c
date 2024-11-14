@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 18:55:36 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/14 21:53:21 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/14 22:00:06 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	*ft_strdup(const char *s)
 	char	*dest;
 	char	*dest_ptr;
 
-	dest = (char *)malloc((ft_strlen(s) + 1));
+	dest = (char *)malloc(ft_strlen(s) + 1);
 	if (!dest)
 		return (NULL);
 	dest_ptr = dest;
@@ -55,7 +55,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		return (ft_strdup(""));
 	if (len > ft_strlen(s + start))
 		len = ft_strlen(s + start);
-	substr = (char *)malloc((len + 1) * sizeof(char));
+	substr = (char *)malloc(len + 1);
 	if (!substr)
 		return (NULL);
 	i = 0;
