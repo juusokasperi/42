@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 20:24:51 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/14 00:34:39 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/14 17:32:53 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,24 +52,52 @@ static int	print_ptr(char *ptr_xtoa, t_flags flags)
 	return (count);
 }
 
+static int	format_ptr(char *ptr_xtoa, t_flags flags)
+{
+	int		ptr_len;
+	char	*pad;
+	char	*str;
+	char	*new_str;
+
+	ptr_len = ft_strlen(ptr_xtoa);
+	if (flags.left == 1)
+		str = ft_strdup("0x");
+	if (flags.prec >= 0)
+	{
+		pad = pad_width(flags.prec - 1, ptr_len - 1, 1);
+		new_str = ft_strjoin(str, pad);
+		new_str = ft_strjoin(new_str, ptr_xtoa);
+	}
+	else if (flags.prec < 0)
+	{
+		pad = pad_width(flags.width, ptr_len, 0);
+		new_str = ft_strjoin(str, ptr_xtoa);
+		new_str = ft_strjoin(new_str, pad);
+	}
+	free(pad);
+	free(str);
+	return (new_str);
+}
+
 int	print_ptr_handler(uintptr_t nbr, t_flags flags)
 {
-	int		count;
+	int		res;
 	char	*ptr_xtoa;
+	int		len;
+	char	*pad;
+	char	*new_str;
 
-	count = 0;
 	if (!nbr)
-		return count += print_s("(nil)");
+		return (print_s("(nil)", ft_strlen("(nil)")));
 	flags.width -= 2;
-	if (flags.prec == 0 && nbr == 0)
-	{
-		count += print_s("0x");
-		return (count += pad_width(flags.width, 0, 0));
-	}
 	ptr_xtoa = ft_xtoa(nbr, 0);
 	if (!ptr_xtoa)
-		return (0);
-	count += print_ptr(ptr_xtoa, flags);
+		return (-1);
+	new_str = format(ptr_xtoa, flags);
+	if (!new_str)
+		return (-1);
+	res = print_s(new_str, ft_strlen(new_str));
 	free(ptr_xtoa);
-	return (count);
+	free(new_str);
+	return (res);
 }

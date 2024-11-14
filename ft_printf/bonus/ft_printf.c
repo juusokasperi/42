@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 19:06:48 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/14 00:26:05 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/14 15:50:00 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,53 +27,65 @@ void	init_flags(t_flags *flags)
 
 int	type_handler(char c, va_list *args, t_flags flags)
 {
-	int	count;
+	int	res;
 
-	count = 0;
+	res = 0;
 	if (c == '%')
-		count += print_char('%', flags);
+		res = print_c('%');
 	else if (c == 'c')
-		count += print_char(va_arg(*args, int), flags);
+		res = print_char(va_arg(*args, int), flags);
 	else if (c == 's')
-		count += print_str_handler(va_arg(*args, const char *), flags);
-	else if (c == 'p')
-		count += print_ptr_handler((unsigned long int)va_arg(*args, void *),
-				flags);
-	else if (c == 'i' || c == 'd')
-		count += print_nbr_handler(va_arg(*args, int), &flags);
-	else if (c == 'u')
-		count += print_unsigned_handler(va_arg(*args, unsigned int), flags);
-	else if (c == 'x')
-		count += print_hex_handler(va_arg(*args, unsigned int), 0, &flags);
-	else if (c == 'X')
-		count += print_hex_handler(va_arg(*args, unsigned int), 1, &flags);
+		res = print_str_handler(va_arg(*args, const char *), flags);
+//	else if (c == 'p')
+//		res = print_ptr_handler((unsigned long int)va_arg(*args, void *),
+//				flags);
+//	else if (c == 'i' || c == 'd')
+//		res = print_nbr_handler(va_arg(*args, int), &flags);
+//	else if (c == 'u')
+//		res = print_unsigned_handler(va_arg(*args, unsigned int), flags);
+//	else if (c == 'x')
+//		res = print_hex_handler(va_arg(*args, unsigned int), 0, &flags);
+//	else if (c == 'X')
+//		res = print_hex_handler(va_arg(*args, unsigned int), 1, &flags);
+	return (res);
+}
+
+int	printf_handler(const char *format, va_list *args)
+{
+	t_flags	flags;
+	int		i;
+	int		count;
+	int		res;
+
+	i = 0;
+	count = 0;
+	res = 0;
+	while (format[i])
+	{
+		init_flags(&flags);
+		if (format[i] == '%' && format[i + 1])
+			i = parse_flags(format, &flags, *args, i);
+		if (flags.specifier > 0 && ft_strchr("cspdiuxX%", format[i]))
+			res = type_handler(format[i], args, flags);
+		else
+			res = print_c(format[i]);
+		if (res == -1)
+			return (-1);
+		i++;
+		count += res;
+	}
 	return (count);
 }
 
 int	ft_printf(const char *format, ...)
 {
 	va_list	args;
-	t_flags	flags;
-	int		i;
 	int		count;
 
-	i = 0;
-	count = 0;
 	if (!format || !(*format))
 		return (0);
 	va_start(args, format);
-	while (format[i])
-	{
-		init_flags(&flags);
-		if (format[i] == '%' && format[i + 1])
-			i = parse_flags(format, &flags, args, i);
-		if (flags.specifier > 0 && is_type(format[i]))
-			count += type_handler(format[i], &args, flags);
-		else if (format[i] == '%' && !(format[i + 1]))
-			return (count);
-		else
-			count += print_c(format[i]);
-		i++;
-	}
+	count = printf_handler(format, &args);
+	va_end(args);
 	return (count);
 }

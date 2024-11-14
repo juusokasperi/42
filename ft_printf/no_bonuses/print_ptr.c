@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 20:24:51 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/14 11:15:48 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/14 17:38:44 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	print_ptr_handler(uintptr_t nbr)
 
 	res = 0;
 	if (!nbr)
-		return (print_str("0x0"));
+		return (print_str("(nil)"));
 	ptr_xtoa = ft_xtoa(nbr, 0, 1);
 	if (!ptr_xtoa)
 		return (-1);

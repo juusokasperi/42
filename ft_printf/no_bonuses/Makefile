@@ -13,15 +13,14 @@ CFLAGS = -Wall -Wextra -Werror -I./
 
 ARFLAGS = rcs
 
-LIBFT := Libft/libft.a
+LIBFT := libft/libft.a
 
 NAME := libftprintf.a
 
 all: $(NAME)
 
 $(LIBFT):
-	@make -C ./Libft
-	@make -C ./Libft clean
+	@make -C ./libft
 
 $O: $(LIBFT) $(LIBFT_H)
 
@@ -34,10 +33,12 @@ $(NAME): $(LIBFT) $O
 	@echo "$(GREEN)✅ FT_PRINTF: Library compilation complete!$(ENDCOLOR)"
 
 clean:
+	@make -C ./libft clean
 	@rm -f $O $(O_BONUS)
 	@echo "$(RED)✅ FT_PRINTF: Clean complete.$(ENDCOLOR)"
 
 fclean: clean
+	@make -C ./libft fclean
 	@rm  -f $(NAME) $(LIBFT)
 	@echo "$(RED)✅ FT_PRINTF: FClean complete.$(ENDCOLOR)"
 

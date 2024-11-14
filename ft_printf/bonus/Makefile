@@ -1,5 +1,7 @@
-S := ft_printf.c ft_ltoa.c ft_xtoa.c print_hex.c print_nbr.c \
+#S := ft_printf.c ft_ltoa.c ft_xtoa.c print_hex.c print_nbr.c \
 	print_ptr.c print_str.c print_unsigned.c helper_functions.c \
+	parse_flags.c print_char.c
+S := ft_printf.c print_str.c helper_functions.c \
 	parse_flags.c print_char.c
 O := $(S:.c=.o)
 
@@ -14,15 +16,15 @@ CFLAGS = -Wall -Wextra -Werror -I./
 
 ARFLAGS = rcs
 
-LIBFT := Libft/libft.a
+LIBFT := libft/libft.a
 
 NAME := libftprintf.a
 
 all: $(NAME)
 
 $(LIBFT):
-	@make -C ./Libft
-	@make -C ./Libft clean
+	@make -C ./libft
+	@make -C ./libft clean
 
 bonus: all
 

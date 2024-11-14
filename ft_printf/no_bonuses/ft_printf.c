@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 19:06:48 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/14 10:58:52 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/14 14:40:48 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,8 @@ int	type_handler(char c, va_list *args)
 	return (res);
 }
 
-int	ft_printf(const char *format, ...)
+int	printf_handler(const char *format, va_list *args)
 {
-	va_list	args;
 	int		i;
 	int		count;
 	int		res;
@@ -46,14 +45,11 @@ int	ft_printf(const char *format, ...)
 	i = 0;
 	res = 0;
 	count = 0;
-	if (!format || !(*format))
-		return (0);
-	va_start(args, format);
 	while (format[i])
 	{
 		if (format[i] == '%' && ft_strchr("cspdiuxX%", format[i + 1]))
 		{
-			res = type_handler(format[i + 1], &args);
+			res = type_handler(format[i + 1], args);
 			i++;
 		}
 		else
@@ -63,6 +59,18 @@ int	ft_printf(const char *format, ...)
 		i++;
 		count += res;
 	}
+	return (count);
+}
+
+int ft_printf(const char *format, ...)
+{
+	va_list	args;
+	int		count;
+
+	if (!format || !(*format))
+		return (0);
+	va_start(args, format);
+	count = printf_handler(format, &args);
 	va_end(args);
 	return (count);
 }

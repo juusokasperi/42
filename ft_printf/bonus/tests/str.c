@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 15:44:26 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/11 15:28:59 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/14 17:40:04 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,23 @@ void	test_str(void)
 	ret = printf("PF: \001\002\007\v\010\f\r\n");
 	ret_ft = ft_printf("FT: \001\002\007\v\010\f\r\n");
 	cmp(ret, ret_ft);
+
+	ret = printf("1-> PF: %.50p\n", &str);
+	ret = printf("2-> PF: %.5p\n", &str);
+	ret = printf("3-> PF: %50p\n", &str);
+	ret = printf("x-> PF: %-50p\n", &str);
+	ret = printf("4-> PF: %5.50p\n", &str);
+	ret = printf("5-> PF: %050.5p\n", &str);
+	ret = printf("y-> PF: %50.5p\n", &str);
+	ret = printf("6-> PF: %050p\n", &str);
+	ret = printf("z-> PF: %050.25p\n", &str);
+	ret = printf("Z-> PF: %050.25p\n", &str);
+	ret = printf("7-> PF: %05p\n", &str);
+	ret = printf("8-> PF: %5p\n", &str);
+	ret = printf("9-> PF: %-50.30p\n", &str);
+	ret = printf("A-> PF: %-.50p\n", &str);
+	ret = printf("B-> PF: %.50p\n", &str);
+
+
 	printf("%s--------------------\n- STRING TEST ENDS -\n--------------------\n%s", KYEL, KNRM);
 }

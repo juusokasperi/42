@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 13:33:28 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/11 16:21:03 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/14 15:50:35 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define TEST_H
 
 # include "colors.h"
-# include "libft.h"
+# include "libft/libft.h"
 # include "ft_printf.h"
 # include <stdio.h>
 # include <limits.h>

@@ -2,7 +2,7 @@ SRCS := char.c eval.c hex_upper.c hex_lower.c int.c ptr.c str.c test.c unsigned.
 OBJ := $(SRCS:.c=.o)
 
 H := ft_printf.h
-LIB := libftprintf.a
+LIB := ../libftprintf.a
 
 CC := cc
 CFLAGS += -g -Wno-format -I./ -I../
@@ -17,13 +17,12 @@ ENDCOLOR = \033[0m
 
 all: $(NAME)
 
-$(LIB) $H:
+$(LIB):
 	@make -C ../
-	@make -C ../ clean
 
-$(OBJ): $(LIB) $H
+$(OBJ): $(LIB)
 
-%.o: %.c $H
+%.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(LIB) $(OBJ)
@@ -31,6 +30,7 @@ $(NAME): $(LIB) $(OBJ)
 	@echo "$(GREEN)✅ FT_PRINTF: Test compilation complete.$(ENDCOLOR)"
 
 clean:
+	@make -C ../ clean
 	rm -f $(OBJ)
 	@echo "$(RED)✅ FT_PRINTF: Test clean complete.$(ENDCOLOR)"
 

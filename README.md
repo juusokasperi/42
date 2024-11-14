@@ -16,7 +16,7 @@ _Started 2024/07/31_
 ### Ft_printf
 _Started 2024/08/07_
 - The base/ Printf works.
-- Bonus printf error handling not there yet - needs some implementation..
+- Bonus printf %s and %c work already, but the rest is unfinished..
 - Check how %s and %c behave with `0` flag w/ linux -- in macOS, prints 0, but in some
   online compilers the 0 is just ignored. In my current implementation the flag is ignored,
   but can be easily changed by replacing `pad_width(flags.width, len, 0);` with `pad_width(flags.width, len, flags.zero_pad);`
@@ -25,14 +25,7 @@ _Started 2024/08/07_
   since va_arg leads to undefined behaviour if it tries to read a character as a string. Probably ok, since regular
   printf doesn't work with false flags either.
 - To compile for testing, run `make` inside tests/ folder.
-- In linux null pointer with %p returns (nil), on macOS 0x0. To change from linux version to mac implementation, just remove lines 61&62 from print_ptr.c and add (below) after flags.width -= 2;
-```
-	if (flags.prec == 0 && nbr == 0)
-	{
-		count += print_s("0x");
-		return (count += pad_width(flags.width, 0, 0));
-	}
-```
+- In linux null pointer with %p returns (nil), on macOS 0x0. To change from linux version to mac implementation, just replace (nil) in lines 61&62 from print_ptr.c to 0x0..
 
 ### Get_next_line
 _Started 2024/08/12_

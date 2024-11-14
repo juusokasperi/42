@@ -5,9 +5,9 @@ H := ft_printf.h
 LIB := libftprintf.a
 
 CC := cc
-CFLAGS += -g -Wno-format -I./ -I../ -I../Libft/
+CFLAGS += -g -Wno-format -I./ -I../
 
-LDFLAGS = -L../ -lftprintf -L../Libft/ -lft
+LDFLAGS = -L../ -lftprintf
 
 NAME := test
 
@@ -18,8 +18,7 @@ ENDCOLOR = \033[0m
 all: $(NAME)
 
 $(LIB) $H:
-	@make -C ../ bonus
-	@make -C ../ clean
+	@make -C ../
 
 $(OBJ): $(LIB) $H
 
@@ -31,6 +30,7 @@ $(NAME): $(LIB) $(OBJ)
 	@echo "$(GREEN)✅ FT_PRINTF: Test compilation complete.$(ENDCOLOR)"
 
 clean:
+	@make -C ../ clean
 	rm -f $(OBJ)
 	@echo "$(RED)✅ FT_PRINTF: Test clean complete.$(ENDCOLOR)"
 

@@ -6,52 +6,37 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 20:45:13 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/11 16:26:02 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/14 16:19:17 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-int	pad_width(int width, int size, int zero_pad)
+#include <stdio.h>
+char	*pad_width(int width, int size, int zero_pad)
 {
-	int	count;
+	int		i;
+	char	*pad;
 
-	count = 0;
+	i = 0;
+	if (width - size + 1 < 0)
+		return (NULL);
+	pad = (char *)malloc((width - size + 1) * sizeof(char));
+	if (!pad)
+		return (NULL);
 	while (width - size > 0)
 	{
 		if (zero_pad)
-			count += print_c('0');
+			pad[i] = '0';
 		else
-			count += print_c(' ');
+			pad[i] = ' ';
 		width--;
+		i++;
 	}
-	return (count);
-}
-
-int	is_type(char c)
-{
-	if (c == '%' || c == 'c' || c == 's' || c == 'p' || c == 'i'
-		|| c == 'd' || c == 'u' || c == 'x' || c == 'X')
-		return (1);
-	return (0);
-}
-
-int	is_digit(char c)
-{
-	if (c >= '0' && c <= '9')
-		return (1);
-	return (0);
-}
-
-int	is_spec(char c)
-{
-	if (c == '-' || c == '0' || c == '.' || c == '#'
-		|| c == ' ' || c == '+' || c == '*')
-		return (1);
-	return (0);
+	pad[i] = '\0';
+	return (pad);
 }
 
 int	is_flag(char c)
 {
-	return (is_type(c) || is_digit(c) || is_spec(c));
+	return (ft_strchr("cspdiuxX%-0.# +*", c) || ft_isdigit(c));
 }
