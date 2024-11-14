@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 20:26:53 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/11 16:25:56 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/14 00:33:05 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ int	print_char(char c, t_flags flags)
 	int	count;
 
 	count = 0;
-	if (flags.left_align == 0)
+	if (flags.left == 0)
 		count += pad_width(flags.width, 1, 0);
 	count += print_c(c);
-	if (flags.left_align == 1)
+	if (flags.left == 1)
 		count += pad_width(flags.width, 1, 0);
 	return (count);
 }
@@ -52,13 +52,13 @@ int	print_str_handler(const char *str, t_flags flags)
 	if (!str)
 		str = "(null)";
 	len = ft_strlen(str);
-	if (flags.precision >= 0 && flags.precision < len)
-		len = flags.precision;
-	if (flags.left_align == 0)
+	if (flags.prec >= 0 && flags.prec < len)
+		len = flags.prec;
+	if (flags.left == 0)
 		count += pad_width(flags.width, len, 0);
 	while (i < len)
 		count += print_c(str[i++]);
-	if (flags.left_align == 1)
+	if (flags.left == 1)
 		count += pad_width(flags.width, len, 0);
 	return (count);
 }

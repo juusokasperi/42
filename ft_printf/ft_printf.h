@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 19:07:43 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/13 14:48:18 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/14 00:34:03 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,16 @@ typedef struct s_flags
 {
 	char	specifier;
 	int		width;
-	int		precision;
-	int		zero_pad;
-	int		left_align;
-	char	positive_sign;
+	int		prec;
+	int		zero;
+	int		left;
+	char	positive;
 	int		hash;
 	int		star;
 	int		negative;
 }		t_flags;
 
-void	parse_flags(const char *format, t_flags *flags, va_list args, int *i);
+int		parse_flags(const char *format, t_flags *f, va_list args, int i);
 int		pad_width(int width, int size, int zero_pad);
 int		print_c(char c);
 int		is_type(char c);

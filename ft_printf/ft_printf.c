@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 19:06:48 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/11 16:25:54 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/14 00:26:05 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ void	init_flags(t_flags *flags)
 {
 	flags->specifier = 0;
 	flags->width = 0;
-	flags->precision = -1;
-	flags->zero_pad = 0;
-	flags->left_align = 0;
-	flags->positive_sign = 0;
+	flags->prec = -1;
+	flags->zero = 0;
+	flags->left = 0;
+	flags->positive = 0;
 	flags->hash = 0;
 	flags->star = 0;
 	flags->negative = 0;
@@ -66,7 +66,7 @@ int	ft_printf(const char *format, ...)
 	{
 		init_flags(&flags);
 		if (format[i] == '%' && format[i + 1])
-			parse_flags(format, &flags, args, &i);
+			i = parse_flags(format, &flags, args, i);
 		if (flags.specifier > 0 && is_type(format[i]))
 			count += type_handler(format[i], &args, flags);
 		else if (format[i] == '%' && !(format[i + 1]))
