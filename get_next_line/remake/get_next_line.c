@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 21:26:33 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/14 22:02:22 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/14 22:01:56 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,18 +103,18 @@ char	*read_buffer(int fd, char *str)
 
 char	*get_next_line(int fd)
 {
-	static char	*str[OPEN_MAX];
+	static char	*str;
 	char		*new_line;
 
 	if (fd < 0)
 		return (NULL);
-	if ((str[fd] && !ft_strchr(str[fd], '\n')) || !str[fd])
-		str[fd] = read_buffer (fd, str[fd]);
-	if (!str[fd])
+	if ((str && !ft_strchr(str, '\n')) || !str)
+		str = read_buffer (fd, str);
+	if (!str)
 		return (NULL);
-	new_line = fetch_line(str[fd]);
+	new_line = fetch_line(str);
 	if (!new_line)
-		return (free_str(&str[fd]));
-	str[fd] = clean_str(str[fd]);
+		return (free_str(&str));
+	str[fd] = clean_str(str);
 	return (new_line);
 }
