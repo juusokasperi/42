@@ -22,7 +22,7 @@ all: $(NAME)
 $(LIBFT):
 	@make -C ./libft
 
-$O: $(LIBFT) $(LIBFT_H)
+$O: $(LIBFT)
 
 %.o: %.c $H
 	@$(CC) $(CFLAGS) -c $< -o $@

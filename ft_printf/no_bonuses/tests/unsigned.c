@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 15:44:26 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/14 10:52:41 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/15 16:44:47 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,10 @@ void	test_unsigned(void)
 	ret_ft = ft_printf("FT: %u\n", 2147483647);
 	cmp(ret, ret_ft);
 
+	ret = printf("PF: %u\n", -2147483648);
+	ret_ft = ft_printf("FT: %u\n", -2147483648);
+	cmp(ret, ret_ft);
 
-	printf("%s--------------------\nPrinting just ints with no flags\n%s", KBLU, KNRM);
 	ret = printf("PF: %u\n", 0);
 	ret_ft = ft_printf("FT: %u\n", 0);
 	cmp(ret, ret_ft);

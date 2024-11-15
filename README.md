@@ -29,9 +29,8 @@ _Started 2024/08/07_
 
 ### Get_next_line
 _Started 2024/08/12_
-- Works almost, bonus works too (really simple addition really).
 - Still needs some further testing.
-- Remake is better.
+- Str_version/ works, linked_list_version/ has some leaks.
 
 ### Born2beroot
 - Will finish in the clusters, but the concept and implementation ok.

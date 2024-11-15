@@ -26,14 +26,17 @@ all: $(NAME)
 %.o: %.c $H
 	$(CC) $(CFLAGS) -c $< -o $@
 
-bonus: $(NAME) $(O_BONUS)
-	@ar $(ARFLAGS) $(NAME) $(O_BONUS)
+bonus: .bonus
+
+.bonus: $(NAME) $(O_BONUS)
+	ar $(ARFLAGS) $(NAME) $(O_BONUS)
+	@touch .bonus
 
 $(NAME): $O
-	@ar $(ARFLAGS) $(NAME) $^
+	ar $(ARFLAGS) $(NAME) $^
 
 clean:
-	rm -f $O $(O_BONUS)
+	rm -f $O $(O_BONUS) .bonus
 
 fclean: clean
 	rm  -f $(NAME)

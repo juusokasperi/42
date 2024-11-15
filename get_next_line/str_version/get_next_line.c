@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 21:26:33 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/14 22:01:56 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/15 12:30:10 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,6 @@ char	*get_next_line(int fd)
 	new_line = fetch_line(str);
 	if (!new_line)
 		return (free_str(&str));
-	str[fd] = clean_str(str);
+	str = clean_str(str);
 	return (new_line);
 }

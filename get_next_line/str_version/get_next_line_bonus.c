@@ -6,11 +6,12 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 21:26:33 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/14 22:02:22 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/15 14:28:08 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
+#include <stdio.h>
 
 char	*join_strs(char *s1, char *s2)
 {
@@ -28,11 +29,14 @@ char	*join_strs(char *s1, char *s2)
 	str = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
 	if (!str)
 		return (free_str(&s1));
-	i = -1;
-	while (s1[++i])
+	i = 0;
+	while (s1[i++])
+	{
+		write(1, i, 1);
 		str[i] = s1[i];
-	j = -1;
-	while (s2[++j])
+	}
+	j = 0;
+	while (s2[j++])
 		str[i + j] = s2[j];
 	str[i + j] = '\0';
 	free(s1);
@@ -78,38 +82,38 @@ char	*fetch_line(char *str)
 
 char	*read_buffer(int fd, char *str)
 {
-	int		i;
+	int		nb_read;
 	char	*buffer;
 
-	i = 1;
+	nb_read = 1;
 	buffer = (char *)malloc(BUFFER_SIZE + 1);
 	if (!buffer)
 		return (free_str(&str));
 	buffer[0] = '\0';
-	while (i > 0 && !ft_strchr(buffer, '\n'))
+	while (nb_read > 0 && !ft_strchr(buffer, '\n'))
 	{
-		i = read (fd, buffer, BUFFER_SIZE);
-		if (i > 0)
+		nb_read = read(fd, buffer, BUFFER_SIZE);
+		if (nb_read > 0)
 		{
-			buffer[i] = '\0';
+			buffer[nb_read] = '\0';
 			str = join_strs(str, buffer);
 		}
 	}
 	free(buffer);
-	if (i == -1)
+	if (nb_read == -1)
 		return (free_str(&str));
 	return (str);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*str[OPEN_MAX];
+	static char	*str[FOPEN_MAX];
 	char		*new_line;
 
-	if (fd < 0)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	if ((str[fd] && !ft_strchr(str[fd], '\n')) || !str[fd])
-		str[fd] = read_buffer (fd, str[fd]);
+		str[fd] = read_buffer(fd, str[fd]);
 	if (!str[fd])
 		return (NULL);
 	new_line = fetch_line(str[fd]);
