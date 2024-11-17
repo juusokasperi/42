@@ -17,6 +17,14 @@ H := libft.h
 
 CC := cc
 CFLAGS += -Wall -Wextra -Werror -I./
+
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S),Darwin)
+	ifeq ($(shell uname -p),arm)
+		CFLAGS += -arch x86_64
+	endif
+endif
+
 ARFLAGS := -rcs
 
 NAME := libft.a

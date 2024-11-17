@@ -6,60 +6,52 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 21:26:33 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/15 14:28:08 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/17 19:09:57 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
-#include <stdio.h>
 
 char	*join_strs(char *s1, char *s2)
 {
-	char	*str;
+	char	*result;
 	size_t	i;
 	size_t	j;
 
 	if (!s1)
 	{
-		s1 = (char *)malloc(1);
+		s1 = ft_calloc(1, 1);
 		if (!s1)
-			return (0);
-		s1[0] = 0;
+			return (NULL);
 	}
-	str = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
-	if (!str)
+	result = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	if (!result)
 		return (free_str(&s1));
 	i = 0;
-	while (s1[i++])
-	{
-		write(1, i, 1);
-		str[i] = s1[i];
-	}
 	j = 0;
-	while (s2[j++])
-		str[i + j] = s2[j];
-	str[i + j] = '\0';
+	while (s1[i])
+		result[j++] = s1[i++];
+	i = 0;
+	while (s2[i])
+		result[j++] = s2[i++];
+	result[j] = '\0';
 	free(s1);
-	return (str);
+	return (result);
 }
 
 char	*clean_str(char *str)
 {
 	char	*new;
 	char	*ptr;
-	int		len;
+	int		start;
 
 	ptr = ft_strchr(str, '\n');
 	if (!ptr)
-	{
-		new = NULL;
 		return (free_str(&str));
-	}
-	else
-		len = (ptr - str) + 1;
-	if (!str[len])
+	start = (ptr - str) + 1;
+	if (!str[start])
 		return (free_str(&str));
-	new = ft_substr(str, len, ft_strlen(str) - len);
+	new = ft_substr(str, start, ft_strlen(str) - start);
 	free_str(&str);
 	if (!new)
 		return (NULL);
@@ -73,7 +65,10 @@ char	*fetch_line(char *str)
 	int		len;
 
 	ptr = ft_strchr(str, '\n');
-	len = (ptr - str) + 1;
+	if (!ptr)
+		len = ft_strlen(str);
+	else
+		len = (ptr - str) + 1;
 	line = ft_substr(str, 0, len);
 	if (!line)
 		return (NULL);
@@ -86,18 +81,18 @@ char	*read_buffer(int fd, char *str)
 	char	*buffer;
 
 	nb_read = 1;
-	buffer = (char *)malloc(BUFFER_SIZE + 1);
+	buffer = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
 	if (!buffer)
 		return (free_str(&str));
-	buffer[0] = '\0';
-	while (nb_read > 0 && !ft_strchr(buffer, '\n'))
+	while (!str || !ft_strchr(str, '\n'))
 	{
 		nb_read = read(fd, buffer, BUFFER_SIZE);
-		if (nb_read > 0)
-		{
-			buffer[nb_read] = '\0';
-			str = join_strs(str, buffer);
-		}
+		if (nb_read <= 0)
+			break ;
+		buffer[nb_read] = '\0';
+		str = join_strs(str, buffer);
+		if (!str)
+			break ;
 	}
 	free(buffer);
 	if (nb_read == -1)
@@ -107,10 +102,10 @@ char	*read_buffer(int fd, char *str)
 
 char	*get_next_line(int fd)
 {
-	static char	*str[FOPEN_MAX];
+	static char	*str[OPEN_MAX];
 	char		*new_line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd > OPEN_MAX)
 		return (NULL);
 	if ((str[fd] && !ft_strchr(str[fd], '\n')) || !str[fd])
 		str[fd] = read_buffer(fd, str[fd]);

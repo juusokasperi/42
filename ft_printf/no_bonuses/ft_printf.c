@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 19:06:48 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/15 17:58:59 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/17 18:54:31 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,13 @@ int	type_handler(char c, va_list *args)
 		return (print_hex_handler(va_arg(*args, unsigned int), 0));
 	else if (c == 'X')
 		return (print_hex_handler(va_arg(*args, unsigned int), 1));
-	return (-1);
+	return (0);
 }
 
 int	handle_regular_print(char c, int *trailing_percent)
 {
 	if (c == '%')
-		(*trailing_percent)++;
+		(*trailing_percent) = true;
 	return (print_char(c));
 }
 
@@ -45,10 +45,10 @@ int	printf_handler(const char *format, va_list *args)
 	int		i;
 	int		count;
 	int		res;
-	int		trailing_percent;
+	bool	trailing_percent;
 
 	i = 0;
-	trailing_percent = 0;
+	trailing_percent = false;
 	count = 0;
 	while (format[i])
 	{
@@ -56,7 +56,7 @@ int	printf_handler(const char *format, va_list *args)
 		if (format[i] == '%' && format[i + 1]
 			&& ft_strchr("cspdiuxX%", format[i + 1]))
 			res = type_handler(format[++i], args);
-		else if (format[i] == '%' && !format[i + 1] && trailing_percent == 0)
+		else if (format[i] == '%' && !format[i + 1] && !trailing_percent)
 			return (-1);
 		else
 			res = handle_regular_print(format[i], &trailing_percent);

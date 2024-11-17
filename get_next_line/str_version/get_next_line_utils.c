@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 18:55:36 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/14 22:02:05 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/17 18:35:45 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,24 @@ char	*free_str(char **str)
 	return (NULL);
 }
 
-char	*ft_strdup(const char *s)
+void	*ft_calloc(size_t nmemb, size_t size)
 {
-	char	*dest;
-	char	*dest_ptr;
+	void			*s;
+	unsigned char	*p;
+	size_t			total_size;
 
-	dest = (char *)malloc(ft_strlen(s) + 1);
-	if (!dest)
+	if (nmemb == 0 || size == 0)
+		return (malloc(0));
+	if (size && nmemb > SIZE_MAX / size)
 		return (NULL);
-	dest_ptr = dest;
-	while (*s)
-		*dest_ptr++ = *s++;
-	*dest_ptr = '\0';
-	return (dest);
+	total_size = nmemb * size;
+	s = malloc(total_size);
+	if (!s)
+		return (NULL);
+	p = (unsigned char *)s;
+	while (total_size--)
+		p[total_size] = 0;
+	return (s);
 }
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
@@ -52,7 +57,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	if (!s)
 		return (NULL);
 	if (start > ft_strlen(s))
-		return (ft_strdup(""));
+		return (ft_calloc(1, 1));
 	if (len > ft_strlen(s + start))
 		len = ft_strlen(s + start);
 	substr = (char *)malloc(len + 1);

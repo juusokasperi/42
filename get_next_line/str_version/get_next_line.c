@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 21:26:33 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/15 12:30:10 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/17 19:10:09 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,48 +14,44 @@
 
 char	*join_strs(char *s1, char *s2)
 {
-	char	*str;
+	char	*result;
 	size_t	i;
 	size_t	j;
 
 	if (!s1)
 	{
-		s1 = (char *)malloc(1);
+		s1 = ft_calloc(1, 1);
 		if (!s1)
 			return (0);
-		s1[0] = 0;
 	}
-	str = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
-	if (!str)
+	result = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	if (!result)
 		return (free_str(&s1));
-	i = -1;
-	while (s1[++i])
-		str[i] = s1[i];
-	j = -1;
-	while (s2[++j])
-		str[i + j] = s2[j];
-	str[i + j] = '\0';
+	i = 0;
+	j = 0;
+	while (s1[i])
+		result[j++] = s1[i++];
+	i = 0;
+	while (s2[i])
+		result[j++] = s2[i++];
+	result[j] = '\0';
 	free(s1);
-	return (str);
+	return (result);
 }
 
 char	*clean_str(char *str)
 {
 	char	*new;
 	char	*ptr;
-	int		len;
+	int		start;
 
 	ptr = ft_strchr(str, '\n');
 	if (!ptr)
-	{
-		new = NULL;
 		return (free_str(&str));
-	}
-	else
-		len = (ptr - str) + 1;
-	if (!str[len])
+	start = (ptr - str) + 1;
+	if (!str[start])
 		return (free_str(&str));
-	new = ft_substr(str, len, ft_strlen(str) - len);
+	new = ft_substr(str, start, ft_strlen(str) - start);
 	free_str(&str);
 	if (!new)
 		return (NULL);

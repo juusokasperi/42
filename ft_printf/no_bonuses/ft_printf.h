@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 19:07:43 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/14 18:46:41 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/17 18:54:00 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdarg.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include <stdbool.h>
 
 int		print_hex_handler(unsigned int nbr, int capital);
 int		print_char(char c);

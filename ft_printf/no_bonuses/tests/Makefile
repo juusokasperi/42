@@ -7,6 +7,13 @@ LIB := ../libftprintf.a
 CC := cc
 CFLAGS += -g -Wno-format -I./ -I../
 
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S),Darwin)
+	ifeq ($(shell uname -p),arm)
+		CFLAGS += -arch x86_64
+	endif
+endif
+
 LDFLAGS = -L../ -lftprintf
 
 NAME := test

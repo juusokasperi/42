@@ -6,24 +6,14 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 18:58:03 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/13 18:03:00 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/17 18:07:15 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 #include "string.h"
-
-/*
-
-Static Linked List
-
-Lue tiedostoa ja lisää listaan niin kauan, että listaan tulee string jossa \n
-Kun löytyy \n, luo uusi string \n asti
-Siisti lista -> kopioi viimeisesta nodesta kaikki, jotka tulee
-\n jalkeen paitsi jos siella on ainostaan \0
-Vapauta linked list ja aseta linked listin ekaksi juuri luotu uusi lista
-
-*/
+#include <stdio.h>
+#include <fcntl.h>
 
 int	main(int argc, char **argv)
 {
