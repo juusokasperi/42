@@ -6,22 +6,23 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 17:22:08 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/18 20:32:05 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/18 22:08:52 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_BONUS_H
 # define GET_NEXT_LINE_BONUS_H
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
-# endif
-
-
-# include <limits.h>
 # include <stdint.h>
 # include <stdlib.h>
 # include <unistd.h>
+# ifdef __APPLE__
+#  include <limits.h>
+# endif
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
 
 # ifndef OPEN_MAX
 #  define OPEN_MAX 256
