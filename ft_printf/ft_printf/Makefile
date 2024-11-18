@@ -29,13 +29,12 @@ all: $(NAME)
 $(LIBFT): phony
 	make -C ./libft
 
-$O: $(LIBFT)
-
 %.o: %.c $H
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(LIBFT) $O
-	ar $(ARFLAGS) $@ $O
+	@cp $(LIBFT) $(NAME)
+	@ar $(ARFLAGS) $@ $O
 	@echo "$(GREEN)✅ FT_PRINTF: Library compilation complete!$(ENDCOLOR)"
 
 clean:
@@ -50,4 +49,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: clean fclean re all bonus phony
+.PHONY: clean fclean re all phony

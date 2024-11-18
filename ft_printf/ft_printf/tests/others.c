@@ -109,6 +109,6 @@ void	test_others(void)
 	printf("\n");
 	ret_ft = ft_printf("%k");
 	ft_printf("\n");
-	cmp(ret, ret_ft);`
+	cmp(ret, ret_ft);
 	printf("%s--------------------\n- OTHER  TEST ENDS -\n--------------------\n%s", KYEL, KNRM);
 }
