@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 18:58:03 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/17 18:07:15 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/17 19:26:44 by juusorinta       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,23 @@ int	main(int argc, char **argv)
 	int		lines_2;
 
 	if (argc < 2)
-		return (printf("Usage: ./test <m or b> or ./test <file(s) to read>\n"));
+		return (printf("Usage: ./test <m or b or i (for stdin)> or ./test <file(s) to read>\n"));
+	if (argv[1][0] == 'i' && strlen(argv[1]) == 1)
+	{
+		(void)lines_2;
+		(void)next_line_2;
+		lines = 1;
+		while (1)
+		{
+			if ((next_line = get_next_line(0)))
+				printf("%d->%s", lines++, next_line);
+			if (!next_line)
+				break ;
+			free(next_line);
+		}
+		free(next_line);
+		return (0);
+	}
 	if (argv[1][0] == 'm' && strlen(argv[1]) == 1)
 	{
 		(void)lines_2;
