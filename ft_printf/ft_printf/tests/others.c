@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 14:44:13 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/18 15:56:49 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/18 20:08:14 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,5 +110,12 @@ void	test_others(void)
 	ret_ft = ft_printf("%k");
 	ft_printf("\n");
 	cmp(ret, ret_ft);
+
+	ret = printf("PF: adsa%");
+	printf("\n");
+	ret_ft = ft_printf("FT: adsa%");
+	ft_printf("\n");
+	cmp(ret, ret_ft);
+
 	printf("%s--------------------\n- OTHER  TEST ENDS -\n--------------------\n%s", KYEL, KNRM);
 }

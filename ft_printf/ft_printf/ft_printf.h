@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 19:07:43 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/18 15:54:31 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/18 20:13:32 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 
 # include "libft/libft.h"
 # include <stdarg.h>
-# include <unistd.h>
-# include <stdlib.h>
 # include <stdbool.h>
 
 char	*ft_ltoa(long n);

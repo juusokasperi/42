@@ -15,6 +15,10 @@ O_BONUS := $(S_BONUS:.c=.o)
 
 H := libft.h
 
+GREEN = \033[0;32m
+RED = \033[0;31m
+ENDCOLOR = \033[0m
+
 CC := cc
 CFLAGS += -Wall -Wextra -Werror -I./
 
@@ -32,22 +36,26 @@ NAME := libft.a
 all: $(NAME)
 
 %.o: %.c $H
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 bonus: .bonus
 
 .bonus: $(NAME) $(O_BONUS)
-	ar $(ARFLAGS) $(NAME) $(O_BONUS)
+	@ar $(ARFLAGS) $(NAME) $(O_BONUS)
 	@touch .bonus
+	@echo "$(GREEN)✅ LIBFT: Bonus compilation complete!$(ENDCOLOR)"
 
 $(NAME): $O
-	ar $(ARFLAGS) $(NAME) $^
+	@ar $(ARFLAGS) $(NAME) $^
+	@echo "$(GREEN)✅ LIBFT: Library compilation complete!$(ENDCOLOR)"
 
 clean:
-	rm -f $O $(O_BONUS) .bonus
+	@rm -f $O $(O_BONUS) .bonus
+	@echo "$(RED)✅ LIBFT: Clean complete.$(ENDCOLOR)"
 
 fclean: clean
-	rm  -f $(NAME)
+	@rm  -f $O $(O_BONUS) .bonus $(NAME)
+	@echo "$(RED)✅ LIBFT: FClean complete.$(ENDCOLOR)"
 
 re: fclean all
 

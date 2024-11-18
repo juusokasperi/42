@@ -18,8 +18,8 @@ LDFLAGS = -L../ -lftprintf
 
 NAME := test
 
-GREEN = \033[0;92m
-RED = \033[0;91m
+GREEN = \033[0;32m
+RED = \033[0;31m
 ENDCOLOR = \033[0m
 
 all: $(NAME)
@@ -30,7 +30,7 @@ $(LIB):
 $(OBJ): $(LIB)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(LIB) $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) $(LDFLAGS) -o $@
@@ -38,12 +38,12 @@ $(NAME): $(LIB) $(OBJ)
 
 clean:
 	@make -C ../ clean
-	rm -f $(OBJ)
+	@rm -f $(OBJ)
 	@echo "$(RED)✅ FT_PRINTF: Test clean complete.$(ENDCOLOR)"
 
 fclean:
 	@make -C ../ fclean
-	rm -f $(OBJ) $(NAME)
+	@rm -f $(OBJ) $(NAME)
 	@echo "$(RED)✅ FT_PRINTF: Test fclean complete.$(ENDCOLOR)"
 
 re: fclean all

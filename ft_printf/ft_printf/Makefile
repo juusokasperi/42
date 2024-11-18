@@ -4,8 +4,8 @@ O := $(S:.c=.o)
 
 H := ft_printf.h
 
-GREEN = \033[0;92m
-RED = \033[0;91m
+GREEN = \033[0;32m
+RED = \033[0;31m
 ENDCOLOR = \033[0m
 
 CC := cc
@@ -27,7 +27,7 @@ NAME := libftprintf.a
 all: $(NAME)
 
 $(LIBFT): phony
-	make -C ./libft
+	@make -C ./libft
 
 %.o: %.c $H
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -42,9 +42,9 @@ clean:
 	@rm -f $O $(O_BONUS)
 	@echo "$(RED)✅ FT_PRINTF: Clean complete.$(ENDCOLOR)"
 
-fclean: clean
+fclean:
 	@make -C ./libft fclean
-	@rm  -f $(NAME) $(LIBFT)
+	@rm  -f $O $(O_BONUS) $(NAME)
 	@echo "$(RED)✅ FT_PRINTF: FClean complete.$(ENDCOLOR)"
 
 re: fclean all
