@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 17:22:08 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/16 19:28:15 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/18 20:19:47 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 #  define BUFFER_SIZE 42
 # endif
 
+# include <stdint.h>
 # include <stdlib.h>
-# include <fcntl.h>
 # include <unistd.h>
 
 char	*get_next_line(int fd);

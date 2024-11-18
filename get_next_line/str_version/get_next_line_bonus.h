@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 17:22:08 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/17 18:59:57 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/18 20:32:05 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,15 @@
 #  define BUFFER_SIZE 42
 # endif
 
-# if defined(__linux__)
-#  include <linux/lmits.h>
-# else
-#  include <limits.h>
-# endif
 
+# include <limits.h>
+# include <stdint.h>
 # include <stdlib.h>
 # include <unistd.h>
+
+# ifndef OPEN_MAX
+#  define OPEN_MAX 256
+# endif
 
 char	*get_next_line(int fd);
 char	*read_buffer(int fd, char *str);

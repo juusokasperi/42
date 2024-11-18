@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 21:26:33 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/17 19:10:09 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/18 20:19:35 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ char	*read_buffer(int fd, char *str)
 	buffer[0] = '\0';
 	while (i > 0 && !ft_strchr(buffer, '\n'))
 	{
-		i = read (fd, buffer, BUFFER_SIZE);
+		i = read(fd, buffer, BUFFER_SIZE);
 		if (i > 0)
 		{
 			buffer[i] = '\0';
