@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 21:30:28 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/11 16:22:41 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/18 14:50:15 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	cmp(int ret, int ret_ft)
 int	main(int argc, char **argv)
 {
 	if (argc != 2 || ft_strlen(argv[1]) != 1)
-		return (ft_printf("Usage: ./test <i, d, u, s, c, p, x, X>\n"));
+		return (ft_printf("Usage: ./test <i d, u, s, c, p, x, X, o (for others)>\n"));
 	if (argv[1][0] == 'i' || argv[1][0] == 'd')
 		test_int();
 	else if (argv[1][0] == 'u')
@@ -40,5 +40,7 @@ int	main(int argc, char **argv)
 		test_char();
 	else if (argv[1][0] == 'e')
 		test_eval();
+	else if (argv[1][0] == 'o')
+		test_others();
 	return (0);
 }

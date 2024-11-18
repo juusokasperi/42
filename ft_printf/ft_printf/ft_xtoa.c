@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 17:12:27 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/14 18:23:53 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/18 15:50:21 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	reverse_digit(char *xtoa)
 	}
 }
 
-int	handle_ptr(char *xtoa, int i)
+static int	handle_ptr(char *xtoa, int i)
 {
 	xtoa[i++] = 'x';
 	xtoa[i++] = '0';

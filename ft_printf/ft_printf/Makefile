@@ -26,17 +26,16 @@ NAME := libftprintf.a
 
 all: $(NAME)
 
-$(LIBFT):
-	@make -C ./libft
+$(LIBFT): phony
+	make -C ./libft
 
 $O: $(LIBFT)
 
 %.o: %.c $H
-	@$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(LIBFT) $O
-	@cp $(LIBFT) $(NAME)
-	@ar $(ARFLAGS) $@ $O
+	ar $(ARFLAGS) $@ $O
 	@echo "$(GREEN)✅ FT_PRINTF: Library compilation complete!$(ENDCOLOR)"
 
 clean:
@@ -51,4 +50,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: clean fclean re all bonus
+.PHONY: clean fclean re all bonus phony

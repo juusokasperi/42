@@ -6,13 +6,13 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 19:06:48 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/17 18:54:31 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/18 17:12:26 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	type_handler(char c, va_list *args)
+static int	type_handler(char c, va_list *args)
 {
 	if (c == '%')
 		return (print_char('%'));
@@ -33,14 +33,14 @@ int	type_handler(char c, va_list *args)
 	return (0);
 }
 
-int	handle_regular_print(char c, int *trailing_percent)
+static int	handle_regular_print(char c, bool *trailing_percent)
 {
 	if (c == '%')
 		(*trailing_percent) = true;
 	return (print_char(c));
 }
 
-int	printf_handler(const char *format, va_list *args)
+static int	printf_handler(const char *format, va_list *args)
 {
 	int		i;
 	int		count;
@@ -73,8 +73,8 @@ int	ft_printf(const char *format, ...)
 	va_list	args;
 	int		count;
 
-	if (!format || !(*format))
-		return (0);
+	if (!format)
+		return (-1);
 	va_start(args, format);
 	count = printf_handler(format, &args);
 	va_end(args);

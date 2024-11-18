@@ -1,4 +1,4 @@
-SRCS := char.c eval.c hex_upper.c hex_lower.c int.c ptr.c str.c test.c unsigned.c
+SRCS := char.c eval.c hex_upper.c hex_lower.c int.c ptr.c str.c test.c unsigned.c others.c
 OBJ := $(SRCS:.c=.o)
 
 H := ft_printf.h

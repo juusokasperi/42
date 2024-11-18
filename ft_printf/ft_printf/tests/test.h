@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 13:33:28 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/15 17:07:51 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/18 14:49:40 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	test_lower_hex(void);
 void	test_ptr(void);
 void	test_str(void);
 void	test_char(void);
-void	test_false(void);
+void	test_others(void);
 void	test_eval(void);
 void	cmp(int ret, int ret_ft);
 
