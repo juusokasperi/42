@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 21:26:33 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/18 20:19:35 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/20 12:58:49 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,10 @@ char	*fetch_line(char *str)
 	int		len;
 
 	ptr = ft_strchr(str, '\n');
-	len = (ptr - str) + 1;
+	if (!ptr)
+		len = ft_strlen(str);
+	else
+		len = (ptr - str) + 1;
 	line = ft_substr(str, 0, len);
 	if (!line)
 		return (NULL);
@@ -74,25 +77,24 @@ char	*fetch_line(char *str)
 
 char	*read_buffer(int fd, char *str)
 {
-	int		i;
+	int		nb_read;
 	char	*buffer;
 
-	i = 1;
-	buffer = (char *)malloc(BUFFER_SIZE + 1);
+	nb_read = 1;
+	buffer = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
 	if (!buffer)
 		return (free_str(&str));
-	buffer[0] = '\0';
-	while (i > 0 && !ft_strchr(buffer, '\n'))
+	while (nb_read > 0 && !ft_strchr(buffer, '\n'))
 	{
-		i = read(fd, buffer, BUFFER_SIZE);
-		if (i > 0)
+		nb_read = read(fd, buffer, BUFFER_SIZE);
+		if (nb_read > 0)
 		{
-			buffer[i] = '\0';
+			buffer[nb_read] = '\0';
 			str = join_strs(str, buffer);
 		}
 	}
 	free(buffer);
-	if (i == -1)
+	if (nb_read == -1)
 		return (free_str(&str));
 	return (str);
 }
@@ -102,10 +104,10 @@ char	*get_next_line(int fd)
 	static char	*str;
 	char		*new_line;
 
-	if (fd < 0)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	if ((str && !ft_strchr(str, '\n')) || !str)
-		str = read_buffer (fd, str);
+		str = read_buffer(fd, str);
 	if (!str)
 		return (NULL);
 	new_line = fetch_line(str);
