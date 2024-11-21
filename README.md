@@ -18,6 +18,7 @@ _Started 2024/08/07_
 
 ### Get_next_line
 _Started 2024/08/12_
+- To compile for testing, run `cc -Wall -Wextra -Werror <files> test/main.c`
 
 ### Born2beroot
 - Will finish in the clusters, but the concept and implementation ok.
