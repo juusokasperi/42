@@ -9,28 +9,15 @@
 ### Libft
 _Started 2024/07/31_
 - To compile main.c for testing, run `make` inside tests/ folder
-- Everything should be functional.
 
 ## Rank 01
 
 ### Ft_printf
 _Started 2024/08/07_
-- The base/ Printf works.
-- Bonus printf %s and %c work already, but the rest is very much broken.
-- Check how %s and %c behave with `0` flag w/ linux -- in macOS, prints 0, but in some
-  online compilers the 0 is just ignored. In my current implementation the flag is ignored,
-  but can be easily changed by replacing `pad_width(flags.width, len, 0);` with `pad_width(flags.width, len, flags.zero_pad);`
-  in function print_str.
-- If user tries to run the program with false parameters, f.ex. ft_printf("%s\n", 'b'); leads to a segfault,
-  since va_arg leads to undefined behaviour if it tries to read a character as a string. Probably ok, since regular
-  printf doesn't work with false flags either.
 - To compile for testing, run `make` inside tests/ folder.
-- In linux null pointer with %p returns (nil), on macOS 0x0. To change from linux version to mac implementation, just replace (nil) in lines 61&62 from print_ptr.c to 0x0..
 
 ### Get_next_line
 _Started 2024/08/12_
-- Still needs some further testing.
-- Str_version/ works, linked_list_version/ has some leaks.
 
 ### Born2beroot
 - Will finish in the clusters, but the concept and implementation ok.
