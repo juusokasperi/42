@@ -12,18 +12,16 @@ ft_count_digits
 ## Rank 00
 
 ### Libft
-_Started 2024/07/31_
+- Finished, 125/100.
 - To compile main.c for testing, run `make` inside tests/ folder
 
 ## Rank 01
 
 ### Ft_printf
-_Started 2024/08/07_
-- To compile for testing, run `make` inside tests/ folder.
+- Finished, 100/100.
 
 ### Get_next_line
-_Started 2024/08/12_
-- To compile for testing, run `cc -Wall -Wextra -Werror <files> test/main.c`
+- Finished, 125/100.
 
 ### Born2beroot
 - Will finish in the clusters, but the concept and implementation ok.
