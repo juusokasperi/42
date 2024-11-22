@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 19:06:48 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/22 18:29:01 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/22 19:59:07 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	type_handler(char c, va_list *args)
 {
-	const char *str;
+	const char	*str;
 
 	if (c == '%')
 		return (ft_putchar_fd('%', 1));
@@ -28,7 +28,8 @@ static int	type_handler(char c, va_list *args)
 		return (ft_putstr_fd((char *)str, 1));
 	}
 	else if (c == 'p')
-		return (print_hexptr_handler((unsigned long int)va_arg(*args, void *), 0, 1));
+		return (print_hexptr_handler(
+				(unsigned long int)va_arg(*args, void *), 0, 1));
 	else if (c == 'i' || c == 'd')
 		return (print_nbr_handler(va_arg(*args, int)));
 	else if (c == 'u')
