@@ -45,7 +45,7 @@ $(NAME): $(O_LIB) $(O_PF) $(O_GN)
 	@echo "$(GREEN)✅ LIBFT: Library compilation complete!$(ENDCOLOR)"
 
 clean:
-	rm -f $O $(O_PF) $(O_GN)
+	rm -f $(O_LIB) $(O_PF) $(O_GN)
 	@echo "$(RED)✅ LIBFT: Clean complete.$(ENDCOLOR)"
 
 fclean: clean
