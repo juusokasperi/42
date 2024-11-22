@@ -37,7 +37,7 @@ NAME := libft.a
 
 all: $(NAME)
 
-objs/%.o: %.c $(HDR_PATH)
+%.o: %.c $(HDR_PATH)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(O_LIB) $(O_PF) $(O_GN)
