@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 21:26:33 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/21 09:47:55 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/22 20:29:30 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 char	*join_strs(char *s1, char *s2)
 {
 	char	*result;
-	size_t	i;
-	size_t	j;
 
 	if (!s1)
 	{
@@ -24,17 +22,9 @@ char	*join_strs(char *s1, char *s2)
 		if (!s1)
 			return (NULL);
 	}
-	result = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	result = ft_strjoin(s1, s2);
 	if (!result)
 		return (ft_free(&s1));
-	i = 0;
-	j = 0;
-	while (s1[i])
-		result[j++] = s1[i++];
-	i = 0;
-	while (s2[i])
-		result[j++] = s2[i++];
-	result[j] = '\0';
 	free(s1);
 	return (result);
 }
