@@ -1,8 +1,13 @@
 # My 42 projects
 
 ### myLibft
-- 24/11/06: Not up to date (did some fixes to printf and libft that are not yet here).
-- This is the libft with additions such as ft_printf and get_next_line
+- My libft with additions:
+```
+ft_printf
+get_next_line
+ft_free
+ft_count_digits
+```
 
 ## Rank 00
 
