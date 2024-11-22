@@ -39,12 +39,12 @@ $(NAME): $(LIBFT) $O
 
 clean:
 	@make -C ./libft clean
-	@rm -f $O $(O_BONUS)
+	@rm -f $O
 	@echo "$(RED)✅ FT_PRINTF: Clean complete.$(ENDCOLOR)"
 
 fclean:
 	@make -C ./libft fclean
-	@rm  -f $O $(O_BONUS) $(NAME)
+	@rm  -f $O $(NAME)
 	@echo "$(RED)✅ FT_PRINTF: FClean complete.$(ENDCOLOR)"
 
 re: fclean all
