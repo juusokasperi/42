@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 10:35:59 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/22 15:55:48 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/22 18:21:35 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ typedef struct s_list
 	struct s_list	*next;
 }					t_list;
 
+char	*ft_ltoa(long n);
+void	ft_reverse_digit(char *itoa);
 int		ft_count_digits(long long n, int base);
 char	*ft_free(char **str);
 int		ft_atoi(const char *str);

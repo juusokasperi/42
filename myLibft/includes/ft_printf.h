@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 19:07:43 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/21 09:48:54 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/22 18:27:00 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,9 @@
 # include <stdarg.h>
 # include <stdbool.h>
 
-char	*ft_ltoa(long n);
 int		ft_printf(const char *format, ...);
-char	*ft_xtoa(uintptr_t n, int capital, int is_ptr);
-int		print_char(char c);
-int		print_hex_handler(unsigned int nbr, int capital);
 int		print_nbr_handler(int nbr);
-int		print_ptr_handler(uintptr_t n);
+int		print_hexptr_handler(uintptr_t n, bool capital, bool is_ptr);
 int		print_unsigned_handler(unsigned int nbr);
-int		print_str_handler(const char *str);
-int		print_str(const char *str);
 
 #endif

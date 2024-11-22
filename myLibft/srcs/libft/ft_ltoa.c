@@ -1,29 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_ptr.c                                        :+:      :+:    :+:   */
+/*   ft_ltoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/07 20:24:51 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/16 17:28:31 by jrinta-          ###   ########.fr       */
+/*   Created: 2024/11/22 18:17:53 by jrinta-           #+#    #+#             */
+/*   Updated: 2024/11/22 18:21:05 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+# include "libft.h"
 
-int	print_ptr_handler(uintptr_t nbr)
+char	*ft_ltoa(long n)
 {
-	int		res;
-	char	*ptr_xtoa;
+	char	*itoa;
+	size_t	i;
 
-	res = 0;
-	if (!nbr)
-		return (print_str("(nil)"));
-	ptr_xtoa = ft_xtoa(nbr, 0, 1);
-	if (!ptr_xtoa)
-		return (-1);
-	res = print_str(ptr_xtoa);
-	free(ptr_xtoa);
-	return (res);
+	if (n == 0)
+		return (ft_strdup("0"));
+	itoa = (char *)malloc((ft_count_digits(n, 10) + 1));
+	if (!itoa)
+		return (NULL);
+	i = 0;
+	if (n < 0)
+	{
+		itoa[i++] = '-';
+		n = -n;
+	}
+	while (n)
+	{
+		itoa[i++] = (n % 10) + '0';
+		n /= 10;
+	}
+	itoa[i] = '\0';
+	ft_reverse_digit(itoa);
+	return (itoa);
 }

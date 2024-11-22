@@ -7,12 +7,10 @@ LIBFT_SRCS := ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c \
 	ft_strrchr.c ft_strtrim.c ft_substr.c ft_tolower.c ft_toupper.c \
 	ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c \
 	ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c \
-	ft_lstmap.c ft_free.c ft_count_digits.c
+	ft_lstmap.c ft_free.c ft_count_digits.c ft_ltoa.c
 LIBFT_PATH := $(addprefix ./srcs/libft/, $(LIBFT_SRCS))
 
-PF_SRCS := ft_ltoa.c ft_printf.c ft_xtoa.c \
-	print_char.c print_hex.c print_nbr.c \
-	print_ptr.c print_str.c print_unsigned.c
+PF_SRCS := ft_printf.c ft_printf_utils.c
 PF_PATH := $(addprefix ./srcs/ft_printf/, $(PF_SRCS))
 
 GN_SRCS := get_next_line.c

@@ -6,31 +6,13 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 17:12:27 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/06 17:37:58 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/22 18:20:48 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	count_len(int n)
-{
-	int	i;
-
-	i = 0;
-	if (n < 0)
-	{
-		i++;
-		n = -n;
-	}
-	while (n)
-	{
-		n /= 10;
-		i++;
-	}
-	return (i);
-}
-
-static void	reverse_digit(char *itoa)
+void	ft_reverse_digit(char *itoa)
 {
 	char	temp;
 	int		i;
@@ -59,7 +41,7 @@ char	*ft_itoa(int n)
 		return (ft_strdup("0"));
 	if (n == -2147483648)
 		return (ft_strdup("-2147483648"));
-	itoa = (char *)malloc((count_len(n) + 1));
+	itoa = (char *)malloc((ft_count_digits(n, 10) + 1));
 	if (!itoa)
 		return (NULL);
 	i = 0;
@@ -74,6 +56,6 @@ char	*ft_itoa(int n)
 		n /= 10;
 	}
 	itoa[i] = '\0';
-	reverse_digit(itoa);
+	ft_reverse_digit(itoa);
 	return (itoa);
 }
