@@ -1,39 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ltoa.c                                          :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/22 18:17:53 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/22 20:00:25 by jrinta-          ###   ########.fr       */
+/*   Created: 2024/07/31 11:48:59 by jrinta-           #+#    #+#             */
+/*   Updated: 2024/11/08 16:59:15 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_ltoa(long n)
+size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
-	char	*itoa;
 	size_t	i;
+	size_t	dst_len;
+	size_t	src_len;
 
-	if (n == 0)
-		return (ft_strdup("0"));
-	itoa = (char *)malloc((ft_count_digits(n, 10) + 1));
-	if (!itoa)
-		return (NULL);
+	src_len = ft_strlen(src);
+	if (!dst && !size)
+		return (src_len);
+	dst_len = ft_strlen(dst);
+	if (size <= dst_len)
+		return (size + src_len);
 	i = 0;
-	if (n < 0)
+	while (src[i] && size > dst_len + i + 1)
 	{
-		itoa[i++] = '-';
-		n = -n;
+		dst[dst_len + i] = src[i];
+		i++;
 	}
-	while (n)
-	{
-		itoa[i++] = (n % 10) + '0';
-		n /= 10;
-	}
-	itoa[i] = '\0';
-	ft_reverse_digit(itoa);
-	return (itoa);
+	dst[dst_len + i] = 0;
+	return (dst_len + src_len);
 }

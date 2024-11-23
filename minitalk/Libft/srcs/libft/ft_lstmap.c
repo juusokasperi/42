@@ -1,39 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ltoa.c                                          :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/22 18:17:53 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/22 20:00:25 by jrinta-          ###   ########.fr       */
+/*   Created: 2024/08/01 20:27:47 by jrinta-           #+#    #+#             */
+/*   Updated: 2024/11/21 10:03:19 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_ltoa(long n)
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	char	*itoa;
-	size_t	i;
+	t_list	*new_lst;
+	t_list	*new_elem;
+	void	*new_content;
 
-	if (n == 0)
-		return (ft_strdup("0"));
-	itoa = (char *)malloc((ft_count_digits(n, 10) + 1));
-	if (!itoa)
+	if (!lst || !f || !del)
 		return (NULL);
-	i = 0;
-	if (n < 0)
+	new_lst = NULL;
+	while (lst)
 	{
-		itoa[i++] = '-';
-		n = -n;
+		new_content = f(lst->content);
+		new_elem = ft_lstnew(new_content);
+		if (!new_elem)
+		{
+			del(new_content);
+			ft_lstclear(&new_lst, del);
+			return (NULL);
+		}
+		ft_lstadd_back(&new_lst, new_elem);
+		lst = lst->next;
 	}
-	while (n)
-	{
-		itoa[i++] = (n % 10) + '0';
-		n /= 10;
-	}
-	itoa[i] = '\0';
-	ft_reverse_digit(itoa);
-	return (itoa);
+	return (new_lst);
 }

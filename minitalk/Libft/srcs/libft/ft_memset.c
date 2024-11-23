@@ -1,30 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/14 17:22:08 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/22 22:04:10 by jrinta-          ###   ########.fr       */
+/*   Created: 2024/07/31 10:33:34 by jrinta-           #+#    #+#             */
+/*   Updated: 2024/11/06 17:54:59 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
-# endif
+void	*ft_memset(void *s, int c, size_t len)
+{
+	unsigned char	*p;
+	size_t			i;
 
-# ifndef OPEN_MAX
-#  define OPEN_MAX 256
-# endif
-
-char	*get_next_line(int fd);
-char	*read_buffer(int fd, char *str);
-char	*fetch_line(char *str);
-char	*clean_str(char *str);
-char	*join_strs(char *s1, char *s2);
-
-#endif
+	p = (unsigned char *)s;
+	i = 0;
+	while (i < len)
+		p[i++] = c;
+	return (s);
+}

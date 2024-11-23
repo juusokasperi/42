@@ -1,30 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/14 17:22:08 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/22 22:04:10 by jrinta-          ###   ########.fr       */
+/*   Created: 2024/08/01 18:09:48 by jrinta-           #+#    #+#             */
+/*   Updated: 2024/11/22 15:57:24 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
-# endif
+ssize_t	ft_putnbr_fd(int n, int fd)
+{
+	char	digit;
+	int		count;
 
-# ifndef OPEN_MAX
-#  define OPEN_MAX 256
-# endif
-
-char	*get_next_line(int fd);
-char	*read_buffer(int fd, char *str);
-char	*fetch_line(char *str);
-char	*clean_str(char *str);
-char	*join_strs(char *s1, char *s2);
-
-#endif
+	count = 0;
+	if (n == -2147483648)
+		return (write(fd, "-2147483648", 11));
+	else if (n < 0)
+	{
+		count += write(fd, "-", 1);
+		n = -n;
+		count += ft_putnbr_fd(n, fd);
+	}
+	else
+	{
+		if (n >= 10)
+			count += ft_putnbr_fd(n / 10, fd);
+		digit = n % 10 + '0';
+		count += write(fd, &digit, 1);
+	}
+	return (count);
+}

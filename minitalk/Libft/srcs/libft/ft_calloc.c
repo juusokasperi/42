@@ -1,30 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/14 17:22:08 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/22 22:04:10 by jrinta-          ###   ########.fr       */
+/*   Created: 2024/07/31 23:32:51 by jrinta-           #+#    #+#             */
+/*   Updated: 2024/10/31 13:40:15 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
-# endif
+void	*ft_calloc(size_t nmemb, size_t size)
+{
+	void	*s;
 
-# ifndef OPEN_MAX
-#  define OPEN_MAX 256
-# endif
-
-char	*get_next_line(int fd);
-char	*read_buffer(int fd, char *str);
-char	*fetch_line(char *str);
-char	*clean_str(char *str);
-char	*join_strs(char *s1, char *s2);
-
-#endif
+	if (nmemb == 0 || size == 0)
+		return (malloc(0));
+	if (size && nmemb > SIZE_MAX / size)
+		return (NULL);
+	s = malloc(nmemb * size);
+	if (!s)
+		return (NULL);
+	ft_bzero(s, nmemb * size);
+	return (s);
+}
