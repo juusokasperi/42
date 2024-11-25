@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 18:11:42 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/08/19 11:46:21 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/24 18:06:33 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,10 @@ void	send_signal(int pid, char *message)
 int	init(int argc, char **argv, int *server_id, struct sigaction *sa)
 {
 	if (argc != 3)
+	{
 		ft_printf("ERROR: Usage %s <PID> <MESSAGE>\n", argv[0]);
+		return (0);
+	}
 	*server_id = ft_atoi(argv[1]);
 	if (!(*server_id))
 		ft_printf("ERROR: First argument (%s) false.\n", argv[1]);

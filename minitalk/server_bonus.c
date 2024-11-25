@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 19:49:27 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/08/19 12:04:07 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/24 18:05:29 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,58 +28,54 @@ void	expected_len(unsigned char *buffer, int *expected_bytes)
 		*expected_bytes = 1;
 }
 
-void	print_handler(unsigned char *buffer, int *client_pid,
-	int *expected_bytes, int *byte_count)
+void	print_handler(t_signal_state *state)
 {
 	int	i;
 
-	if (buffer[0] == '\0')
+	if (state->buffer[0] == '\0')
 	{
 		ft_printf("\n");
-		kill(*client_pid, SIGUSR1);
-		*client_pid = 0;
+		kill(state->client_pid, SIGUSR1);
+		state->client_pid = 0;
 	}
 	else
 	{
 		i = 0;
-		while (i < *expected_bytes)
-			ft_printf("%c", buffer[i++]);
-		kill(*client_pid, SIGUSR2);
+		while (i < state->expected_bytes)
+			ft_printf("%c", state->buffer[i++]);
+		kill(state->client_pid, SIGUSR2);
 	}
 	i = 0;
 	while (i < 4)
-		buffer[i++] = 0;
-	*byte_count = 0;
-	*expected_bytes = 0;
+		state->buffer[i++] = 0;
+	state->byte_count = 0;
+	state->expected_bytes = 0;
 }
 
 void	signal_handler(int signum, siginfo_t *info, void *context)
 {
-	static int				client_pid = 0;
-	static unsigned char	buffer[4] = {0};
-	static int				byte_count = 0;
-	static int				bit_count = 0;
-	static int				expected_bytes = 0;
+	static t_signal_state	state = {0};
 
-	if (!client_pid)
-		client_pid = info->si_pid;
+	if (!state.client_pid)
+		state.client_pid = info->si_pid;
 	(void)context;
 	if (signum == SIGUSR1)
-		buffer[byte_count] |= (1 << (7 - bit_count));
-	bit_count++;
-	if (bit_count == 8)
+		state.buffer[state.byte_count] |= (1 << (7 - state.bit_count));
+	state.bit_count++;
+	if (state.bit_count == 8)
 	{
-		bit_count = 0;
-		byte_count++;
-		if (byte_count == 1)
-			expected_len(buffer, &expected_bytes);
-		if (byte_count == expected_bytes)
-			print_handler(buffer, &client_pid, &expected_bytes, &byte_count);
+		state.bit_count = 0;
+		state.byte_count++;
+		state.total_bytes++;
+		if (state.byte_count == 1)
+			expected_len(state.buffer, &state.expected_bytes);
+		if (state.byte_count == state.expected_bytes)
+			print_handler(&state);
 		else
-			kill(client_pid, SIGUSR2);
+			kill(state.client_pid, SIGUSR2);
 	}
 	else
-		kill(client_pid, SIGUSR2);
+		kill(state.client_pid, SIGUSR2);
 }
 
 int	main(void)
@@ -97,7 +93,7 @@ int	main(void)
 	}
 	ft_printf("------------------------------\n");
 	ft_printf("* Welcome to Juuso's server! *\n");
-	ft_printf("*       Server ID: %-10d*\n", getpid());
+	ft_printf("*       Server ID: %d*\n", getpid());
 	ft_printf("------------------------------\n\n");
 	while (1)
 		pause();
