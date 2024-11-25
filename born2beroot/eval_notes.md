@@ -11,7 +11,6 @@ sudo usermod -aG <group> <username>
 
 sudo vim /etc/pam.d/common-password
 sudo vim /etc/login.defs
-sudo nano /etc/sudoers
-sudo visudo
+sudo visudo (sudo nano /etc/sudoers)
 
 sudo crontab -u root -e

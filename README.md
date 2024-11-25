@@ -32,6 +32,7 @@ ft_count_digits
 ### fract-oi
 ### minitalk
 _Wrote 2024/08/16-17_
+- Add error handling for kill()
 - To test with a really long string, run `cat ./text.txt|xargs -0 ./client <SERVER_PID>`
 - To test unicode support, `make bonus`. There's a txt file with different unicode characters in the project folder, run `cat ./textunicode.txt|xargs -0 ./client_bonus <SERVER_PID>`
 - Still needs some further testing
