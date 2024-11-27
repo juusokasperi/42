@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 23:44:03 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/28 01:01:09 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/28 01:06:21 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,6 @@ static void		ft_sort_three(t_stack **stack_a);
 
 void	ft_sort(t_stack **stack_a)
 {
-	t_stack	*stack_b;
-	int		i;
-
-	stack_b = NULL;
 	if (ft_stacksize(*stack_a) == 2)
 		ft_sa(stack_a);
 	else if (ft_stacksize(*stack_a) == 3)

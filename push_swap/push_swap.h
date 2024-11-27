@@ -6,14 +6,14 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 10:10:47 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/28 00:48:08 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/28 01:05:50 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-# include "libft/includes/libft.h"
+# include "libft.h"
 # include <limits.h>
 # include <unistd.h>
 

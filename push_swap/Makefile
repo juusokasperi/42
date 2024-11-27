@@ -9,7 +9,7 @@ LIBFT = libft/libft.a
 HDR = push_swap.h
 
 CC = cc
-#CFLAGS += -Wall -Wextra -Werror -I./libft/includes
+CFLAGS += -Wall -Wextra -Werror -I./libft/includes
 LDFLAGS = -L./libft -lft
 
 %.o: %.c $(HDR)
