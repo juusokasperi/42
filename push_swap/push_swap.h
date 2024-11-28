@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 10:10:47 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/28 01:05:50 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/28 10:59:24 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,15 @@ typedef struct s_stack
 } t_stack;
 
 //Init:
-long long int	ft_atoll(const char *str);
-void			ft_error_free(t_stack **stack_a, t_stack **stack_b);
 t_stack			*ft_init(int argc, char **argv);
+long long int	ft_atoll(const char *str);
 t_stack			*ft_parse_stack(char **values);
-void			ft_stackclear(t_stack **stack);
 //Sort:
 int				ft_is_sorted(t_stack *stack);
 void			ft_sort(t_stack **stack_a);
-
+//Cleanup:
+void			ft_error_free(t_stack **stack_a, t_stack **stack_b);
+void			ft_stackclear(t_stack **stack);
 //Operations:
 void	ft_sa(t_stack **stack_a);
 void	ft_sb(t_stack **stack_b);

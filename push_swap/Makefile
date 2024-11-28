@@ -1,4 +1,4 @@
-SRCS = main.c ft_atoll.c ft_validate.c ft_parse_stack.c ft_sort.c \
+SRCS = main.c ft_atoll.c ft_init.c ft_parse_stack.c ft_sort.c \
 	ft_swap.c ft_rotate.c ft_push.c ft_reverse_rotate.c
 OBJS = $(SRCS:.c=.o)
 
