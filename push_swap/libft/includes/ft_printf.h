@@ -6,18 +6,16 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 19:07:43 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/27 11:19:27 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/28 17:02:49 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-# include <unistd.h>
-# include <stdlib.h>
+# include "libft.h"
 # include <stdarg.h>
 # include <stdbool.h>
-# include "libft.h"
 
 int		ft_printf(const char *format, ...);
 int		print_nbr_handler(int nbr);
