@@ -14,3 +14,6 @@ sudo vim /etc/login.defs
 sudo visudo (sudo nano /etc/sudoers)
 
 sudo crontab -u root -e
+
+php console system:check
+php console database:check
