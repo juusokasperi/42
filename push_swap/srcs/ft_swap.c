@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 23:48:16 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/28 00:22:25 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/29 19:54:55 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	ft_swap(t_stack **stack)
 
 	if (!(*stack) || !(*stack)->next)
 		return ;
-	tmp = *stack;
+	tmp = (*stack);
 	*stack = (*stack)->next;
 	tmp->next = (*stack)->next;
 	(*stack)->next = tmp;

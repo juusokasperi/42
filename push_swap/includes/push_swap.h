@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 10:10:47 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/28 10:59:24 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/29 22:30:41 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,18 @@
 # include "libft.h"
 # include <limits.h>
 # include <unistd.h>
+// Delete this
+# include <stdio.h>
+
 
 typedef struct s_stack
 {
 	int				nbr;
 	int				rank;
+	int				pos;
+	int				target;
+	int				cost_a;
+	int				cost_b;
 	struct s_stack	*next;
 } t_stack;
 
@@ -31,6 +38,17 @@ t_stack			*ft_parse_stack(char **values);
 //Sort:
 int				ft_is_sorted(t_stack *stack);
 void			ft_sort(t_stack **stack_a);
+//Stack utilities:
+int	ft_stacksize(t_stack *stack);
+t_stack	*ft_stacklast(t_stack *stack);
+int	ft_find_highest(t_stack *stack_a);
+int	ft_find_lowest(t_stack *stack_a);
+//Bigger sort, calculate target and costs and execute:
+void	ft_target(t_stack **stack_a, t_stack **stack_b);
+void	ft_calculate(t_stack **stack_a, t_stack **stack_b);
+void	ft_execute(t_stack **stack_a, t_stack **stack_b);
+void	ft_move(t_stack **stack_a, t_stack **stack_b, int cost_a, int cost_b);
+int		ft_lowest_position(t_stack **stack);
 //Cleanup:
 void			ft_error_free(t_stack **stack_a, t_stack **stack_b);
 void			ft_stackclear(t_stack **stack);

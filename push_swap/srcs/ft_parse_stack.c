@@ -6,15 +6,15 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 11:55:21 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/28 00:56:36 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/29 22:05:30 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <stdio.h>
 
-static void	ft_stackrank(t_stack **stack_a);
-static void	ft_stackadd_back(t_stack **stack_a, t_stack *new);
+static void		ft_stackrank(t_stack **stack_a);
+static void		ft_stackadd_back(t_stack **stack_a, t_stack *new);
 static t_stack	*ft_stacknew(int nbr);
 
 t_stack	*ft_parse_stack(char **values)

@@ -3,7 +3,7 @@ SRCS = \
 	checks/ft_isascii.c checks/ft_isdigit.c checks/ft_isprint.c \
 	\
 	conversion/ft_atoi.c conversion/ft_itoa.c conversion/ft_ltoa.c \
-	conversion/ft_tolower.c conversion/ft_toupper.c \
+	conversion/ft_tolower.c conversion/ft_toupper.c conversion/ft_abs.c \
 	\
 	ft_printf/ft_printf.c ft_printf/ft_printf_utils.c \
 	\
