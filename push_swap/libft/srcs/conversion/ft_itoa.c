@@ -6,13 +6,13 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 17:12:27 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/22 18:20:48 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/30 16:41:16 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_reverse_digit(char *itoa)
+static void	ft_reverse_digit(char *itoa)
 {
 	char	temp;
 	int		i;

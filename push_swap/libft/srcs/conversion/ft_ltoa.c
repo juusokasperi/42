@@ -6,12 +6,30 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 18:17:53 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/22 20:00:25 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/30 16:41:23 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+static void	ft_reverse_digit(char *itoa)
+{
+	char	temp;
+	int		i;
+	int		j;
 
+	i = 0;
+	j = ft_strlen(itoa) - 1;
+	if (itoa[i] == '-')
+		i++;
+	while (itoa[i] && j > i)
+	{
+		temp = itoa[i];
+		itoa[i] = itoa[j];
+		itoa[j] = temp;
+		i++;
+		j--;
+	}
+}
 char	*ft_ltoa(long n)
 {
 	char	*itoa;
