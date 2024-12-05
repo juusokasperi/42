@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 10:10:47 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/29 22:30:41 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/12/04 20:40:50 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,6 @@
 # include "libft.h"
 # include <limits.h>
 # include <unistd.h>
-// Delete this
-# include <stdio.h>
-
 
 typedef struct s_stack
 {
@@ -49,6 +46,10 @@ void	ft_calculate(t_stack **stack_a, t_stack **stack_b);
 void	ft_execute(t_stack **stack_a, t_stack **stack_b);
 void	ft_move(t_stack **stack_a, t_stack **stack_b, int cost_a, int cost_b);
 int		ft_lowest_position(t_stack **stack);
+void	ft_sort_five_helper(t_stack **stack_a);
+void	ft_biggest_three(t_stack **stack_a, t_stack **stack_b,
+		int stack_size, int values_pushed);
+void	ft_shift(t_stack **stack_a);
 //Cleanup:
 void			ft_error_free(t_stack **stack_a, t_stack **stack_b);
 void			ft_stackclear(t_stack **stack);

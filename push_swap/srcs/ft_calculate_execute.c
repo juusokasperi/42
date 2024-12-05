@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 22:07:48 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/29 22:33:24 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/12/05 13:52:47 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,12 @@ void	ft_execute(t_stack **stack_a, t_stack **stack_b)
 	int		cost_b;
 
 	tmp = *stack_b;
-	cheap = INT_MAX;
+	cheap = ft_abs(tmp->cost_b) + ft_abs(tmp->cost_a);
+	cost_a = tmp->cost_a;
+	cost_b = tmp->cost_b;
 	while (tmp)
 	{
-		if (ft_abs(tmp->cost_a) + ft_abs(tmp->cost_b) < ft_abs(cheap))
+		if (ft_abs(tmp->cost_a) + ft_abs(tmp->cost_b) < cheap)
 		{
 			cheap = ft_abs(tmp->cost_b) + ft_abs(tmp->cost_a);
 			cost_a = tmp->cost_a;
