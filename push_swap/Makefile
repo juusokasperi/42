@@ -3,12 +3,12 @@ SRCS_DIR = srcs/
 SRCS = main.c ft_atoll.c ft_init.c ft_parse_stack.c ft_sort.c \
 	ft_swap.c ft_rotate.c ft_push.c ft_reverse_rotate.c \
 	ft_stack_utils.c ft_target.c ft_calculate_execute.c \
-	ft_move.c ft_sort_utils.c
+	ft_move.c ft_sort_utils.c ft_init_join.c
 
-SRCS_BONUS = checker/ft_checker_init_bonus.c checker/ft_checker_parse_bonus.c \
-	checker/ft_checker_bonus.c checker/ft_checker_push_bonus.c \
-	checker/ft_checker_reverse_rotate_bonus.c checker/ft_checker_rotate_bonus.c \
-	checker/ft_checker_swap_bonus.c ft_atoll.c
+SRCS_BONUS = checker/ft_checker_init_bonus.c checker/ft_checker_init_join_bonus.c  \
+	checker/ft_checker_parse_bonus.c checker/ft_checker_bonus.c \
+	checker/ft_checker_push_bonus.c checker/ft_checker_reverse_rotate_bonus.c \
+	checker/ft_checker_rotate_bonus.c checker/ft_checker_swap_bonus.c ft_atoll.c
 
 OBJS = $(addprefix $(OBJS_DIR), $(SRCS:.c=.o))
 OBJS_DIR = objs/

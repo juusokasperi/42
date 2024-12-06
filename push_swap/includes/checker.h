@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 14:52:10 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/12/02 12:44:14 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/12/06 01:58:06 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ typedef struct s_stack
 
 t_stack			*ft_checker_init(int argc, char **argv);
 t_stack			*ft_checker_parse(char **values);
+char			**ft_join(char **values, char **new_values);
+void			**ft_free_split(char **values);
 void			ft_error_free(t_stack **stack_a, t_stack **stack_b);
 long long int	ft_atoll(const char *str);
 //Moves:

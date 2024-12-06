@@ -6,12 +6,12 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 11:41:25 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/12/05 13:54:35 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/12/06 02:04:45 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
-
+#include <stdio.h>
 // Checks that arguments contain only integers
 // without any duplicates and that are within the range
 // of an integer.
@@ -19,33 +19,32 @@
 static int	ft_isnumber(char *str);
 static int	ft_duplicates_overflow(char **values);
 static int	ft_validate(char **values);
-static void	ft_free_split(char **values);
 
 t_stack	*ft_checker_init(int argc, char **argv)
 {
 	char	**values;
-	int		values_malloced;
+	char	**new_values;
+	int		i;
 	t_stack	*stack_a;
 
-	values_malloced = 0;
-	if (argc == 2)
+	values = NULL;
+	i = 0;
+	while (++i < argc)
 	{
-		values = ft_split(argv[1], ' ');
+		new_values = ft_split(argv[i], ' ');
+		if (!new_values)
+			return ((t_stack *)ft_free_split(values));
+		values = ft_join(values, new_values);
 		if (!values)
 			return (NULL);
-		values_malloced = 1;
 	}
-	else
-		values = argv + 1;
 	if (!ft_validate(values))
 	{
-		if (values_malloced)
-			ft_free_split(values);
+		ft_free_split(values);
 		ft_error_free(NULL, NULL);
 	}
 	stack_a = ft_checker_parse(values);
-	if (values_malloced)
-		ft_free_split(values);
+	ft_free_split(values);
 	return (stack_a);
 }
 
@@ -110,12 +109,16 @@ static int	ft_duplicates_overflow(char **values)
 	return (0);
 }
 
-static void	ft_free_split(char **values)
+void	**ft_free_split(char **values)
 {
 	int	i;
 
 	i = 0;
-	while (values[i])
-		free(values[i++]);
-	free(values);
+	if (values)
+	{
+		while (values[i])
+			free(values[i++]);
+		free(values);
+	}
+	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 10:10:47 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/12/04 20:40:50 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/12/06 01:53:26 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ typedef struct s_stack
 
 //Init:
 t_stack			*ft_init(int argc, char **argv);
+char			**ft_join(char **values, char **new_values);
+void			**ft_free_split(char **values);
 long long int	ft_atoll(const char *str);
 t_stack			*ft_parse_stack(char **values);
 //Sort:
