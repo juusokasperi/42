@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 23:44:03 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/12/05 13:40:13 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/12/06 02:07:11 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	ft_sort(t_stack **stack_a)
 
 static void	ft_sort_four(t_stack **stack_a)
 {
-	t_stack *stack_b;
+	t_stack	*stack_b;
 
 	stack_b = NULL;
 	if ((*stack_a)->next->rank == ft_find_lowest(*stack_a))
