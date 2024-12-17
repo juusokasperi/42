@@ -11,7 +11,13 @@ SRCS = main.c \
 	\
 	read_map/read_map.c read_map/read_map_utils.c read_map/read_map_utils_2.c \
 	\
-	draw/draw.c
+	draw/draw.c draw/draw_utils.c draw/draw_utils_2.c \
+	\
+	controls/controls.c \
+	\
+	init/init.c init/calculate.c \
+	\
+	exit.c
 SRC_DIR = srcs/
 
 OBJ_DIR = objs/

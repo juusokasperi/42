@@ -6,69 +6,78 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 18:00:43 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/12/08 20:08:57 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/12/17 19:22:16 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static float	f_abs(float n)
-{
-	if (n < 0)
-		return (-n);
-	return (n);
-}
+static uint32_t	interpolate_color(t_draw *info);
+static void		draw(double x, double y, t_info *data, int x_or_y);
 
-void	draw(float x1, float y1, float x2, float y2, t_info *data)
+void	draw_lines(t_info *data)
 {
-	float	x_step;
-	float	y_step;
-	int		max;
-	int		i;
+	int	x;
+	int	y;
 
-	i = 0;
-	x_step = x2 - x1;
-	y_step = y2 - y1;
-	if (f_abs(x_step) > f_abs(y_step))
-		max = f_abs(x_step);
-	else
-		max = f_abs(y_step);
-	x_step /= max;
-	y_step /= max;
-	while (i <= max)
+	y = 0;
+	while (y < data->height)
 	{
-		mlx_put_pixel(data->mlx_img, x1, y1, 0xFFFFFF);
-		x1 += x_step;
-		y1 += y_step;
-		i++;
+		x = 0;
+		while (x < data->width)
+		{
+			if (x + 1 < data->width)
+				draw(x, y, data, 0);
+			if (y + 1 < data->height)
+				draw(x, y, data, 1);
+			x++;
+		}
+		y++;
 	}
 }
 
-/*
-void draw(int x1, int y1, int x2, int y2, t_info *data)
+static void	draw(double x, double y, t_info *data, int x_or_y)
 {
-    int dx = abs(x2 - x1);
-    int dy = abs(y2 - y1);
-    int sx = x1 < x2 ? 1 : -1;
-    int sy = y1 < y2 ? 1 : -1;
-    int err = dx - dy;
+	t_draw	*info;
 
-    while (1)
-    {
-        mlx_put_pixel(data->mlx_img, x1, y1, 0xFFFFFF); // White color
-        if (x1 == x2 && y1 == y2)
-            break;
-        int e2 = err * 2;
-        if (e2 > -dy)
-        {
-            err -= dy;
-            x1 += sx;
-        }
-        if (e2 < dx)
-        {
-            err += dx;
-            y1 += sy;
-        }
-    }
+	info = (t_draw *)malloc(sizeof(t_draw));
+	if (!info)
+		ft_exit_error(3, data);
+	set_x_y(x, y, info, x_or_y);
+	init_info(info, data);
+	while ((int)(info->x1 - info->x2) || (int)(info->y1 - info->y2))
+	{
+		if (info->x1 >= 0 && info->x1 < WIDTH
+			&& info->y1 >= 0 && info->y1 < HEIGHT)
+			mlx_put_pixel(data->mlx_img, info->x1,
+				info->y1, interpolate_color(info));
+		info->x1 += info->x_step;
+		info->y1 += info->y_step;
+		info->fraction += 1.0 / info->max;
+	}
+	if (info->x2 >= 0 && info->z2 < WIDTH && info->y2 >= 0 && info->y2 < HEIGHT)
+		mlx_put_pixel(data->mlx_img, info->x2, info->y2, info->color_2);
+	free(info);
 }
-*/
+
+static uint32_t	interpolate_color(t_draw *info)
+{
+	uint32_t	r;
+	uint32_t	g;
+	uint32_t	b;
+	uint32_t	a;
+
+	r = ((info->color_1 >> 24) & 0xFF)
+		+ (uint32_t)(((info->color_2 >> 24) & 0xFF)
+			- ((info->color_1 >> 24) & 0xFF)) * info->fraction;
+	g = ((info->color_1 >> 16) & 0xFF)
+		+ (uint32_t)(((info->color_2 >> 16) & 0xFF)
+			- ((info->color_1 >> 16) & 0xFF)) * info->fraction;
+	b = (info->color_1 >> 8 & 0xFF)
+		+ (uint32_t)((info->color_2 >> 8 & 0xFF)
+			- (info->color_1 >> 8 & 0xFF)) * info->fraction;
+	a = (info->color_1 & 0xFF)
+		+ (uint32_t)((info->color_2 & 0xFF)
+			- (info->color_1 & 0xFF)) * info->fraction;
+	return ((r << 24) | (g << 16) | (b << 8) | a);
+}

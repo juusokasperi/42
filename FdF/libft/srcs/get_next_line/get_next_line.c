@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 21:26:33 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/12/06 23:13:53 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/12/15 20:27:17 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ char	*get_next_line(int fd)
 	new_line = NULL;
 	new_line = read_buffer(fd, new_line, buffer[fd]);
 	if (!new_line)
-		return (ft_free(&new_line));
+		return (ft_free((void **)&new_line));
 	new_line = fetch_line(new_line);
 	if (!new_line)
-		return (ft_free(&new_line));
+		return (ft_free((void **)&new_line));
 	clean_buffer(buffer[fd]);
 	return (new_line);
 }
@@ -47,8 +47,8 @@ static char	*append(char *new_line, char *buffer)
 	}
 	result = ft_strjoin(new_line, buffer);
 	if (!result)
-		return (ft_free(&new_line));
-	ft_free(&new_line);
+		return (ft_free((void **)&new_line));
+	ft_free((void **)&new_line);
 	return (result);
 }
 
@@ -80,7 +80,7 @@ static char	*fetch_line(char *str)
 	else
 		len = (ptr - str) + 1;
 	line = ft_substr(str, 0, len);
-	ft_free(&str);
+	ft_free((void **)&str);
 	if (!line)
 		return (NULL);
 	return (line);
@@ -108,6 +108,6 @@ static char	*read_buffer(int fd, char *new_line, char *buffer)
 			break ;
 	}
 	if (nb_read == -1)
-		return (ft_free(&new_line));
+		return (ft_free((void **)&new_line));
 	return (new_line);
 }

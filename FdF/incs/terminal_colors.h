@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 12:07:53 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/12/08 12:21:56 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/12/15 19:52:43 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 # define COLORS_H
 
 # ifdef __APPLE__
-#  define RESET		"\033[0m"
-#  define RED		"\033[91m"
-#  define GREEN		"\033[92m"
-#  define YELLLOW	"\033[93m"
-#  define BLUE		"\033[94m"
-#  define MAGENTA	"\033[95m"
-#  define CYAN		"\033[96m"
-#  define WHITE		"\033[97m"
+#  define TRESET	"\033[0m"
+#  define TRED		"\033[91m"
+#  define TGREEN	"\033[92m"
+#  define TYELLOW	"\033[93m"
+#  define TBLUE		"\033[94m"
+#  define TMAGENTA	"\033[95m"
+#  define TCYAN		"\033[96m"
+#  define TWHITE	"\033[97m"
 #  define BG_RESET	"\033[49m"
 #  define BG_GREEN	"\033[102m"
 #  define BG_CYAN	"\033[106m"

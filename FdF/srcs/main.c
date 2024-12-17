@@ -6,32 +6,43 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 15:38:00 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/12/08 20:14:29 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/12/15 20:56:39 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void ft_exit(int i)
-{
-	char *error_message;
+static int	valid_file(char *filename);
+void		clear_image(t_info *data);
 
-	if (i == 1)
-		error_message = "Usage: ./fdf <file_to_read>";
-	else if (i == 2)
-		error_message = "Invalid file.";
-	else if (i == 3)
-		error_message = "Malloc failed.";
-	else if (i == 4)
-		error_message = "Found wrong line length. Exiting.";
-	else
-		error_message = "Unknown error.";
-	ft_printf("%sERROR:%s ", RED, RESET);
-	ft_printf("%s\n", error_message);
-	exit(1);
+int	main(int argc, char **argv)
+{
+	t_info	*data;
+	int		i;
+
+	data = NULL;
+	if (argc != 2)
+		ft_exit_error(1, data);
+	if (!valid_file(argv[1]))
+		ft_exit_error(2, data);
+	data = (t_info *)malloc(sizeof(t_info));
+	if (!data)
+		ft_exit_error(3, data);
+	if (!init_data(data))
+		ft_exit_error(3, data);
+	i = read_map(argv[1], data);
+	if (i != 0)
+		ft_exit_error(i, data);
+	calculate_zoom(data);
+	draw_lines(data);
+	mlx_key_hook(data->mlx_ptr, &key_hook, data);
+	mlx_loop(data->mlx_ptr);
+	mlx_terminate(data->mlx_ptr);
+	ft_exit(data);
+	return (0);
 }
 
-int	valid_file(char *filename)
+static int	valid_file(char *filename)
 {
 	int	fd;
 
@@ -42,50 +53,16 @@ int	valid_file(char *filename)
 	return (1);
 }
 
-int	init_data(t_info *data)
+void	clear_image(t_info *data)
 {
-	data->width = 0;
-	data->height = 0;
-	data->xyz = NULL;
-	data->colors = NULL;
-	data->mlx_ptr = mlx_init(WIDTH, HEIGHT, "FdF jrinta-42", true);
-	data->mlx_img = mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT);
-	if (!data->mlx_ptr || !data->mlx_img
-		|| (mlx_image_to_window(data->mlx_ptr, data->mlx_img, 0, 0) < 0))
-	{
-		free(data);
-		return (0);
-	}
-	return (1);
-}
+	int	x;
+	int	y;
 
-int	main(int argc, char **argv)
-{
-	t_info	*data;
-	int		i;
-
-	if (argc != 2)
-		ft_exit(1);
-	data = (t_info *)malloc(sizeof(t_info));
-	if (!data)
-		ft_exit(3);
-	if (!valid_file(argv[1]))
-		ft_exit(2);
-	if (!init_data(data))
-		ft_exit(3);
-	i = read_map(argv[1], data);
-	if (i)
+	y = -1;
+	while (++y < HEIGHT)
 	{
-		free(data);
-		ft_exit(i);
+		x = -1;
+		while (++x < WIDTH)
+			mlx_put_pixel(data->mlx_img, x, y, 0x000000FF);
 	}
-	draw(10, 10, 600, 10, data);
-	draw(11, 11, 600, 11, data);
-	draw(12, 12, 600, 12, data);
-	draw(13, 13, 600, 13, data);
-	draw(14, 14, 600, 14, data);
-//	mlx_key_hook(data->win_ptr, key_hook, data);
-	mlx_loop(data->mlx_ptr);
-	mlx_terminate(data->mlx_ptr);
-	return (0);
 }

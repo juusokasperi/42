@@ -6,15 +6,17 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 15:33:35 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/12/08 17:51:42 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/12/17 19:16:01 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
 // Tarviiko vielä error handlingin jos esim get_next_line palauttaa NULL heti?
+static uint32_t	hex_to_rgba(const char *hex);
+static int		free_split(char **split);
 
-static int	fill_xyz(int *z, char *line)
+int	fill_xyz(int *z, char *line)
 {
 	char	**split;
 	int		i;
@@ -26,18 +28,17 @@ static int	fill_xyz(int *z, char *line)
 	while (split[i])
 	{
 		z[i] = ft_atoi(split[i]);
-		free(split[i]);
 		i++;
 	}
-	free(split);
+	free_split(split);
 	return (1);
 }
 
-static int	fill_colors(char **color, char *line)
+int	fill_colors(uint32_t *colors, char *line, t_info *data)
 {
-	char	**split;
-	char	**colors_split;
-	int		i;
+	char		**split;
+	char		**colors_split;
+	int			i;
 
 	i = 0;
 	split = ft_split(line, ' ');
@@ -47,84 +48,36 @@ static int	fill_colors(char **color, char *line)
 	{
 		colors_split = ft_split(split[i], ',');
 		if (!colors_split)
-		{
-			free(split[i]);
-			return (0);
-		}
+			return (free_split(split));
 		if (colors_split[1])
 		{
-			color[i] = ft_strdup(colors_split[1]);
-			free(colors_split[1]);
+			colors[i] = hex_to_rgba(colors_split[1]);
+			data->default_colors = 0;
 		}
 		else
-			color[i] = ft_strdup("0xFFFFFF");
-		free(split[i]);
-		free(colors_split[0]);
-		free(colors_split);
+			colors[i] = WHITE;
+		free_split(colors_split);
 		i++;
 	}
+	free_split(split);
+	return (1);
+}
+
+static uint32_t	hex_to_rgba(const char *hex)
+{
+	uint32_t	rgb;
+
+	rgb = (uint32_t)ft_strtol(hex, NULL, 16);
+	return (rgb << 8 | 0xFF);
+}
+
+static int	free_split(char **split)
+{
+	int	i;
+
+	i = 0;
+	while (split[i])
+		free(split[i++]);
 	free(split);
-	return (1);
-}
-
-int	get_colors(char *filename, t_info *data)
-{
-	int		fd;
-	int		i;
-	char	*line;
-
-	i = 0;
-	fd = open(filename, O_RDONLY);
-	if (fd < 0)
-		return (0);
-	line = get_next_line(fd);
-	while (line)
-	{
-		if (!fill_colors(data->colors[i], line))
-		{
-			while (i > 0)
-				free(data->colors[--i]);
-			free(data->colors);
-			free(line);
-			close(fd);
-			return (0);
-		}
-		free(line);
-		line = get_next_line(fd);
-		i++;
-	}
-	close(fd);
-	data->colors[i] = NULL;
-	return (1);
-}
-
-int	get_xyz(char *filename, t_info *data)
-{
-	int		fd;
-	int		i;
-	char	*line;
-
-	i = 0;
-	fd = open(filename, O_RDONLY);
-	if (fd < 0)
-		return (0);
-	line = get_next_line(fd);
-	while (line)
-	{
-		if (!fill_xyz(data->xyz[i], line))
-		{
-			while (i > 0)
-				free(data->xyz[--i]);
-			free(data->xyz);
-			free(line);
-			close(fd);
-			return (0);
-		}
-		free(line);
-		line = get_next_line(fd);
-		i++;
-	}
-	close(fd);
-	data->xyz[i] = NULL;
-	return (1);
+	return (0);
 }
