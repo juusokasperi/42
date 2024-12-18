@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 15:38:00 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/12/15 20:56:39 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/12/18 00:34:23 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,10 @@ int	main(int argc, char **argv)
 	t_info	*data;
 	int		i;
 
-	data = NULL;
 	if (argc != 2)
-		ft_exit_error(1, data);
+		ft_exit_error(1, NULL);
 	if (!valid_file(argv[1]))
-		ft_exit_error(2, data);
+		ft_exit_error(2, NULL);
 	data = (t_info *)malloc(sizeof(t_info));
 	if (!data)
 		ft_exit_error(3, data);
@@ -33,7 +32,8 @@ int	main(int argc, char **argv)
 	i = read_map(argv[1], data);
 	if (i != 0)
 		ft_exit_error(i, data);
-	calculate_zoom(data);
+	set_altitude(data);
+	calculate_position(data);
 	draw_lines(data);
 	mlx_key_hook(data->mlx_ptr, &key_hook, data);
 	mlx_loop(data->mlx_ptr);

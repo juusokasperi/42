@@ -6,83 +6,53 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 01:31:09 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/12/17 19:15:31 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/12/18 16:24:51 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include <stdio.h>
 
-static void		update_min_max(double tx, double ty, t_minmax *minmax);
-static void		calculate_min_max(t_info *data, t_minmax *minmax);
-static double	calculate_zoom_factor(t_minmax *minmax);
+static void	shift_values(double *t, double *b, double *l, double *r);
 
-void	calculate_zoom(t_info *data)
+void calculate_position(t_info *data)
 {
-	t_minmax	minmax;
+	double left;
+	double right;
+	double top;
+	double bottom;
 
-	calculate_min_max(data, &minmax);
-	data->zoom = calculate_zoom_factor(&minmax);
-	minmax.min_x *= data->zoom;
-	minmax.max_x *= data->zoom;
-	minmax.min_y *= data->zoom;
-	minmax.max_y *= data->zoom;
-	data->shift_x = (WIDTH - (minmax.max_x - minmax.min_x))
-		/ 2 - minmax.min_x;
-	data->shift_y = ((HEIGHT
-				- (minmax.max_y - minmax.min_y)) / 2 - minmax.min_y) / 3;
-	if (data->shift_x < 0)
-		data->shift_x = 0;
-	if (data->shift_y < 0)
-		data->shift_y = 0;
-}
-
-static void	update_min_max(double tx, double ty, t_minmax *minmax)
-{
-	if (tx < minmax->min_x)
-		minmax->min_x = tx;
-	if (tx > minmax->max_x)
-		minmax->max_x = tx;
-	if (ty < minmax->min_y)
-		minmax->min_y = ty;
-	if (ty > minmax->max_y)
-		minmax->max_y = ty;
-}
-
-static void	calculate_min_max(t_info *data, t_minmax *minmax)
-{
-	int		y;
-	int		x;
-	double	tx;
-	double	ty;
-
-	minmax->min_x = WIDTH;
-	minmax->max_x = 0;
-	minmax->min_y = HEIGHT;
-	minmax->max_y = 0;
-	y = 0;
-	while (y < data->height)
+	left = 0;
+	top = 0;
+	right = data->width - 1;
+	bottom = data->height - 1;
+	if (data->projection == 1)
 	{
-		x = 0;
-		while (x < data->width)
-		{
-			tx = x;
-			ty = y;
-			isometric(&tx, &ty, data->xyz[y][x], data);
-			update_min_max(tx, ty, minmax);
-			x++;
-		}
-		y++;
+		isometric(&left, &top, data->xyz[0][0], data);
+		isometric(&right, &bottom, data->xyz[(int)bottom][(int)right], data);
 	}
+	else
+	{
+		parallel(&left, &top, data);
+		parallel(&right, &bottom, data);
+	}
+	data->zoom = fmin((WIDTH * 0.8) / (right - left), (HEIGHT * 0.8) / (bottom - top));
+	if (top < 0 || left < 0)
+		shift_values(&top, &bottom, &left, &right);
+	data->shift_x = (WIDTH / 2) - ((left + right) / 2 * data->zoom);
+	data->shift_y = (HEIGHT / 2) - ((top + bottom) / 2 * data->zoom);
 }
 
-static double	calculate_zoom_factor(t_minmax *minmax)
+static void	shift_values(double *t, double *b, double *l, double *r)
 {
-	double	width_zoom;
-	double	height_zoom;
-
-	width_zoom = (0.75 * WIDTH) / (minmax->max_x - minmax->min_x);
-	height_zoom = (0.75 * HEIGHT) / (minmax->max_y - minmax->min_y);
-	if (width_zoom < height_zoom)
-		return (width_zoom);
-	return (height_zoom);
+	if (*t < 0)
+	{
+		*t += -(*t);
+		*b += (*t);
+	}
+	if (*l < 0)
+	{
+		*l += -(*l);
+		*r += (*l);
+	}
 }

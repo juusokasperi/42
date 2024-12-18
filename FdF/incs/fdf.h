@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 15:37:28 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/12/17 19:13:25 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/12/18 00:34:51 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include "terminal_colors.h"
 
 # define WIDTH 1080
-# define HEIGHT 1080
+# define HEIGHT 720
 # define WHITE 0xFFFFFFFF
 # define RED 0xFF0000FF
 # define BLUE 0x0000FFFF
@@ -64,30 +64,25 @@ typedef struct s_info
 	double		rotate;
 	int			projection;
 	int			default_colors;
+	int			highest_z;
+	int			lowest_z;
 	t_keys		keys;
 	uint32_t	**colors;
 	mlx_t		*mlx_ptr;
 	mlx_image_t	*mlx_img;
 }	t_info;
 
-typedef struct s_minmax
-{
-	double min_x;
-	double max_x;
-	double min_y;
-	double max_y;
-}	t_minmax;
-
 // Main.c
 int		main(int argc, char **argv);
 void	clear_image(t_info *data);
 // Init
-void	calculate_zoom(t_info *data);
+void	calculate_position(t_info *data);
 int		init_data(t_info *data);
+void	set_altitude(t_info *data);
 // Read_map.c
 int		read_map(char *filename, t_info *data);
 // Read_map_utils.c
-int		fill_xyz(int *z, char *line);
+int		fill_xyz(int *z, char *line, t_info *data);
 int		fill_colors(uint32_t *colors, char *line, t_info *data);
 int		count_words(char *line);
 int		get_height(char *filename);

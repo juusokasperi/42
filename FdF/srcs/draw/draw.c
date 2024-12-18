@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 18:00:43 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/12/17 19:22:16 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/12/18 15:50:42 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,10 @@ static void	draw(double x, double y, t_info *data, int x_or_y)
 		info->y1 += info->y_step;
 		info->fraction += 1.0 / info->max;
 	}
-	if (info->x2 >= 0 && info->z2 < WIDTH && info->y2 >= 0 && info->y2 < HEIGHT)
+	if (info->x1 >= 0 && info->x1 < WIDTH
+		&& info->y1 >= 0 && info->y1 < HEIGHT
+		&& info->x2 >= 0 && info->z2 < WIDTH
+		&& info->y2 >= 0 && info->y2 < HEIGHT)
 		mlx_put_pixel(data->mlx_img, info->x2, info->y2, info->color_2);
 	free(info);
 }

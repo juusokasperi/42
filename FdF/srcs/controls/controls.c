@@ -6,11 +6,12 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 01:25:03 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/12/17 19:16:50 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/12/18 01:00:57 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include <float.h>
 
 static void	update_position(t_info *data);
 static void	handle_shift(mlx_key_data_t keydata, t_info *data);
@@ -65,6 +66,18 @@ static void	handle_shift(mlx_key_data_t keydata, t_info *data)
 	update_position(data);
 }
 
+static void	handle_projection(t_info *data)
+{
+	if (data->projection == 1)
+		data->projection = 0;
+	else
+		data->projection = 1;
+	data->rotate = 0;
+	data->angle = 0.523599;
+	set_altitude(data);
+	calculate_position(data);
+}
+
 static void	handle_changes(mlx_key_data_t keydata, t_info *data)
 {
 	if (keydata.key == 90 && keydata.action != MLX_RELEASE)
@@ -84,10 +97,5 @@ static void	handle_changes(mlx_key_data_t keydata, t_info *data)
 	if (keydata.key == 84 && keydata.action != MLX_RELEASE)
 		data->rotate -= 0.05;
 	if (keydata.key == 75 && keydata.action != MLX_RELEASE)
-	{
-		if (data->projection == 1)
-			data->projection = 2;
-		else
-			data->projection = 1;
-	}
+		handle_projection(data);
 }

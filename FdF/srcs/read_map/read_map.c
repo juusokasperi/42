@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 22:31:35 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/12/15 20:43:40 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/12/17 19:49:24 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ static int	get_xyz(char *filename, t_info *data)
 	line = get_next_line(fd);
 	while (line)
 	{
-		if (!fill_xyz(data->xyz[i], line))
+		if (!fill_xyz(data->xyz[i], line, data))
 		{
 			free(line);
 			close(fd);

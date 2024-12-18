@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 15:33:35 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/12/17 19:16:01 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/12/17 19:49:20 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 static uint32_t	hex_to_rgba(const char *hex);
 static int		free_split(char **split);
 
-int	fill_xyz(int *z, char *line)
+int	fill_xyz(int *z, char *line, t_info *data)
 {
 	char	**split;
 	int		i;
@@ -28,6 +28,10 @@ int	fill_xyz(int *z, char *line)
 	while (split[i])
 	{
 		z[i] = ft_atoi(split[i]);
+		if (z[i] > data->highest_z)
+			data->highest_z = z[i];
+		if (z[i] < data->lowest_z)
+			data->lowest_z = z[i];
 		i++;
 	}
 	free_split(split);
