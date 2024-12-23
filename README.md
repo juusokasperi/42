@@ -7,13 +7,15 @@ ft_printf
 get_next_line
 ft_free
 ft_count_digits
+ft_abs
+ft_ltoi
+ft_strtol
 ```
 
 ## Rank 00
 
 ### Libft
 - Finished, 125/100.
-- To compile main.c for testing, run `make` inside tests/ folder
 
 ## Rank 01
 
