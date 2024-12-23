@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 10:35:59 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/12/01 14:42:45 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/12/06 23:12:35 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ int		ft_toupper(int c);
 int		ft_printf(const char *format, ...);
 
 //Get next line:
-
 char	*get_next_line(int fd);
 
 //Lists:
