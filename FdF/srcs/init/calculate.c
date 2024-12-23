@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 01:31:09 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/12/18 16:24:51 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/12/23 22:10:53 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 
 static void	shift_values(double *t, double *b, double *l, double *r);
 
-void calculate_position(t_info *data)
+void	calculate_position(t_info *data)
 {
-	double left;
-	double right;
-	double top;
-	double bottom;
+	double	left;
+	double	right;
+	double	top;
+	double	bottom;
 
 	left = 0;
 	top = 0;
@@ -36,7 +36,8 @@ void calculate_position(t_info *data)
 		parallel(&left, &top, data);
 		parallel(&right, &bottom, data);
 	}
-	data->zoom = fmin((WIDTH * 0.8) / (right - left), (HEIGHT * 0.8) / (bottom - top));
+	data->zoom = fmin((WIDTH * 0.8) / (right - left),
+			(HEIGHT * 0.8) / (bottom - top));
 	if (top < 0 || left < 0)
 		shift_values(&top, &bottom, &left, &right);
 	data->shift_x = (WIDTH / 2) - ((left + right) / 2 * data->zoom);

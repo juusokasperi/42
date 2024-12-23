@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 15:38:00 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/12/18 00:34:23 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/12/23 22:14:01 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	main(int argc, char **argv)
 		ft_exit_error(2, NULL);
 	data = (t_info *)malloc(sizeof(t_info));
 	if (!data)
-		ft_exit_error(3, data);
+		ft_exit_error(3, NULL);
 	if (!init_data(data))
 		ft_exit_error(3, data);
 	i = read_map(argv[1], data);

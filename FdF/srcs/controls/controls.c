@@ -6,12 +6,11 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 01:25:03 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/12/18 01:00:57 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/12/23 22:12:11 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <float.h>
 
 static void	update_position(t_info *data);
 static void	handle_shift(mlx_key_data_t keydata, t_info *data);
