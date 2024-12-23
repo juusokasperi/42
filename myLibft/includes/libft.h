@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 10:35:59 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/12/06 23:12:35 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/12/15 20:23:26 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int		ft_isalpha(int c);
 int		ft_isascii(int c);
 int		ft_isdigit(int c);
 int		ft_isprint(int c);
+int		ft_isspace(int c);
 
 //Conversion:
 int		ft_abs(int nbr);
@@ -39,6 +40,7 @@ char	*ft_itoa(int n);
 char	*ft_ltoa(long n);
 int		ft_tolower(int c);
 int		ft_toupper(int c);
+long	ft_strtol(const char *nptr, char **endptr, int base);
 
 //Printf:
 int		ft_printf(const char *format, ...);
@@ -60,7 +62,7 @@ int		ft_lstsize(t_list *lst);
 //Mem:
 void	ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t nmemb, size_t size);
-char	*ft_free(char **str);
+void	*ft_free(void **ptr);
 void	*ft_memchr(const void *s, int c, size_t n);
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
 void	*ft_memcpy(void *dest, const void *src, size_t n);
