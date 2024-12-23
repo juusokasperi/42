@@ -24,12 +24,13 @@ ft_count_digits
 - Finished, 125/100.
 
 ### Born2beroot
-- Will finish in the clusters, but the concept and implementation ok.
+- Finished, 125/100.
 
 ## Rank 02
 
 ### FdF
-### fract-oi
+_Wrote Dec 2024_
+
 ### minitalk
 _Wrote 2024/08/16-17_
 - Add error handling for kill()
@@ -37,6 +38,5 @@ _Wrote 2024/08/16-17_
 - To test unicode support, `make bonus`. There's a txt file with different unicode characters in the project folder, run `cat ./textunicode.txt|xargs -0 ./client_bonus <SERVER_PID>`
 - Still needs some further testing
 
-### pipex
 ### push_swap
-### so_long
+_Wrote Nov-Dec 2024_
