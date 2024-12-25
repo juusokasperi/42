@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/14 17:22:08 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/12/06 22:08:49 by jrinta-          ###   ########.fr       */
+/*   Created: 2024/11/21 09:46:34 by jrinta-           #+#    #+#             */
+/*   Updated: 2024/12/15 20:27:22 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1024
-# endif
-
-# ifndef FD_MAX
-#  define FD_MAX 24
-# endif
-
-# include "libft.h"
-
-char	*get_next_line(int fd);
-
-#endif
+void	*ft_free(void **ptr)
+{
+	if (ptr && *ptr)
+	{
+		free(*ptr);
+		*ptr = NULL;
+	}
+	return (NULL);
+}

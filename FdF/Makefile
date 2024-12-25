@@ -1,5 +1,5 @@
 NAME = fdf_macos
-CFLAGS += -Wall -Wextra -Werror -Wunreachable-code -g
+CFLAGS += -Wall -Wextra -Werror -Wunreachable-code
 LIBMLX = ./MLX42
 
 HEADERS = incs/fdf.h incs/terminal_colors.h

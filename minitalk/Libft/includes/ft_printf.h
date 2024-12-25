@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 19:07:43 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/22 22:12:53 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/12/25 12:05:23 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 # define FT_PRINTF_H
 
 # include "libft.h"
+# include <stdint.h>
 # include <stdarg.h>
 # include <stdbool.h>
-# include <stdint.h>
 
 int		ft_printf(const char *format, ...);
 int		print_nbr_handler(int nbr);

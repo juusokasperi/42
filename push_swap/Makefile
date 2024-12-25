@@ -24,7 +24,7 @@ HDR_BONUS = includes/checker.h
 INCS = -I./libft/includes -I./includes
 
 CC = cc
-CFLAGS += -Wall -Wextra -Werror -g $(INCS)
+CFLAGS += -Wall -Wextra -Werror $(INCS)
 LDFLAGS = -L./libft -lft
 
 RED = \033[0;31m

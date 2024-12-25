@@ -1,28 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   minitalk.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/14 17:22:08 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/12/06 22:08:49 by jrinta-          ###   ########.fr       */
+/*   Created: 2024/08/17 19:36:39 by jrinta-           #+#    #+#             */
+/*   Updated: 2024/12/25 20:15:27 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1024
-# endif
-
-# ifndef FD_MAX
-#  define FD_MAX 24
-# endif
+#ifndef MINITALK_H
+# define MINITALK_H
 
 # include "libft.h"
+# include <stdlib.h>
+# include <unistd.h>
+# include <signal.h>
+# include <stdio.h>
 
-char	*get_next_line(int fd);
+# define DELAY 50000
+# define RETRY_LIMIT 10
+# define BUFFER_SIZE 1024
+
+typedef struct	s_buffer
+{
+	char	*str;
+	size_t	size;
+	size_t	index;
+}	t_buffer;
 
 #endif

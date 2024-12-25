@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   minitalk_bonus.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/14 17:22:08 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/12/06 22:08:49 by jrinta-          ###   ########.fr       */
+/*   Created: 2024/12/25 17:16:35 by jrinta-           #+#    #+#             */
+/*   Updated: 2024/12/25 17:17:06 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef MINITALK_BONUS_H
+# define MINITALK_BONUS_H
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1024
-# endif
+# include "minitalk.h"
 
-# ifndef FD_MAX
-#  define FD_MAX 24
-# endif
-
-# include "libft.h"
-
-char	*get_next_line(int fd);
+typedef struct	s_signal_state
+{
+	int				client_pid;
+	unsigned char	buffer[4];
+	int				byte_count;
+	int				bit_count;
+	int				expected_bytes;
+	int				total_bytes;
+}	t_signal_state;
 
 #endif

@@ -1,28 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_realloc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/14 17:22:08 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/12/06 22:08:49 by jrinta-          ###   ########.fr       */
+/*   Created: 2024/12/25 19:56:10 by jrinta-           #+#    #+#             */
+/*   Updated: 2024/12/25 20:31:34 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1024
-# endif
+void	*ft_realloc(void *ptr, size_t old_size, size_t new_size)
+{
+	void	*new_ptr;
 
-# ifndef FD_MAX
-#  define FD_MAX 24
-# endif
-
-# include "libft.h"
-
-char	*get_next_line(int fd);
-
-#endif
+	if (new_size == 0)
+		return (ft_free(&ptr));
+	new_ptr = malloc(new_size);
+	if (!new_ptr)
+		return (ft_free(&ptr));
+	if (ptr)
+	{
+		if (old_size < new_size)
+			ft_memcpy(new_ptr, ptr, old_size);
+		else
+			ft_memcpy(new_ptr, ptr, new_size);
+		ft_free(&ptr);
+	}
+	return (new_ptr);
+}

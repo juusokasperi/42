@@ -17,14 +17,16 @@ SRCS = \
 	\
 	mem/ft_bzero.c mem/ft_calloc.c mem/ft_free.c mem/ft_memchr.c \
 	mem/ft_memcmp.c mem/ft_memcpy.c mem/ft_memmove.c mem/ft_memset.c \
+	mem/ft_realloc.c \
 	\
 	puts/ft_putchar_fd.c puts/ft_putendl_fd.c puts/ft_putnbr_fd.c puts/ft_putstr_fd.c \
 	\
 	str/ft_split.c str/ft_strchr.c str/ft_strcmp.c str/ft_strdup.c str/ft_striteri.c \
 	str/ft_strjoin.c str/ft_strlcat.c str/ft_strlcpy.c str/ft_strlen.c \
 	str/ft_strmapi.c str/ft_strncmp.c str/ft_strnstr.c str/ft_strrchr.c \
-	str/ft_strtrim.c str/ft_substr.c
-
+	str/ft_strtrim.c str/ft_substr.c \
+	\
+	error/ft_error.c
 SRC_DIR = srcs/
 OBJ_DIR = objs/
 

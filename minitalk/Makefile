@@ -1,65 +1,75 @@
-C_SRCS := client.c
-S_SRCS := server.c
-C_OBJS := $(C_SRCS:.c=.o)
-S_OBJS := $(S_SRCS:.c=.o)
+SRCS_DIR = srcs/
 
-BONUS_C_SRCS := client_bonus.c
-BONUS_S_SRCS := server_bonus.c
-BONUS_C_OBJS := $(BONUS_C_SRCS:.c=.o)
-BONUS_S_OBJS := $(BONUS_S_SRCS:.c=.o)
+C_SRCS = client.c
+S_SRCS = server.c
+BONUS_C_SRCS = bonus/client_bonus.c
+BONUS_S_SRCS = bonus/server_bonus.c
 
-H := minitalk.h
+OBJS_DIR = objs/
+C_OBJS = $(addprefix $(OBJS_DIR), $(C_SRCS:.c=.o))
+S_OBJS = $(addprefix $(OBJS_DIR), $(S_SRCS:.c=.o))
 
-CC := gcc
-CFLAGS += -Wall -Wextra -Werror -I./ -I./libft/includes
-LDFLAGS := -L./libft -lft
+BONUS_C_OBJS = $(addprefix $(OBJS_DIR), $(BONUS_C_SRCS:.c=.o))
+BONUS_S_OBJS = $(addprefix $(OBJS_DIR), $(BONUS_S_SRCS:.c=.o))
 
-LIB := libft/libft.a
+H = incs/minitalk.h
+BONUS_H = incs/minitalk_bonus.h
+INCS = -I./libft/includes -I./incs/
 
-GREEN = \033[0;92m
-RED = \033[0;91m
+CC = cc
+CFLAGS += -Wall -Wextra -Werror $(INCS)
+LDFLAGS = -L./libft -lft
+
+LIBFT = libft/libft.a
+
+GREEN = \033[0;32m
+RED = \033[0;31m
 ENDCOLOR = \033[0m
 
-NAME := minitalk
+NAME = minitalk
 
 all: $(NAME)
 
 $(NAME): server client
 
-%.o: %.c $H
-	$(CC) $(CFLAGS) -c $< -o $@
+$(OBJS_DIR)%.o: $(SRCS_DIR)%.c $(H)
+	@mkdir -p $(dir $@)
+	@$(CC) $(CFLAGS) -c $< -o $@
 
-$(LIB): phony
+$(OBJS_DIR)bonus/%.o: $(SRCS_DIR)bonus/%.c $(BONUS_H)
+	@mkdir -p $(dir $@)
+	@$(CC) $(CFLAGS) -c $< -o $@
+
+$(LIBFT): phony
 	@make -C ./libft
 
-client: $(LIB) $(C_OBJS)
+client: $(LIBFT) $(C_OBJS)
 	$(CC) $(CFLAGS) $(C_OBJS) $(LDFLAGS) -o $@
 	@echo "$(GREEN)✅ MINITALK: Client compilation complete!$(ENDCOLOR)"
 
-server: $(LIB) $(S_OBJS)
+server: $(LIBFT) $(S_OBJS)
 	$(CC) $(CFLAGS) $(S_OBJS) $(LDFLAGS) -o $@
 	@echo "$(GREEN)✅ MINITALK: Server compilation complete!$(ENDCOLOR)"
 
+bonus: server_bonus client_bonus
+
+client_bonus: $(LIBFT) $(BONUS_C_OBJS)
+	$(CC) $(CFLAGS) $(BONUS_C_OBJS) $(LDFLAGS) -o $@
+	@echo "$(GREEN)✅ MINITALK: Bonus client compilation complete!$(ENDCOLOR)"
+
+server_bonus: $(LIBFT) $(BONUS_S_OBJS)
+	$(CC) $(CFLAGS) $(BONUS_S_OBJS) $(LDFLAGS) -o $@
+	@echo "$(GREEN)✅ MINITALK: Bonus server compilation complete!$(ENDCOLOR)"
+
 clean:
 	@make -C ./libft clean
-	rm -f $(C_OBJS) $(S_OBJS) $(BONUS_C_OBJS) $(BONUS_S_OBJS)
+	rm -rf $(OBJS_DIR)
 	@echo "$(RED)✅ MINITALK: Clean complete.$(ENDCOLOR)"
 
 fclean:
 	@make -C ./libft fclean
-	rm  -f $(C_OBJS) $(S_OBJS) $(BONUS_C_OBJS) $(BONUS_S_OBJS) \
-	client server client_bonus server_bonus
+	rm -rf $(OBJS_DIR) client server client_bonus server_bonus
 	@echo "$(RED)✅ MINITALK: FClean complete.$(ENDCOLOR)"
-
-bonus: server_bonus client_bonus
-
-client_bonus: $(LIB) $(BONUS_C_OBJS)
-	$(CC) $(CFLAGS) $(BONUS_C_OBJS) $(LDFLAGS) -o $@
-	@echo "$(GREEN)✅ MINITALK: Bonus client compilation complete!$(ENDCOLOR)"
-
-server_bonus: $(LIB) $(BONUS_S_OBJS)
-	$(CC) $(CFLAGS) $(BONUS_S_OBJS) $(LDFLAGS) -o $@
-	@echo "$(GREEN)✅ MINITALK: Bonus server compilation complete!$(ENDCOLOR)"
 
 re: fclean all
 
