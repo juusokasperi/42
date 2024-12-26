@@ -37,10 +37,8 @@ ft_realloc
 _Wrote Dec 2024_
 
 ### minitalk
-_Wrote 2024/08/16-17_
 - To test with a really long string, run `cat ./text.txt|xargs -0 ./client <SERVER_PID>`
-- To test unicode support, `make bonus`. There's a txt file with different unicode characters in the project folder, run `cat ./textunicode.txt|xargs -0 ./client_bonus <SERVER_PID>`
-- Changed the way the mandatory works which is IMO cleaner, fix the bonus version to be similar.
+- Mandatory version works with unicode but does not acknowledge messages. Bonus does that. Maybe just get rid of that and make the bonus the only program this compiles.
 
 ### push_swap
 _Wrote Nov-Dec 2024_
