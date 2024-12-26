@@ -6,13 +6,14 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 10:35:59 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/12/25 20:11:58 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/12/27 01:07:03 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
+# include "terminal_colors.h"
 # include <unistd.h>
 # include <stdlib.h>
 # include <limits.h>

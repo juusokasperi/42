@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 14:26:09 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/12/25 15:50:05 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/12/26 13:58:15 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 void	ft_error(char *str)
 {
-	ft_printf("%s\n", str);
+	ft_printf("%sERROR:%s %s\n", TRED, TRESET, str);
 	exit(1);
 }
