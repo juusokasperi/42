@@ -6,20 +6,18 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 18:11:42 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/12/25 17:17:23 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/12/27 00:52:52 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* Add UTF-8 support! */
-
-#include "minitalk_bonus.h"
+#include "minitalk.h"
 
 static void	signal_handler(int signum, siginfo_t *info, void *context);
 static void	wait_server(void);
 static void	ft_signal(int pid, int signal);
 static void	send_signal(int pid, char *message);
 
-static int	g_i = 0;
+volatile sig_atomic_t	g_ack = 0;
 
 int	main(int argc, char **argv)
 {
@@ -27,16 +25,16 @@ int	main(int argc, char **argv)
 	int					server_id;
 
 	if (argc != 3)
-		ft_error("ERROR: Usage ./client_bonus <PID> <MESSAGE>");
+		ft_error("Usage ./client <PID> <MESSAGE>");
 	server_id = ft_atoi(argv[1]);
 	if (server_id <= 0 || kill(server_id, 0) == -1)
-		ft_error("ERROR: Incorrect server ID.");
+		ft_error("Incorrect server ID.");
 	sigemptyset(&sa.sa_mask);
 	sa.sa_sigaction = signal_handler;
 	sa.sa_flags = SA_RESTART | SA_SIGINFO;
 	if (sigaction(SIGUSR1, &sa, NULL) == -1
 		|| sigaction(SIGUSR2, &sa, NULL) == -1)
-		ft_error("ERROR: Error setting up handlers.");
+		ft_error("Error setting up handlers.");
 	send_signal(server_id, argv[2]);
 	return (0);
 }
@@ -45,33 +43,53 @@ static void	signal_handler(int signum, siginfo_t *info, void *context)
 {
 	static int	i = 0;
 
-	g_i = 1;
 	(void)info;
 	(void)context;
-	if (signum == SIGUSR2)
-		i++;
-	else if (signum == SIGUSR1)
-		ft_printf("Bytes received: %d\n", i / 8);
+	if (signum == SIGUSR2 || signum == SIGUSR1)
+	{
+		g_ack = 1;
+		if (signum == SIGUSR2)
+			i++;
+		else if (signum == SIGUSR1)
+			ft_printf("%sSUCCESS:%s %d bytes sent.\n", TGREEN, TRESET, i / 8);
+	}
+	else
+		ft_error("Invalid signal received.");
 }
 
 static void	wait_server(void)
 {
-	int	response;
+	int	timeout;
 
-	response = 0;
-	while (g_i == 0)
+	timeout = 0;
+	while (!g_ack && timeout < 100)
 	{
-		usleep(100);
-		if (++response == 50)
-			ft_error("ERROR: No response from server.");
+		usleep(DELAY);
+		timeout++;
 	}
-	g_i = 0;
+	if (timeout >= 100)
+		ft_error("No acknowledgment from server.");
+	g_ack = 0;
 }
 
 static void	ft_signal(int pid, int signal)
 {
-	if (kill(pid, signal) == -1)
-		ft_error("ERROR: Problem with signal transmission.");
+	int	retry;
+
+	g_ack = 0;
+	retry = 0;
+	while (retry < RETRY_LIMIT)
+	{
+		if (kill(pid, signal) != -1)
+		{
+			wait_server();
+			usleep(50);
+			return ;
+		}
+		usleep(DELAY);
+		retry++;
+	}
+	ft_error("Problem with signal transmission.");
 }
 
 static void	send_signal(int pid, char *message)
@@ -91,13 +109,9 @@ static void	send_signal(int pid, char *message)
 				ft_signal(pid, SIGUSR1);
 			else
 				ft_signal(pid, SIGUSR2);
-			wait_server();
 		}
 	}
 	i = 0;
 	while (i++ < 8)
-	{
 		ft_signal(pid, SIGUSR2);
-		wait_server();
-	}
 }

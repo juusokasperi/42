@@ -6,104 +6,96 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 19:49:27 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/12/25 17:18:38 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/12/27 01:04:33 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk_bonus.h"
+#include "minitalk.h"
 
 static void	ft_signal(int pid, int signal);
-static void	expected_len(unsigned char *buffer, int *expected_bytes);
-void		print_handler(t_signal_state *state);
-void		signal_handler(int signum, siginfo_t *info, void *context);
+static void	signal_handler(int signum, siginfo_t *info, void *context);
+static void	handle_byte(int *received_char, int *bit_count,
+				t_buffer *buffer, int pid);
+
+volatile sig_atomic_t	g_pid = 0;
 
 int	main(void)
 {
 	struct sigaction	sa;
 
-	sigemptyset(&sa.sa_mask);
 	sa.sa_sigaction = signal_handler;
-	sa.sa_flags = SA_RESTART | SA_SIGINFO;
+	sa.sa_flags = SA_SIGINFO;
 	if (sigaction(SIGUSR1, &sa, NULL) == -1
 		|| sigaction(SIGUSR2, &sa, NULL) == -1)
-		ft_error("ERROR: Error setting up handlers.");
-	ft_printf("------------------------------\n");
-	ft_printf("* Welcome to Juuso's server! *\n");
-	ft_printf("*       Server ID: %d*\n", getpid());
-	ft_printf("------------------------------\n\n");
+		ft_error("Error setting up handlers.");
+	ft_printf("%sServer PID:%s %d\n", TYELLOW, TRESET, getpid());
 	while (1)
 		pause();
 	return (0);
 }
 
+static void	signal_handler(int signum, siginfo_t *info, void *context)
+{
+	static int		received_char = 0;
+	static int		bit_count = 0;
+	static t_buffer	buffer = {0};
+	pid_t			sender_pid;
+
+	(void)context;
+	sender_pid = info->si_pid;
+	if (!sender_pid)
+		return ;
+	if (!g_pid)
+		g_pid = sender_pid;
+	else if (g_pid != sender_pid)
+		return ;
+	if (signum == SIGUSR1)
+		received_char |= (1 << (7 - bit_count));
+	bit_count++;
+	if (bit_count == 8)
+		handle_byte(&received_char, &bit_count, &buffer, sender_pid);
+	else
+		ft_signal(g_pid, SIGUSR2);
+}
+
+static void	clear_buffer(t_buffer *buffer)
+{
+	buffer->str = ft_free((void **)&buffer->str);
+	buffer->size = 0;
+	buffer->index = 0;
+}
+
+static void	handle_byte(int *received_char, int *bit_count,
+	t_buffer *buffer, int pid)
+{
+	if (buffer->index >= buffer->size)
+	{
+		buffer->size += BUFFER_SIZE;
+		buffer->str = ft_realloc((void *)buffer->str,
+				buffer->size - BUFFER_SIZE, buffer->size);
+		if (!buffer->str)
+			ft_error("Malloc error.");
+	}
+	buffer->str[buffer->index++] = (char)*received_char;
+	if (*received_char == '\0')
+	{
+		if (buffer->str)
+			ft_printf("%s\n", buffer->str);
+		clear_buffer(buffer);
+		if (pid != 0)
+		{
+			ft_signal(pid, SIGUSR1);
+			g_pid = 0;
+		}
+	}
+	else if (pid != 0)
+		ft_signal(pid, SIGUSR2);
+	*received_char = 0;
+	*bit_count = 0;
+}
+
 static void	ft_signal(int pid, int signal)
 {
 	if (kill(pid, signal) == -1)
-		ft_error("ERROR: Problem with signal transmission.\n");
-}
-
-static void	expected_len(unsigned char *buffer, int *expected_bytes)
-{
-	if ((buffer[0] & 0x80) == 0)
-		*expected_bytes = 1;
-	else if ((buffer[0] & 0xE0) == 0xC0)
-		*expected_bytes = 2;
-	else if ((buffer[0] & 0xF0) == 0xE0)
-		*expected_bytes = 3;
-	else if ((buffer[0] & 0xF8) == 0xF0)
-		*expected_bytes = 4;
-	else
-		*expected_bytes = 1;
-}
-
-void	print_handler(t_signal_state *state)
-{
-	int	i;
-
-	if (state->buffer[0] == '\0')
-	{
-		ft_printf("\n");
-		ft_signal(state->client_pid, SIGUSR1);
-		state->client_pid = 0;
-	}
-	else
-	{
-		i = 0;
-		while (i < state->expected_bytes)
-			ft_printf("%c", state->buffer[i++]);
-		ft_signal(state->client_pid, SIGUSR2);
-	}
-	i = 0;
-	while (i < 4)
-		state->buffer[i++] = 0;
-	state->byte_count = 0;
-	state->expected_bytes = 0;
-}
-
-void	signal_handler(int signum, siginfo_t *info, void *context)
-{
-	static t_signal_state	state = {0};
-
-	(void)context;
-	if (!state.client_pid)
-		state.client_pid = info->si_pid;
-	else if (state.client_pid != info->si_pid)
-		return ;
-	if (signum == SIGUSR1)
-		state.buffer[state.byte_count] |= (1 << (7 - state.bit_count));
-	state.bit_count++;
-	if (state.bit_count == 8)
-	{
-		state.bit_count = 0;
-		state.byte_count++;
-		state.total_bytes++;
-		if (state.byte_count == 1)
-			expected_len(state.buffer, &state.expected_bytes);
-		if (state.byte_count == state.expected_bytes)
-			print_handler(&state);
-		else
-			ft_signal(state.client_pid, SIGUSR2);
-	}
-	else
-		ft_signal(state.client_pid, SIGUSR2);
+		ft_error("Problem with signal transmission.");
 }

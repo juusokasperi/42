@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 10:35:59 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/12/25 20:14:06 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/12/26 15:55:26 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdlib.h>
 # include <limits.h>
 # include <stdint.h>
+# include "terminal_colors.h"
 
 typedef struct s_list
 {
