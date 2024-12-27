@@ -6,11 +6,12 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 18:17:53 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/30 16:41:23 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/11/30 16:43:36 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
 static void	ft_reverse_digit(char *itoa)
 {
 	char	temp;
@@ -30,6 +31,7 @@ static void	ft_reverse_digit(char *itoa)
 		j--;
 	}
 }
+
 char	*ft_ltoa(long n)
 {
 	char	*itoa;

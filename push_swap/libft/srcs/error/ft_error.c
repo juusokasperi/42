@@ -1,23 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free.c                                          :+:      :+:    :+:   */
+/*   ft_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/21 09:46:34 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/12/15 20:27:22 by jrinta-          ###   ########.fr       */
+/*   Created: 2024/12/25 14:26:09 by jrinta-           #+#    #+#             */
+/*   Updated: 2024/12/26 13:58:15 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_free(void **ptr)
+void	ft_error(char *str)
 {
-	if (ptr && *ptr)
-	{
-		free(*ptr);
-		*ptr = NULL;
-	}
-	return (NULL);
+	ft_printf("%sERROR:%s %s\n", TRED, TRESET, str);
+	exit(1);
 }

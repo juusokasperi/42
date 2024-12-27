@@ -6,16 +6,11 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 23:11:39 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/06 17:22:51 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/12/09 00:37:34 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-static int	ft_isspace(int c)
-{
-	return (c == ' ' || (c >= 9 && c <= 13));
-}
 
 static int	check_overflow(int c, long res)
 {

@@ -6,19 +6,18 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 10:35:59 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/12/06 01:52:20 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/12/27 01:07:03 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
+# include "terminal_colors.h"
 # include <unistd.h>
 # include <stdlib.h>
 # include <limits.h>
 # include <stdint.h>
-# include <stdbool.h>
-# include <stdarg.h>
 
 typedef struct s_list
 {
@@ -33,6 +32,7 @@ int		ft_isalpha(int c);
 int		ft_isascii(int c);
 int		ft_isdigit(int c);
 int		ft_isprint(int c);
+int		ft_isspace(int c);
 
 //Conversion:
 int		ft_abs(int nbr);
@@ -41,11 +41,12 @@ char	*ft_itoa(int n);
 char	*ft_ltoa(long n);
 int		ft_tolower(int c);
 int		ft_toupper(int c);
+long	ft_strtol(const char *nptr, char **endptr, int base);
 
 //Printf:
 int		ft_printf(const char *format, ...);
 
-//Get_next_line:
+//Get next line:
 char	*get_next_line(int fd);
 
 //Lists:
@@ -59,10 +60,14 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 t_list	*ft_lstnew(void *content);
 int		ft_lstsize(t_list *lst);
 
+//Error:
+void	ft_error(char *str);
+
 //Mem:
 void	ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t nmemb, size_t size);
-char	*ft_free(char **str);
+void	*ft_realloc(void *ptr, size_t old_size, size_t new_size);
+void	*ft_free(void **ptr);
 void	*ft_memchr(const void *s, int c, size_t n);
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
 void	*ft_memcpy(void *dest, const void *src, size_t n);
