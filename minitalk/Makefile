@@ -3,15 +3,9 @@ SRCS_DIR = srcs/
 C_SRCS = client.c
 S_SRCS = server.c
 
-C_BONUS_SRCS = bonus/client_bonus.c
-S_BONUS_SRCS = bonus/server_bonus.c
-
 OBJS_DIR = objs/
 C_OBJS = $(addprefix $(OBJS_DIR), $(C_SRCS:.c=.o))
 S_OBJS = $(addprefix $(OBJS_DIR), $(S_SRCS:.c=.o))
-
-C_BONUS_OBJS = $(addprefix $(OBJS_DIR), $(C_BONUS_SRCS:.c=.o))
-S_BONUS_OBJS = $(addprefix $(OBJS_DIR), $(S_BONUS_SRCS:.c=.o))
 
 H = incs/minitalk.h
 INCS = -I./libft/includes -I./incs/
@@ -36,10 +30,6 @@ $(OBJS_DIR)%.o: $(SRCS_DIR)%.c $(H)
 	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
-$(OBJS_DIR)bonus/%.o: $(SRCS_DIR)bonus/%.c $(H)
-	@mkdir -p $(dir $@)
-	@$(CC) $(CFLAGS) -c $< -o $@
-
 $(LIBFT): phony
 	@make -C ./libft
 
@@ -53,13 +43,9 @@ server: $(LIBFT) $(S_OBJS)
 
 bonus: server_bonus client_bonus
 
-client_bonus: $(LIBFT) $(C_BONUS_OBJS)
-	$(CC) $(CFLAGS) $(C_BONUS_OBJS) $(LDFLAGS) -o $@
-	@echo "$(GREEN)✅ MINITALK: Client bonus compilation complete!$(ENDCOLOR)"
+client_bonus: client
 
-server_bonus: $(LIBFT) $(S_BONUS_OBJS)
-	$(CC) $(CFLAGS) $(S_BONUS_OBJS) $(LDFLAGS) -o $@
-	@echo "$(GREEN)✅ MINITALK: Server bonus compilation complete!$(ENDCOLOR)"
+server_bonus: server
 
 clean:
 	@make -C ./libft clean
