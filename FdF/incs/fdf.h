@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 15:37:28 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/12/28 12:17:24 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/12/28 18:25:19 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,14 @@
 # define WHITE 0xFFFFFFFF
 # define RED 0xFF0000FF
 # define BLUE 0x0000FFFF
+
+enum {
+	LEFT,
+	RIGHT,
+	TOP,
+	BOTTOM,
+	CENTER_X
+};
 
 typedef struct	s_draw
 {

@@ -6,23 +6,14 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 01:31:09 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/12/28 17:58:35 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/12/28 18:25:54 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <stdio.h>
-
-enum {
-	LEFT,
-	RIGHT,
-	TOP,
-	BOTTOM,
-	CENTER_X
-};
 
 static void	shift_values(double *coord);
-static void handle_coordinates(t_info *data, double *coord);
+static void	handle_coordinates(t_info *data, double *coord);
 
 void	calculate_position(t_info *data)
 {
@@ -32,10 +23,11 @@ void	calculate_position(t_info *data)
 	data->zoom = fmin((WIDTH * 0.8) / (coord[RIGHT] - coord[LEFT]),
 			(HEIGHT * 0.8) / (coord[BOTTOM] - coord[TOP]));
 	data->shift_x = (WIDTH / 2) - (coord[CENTER_X] * data->zoom);
-	data->shift_y = (HEIGHT / 2) - ((coord[TOP] + coord[BOTTOM]) / 2 * data->zoom);
+	data->shift_y = (HEIGHT / 2)
+		- ((coord[TOP] + coord[BOTTOM]) / 2 * data->zoom);
 }
 
-static void handle_coordinates(t_info *data, double *coord)
+static void	handle_coordinates(t_info *data, double *coord)
 {
 	coord[LEFT] = 0;
 	coord[TOP] = 0;

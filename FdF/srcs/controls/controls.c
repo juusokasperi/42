@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 01:25:03 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/12/28 12:27:27 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/12/28 18:26:12 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,8 @@ static void	handle_projection(t_info *data)
 
 static void	handle_changes(mlx_key_data_t keydata, t_info *data)
 {
-	if (keydata.key == 73 && keydata.action != MLX_RELEASE && data->distance != 0)
+	if (keydata.key == 73 && keydata.action != MLX_RELEASE
+		&& data->distance != 0)
 		data->distance -= 0.5;
 	if (keydata.key == 79 && keydata.action != MLX_RELEASE)
 		data->distance += 0.5;
