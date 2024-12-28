@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 01:25:03 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/12/23 22:12:11 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/12/28 12:27:27 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,21 @@ static void	handle_projection(t_info *data)
 	calculate_position(data);
 }
 
+/* **************************************************** */
+/* Distance (parallel projection): 73 = i, 79 = o		*/
+/* Zoom: 90 = z, 88 = x									*/
+/* Z_scale (altitude): 81 = q, 87 = w					*/
+/* Angle: 65 = a, 83 = s								*/
+/* Rotate: 82 = r, 84 = t								*/
+/* Shift: 265 = up, 264 = down, 263 = left, 262 = right	*/
+/* **************************************************** */
+
 static void	handle_changes(mlx_key_data_t keydata, t_info *data)
 {
+	if (keydata.key == 73 && keydata.action != MLX_RELEASE && data->distance != 0)
+		data->distance -= 0.5;
+	if (keydata.key == 79 && keydata.action != MLX_RELEASE)
+		data->distance += 0.5;
 	if (keydata.key == 90 && keydata.action != MLX_RELEASE)
 		data->zoom += 0.35;
 	if (keydata.key == 88 && keydata.action != MLX_RELEASE)

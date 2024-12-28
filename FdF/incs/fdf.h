@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 15:37:28 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/12/18 00:34:51 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/12/28 12:17:24 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ typedef struct s_info
 	double		z_scale;
 	double		angle;
 	double		rotate;
+	double		distance;
 	int			projection;
 	int			default_colors;
 	int			highest_z;
@@ -93,7 +94,7 @@ void	draw_lines(t_info *data);
 void	init_info(t_draw *info, t_info *data);
 void	set_x_y(double x, double y, t_draw *info, int x_or_y);
 // Draw_utils_2.c
-void	parallel(double *x, double *y, t_info *data);
+void	parallel(double *x, double *y, int z, t_info *data);
 void	isometric(double *x, double *y, int z, t_info *data);
 double	d_abs(double n);
 // Controls.c

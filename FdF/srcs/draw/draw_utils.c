@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 19:00:00 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/12/17 19:20:48 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/12/28 12:11:27 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,8 @@ static void	calculate_steps(t_draw *info, t_info *data)
 	}
 	else
 	{
-		parallel(&info->x1, &info->y1, data);
-		parallel(&info->x2, &info->y2, data);
+		parallel(&info->x1, &info->y1, info->z1, data);
+		parallel(&info->x2, &info->y2, info->z2, data);
 	}
 	info->x1 += data->shift_x;
 	info->y1 += data->shift_y;

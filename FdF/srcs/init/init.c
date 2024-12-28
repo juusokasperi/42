@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 01:38:23 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/12/18 16:23:41 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/12/28 12:17:45 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	init_variables(t_info *data)
 	data->highest_z = 0;
 	data->lowest_z = 0;
 	data->z_scale = 1;
+	data->distance = 0.0;
 	data->projection = 1;
 	data->angle = 0.5235988;
 	data->default_colors = 1;
