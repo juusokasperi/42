@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 15:37:28 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/12/28 18:25:19 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/12/28 18:58:08 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # define WIDTH 1080
 # define HEIGHT 720
 # define WHITE 0xFFFFFFFF
+# define BLACK 0x000000FF
 # define RED 0xFF0000FF
 # define BLUE 0x0000FFFF
 
@@ -84,6 +85,7 @@ typedef struct s_info
 // Main.c
 int		main(int argc, char **argv);
 void	clear_image(t_info *data);
+void	draw_instructions(t_info *data);
 // Init
 void	calculate_position(t_info *data);
 int		init_data(t_info *data);

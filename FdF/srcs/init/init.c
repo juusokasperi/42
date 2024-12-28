@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 01:38:23 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/12/28 12:17:45 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/12/28 18:58:29 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,6 @@ int	init_data(t_info *data)
 		return (0);
 	}
 	clear_image(data);
+	draw_instructions(data);
 	return (1);
 }
