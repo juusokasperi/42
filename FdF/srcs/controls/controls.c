@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 01:25:03 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/12/28 18:57:45 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/12/28 19:20:52 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 	handle_shift(keydata, data);
 	handle_changes(keydata, data);
 	clear_image(data);
-	draw_instructions(data);
 	draw_lines(data);
 	if (keydata.key == 256 && keydata.action == MLX_RELEASE)
 	{

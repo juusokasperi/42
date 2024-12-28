@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 15:38:00 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/12/28 18:57:57 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/12/28 21:06:06 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,12 @@ void	clear_image(t_info *data)
 
 void	draw_instructions(t_info *data)
 {
-	mlx_put_string(data->mlx_ptr, "Controls:", 10, 10);
-	mlx_put_string(data->mlx_ptr, "Arrow keys: Move", 10, 30);
-	mlx_put_string(data->mlx_ptr, "Q/W: Altitude (z-scale)", 10, 50);
-	mlx_put_string(data->mlx_ptr, "A/S: Degree / angle", 10, 70);
-	mlx_put_string(data->mlx_ptr, "Z/X: Zoom", 10, 90);
-	mlx_put_string(data->mlx_ptr, "R/T: Rotate", 10, 110);
-	mlx_put_string(data->mlx_ptr, "ESC: Exit", 10, 170);
+	mlx_put_string(data->mlx_ptr, "Arrow keys: Move", 10, 10);
+	mlx_put_string(data->mlx_ptr, "Q/W: Altitude (z-scale)", 200, 10);
+	mlx_put_string(data->mlx_ptr, "A/S: Degree / angle", 450, 10);
+	mlx_put_string(data->mlx_ptr, "Z/X: Zoom", 10, 30);
+	mlx_put_string(data->mlx_ptr, "R/T: Rotate", 200, 30);
+	mlx_put_string(data->mlx_ptr, "K: Isometric / parallel", 450, 30);
+	mlx_put_string(data->mlx_ptr, "I/O: Viewing distance (for parallel)", 10, 50);
+	mlx_put_string(data->mlx_ptr, "ESC: Exit", 450, 50);
 }
