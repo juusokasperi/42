@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 19:05:09 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/12/28 12:17:07 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/12/28 18:23:04 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@ void	parallel(double *x, double *y, int z, t_info *data)
 	rotate(x, y, data->rotate);
 	*x = *x + data->distance * z * cos(data->angle);
 	*y = *y + data->distance * z * sin(data->angle);
-//	*x *= cos(data->angle);
-//	*y *= sin(data->angle);
 }
 
 static void	rotate(double *x, double *y, double rotate)
