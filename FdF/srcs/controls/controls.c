@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 01:25:03 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/12/28 19:20:52 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/12/31 15:30:04 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ static void	handle_projection(t_info *data)
 	else
 		data->projection = 1;
 	data->rotate = 0;
+	data->distance = 0.0;
 	data->angle = 0.523599;
 	set_altitude(data);
 	calculate_position(data);
