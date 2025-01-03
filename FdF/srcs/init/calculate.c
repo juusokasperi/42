@@ -6,18 +6,18 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 01:31:09 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/12/28 18:25:54 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/12/31 15:38:34 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static void	shift_values(double *coord);
-static void	handle_coordinates(t_info *data, double *coord);
+static void	shift_values(float *coord);
+static void	handle_coordinates(t_info *data, float *coord);
 
 void	calculate_position(t_info *data)
 {
-	double	coord[5];
+	float	coord[5];
 
 	handle_coordinates(data, coord);
 	data->zoom = fmin((WIDTH * 0.8) / (coord[RIGHT] - coord[LEFT]),
@@ -27,7 +27,7 @@ void	calculate_position(t_info *data)
 		- ((coord[TOP] + coord[BOTTOM]) / 2 * data->zoom);
 }
 
-static void	handle_coordinates(t_info *data, double *coord)
+static void	handle_coordinates(t_info *data, float *coord)
 {
 	coord[LEFT] = 0;
 	coord[TOP] = 0;
@@ -49,9 +49,9 @@ static void	handle_coordinates(t_info *data, double *coord)
 	shift_values(coord);
 }
 
-static void	shift_values(double *coord)
+static void	shift_values(float *coord)
 {
-	double	temp;
+	float	temp;
 
 	if (coord[TOP] < 0)
 	{

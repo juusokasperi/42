@@ -6,13 +6,13 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 19:00:00 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/12/28 12:11:27 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/12/31 15:37:53 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static void	apply_zoom(t_draw *info, double zoom);
+static void	apply_zoom(t_draw *info, float zoom);
 static void	calculate_steps(t_draw *info, t_info *data);
 static void	set_colors(t_draw *info, t_info *data);
 
@@ -25,7 +25,7 @@ void	init_info(t_draw *info, t_info *data)
 	calculate_steps(info, data);
 }
 
-void	set_x_y(double x, double y, t_draw *info, int x_or_y)
+void	set_x_y(float x, float y, t_draw *info, int x_or_y)
 {
 	info->x1 = x;
 	info->y1 = y;
@@ -65,7 +65,7 @@ static void	set_colors(t_draw *info, t_info *data)
 	}
 }
 
-static void	apply_zoom(t_draw *info, double zoom)
+static void	apply_zoom(t_draw *info, float zoom)
 {
 	info->x1 *= zoom;
 	info->y1 *= zoom;

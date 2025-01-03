@@ -6,18 +6,18 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 19:05:09 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/12/28 18:23:04 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/12/31 15:38:17 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static void	rotate(double *x, double *y, double rotate);
+static void	rotate(float *x, float *y, float rotate);
 
-void	isometric(double *x, double *y, int z, t_info *data)
+void	isometric(float *x, float *y, int z, t_info *data)
 {
-	double	previous_x;
-	double	previous_y;
+	float	previous_x;
+	float	previous_y;
 
 	rotate(x, y, data->rotate);
 	previous_x = *x;
@@ -26,17 +26,17 @@ void	isometric(double *x, double *y, int z, t_info *data)
 	*y = (previous_x + previous_y) * sin(data->angle) - (z * data->z_scale);
 }
 
-void	parallel(double *x, double *y, int z, t_info *data)
+void	parallel(float *x, float *y, int z, t_info *data)
 {
 	rotate(x, y, data->rotate);
 	*x = *x + data->distance * z * cos(data->angle);
 	*y = *y + data->distance * z * sin(data->angle);
 }
 
-static void	rotate(double *x, double *y, double rotate)
+static void	rotate(float *x, float *y, float rotate)
 {
-	double	previous_x;
-	double	previous_y;
+	float	previous_x;
+	float	previous_y;
 
 	previous_x = *x;
 	previous_y = *y;
@@ -44,7 +44,7 @@ static void	rotate(double *x, double *y, double rotate)
 	*y = previous_x * sin(rotate) + previous_y * cos(rotate);
 }
 
-double	d_abs(double n)
+float	d_abs(float n)
 {
 	if (n < 0)
 		return (-n);

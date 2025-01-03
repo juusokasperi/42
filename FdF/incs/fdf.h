@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 15:37:28 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/12/28 18:58:08 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/12/31 15:37:28 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,19 +37,19 @@ enum {
 
 typedef struct	s_draw
 {
-	double		x1;
-	double		y1;
-	double		x2;
-	double		y2;
-	double		x_step;
-	double		y_step;
+	float		x1;
+	float		y1;
+	float		x2;
+	float		y2;
+	float		x_step;
+	float		y_step;
 	int			max;
 	uint32_t	color;
 	uint32_t	color_1;
 	uint32_t	color_2;
 	int			z1;
 	int			z2;
-	double		fraction;
+	float		fraction;
 }				t_draw;
 
 typedef struct	s_keys
@@ -65,13 +65,13 @@ typedef struct s_info
 	int			width;
 	int			height;
 	int			**xyz;
-	double		zoom;
-	double		shift_x;
-	double		shift_y;
-	double		z_scale;
-	double		angle;
-	double		rotate;
-	double		distance;
+	float		zoom;
+	float		shift_x;
+	float		shift_y;
+	float		z_scale;
+	float		angle;
+	float		rotate;
+	int			distance;
 	int			projection;
 	int			default_colors;
 	int			highest_z;
@@ -102,11 +102,11 @@ int		get_width(char *filename);
 void	draw_lines(t_info *data);
 // Draw_utils.c
 void	init_info(t_draw *info, t_info *data);
-void	set_x_y(double x, double y, t_draw *info, int x_or_y);
+void	set_x_y(float x, float y, t_draw *info, int x_or_y);
 // Draw_utils_2.c
-void	parallel(double *x, double *y, int z, t_info *data);
-void	isometric(double *x, double *y, int z, t_info *data);
-double	d_abs(double n);
+void	parallel(float *x, float *y, int z, t_info *data);
+void	isometric(float *x, float *y, int z, t_info *data);
+float	d_abs(float n);
 // Controls.c
 void	key_hook(mlx_key_data_t keydata, void *param);
 // Exit.c

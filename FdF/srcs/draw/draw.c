@@ -6,14 +6,14 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 18:00:43 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/12/28 18:52:12 by jrinta-          ###   ########.fr       */
+/*   Updated: 2024/12/31 15:38:05 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
 static uint32_t	interpolate_color(t_draw *info);
-static void		draw(double x, double y, t_info *data, int x_or_y);
+static void		draw(float x, float y, t_info *data, int x_or_y);
 
 void	draw_lines(t_info *data)
 {
@@ -36,7 +36,7 @@ void	draw_lines(t_info *data)
 	}
 }
 
-static void	draw(double x, double y, t_info *data, int x_or_y)
+static void	draw(float x, float y, t_info *data, int x_or_y)
 {
 	t_draw	*info;
 
