@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 01:25:03 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/12/31 15:30:04 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/04 16:59:55 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ static void	handle_projection(t_info *data)
 		data->projection = 0;
 	else
 		data->projection = 1;
-	data->rotate = 0;
-	data->distance = 0.0;
+	data->rotate = 0.0;
+	data->distance = 0;
 	data->angle = 0.523599;
 	set_altitude(data);
 	calculate_position(data);
@@ -91,9 +91,9 @@ static void	handle_changes(mlx_key_data_t keydata, t_info *data)
 {
 	if (keydata.key == 73 && keydata.action != MLX_RELEASE
 		&& data->distance != 0)
-		data->distance -= 0.5;
+		data->distance -= 1;
 	if (keydata.key == 79 && keydata.action != MLX_RELEASE)
-		data->distance += 0.5;
+		data->distance += 1;
 	if (keydata.key == 90 && keydata.action != MLX_RELEASE)
 		data->zoom += 0.35;
 	if (keydata.key == 88 && keydata.action != MLX_RELEASE)

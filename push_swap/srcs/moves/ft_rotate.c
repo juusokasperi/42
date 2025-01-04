@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_checker_rotate_bonus.c                          :+:      :+:    :+:   */
+/*   ft_rotate.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 23:59:44 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/01/04 14:49:19 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/04 15:36:48 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker_bonus.h"
+#include "push_swap.h"
 
 static void	ft_rotate(t_stack **stack)
 {
@@ -31,15 +31,18 @@ static void	ft_rotate(t_stack **stack)
 void	ft_ra(t_stack **stack_a)
 {
 	ft_rotate(stack_a);
+	ft_putstr_fd("ra\n", 1);
 }
 
 void	ft_rb(t_stack **stack_b)
 {
 	ft_rotate(stack_b);
+	ft_putstr_fd("rb\n", 1);
 }
 
 void	ft_rr(t_stack **stack_a, t_stack **stack_b)
 {
 	ft_rotate(stack_a);
 	ft_rotate(stack_b);
+	ft_putstr_fd("rr\n", 1);
 }

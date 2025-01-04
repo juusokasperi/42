@@ -1,31 +1,40 @@
-NAME = fdf_macos
-CFLAGS += -Wall -Wextra -Werror -Wunreachable-code
-LIBMLX = ./MLX42
+#	Sources
+SRCS =	main.c \
+		read_map/read_map.c		read_map/read_map_utils.c	read_map/read_map_utils_2.c	\
+		draw/draw.c				draw/draw_utils.c			draw/draw_utils_2.c			\
+		controls/controls.c																\
+		init/init.c				init/calculate.c										\
+		exit.c
+SRC_DIR =	srcs/
 
-HEADERS = incs/fdf.h incs/terminal_colors.h
+#	Objects
+OBJ_DIR =	objs/
+OBJS =		$(addprefix $(OBJ_DIR), $(SRCS:.c=.o))
 
-HEADERS_PATH = -I./incs -I$(LIBMLX)/include -I./libft/includes
-LIBS = $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm -framework Cocoa -framework OpenGL -framework IOKit -L./libft -lft
+#	Headers
+HEADERS =		incs/fdf.h incs/terminal_colors.h
+HEADERS_PATH =	-I./incs -I$(LIBMLX)/include -I./libft/includes
 
-SRCS = main.c \
-	\
-	read_map/read_map.c read_map/read_map_utils.c read_map/read_map_utils_2.c \
-	\
-	draw/draw.c draw/draw_utils.c draw/draw_utils_2.c \
-	\
-	controls/controls.c \
-	\
-	init/init.c init/calculate.c \
-	\
-	exit.c
-SRC_DIR = srcs/
+#	Compiler
+CC =		cc
+CFLAGS +=	-Wall -Wextra -Werror -Wunreachable-code
 
-OBJ_DIR = objs/
-OBJS = $(addprefix $(OBJ_DIR), $(SRCS:.c=.o))
+##	Libs for MacOS:
+#LIBS =		$(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm -framework Cocoa -framework OpenGL -framework IOKit -L./libft -lft
+##	Libs for Linux:
+LIBS =		$(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm -L./libft -lft
+LIBMLX =	./MLX42
 
-LIBFT = libft/libft.a
+NAME =		fdf
+LIBFT =		libft/libft.a
 
-all: libmlx $(NAME)
+#	Colors
+RED =		\033[0;31m
+GREEN =		\033[0;32m
+ENDCOLOR =	\033[0m
+
+#	Rules
+all: $(NAME)
 
 $(LIBFT): phony
 	@make -C libft
@@ -33,23 +42,24 @@ $(LIBFT): phony
 libmlx: phony
 	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
 
-$(OBJS): | $(OBJ_DIR)
-
-$(OBJ_DIR):
-	@mkdir -p $(sort $(dir $(OBJS)))
-
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c $(HEADERS)
+	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS_PATH)
 
-$(NAME): $(LIBFT) $(OBJS)
+$(NAME): $(LIBFT) libmlx $(OBJS)
 	@$(CC) $(OBJS) $(LIBS) $(HEADERS_PATH) -o $(NAME)
+	@echo "$(GREEN)✅ FdF: Compilation complete!$(ENDCOLOR)"
 
 clean:
+	@make -C ./libft clean
 	@rm -rf $(OBJ_DIR)
 	@rm -rf $(LIBMLX)/build
+	@echo "$(RED)✅ FdF: Clean complete.$(ENDCOLOR)"
 
-fclean: clean
-	@rm -rf $(NAME) $(LIBFT)
+fclean:
+	@make -C ./libft fclean
+	@rm -rf $(OBJ_DIR) $(LIBMLX)/build $(NAME) $(LIBFT)
+	@echo "$(RED)✅ FdF: FClean complete.$(ENDCOLOR)"
 
 re: fclean all
 

@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_checker_free_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/14 17:22:08 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/01/04 16:05:47 by jrinta-          ###   ########.fr       */
+/*   Created: 2025/01/04 14:20:31 by jrinta-           #+#    #+#             */
+/*   Updated: 2025/01/04 14:46:59 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "checker_bonus.h"
 
-# include "libft.h"
+void	ft_error_free(t_stack **stack_a, t_stack **stack_b)
+{
+	if (stack_a && *stack_a)
+		ft_stackclear(stack_a, NULL);
+	if (stack_b && *stack_b)
+		ft_stackclear(stack_b, NULL);
+	ft_putstr_fd("Error\n", 2);
+	exit (1);
+}
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1024
-# endif
-
-# ifndef FD_MAX
-#  define FD_MAX 24
-# endif
-
-char	*get_next_line(int fd);
-
-#endif
+void	ft_error_free_line(t_stack **stack_a, t_stack **stack_b, char *line)
+{
+	free(line);
+	ft_error_free(stack_a, stack_b);
+}

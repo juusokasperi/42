@@ -1,35 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_checker_push_bonus.c                            :+:      :+:    :+:   */
+/*   ft_atoll_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/28 00:11:46 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/01/04 14:49:13 by jrinta-          ###   ########.fr       */
+/*   Created: 2024/07/31 23:11:39 by jrinta-           #+#    #+#             */
+/*   Updated: 2025/01/04 14:46:44 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker_bonus.h"
 
-void	ft_push(t_stack **src, t_stack **dest)
-{
-	t_stack	*tmp;
+// Convert string to long long,
+// return a value over MAX INT if the
+// string contains non-digit characters
 
-	if (!*src)
-		return ;
-	tmp = *src;
-	*src = (*src)->next;
-	tmp->next = *dest;
-	*dest = tmp;
-}
-
-void	ft_pa(t_stack **stack_a, t_stack **stack_b)
+long long int	ft_atoll(const char *str)
 {
-	ft_push(stack_b, stack_a);
-}
+	int			s;
+	long long	res;
 
-void	ft_pb(t_stack **stack_a, t_stack **stack_b)
-{
-	ft_push(stack_a, stack_b);
+	s = 1;
+	res = 0;
+	while (*str && ft_isspace(*str))
+		str++;
+	if (*str == '-' || *str == '+')
+		if (*str++ == '-')
+			s *= -1;
+	while (*str && ft_isdigit(*str))
+	{
+		res = res * 10 + (*str - '0');
+		str++;
+	}
+	return (res * s);
 }

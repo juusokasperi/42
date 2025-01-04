@@ -6,11 +6,11 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 00:49:16 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/12/06 01:57:47 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/04 14:49:02 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker.h"
+#include "checker_bonus.h"
 
 static char	*copy_str(char *src);
 static int	copy_values(char **joined_values, char **values, int i);

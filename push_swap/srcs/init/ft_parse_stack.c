@@ -1,21 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_checker_parse_bonus.c                           :+:      :+:    :+:   */
+/*   ft_parse_stack.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 11:55:21 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/01/04 14:49:10 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/04 15:31:37 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker_bonus.h"
+#include "push_swap.h"
 
+static void		ft_stackrank(t_stack **stack_a);
 static void		ft_stackadd_back(t_stack **stack_a, t_stack *new);
 static t_stack	*ft_stacknew(int nbr);
 
-t_stack	*ft_checker_parse(char **values)
+t_stack	*ft_parse_stack(char **values)
 {
 	t_stack	*stack_a;
 	int		n;
@@ -29,7 +30,30 @@ t_stack	*ft_checker_parse(char **values)
 		ft_stackadd_back(&stack_a, ft_stacknew(n));
 		i++;
 	}
+	ft_stackrank(&stack_a);
 	return (stack_a);
+}
+
+static void	ft_stackrank(t_stack **stack_a)
+{
+	t_stack	*current;
+	t_stack	*compare;
+	int		rank;
+
+	current = *stack_a;
+	while (current)
+	{
+		rank = 0;
+		compare = *stack_a;
+		while (compare)
+		{
+			if (compare->nbr < current->nbr)
+				rank++;
+			compare = compare->next;
+		}
+		current->rank = rank;
+		current = current->next;
+	}
 }
 
 static void	ft_stackadd_back(t_stack **stack_a, t_stack *new)
@@ -57,6 +81,7 @@ static t_stack	*ft_stacknew(int nbr)
 	if (!new)
 		return (NULL);
 	new->nbr = nbr;
+	new->rank = -1;
 	new->next = NULL;
 	return (new);
 }

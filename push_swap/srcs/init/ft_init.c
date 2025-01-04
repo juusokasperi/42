@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_checker_init_bonus.c                            :+:      :+:    :+:   */
+/*   ft_init.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 11:41:25 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/01/04 14:57:39 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/04 15:31:42 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker_bonus.h"
+#include "push_swap.h"
+
+// Checks that arguments contain only integers
+// without any duplicates and that are within the range
+// of an integer.
 
 static int	ft_isnumber(char *str);
 static int	ft_duplicates_overflow(char **values);
 static int	ft_validate(char **values);
 
-// Parses all the arguments, works for mixed input.
-// After parsing, calls ft_validate
-t_stack	*ft_checker_init(int argc, char **argv)
+t_stack	*ft_init(int argc, char **argv)
 {
 	char	**values;
 	char	**new_values;
@@ -41,12 +43,12 @@ t_stack	*ft_checker_init(int argc, char **argv)
 		ft_free_split(values);
 		ft_error_free(NULL, NULL);
 	}
-	stack_a = ft_checker_parse(values);
+	stack_a = ft_parse_stack(values);
 	ft_free_split(values);
 	return (stack_a);
 }
 
-// Check if all elements in 'values' are integers
+// Check if values are valid
 static int	ft_validate(char **values)
 {
 	int		i;

@@ -1,28 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/14 17:22:08 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/01/04 16:05:47 by jrinta-          ###   ########.fr       */
+/*   Created: 2024/12/25 14:26:09 by jrinta-           #+#    #+#             */
+/*   Updated: 2024/12/26 13:58:15 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# include "libft.h"
-
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1024
-# endif
-
-# ifndef FD_MAX
-#  define FD_MAX 24
-# endif
-
-char	*get_next_line(int fd);
-
-#endif
+void	ft_error(char *str)
+{
+	ft_printf("%sERROR:%s %s\n", TRED, TRESET, str);
+	exit(1);
+}

@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 01:31:09 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/12/31 15:38:34 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/04 16:58:13 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	handle_coordinates(t_info *data, float *coord)
 	{
 		parallel(&coord[LEFT], &coord[TOP], data->xyz[0][0], data);
 		parallel(&coord[RIGHT], &coord[BOTTOM],
-			data->xyz[(int)coord[RIGHT]][(int)coord[BOTTOM]], data);
+			data->xyz[(int)coord[BOTTOM]][(int)coord[RIGHT]], data);
 	}
 	coord[CENTER_X] = (coord[LEFT] + coord[RIGHT]) / 2;
 	shift_values(coord);
