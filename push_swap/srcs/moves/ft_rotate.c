@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 23:59:44 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/28 00:47:40 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/04 15:36:48 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,18 @@ static void	ft_rotate(t_stack **stack)
 void	ft_ra(t_stack **stack_a)
 {
 	ft_rotate(stack_a);
-	write(1, "ra\n", 3);
+	ft_putstr_fd("ra\n", 1);
 }
 
 void	ft_rb(t_stack **stack_b)
 {
 	ft_rotate(stack_b);
-	write(1, "rb\n", 3);
+	ft_putstr_fd("rb\n", 1);
 }
 
 void	ft_rr(t_stack **stack_a, t_stack **stack_b)
 {
 	ft_rotate(stack_a);
 	ft_rotate(stack_b);
-	write(1, "rr\n", 3);
+	ft_putstr_fd("rr\n", 1);
 }

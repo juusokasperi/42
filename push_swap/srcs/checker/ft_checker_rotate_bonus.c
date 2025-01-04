@@ -6,11 +6,11 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 23:59:44 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/12/05 13:54:39 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/04 14:49:19 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker.h"
+#include "checker_bonus.h"
 
 static void	ft_rotate(t_stack **stack)
 {

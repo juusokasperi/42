@@ -6,12 +6,11 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 11:41:25 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/12/06 01:53:05 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/04 15:31:42 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
 
 // Checks that arguments contain only integers
 // without any duplicates and that are within the range

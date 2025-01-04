@@ -6,15 +6,14 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 14:36:44 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/12/05 13:54:32 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/04 14:46:56 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker.h"
+#include "checker_bonus.h"
 
 static int	ft_is_sorted(t_stack *stack);
 static void	ft_operation(t_stack **stack_a, t_stack **stack_b, char *line);
-static void	ft_stackclear(t_stack **stack_a, t_stack **stack_b);
 
 int	main(int argc, char **argv)
 {
@@ -69,10 +68,10 @@ static void	ft_operation(t_stack **stack_a, t_stack **stack_b, char *line)
 	else if (!ft_strncmp(line, "rrr", 3) && ft_strlen(line) == 4)
 		ft_rrr(stack_a, stack_b);
 	else
-		ft_error_free(stack_a, stack_b);
+		ft_error_free_line(stack_a, stack_b, line);
 }
 
-static void	ft_stackclear(t_stack **stack_a, t_stack **stack_b)
+void	ft_stackclear(t_stack **stack_a, t_stack **stack_b)
 {
 	t_stack	*tmp;
 
@@ -105,14 +104,4 @@ static int	ft_is_sorted(t_stack *stack)
 		stack = stack->next;
 	}
 	return (1);
-}
-
-void	ft_error_free(t_stack **stack_a, t_stack **stack_b)
-{
-	if (stack_a && *stack_a)
-		ft_stackclear(stack_a, NULL);
-	if (stack_b && *stack_b)
-		ft_stackclear(stack_b, NULL);
-	ft_putstr_fd("Error\n", 2);
-	exit (1);
 }

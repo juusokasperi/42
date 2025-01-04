@@ -6,11 +6,11 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 00:11:46 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/12/05 13:54:37 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/04 14:49:13 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker.h"
+#include "checker_bonus.h"
 
 void	ft_push(t_stack **src, t_stack **dest)
 {

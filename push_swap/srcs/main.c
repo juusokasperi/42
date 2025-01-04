@@ -6,12 +6,11 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 00:14:44 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/12/06 01:29:49 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/04 15:31:56 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "stdio.h"
 
 int	main(int argc, char **argv)
 {

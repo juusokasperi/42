@@ -6,20 +6,18 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 11:41:25 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/12/06 02:04:45 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/04 14:57:39 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker.h"
-#include <stdio.h>
-// Checks that arguments contain only integers
-// without any duplicates and that are within the range
-// of an integer.
+#include "checker_bonus.h"
 
 static int	ft_isnumber(char *str);
 static int	ft_duplicates_overflow(char **values);
 static int	ft_validate(char **values);
 
+// Parses all the arguments, works for mixed input.
+// After parsing, calls ft_validate
 t_stack	*ft_checker_init(int argc, char **argv)
 {
 	char	**values;
@@ -48,7 +46,7 @@ t_stack	*ft_checker_init(int argc, char **argv)
 	return (stack_a);
 }
 
-// Check if values are valid
+// Check if all elements in 'values' are integers
 static int	ft_validate(char **values)
 {
 	int		i;

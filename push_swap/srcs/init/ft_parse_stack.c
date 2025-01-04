@@ -6,12 +6,11 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 11:55:21 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/29 22:05:30 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/04 15:31:37 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
 
 static void		ft_stackrank(t_stack **stack_a);
 static void		ft_stackadd_back(t_stack **stack_a, t_stack *new);
