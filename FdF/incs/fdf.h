@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 15:37:28 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/12/31 15:37:28 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/04 16:54:12 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,9 @@
 # include <math.h>
 # include "libft.h"
 # include "MLX42/MLX42.h"
-# include "terminal_colors.h"
 
-# define WIDTH 1080
-# define HEIGHT 720
+# define WIDTH 2160
+# define HEIGHT 1440
 # define WHITE 0xFFFFFFFF
 # define BLACK 0x000000FF
 # define RED 0xFF0000FF
