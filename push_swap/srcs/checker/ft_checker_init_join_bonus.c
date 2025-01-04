@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 00:49:16 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/01/05 01:38:52 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/05 01:44:44 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ char	**ft_join(char **values, char **new_values)
 	total_count = count_elements(values, new_values);
 	joined_values = ft_calloc(total_count + 1, sizeof(char *));
 	if (!joined_values)
-		return (ft_free_split(values, new_values));
+		return ((char **)ft_free_split(values, new_values));
 	if (!fill_values(joined_values, values, new_values))
 	{
 		free(joined_values);
-		return (ft_free_split(values, new_values));
+		return ((char **)ft_free_split(values, new_values));
 	}
 	ft_free_split(values, new_values);
 	return (joined_values);
