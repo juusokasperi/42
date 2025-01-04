@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 11:41:25 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/01/04 14:57:39 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/05 01:40:02 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,19 +30,19 @@ t_stack	*ft_checker_init(int argc, char **argv)
 	while (++i < argc)
 	{
 		new_values = ft_split(argv[i], ' ');
-		if (!new_values)
-			return ((t_stack *)ft_free_split(values));
+		if (!new_values || !new_values[0])
+			return ((t_stack *)ft_free_split(values, new_values));
 		values = ft_join(values, new_values);
 		if (!values)
 			return (NULL);
 	}
 	if (!ft_validate(values))
 	{
-		ft_free_split(values);
+		ft_free_split(values, NULL);
 		ft_error_free(NULL, NULL);
 	}
 	stack_a = ft_checker_parse(values);
-	ft_free_split(values);
+	ft_free_split(values, NULL);
 	return (stack_a);
 }
 
@@ -107,16 +107,23 @@ static int	ft_duplicates_overflow(char **values)
 	return (0);
 }
 
-void	**ft_free_split(char **values)
+void	**ft_free_split(char **val, char **val_2)
 {
 	int	i;
 
 	i = 0;
-	if (values)
+	if (val)
 	{
-		while (values[i])
-			free(values[i++]);
-		free(values);
+		while (val[i])
+			free(val[i++]);
+		free(val);
+	}
+	i = 0;
+	if (val_2)
+	{
+		while (val_2[i])
+			free(val_2[i++]);
+		free(val_2);
 	}
 	return (NULL);
 }
