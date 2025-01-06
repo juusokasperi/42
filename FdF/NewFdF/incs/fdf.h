@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 15:37:28 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/01/06 19:53:47 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/06 20:08:01 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,6 @@ typedef struct s_info
 	int			shift_x;
 	int			shift_y;
 	int			z_scale;
-	float		alpha;
-	float		gamma;
-	float		tetha;
 	float		x_angle;
 	float		y_angle;
 	float		rotate;
@@ -125,6 +122,12 @@ int		get_width(char *filename);
 void	draw_lines(t_info *data);
 void	isometric(int *x, int *y, int z, t_info *data);
 void	parallel(int *x, int *y, int z, t_info *data);
+void	set_colors(t_bresenham *line, t_info *data);
+void	set_projection(t_bresenham *line, t_info *data);
+void	shift(t_bresenham *line, t_info *data);
+void	calculate_steps(t_bresenham *line);
+void	zoom(t_bresenham *line, t_info *data);
+void	calculate_line(t_bresenham *line, int x_or_y, t_info *data);
 /*
 // Draw_utils.c
 void	init_info(t_draw *info, t_info *data);

@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 01:38:23 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/01/06 19:54:14 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/06 20:04:31 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,6 @@ void	init_variables(t_info *data)
 	data->z_scale = 1;
 	data->distance = 1;
 	data->projection = 1;
-	data->gamma = 0;
-	data->alpha = 0;
-	data->tetha = 0;
 	data->x_angle = 0.523599;
 	data->y_angle = 0.523599;
 	data->default_colors = 1;

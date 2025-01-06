@@ -6,13 +6,56 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 19:00:00 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/01/06 17:40:12 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/06 20:08:19 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
 #include "fdf.h"
 
+void	calculate_line(t_bresenham *line, int x_or_y, t_info *data)
+{
+	if (x_or_y == 1)
+	{
+		line->x1 = line->x + 1;
+		line->y1 = line->y;
+	}
+	else
+	{
+		line->x1 = line->x;
+		line->y1 = line->y + 1;
+	}
+	line->z = data->xyz[line->y][line->x];
+	line->z1 = data->xyz[line->y1][line->x1];
+	set_colors(line, data);
+	zoom(line, data);
+	set_projection(line, data);
+	shift(line, data);
+	line->diff_x = ft_abs(line->x1 - line->x);
+	line->diff_y = -(ft_abs(line->y1 - line->y));
+	line->err = line->diff_x + line->diff_y;
+	calculate_steps(line);
+	line->max = fmax(fabs((float)(line->step_x)), fabs((float)(line->step_y)));
+}
+
+void	parallel(int *x, int *y, int z, t_info *data)
+{
+	*x = round(*x + data->distance * z * cos(data->x_angle));
+	*y = round(*y + data->distance * z * sin(data->y_angle));
+}
+
+void	isometric(int *x, int *y, int z, t_info *data)
+{
+	int	new_x;
+	int	new_y;
+
+	new_x = round((*x - *y) * cos(data->x_angle));
+	new_y = round((*x + *y) * sin(data->y_angle) - ((z * data->z_scale)));
+	*x = new_x;
+	*y = new_y;
+}
+
+
+/*
 static void	apply_zoom(t_draw *info, float zoom);
 static void	calculate_steps(t_draw *info, t_info *data);
 static void	set_colors(t_draw *info, t_info *data);

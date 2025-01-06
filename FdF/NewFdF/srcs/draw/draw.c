@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 18:00:43 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/01/06 19:53:20 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/06 20:05:53 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,24 +15,6 @@
 //static uint32_t	interpolate_color(t_draw *info);
 //static void		draw(float x, float y, t_info *data, int x_or_y);
 static void	draw(int x, int y, int x_or_y, t_info *data);
-
-void	parallel(int *x, int *y, int z, t_info *data)
-{
-//	rotate(x, y, data->rotate);
-	*x = round(*x + data->distance * z * cos(data->x_angle));
-	*y = round(*y + data->distance * z * sin(data->y_angle));
-}
-
-void	isometric(int *x, int *y, int z, t_info *data)
-{
-	int	new_x;
-	int	new_y;
-
-	new_x = round((*x - *y) * cos(data->x_angle));
-	new_y = round((*x + *y) * sin(data->y_angle) - ((z * data->z_scale)));
-	*x = new_x;
-	*y = new_y;
-}
 
 void	draw_lines(t_info *data)
 {
@@ -52,72 +34,6 @@ void	draw_lines(t_info *data)
 			x++;
 		}
 		y++;
-	}
-}
-
-static void	zoom(t_bresenham *line, t_info *data)
-{
-	line->x *= data->zoom;
-	line->y *= data->zoom;
-	line->x1 *= data->zoom;
-	line->y1 *= data->zoom;
-}
-
-static void	calculate_steps(t_bresenham *line)
-{
-	if (line->y < line->y1)
-		line->step_y = 1;
-	else
-		line->step_y = -1;
-	if (line->x < line->x1)
-		line->step_x = 1;
-	else
-		line->step_x = -1;
-}
-
-static void	shift_values(t_bresenham *line, t_info *data)
-{
-	line->x += data->shift_x;
-	line->x1 += data->shift_x;
-	line->y += data->shift_y;
-	line->y1 += data->shift_y;
-}
-
-static void	set_projection(t_bresenham *line, t_info *data)
-{
-	if (data->projection == 1)
-	{
-		isometric(&line->x, &line->y, line->z, data);
-		isometric(&line->x1, &line->y1, line->z1, data);
-	}
-	else
-	{
-		parallel(&line->x, &line->y, line->z, data);
-		parallel(&line->x1, &line->y1, line->z1, data);
-	}
-}
-
-static void	set_colors(t_bresenham *line, t_info *data)
-{
-	if (data->default_colors)
-	{
-		if (line->z > 0)
-			line->color_1 = RED;
-		else if (line->z < 0)
-			line->color_1 = BLUE;
-		else
-			line->color_1 = WHITE;
-		if (line->z1 > 0)
-			line->color_2 = RED;
-		else if (line->z1 < 0)
-			line->color_2 = BLUE;
-		else
-			line->color_2 = WHITE;
-	}
-	else
-	{
-		line->color_1 = data->colors[line->y][line->x];
-		line->color_2 = data->colors[line->y1][line->x1];
 	}
 }
 
@@ -143,30 +59,7 @@ static uint32_t	interpolate_color(t_bresenham *line)
 	return ((r << 24) | (g << 16) | (b << 8) | a);
 }
 
-static void	calculate_line(t_bresenham *line, int x_or_y, t_info *data)
-{
-	if (x_or_y == 1)
-	{
-		line->x1 = line->x + 1;
-		line->y1 = line->y;
-	}
-	else
-	{
-		line->x1 = line->x;
-		line->y1 = line->y + 1;
-	}
-	line->z = data->xyz[line->y][line->x];
-	line->z1 = data->xyz[line->y1][line->x1];
-	set_colors(line, data);
-	zoom(line, data);
-	set_projection(line, data);
-	shift_values(line, data);
-	line->diff_x = ft_abs(line->x1 - line->x);
-	line->diff_y = -(ft_abs(line->y1 - line->y));
-	line->err = line->diff_x + line->diff_y;
-	calculate_steps(line);
-	line->max = fmax(fabs((float)(line->step_x)), fabs((float)(line->step_y)));
-}
+
 
 static int	within_bounds(t_bresenham *line)
 {
