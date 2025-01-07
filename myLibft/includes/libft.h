@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 10:35:59 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/01/05 15:48:57 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/06 21:50:02 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int		ft_isdigit(int c);
 int		ft_isprint(int c);
 int		ft_isspace(int c);
 int		ft_min(int a, int b);
+int		ft_max(int a, int b);
 
 //Conversion:
 int		ft_abs(int nbr);
