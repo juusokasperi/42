@@ -5,48 +5,85 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/17 19:05:09 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/12/31 15:38:17 by jrinta-          ###   ########.fr       */
+/*   Created: 2025/01/06 20:05:05 by jrinta-           #+#    #+#             */
+/*   Updated: 2025/01/07 19:11:10 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static void	rotate(float *x, float *y, float rotate);
-
-void	isometric(float *x, float *y, int z, t_info *data)
+void	zoom(t_bresenham *line, t_info *data)
 {
-	float	previous_x;
-	float	previous_y;
-
-	rotate(x, y, data->rotate);
-	previous_x = *x;
-	previous_y = *y;
-	*x = (previous_x - previous_y) * cos(data->angle);
-	*y = (previous_x + previous_y) * sin(data->angle) - (z * data->z_scale);
+	line->x *= (data->zoom);
+	line->y *= (data->zoom);
+	line->x1 *= (data->zoom);
+	line->y1 *= (data->zoom);
 }
 
-void	parallel(float *x, float *y, int z, t_info *data)
+void	calculate_bresenham(t_bresenham *line)
 {
-	rotate(x, y, data->rotate);
-	*x = *x + data->distance * z * cos(data->angle);
-	*y = *y + data->distance * z * sin(data->angle);
+	line->start_x = line->x;
+	line->start_y = line->y;
+	line->diff_x = ft_abs(line->x1 - line->x);
+	line->diff_y = -(ft_abs(line->y1 - line->y));
+	line->err = line->diff_x + line->diff_y;
+	if (line->y < line->y1)
+		line->step_y = 1;
+	else
+		line->step_y = -1;
+	if (line->x < line->x1)
+		line->step_x = 1;
+	else
+		line->step_x = -1;
+	line->max = ft_max(ft_abs(line->step_x), ft_abs(line->step_y));
 }
 
-static void	rotate(float *x, float *y, float rotate)
+void	shift(t_bresenham *line, t_info *data)
 {
-	float	previous_x;
-	float	previous_y;
-
-	previous_x = *x;
-	previous_y = *y;
-	*x = previous_x * cos(rotate) - previous_y * sin(rotate);
-	*y = previous_x * sin(rotate) + previous_y * cos(rotate);
+	line->x += data->shift_x;
+	line->x += ((WIDTH / 2) - ((data->width / 2) * data->zoom));
+	line->x1 += data->shift_x;
+	line->x1 += ((WIDTH / 2) - ((data->width / 2) * data->zoom));
+	line->y += data->shift_y;
+	line->y += ((HEIGHT / 2) - ((data->height / 2) * data->zoom));
+	line->y1 += data->shift_y;
+	line->y1 += ((HEIGHT / 2) - ((data->height / 2) * data->zoom));
 }
 
-float	d_abs(float n)
+void	set_projection(t_bresenham *line, t_info *data)
 {
-	if (n < 0)
-		return (-n);
-	return (n);
+	if (data->projection == 1)
+	{
+		isometric(&line->x, &line->y, &line->z, data);
+		isometric(&line->x1, &line->y1, &line->z1, data);
+	}
+	else
+	{
+		parallel(&line->x, &line->y, line->z, data);
+		parallel(&line->x1, &line->y1, line->z1, data);
+	}
+}
+
+void	set_colors(t_bresenham *line, t_info *data)
+{
+	if (data->default_colors)
+	{
+		if (line->z > 0)
+			line->color_1 = RED;
+		else if (line->z < 0)
+			line->color_1 = BLUE;
+		else
+			line->color_1 = WHITE;
+		if (line->z1 > 0)
+			line->color_2 = RED;
+		else if (line->z1 < 0)
+			line->color_2 = BLUE;
+		else
+			line->color_2 = WHITE;
+	}
+	else
+	{
+		line->color_1 = data->colors[line->y][line->x];
+		line->color_2 = data->colors[line->y1][line->x1];
+	}
 }

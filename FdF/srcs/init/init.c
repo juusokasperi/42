@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 01:38:23 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/01/04 16:45:22 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/07 19:15:52 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,23 +18,24 @@ void	init_variables(t_info *data)
 	data->height = 0;
 	data->xyz = NULL;
 	data->colors = NULL;
-	data->zoom = 20;
+	data->zoom = 50;
 	data->highest_z = 0;
 	data->lowest_z = 0;
 	data->z_scale = 1;
-	data->distance = 0.0;
+	data->distance = 1;
 	data->projection = 1;
-	data->angle = 0.523599;
+	data->x_angle = 0.523599;
+	data->y_angle = 0.523599;
+	data->z_angle = 0.523599;
 	data->default_colors = 1;
-	data->rotate = 0;
 }
 
 void	set_altitude(t_info *data)
 {
 	if (ft_abs(data->highest_z) + ft_abs(data->lowest_z) > 50)
-		data->z_scale = 0.8;
-	else if (ft_abs(data->highest_z) + ft_abs(data->lowest_z) > 25)
 		data->z_scale = 2;
+	else if (ft_abs(data->highest_z) + ft_abs(data->lowest_z) > 25)
+		data->z_scale = 3;
 	else
 		data->z_scale = 5;
 }

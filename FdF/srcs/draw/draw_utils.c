@@ -6,96 +6,64 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 19:00:00 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/12/31 15:37:53 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/07 19:17:01 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static void	apply_zoom(t_draw *info, float zoom);
-static void	calculate_steps(t_draw *info, t_info *data);
-static void	set_colors(t_draw *info, t_info *data);
+/*
+static void	rotate_x(int *y, int *z, t_info *data);
+static void	rotate_y(int *x, int *z, t_info *data);
+static void	rotate_z(int *x, int *y, t_info *data);
+*/
 
-void	init_info(t_draw *info, t_info *data)
+void	parallel(int *x, int *y, int z, t_info *data)
 {
-	info->z1 = data->xyz[(int)info->y1][(int)info->x1];
-	info->z2 = data->xyz[(int)info->y2][(int)info->x2];
-	set_colors(info, data);
-	apply_zoom(info, data->zoom);
-	calculate_steps(info, data);
+	*x = round(*x + data->distance * z * cos(data->x_angle));
+	*y = round(*y + data->distance * z * sin(data->y_angle));
 }
 
-void	set_x_y(float x, float y, t_draw *info, int x_or_y)
+void	isometric(int *x, int *y, int *z, t_info *data)
 {
-	info->x1 = x;
-	info->y1 = y;
-	if (x_or_y == 0)
-	{
-		info->x2 = x + 1;
-		info->y2 = y;
-	}
-	else
-	{
-		info->x2 = x;
-		info->y2 = y + 1;
-	}
+//	rotate_x(y, z, data);
+//	rotate_y(x, z, data);
+//	rotate_z(x, y, data);
+	int	new_x;
+	int	new_y;
+
+	new_x = round((*x - *y) * cos(data->x_angle));
+	new_y = round((*x + *y) * sin(data->y_angle) - ((*z * data->z_scale * data->zoom) / HEIGHT));
+	*x = new_x;
+	*y = new_y;
+}
+/*
+static void	rotate_x(int *y, int *z, t_info *data)
+{
+	int	prev_y;
+
+	prev_y = *y;
+	*y = prev_y * cos(data->x_angle) -
+		((*z * data->z_scale * data->zoom) / HEIGHT) * sin(data->x_angle);
+	*z = prev_y * sin(data->x_angle) + (((*z * data->z_scale * data->zoom) / HEIGHT) * cos(data->x_angle));
 }
 
-static void	set_colors(t_draw *info, t_info *data)
+static void	rotate_y(int *x, int *z, t_info *data)
 {
-	if (data->default_colors)
-	{
-		if (info->z1 > 0)
-			info->color_1 = RED;
-		else if (info->z1 < 0)
-			info->color_1 = BLUE;
-		else
-			info->color_1 = WHITE;
-		if (info->z2 > 0)
-			info->color_2 = RED;
-		else if (info->z2 < 0)
-			info->color_2 = BLUE;
-		else
-			info->color_2 = WHITE;
-	}
-	else
-	{
-		info->color_1 = data->colors[(int)info->y1][(int)info->x1];
-		info->color_2 = data->colors[(int)info->y2][(int)info->x2];
-	}
+	int	prev_x;
+
+	prev_x = *x;
+	*x = prev_x * cos(data->y_angle) - ((*z * data->z_scale * data->zoom) / HEIGHT) * sin(data->y_angle);
+	*z = prev_x * sin(data->y_angle) + ((*z * data->z_scale * data->zoom) / HEIGHT) * cos(data->y_angle);
 }
 
-static void	apply_zoom(t_draw *info, float zoom)
+static void	rotate_z(int *x, int *y, t_info *data)
 {
-	info->x1 *= zoom;
-	info->y1 *= zoom;
-	info->x2 *= zoom;
-	info->y2 *= zoom;
+	int	prev_x;
+
+	prev_x = *x;
+	*x = prev_x * cos(data->z_angle) - *y * sin(data->z_angle);
+	*y = prev_x * sin(data->z_angle) + *y * cos(data->z_angle);
 }
 
-static void	calculate_steps(t_draw *info, t_info *data)
-{
-	if (data->projection == 1)
-	{
-		isometric(&info->x1, &info->y1, info->z1, data);
-		isometric(&info->x2, &info->y2, info->z2, data);
-	}
-	else
-	{
-		parallel(&info->x1, &info->y1, info->z1, data);
-		parallel(&info->x2, &info->y2, info->z2, data);
-	}
-	info->x1 += data->shift_x;
-	info->y1 += data->shift_y;
-	info->x2 += data->shift_x;
-	info->y2 += data->shift_y;
-	info->x_step = info->x2 - info->x1;
-	info->y_step = info->y2 - info->y1;
-	if (d_abs(info->x_step) > d_abs(info->y_step))
-		info->max = d_abs(info->x_step);
-	else
-		info->max = d_abs(info->y_step);
-	info->x_step /= info->max;
-	info->y_step /= info->max;
-	info->fraction = 0.0;
-}
+*/
