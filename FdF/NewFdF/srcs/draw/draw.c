@@ -6,13 +6,14 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 18:00:43 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/01/07 13:11:02 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/07 18:24:39 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static void	draw(int x, int y, int x_or_y, t_info *data);
+static void	draw(t_bresenham *line, t_info *data);
+static void	prepare_line(int x, int y, int x_or_y, t_info *data);
 
 void	draw_lines(t_info *data)
 {
@@ -26,12 +27,43 @@ void	draw_lines(t_info *data)
 		while (x < data->width)
 		{
 			if (x + 1 < data->width)
-				draw(x, y, 1, data);
+				prepare_line(x, y, 1, data);
 			if (y + 1 < data->height)
-				draw(x, y, 0, data);
+				prepare_line(x, y, 0, data);
 			x++;
 		}
 		y++;
+	}
+}
+
+static void	set_xy(t_bresenham *line, int x, int y, int x_or_y)
+{
+	line->x = x;
+	line->y = y;
+	line->x1 = x;
+	line->y1 = y;
+	if (x_or_y == 1)
+		line->x1++;
+	else
+		line->y1++;
+}
+
+static void	prepare_line(int x, int y, int x_or_y, t_info *data)
+{
+	t_bresenham	line;
+
+	set_xy(&line, x, y, x_or_y);
+	line.z = data->xyz[line.y][line.x];
+	line.z1 = data->xyz[line.y1][line.x1];
+	set_colors(&line, data);
+	zoom(&line, data);
+	set_projection(&line, data);
+	shift(&line, data);
+	if (((line.x >= 0 || line.x1 >= 0) || (line.y >= 0 || line.y1 >= 0))
+		&& ((line.x < WIDTH || line.x1 < WIDTH) || (line.y < HEIGHT && line.y1 < HEIGHT)))
+	{
+		calculate_bresenham(&line);
+		draw(&line, data);
 	}
 }
 
@@ -48,7 +80,7 @@ static float	calculate_fraction(t_bresenham *line)
 		return ((float)line->y - line->start_y) / (float)(dy);
 	return (0);
 }
-static uint32_t	interpolate_color(t_bresenham *line)
+uint32_t	interpolate_color(t_bresenham *line)
 {
 	t_color			c_1;
 	t_color			c_2;
@@ -81,16 +113,8 @@ static int	within_bounds(t_bresenham *line)
 		&& line->y >= 0 && line->y < HEIGHT);
 }
 
-static void	draw(int x, int y, int x_or_y, t_info *data)
+static void	draw(t_bresenham *line, t_info *data)
 {
-	t_bresenham	*line;
-
-	line = malloc(sizeof(t_bresenham));
-	if (!line)
-		ft_exit_error(3, data);
-	line->x = x;
-	line->y = y;
-	calculate_line(line, x_or_y, data);
 	while (line->x != line->x1 || line->y != line->y1)
 	{
 		if (within_bounds(line))
@@ -107,5 +131,4 @@ static void	draw(int x, int y, int x_or_y, t_info *data)
 			line->y += line->step_y;
 		}
 	}
-	free(line);
 }

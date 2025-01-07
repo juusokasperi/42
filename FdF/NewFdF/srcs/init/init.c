@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 01:38:23 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/01/06 20:04:31 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/07 19:15:52 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ void	init_variables(t_info *data)
 	data->projection = 1;
 	data->x_angle = 0.523599;
 	data->y_angle = 0.523599;
+	data->z_angle = 0.523599;
 	data->default_colors = 1;
-	data->rotate = 0;
 }
 
 void	set_altitude(t_info *data)

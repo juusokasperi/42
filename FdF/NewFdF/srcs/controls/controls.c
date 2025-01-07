@@ -6,64 +6,47 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 01:25:03 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/01/06 19:53:41 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/07 19:00:46 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include <sys/time.h>
+#include <stdio.h>
 
-//static void	update_position(t_info *data);
-static void	handle_shift(mlx_key_data_t keydata, t_info *data);
-static void	handle_changes(mlx_key_data_t keydata, t_info *data);
+static void	handle_shift(t_info *data);
+static void	handle_changes(t_info *data);
 
-void	key_hook(mlx_key_data_t keydata, void *param)
+void	key_hook(void *param)
 {
 	t_info	*data;
+	struct timeval	stop, start;
 
+	gettimeofday(&start, NULL);
 	data = (t_info *)param;
-	handle_shift(keydata, data);
-	handle_changes(keydata, data);
+	handle_shift(data);
+	handle_changes(data);
 	clear_image(data);
 	draw_lines(data);
-	if (keydata.key == 256 && keydata.action == MLX_RELEASE)
+	gettimeofday(&stop, NULL);
+	printf("%lu ms\n", ((stop.tv_usec - start.tv_usec)));
+	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_ESCAPE))
 	{
 		mlx_terminate(data->mlx_ptr);
 		ft_exit(data);
 	}
 }
-/*
-static void	update_position(t_info *data)
-{
-	if (data->keys.up)
-		data->shift_y -= 10;
-	if (data->keys.down)
-		data->shift_y += 10;
-	if (data->keys.left)
-		data->shift_x -= 10;
-	if (data->keys.right)
-		data->shift_x += 10;
-}
-*/
 
-static void	handle_shift(mlx_key_data_t keydata, t_info *data)
+static void	handle_shift(t_info *data)
 {
-	if (keydata.key == 265 && keydata.action != MLX_RELEASE)
+	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_UP))
 		data->shift_y -= 10;
-//	if (keydata.key == 265 && keydata.action == MLX_RELEASE)
-//		data->keys.up = 0;
-	if (keydata.key == 264 && keydata.action != MLX_RELEASE)
+	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_DOWN))
 		data->shift_y += 10;
-//	if (keydata.key == 264 && keydata.action == MLX_RELEASE)
-//		data->keys.down = 0;
-	if (keydata.key == 263 && keydata.action != MLX_RELEASE)
+	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_LEFT))
 		data->shift_x -= 10;
-//	if (keydata.key == 263 && keydata.action == MLX_RELEASE)
-//		data->keys.left = 0;
-	if (keydata.key == 262 && keydata.action != MLX_RELEASE)
+	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_RIGHT))
 		data->shift_x += 10;
-//	if (keydata.key == 262 && keydata.action == MLX_RELEASE)
-//		data->keys.right = 0;
-//	update_position(data);
 }
 
 static void	handle_projection(t_info *data)
@@ -72,10 +55,10 @@ static void	handle_projection(t_info *data)
 		data->projection = 0;
 	else
 		data->projection = 1;
-	data->rotate = 0.0;
 	data->distance = 1;
 	data->x_angle = 0.523599;
 	data->y_angle = 0.523599;
+	data->z_angle = 0.523599;
 	set_altitude(data);
 	calculate_position(data);
 }
@@ -89,29 +72,28 @@ static void	handle_projection(t_info *data)
 /* Shift: 265 = up, 264 = down, 263 = left, 262 = right	*/
 /* **************************************************** */
 
-static void	handle_changes(mlx_key_data_t keydata, t_info *data)
+static void	handle_changes(t_info *data)
 {
-	if (keydata.key == 73 && keydata.action != MLX_RELEASE
-		&& data->distance > 0)
+	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_I) && data->distance > 0)
 		data->distance -= 1;
-	if (keydata.key == 79 && keydata.action != MLX_RELEASE)
+	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_O))
 		data->distance += 1;
-	if (keydata.key == 90 && keydata.action != MLX_RELEASE)
+	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_X))
 		data->zoom += 1;
-	if (keydata.key == 88 && keydata.action != MLX_RELEASE)
+	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_Z) && data->zoom > 1)
 		data->zoom -= 1;
-	if (keydata.key == 81 && keydata.action != MLX_RELEASE)
-		data->z_scale += 1;
-	if (keydata.key == 87 && keydata.action != MLX_RELEASE)
-		data->z_scale -= 1;
-	if (keydata.key == 65 && keydata.action != MLX_RELEASE)
+	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_W))
+		data->z_scale += 20;
+	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_Q))
+		data->z_scale -= 20;
+	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_A))
 		data->x_angle -= 0.005;
-	if (keydata.key == 83 && keydata.action != MLX_RELEASE)
+	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_S))
 		data->x_angle += 0.005;
-	if (keydata.key == 82 && keydata.action != MLX_RELEASE)
-		data->rotate += 0.05;
-	if (keydata.key == 84 && keydata.action != MLX_RELEASE)
-		data->rotate -= 0.05;
-	if (keydata.key == 75 && keydata.action != MLX_RELEASE)
+//	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_R))
+//		data->rotate += 0.05;
+//	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_T))
+//		data->rotate -= 0.05;
+	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_K))
 		handle_projection(data);
 }
