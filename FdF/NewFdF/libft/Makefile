@@ -1,7 +1,7 @@
 #	Sources
 SRCS =	checks/ft_count_digits.c	checks/ft_isalnum.c		checks/ft_isalpha.c		\
 		checks/ft_isascii.c			checks/ft_isdigit.c		checks/ft_isprint.c		\
-		checks/ft_isspace.c															\
+		checks/ft_isspace.c			checks/ft_min.c			checks/ft_max.c			\
 		conversion/ft_atoi.c		conversion/ft_itoa.c	conversion/ft_ltoa.c	\
 		conversion/ft_tolower.c		conversion/ft_toupper.c	conversion/ft_abs.c		\
 		conversion/ft_strtol.c														\

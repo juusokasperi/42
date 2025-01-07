@@ -20,9 +20,9 @@ CC =		cc
 CFLAGS +=	-Wall -Wextra -Werror -Wunreachable-code
 
 ##	Libs for MacOS:
-#LIBS =		$(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm -framework Cocoa -framework OpenGL -framework IOKit -L./libft -lft
+LIBS =		$(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm -framework Cocoa -framework OpenGL -framework IOKit -L./libft -lft
 ##	Libs for Linux:
-LIBS =		$(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm -L./libft -lft
+#LIBS =		$(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm -L./libft -lft
 LIBMLX =	./MLX42
 
 NAME =		fdf

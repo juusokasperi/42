@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 15:37:28 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/01/06 20:08:01 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/07 13:08:34 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 # include "libft.h"
 # include "MLX42/MLX42.h"
 
-# define WIDTH 2160
-# define HEIGHT 1440
+# define WIDTH 2160 / 2
+# define HEIGHT 1440 / 2
 # define WHITE 0xFFFFFFFF
 # define BLACK 0x000000FF
 # define RED 0xFF0000FF
@@ -36,6 +36,8 @@ enum {
 
 typedef struct s_bresenham
 {
+	int			start_x;
+	int			start_y;
 	int			x;
 	int			y;
 	int			x1;
@@ -45,7 +47,6 @@ typedef struct s_bresenham
 	int			step_x;
 	int			step_y;
 	int			max;
-	float		fraction;
 	int			err;
 	int			err_2;
 	int			z;
@@ -101,6 +102,21 @@ typedef struct s_info
 	mlx_t		*mlx_ptr;
 	mlx_image_t	*mlx_img;
 }	t_info;
+
+typedef struct	s_color
+{
+	uint8_t	r;
+	uint8_t	g;
+	uint8_t	b;
+}	t_color;
+
+typedef struct	s_interpolate
+{
+	float	f;
+	float	r;
+	float	g;
+	float	b;
+}	t_interpolate;
 
 // Main.c
 int		main(int argc, char **argv);

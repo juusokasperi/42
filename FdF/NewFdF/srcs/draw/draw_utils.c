@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 19:00:00 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/01/06 20:08:19 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/07 13:11:10 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,13 @@ void	calculate_line(t_bresenham *line, int x_or_y, t_info *data)
 	zoom(line, data);
 	set_projection(line, data);
 	shift(line, data);
+	line->start_x = line->x;
+	line->start_y = line->y;
 	line->diff_x = ft_abs(line->x1 - line->x);
 	line->diff_y = -(ft_abs(line->y1 - line->y));
 	line->err = line->diff_x + line->diff_y;
 	calculate_steps(line);
-	line->max = fmax(fabs((float)(line->step_x)), fabs((float)(line->step_y)));
+	line->max = ft_max(ft_abs(line->step_x), ft_abs(line->step_y));
 }
 
 void	parallel(int *x, int *y, int z, t_info *data)
