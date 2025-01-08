@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 15:38:00 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/01/08 11:14:37 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/08 18:11:16 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ int	main(int argc, char **argv)
 	if (!init_data(data))
 		ft_exit_error(3, data);
 	set_altitude(data);
-	calculate_position(data);
 	draw_lines(data);
 	mlx_key_hook(data->mlx_ptr, &key_hook, data);
 	mlx_loop_hook(data->mlx_ptr, &loop_hook, data);

@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 15:37:28 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/01/08 13:16:57 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/08 15:58:38 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,9 @@ typedef struct	s_color
 int		main(int argc, char **argv);
 void	clear_image(t_info *data);
 void	draw_instructions(t_info *data);
+void	calculate_cam(t_info *data);
 // Init
 void	init_variables(t_info *data);
-void	calculate_position(t_info *data);
 int		init_data(t_info *data);
 void	set_altitude(t_info *data);
 // Read_map.c

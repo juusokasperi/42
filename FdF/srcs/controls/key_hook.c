@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 12:04:13 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/01/08 12:06:07 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/08 15:58:29 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,5 @@ static void	handle_projection(t_info *data)
 	else
 		data->projection = 0;
 	reset_angles(data);
-	calculate_position(data);
+//	calculate_position(data);
 }

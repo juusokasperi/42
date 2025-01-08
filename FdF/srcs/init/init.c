@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 01:38:23 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/01/08 12:03:08 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/08 18:11:55 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,11 @@ void	init_variables(t_info *data)
 	data->y_angle = 0;
 	data->z_angle = 0;
 	data->default_colors = 1;
+}
+
+void	calculate_cam(t_info *data)
+{
+	data->zoom = ft_min(HEIGHT / data->height * 0.7, WIDTH / data->width * 0.7);
 }
 
 void	set_altitude(t_info *data)

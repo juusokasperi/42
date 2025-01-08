@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 22:31:35 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/01/07 20:55:41 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/08 18:11:00 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	read_map(char *filename, t_info *data)
 		return (3);
 	if (!colors_handler(filename, data))
 		return (3);
+	calculate_cam(data);
 	return (0);
 }
 

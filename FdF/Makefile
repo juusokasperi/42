@@ -4,7 +4,7 @@ SRCS =	main.c \
 		draw/draw.c				draw/transformations.c		draw/draw_utils.c			\
 		draw/draw_utils_2.c																\
 		controls/loop_hook.c	controls/key_hook.c										\
-		init/init.c				init/calculate.c										\
+		init/init.c																		\
 		exit.c
 SRC_DIR =	srcs/
 
@@ -22,7 +22,7 @@ CFLAGS +=	-Wall -Wextra -Werror -Wunreachable-code -Ofast
 
 LIBS =		$(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm -L./libft -lft
 ##	Libs for MacOS:
-LIBS +=		-framework Cocoa -framework OpenGL -framework IOKit
+#LIBS +=		-framework Cocoa -framework OpenGL -framework IOKit
 LIBMLX =	./MLX42
 
 NAME =		fdf

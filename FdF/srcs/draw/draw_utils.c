@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 20:05:05 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/01/08 13:15:56 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/08 18:10:10 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	zoom(t_bresenham *line, t_info *data)
 {
-	line->x *= data->zoom;
-	line->x1 *= data->zoom;
-	line->y *= data->zoom;
-	line->y1 *= data->zoom;
+	line->x = line->x * data->zoom - (data->width / 2) * data->zoom;
+	line->y = line->y * data->zoom - (data->height / 2) * data->zoom;
+	line->x1 = line->x1 * data->zoom - (data->width / 2) * data->zoom;
+	line->y1 = line->y1 * data->zoom - (data->height / 2) * data->zoom;
 }
 
 void	calculate_bresenham(t_bresenham *line)
@@ -40,10 +40,10 @@ void	calculate_bresenham(t_bresenham *line)
 
 void	shift(t_bresenham *line, t_info *data)
 {
-	line->x += data->shift_x;
-	line->x1 += data->shift_x;
-	line->y += data->shift_y;
-	line->y1 += data->shift_y;
+	line->x += data->shift_x + WIDTH / 2;
+	line->x1 += data->shift_x + WIDTH / 2;
+	line->y += data->shift_y + HEIGHT / 2;
+	line->y1 += data->shift_y + HEIGHT / 2;
 }
 
 void	set_projection(t_bresenham *line, t_info *data)
