@@ -1,8 +1,9 @@
 #	Sources
 SRCS =	main.c \
 		read_map/read_map.c		read_map/read_map_utils.c	read_map/read_map_utils_2.c	\
-		draw/draw.c				draw/draw_utils.c			draw/draw_utils_2.c			\
-		controls/controls.c																\
+		draw/draw.c				draw/transformations.c		draw/draw_utils.c			\
+		draw/draw_utils_2.c																\
+		controls/loop_hook.c	controls/key_hook.c										\
 		init/init.c				init/calculate.c										\
 		exit.c
 SRC_DIR =	srcs/
@@ -19,10 +20,9 @@ HEADERS_PATH =	-I./incs -I$(LIBMLX)/include -I./libft/includes
 CC =		cc
 CFLAGS +=	-Wall -Wextra -Werror -Wunreachable-code -Ofast
 
-##	Libs for MacOS:
-#LIBS =		$(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm -framework Cocoa -framework OpenGL -framework IOKit -L./libft -lft
-##	Libs for Linux:
 LIBS =		$(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm -L./libft -lft
+##	Libs for MacOS:
+LIBS +=		-framework Cocoa -framework OpenGL -framework IOKit
 LIBMLX =	./MLX42
 
 NAME =		fdf

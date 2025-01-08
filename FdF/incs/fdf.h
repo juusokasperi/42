@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 15:37:28 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/01/07 19:12:51 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/08 13:16:57 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,14 @@
 # include "libft.h"
 # include "MLX42/MLX42.h"
 
-# define WIDTH 2160
-# define HEIGHT 1440
+# ifdef __APPLE__
+#  define WIDTH 1080
+#  define HEIGHT 720
+# else
+#  define WIDTH 2160
+#  define HEIGHT 1440
+# endif
+
 # define WHITE 0xFFFFFFFF
 # define BLACK 0x000000FF
 # define RED 0xFF0000FF
@@ -67,7 +73,6 @@ typedef struct s_info
 	float		x_angle;
 	float		y_angle;
 	float		z_angle;
-	int			distance;
 	int			projection;
 	int			default_colors;
 	int			highest_z;
@@ -84,19 +89,12 @@ typedef struct	s_color
 	uint8_t	b;
 }	t_color;
 
-typedef struct	s_interpolate
-{
-	float	f;
-	float	r;
-	float	g;
-	float	b;
-}	t_interpolate;
-
 // Main.c
 int		main(int argc, char **argv);
 void	clear_image(t_info *data);
 void	draw_instructions(t_info *data);
 // Init
+void	init_variables(t_info *data);
 void	calculate_position(t_info *data);
 int		init_data(t_info *data);
 void	set_altitude(t_info *data);
@@ -111,15 +109,18 @@ int		get_width(char *filename);
 // Draw.c
 void	draw_lines(t_info *data);
 void	isometric(int *x, int *y, int *z, t_info *data);
-void	parallel(int *x, int *y, int z, t_info *data);
+void	orthographic(int *x, int *y, int z, t_info *data);
 void	set_colors(t_bresenham *line, t_info *data);
 void	set_projection(t_bresenham *line, t_info *data);
 void	shift(t_bresenham *line, t_info *data);
 void	calculate_bresenham(t_bresenham *line);
 void	zoom(t_bresenham *line, t_info *data);
 uint32_t	interpolate_color(t_bresenham *line);
+void	set_xy(t_bresenham *line, int x, int y, int x_or_y);
 // Controls.c
-void	key_hook(void *param);
+void	reset_angles(t_info *data);
+void	loop_hook(void *param);
+void	key_hook(mlx_key_data_t keydata, void *param);
 // Exit.c
 void	ft_exit(t_info *data);
 void	ft_exit_error(int i, t_info *data);

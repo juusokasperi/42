@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 22:31:35 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/12/17 19:49:24 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/07 20:55:41 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ static int	get_colors(char *filename, t_info *data);
 
 int	read_map(char *filename, t_info *data)
 {
+	init_variables(data);
 	data->height = get_height(filename);
 	data->width = get_width(filename);
 	if (data->width == -1 || data->height == 0)

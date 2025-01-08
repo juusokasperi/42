@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 01:38:23 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/01/07 19:15:52 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/08 12:03:08 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,27 +22,25 @@ void	init_variables(t_info *data)
 	data->highest_z = 0;
 	data->lowest_z = 0;
 	data->z_scale = 1;
-	data->distance = 1;
-	data->projection = 1;
-	data->x_angle = 0.523599;
-	data->y_angle = 0.523599;
-	data->z_angle = 0.523599;
+	data->projection = 0;
+	data->x_angle = 0;
+	data->y_angle = 0;
+	data->z_angle = 0;
 	data->default_colors = 1;
 }
 
 void	set_altitude(t_info *data)
 {
 	if (ft_abs(data->highest_z) + ft_abs(data->lowest_z) > 50)
-		data->z_scale = 2;
+		data->z_scale = 40;
 	else if (ft_abs(data->highest_z) + ft_abs(data->lowest_z) > 25)
-		data->z_scale = 3;
+		data->z_scale = 60;
 	else
-		data->z_scale = 5;
+		data->z_scale = 80;
 }
 
 int	init_data(t_info *data)
 {
-	init_variables(data);
 	data->mlx_ptr = mlx_init(WIDTH, HEIGHT, "FdF jrinta-42", false);
 	data->mlx_img = mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT);
 	if (!data->mlx_ptr || !data->mlx_img
@@ -54,4 +52,11 @@ int	init_data(t_info *data)
 	clear_image(data);
 	draw_instructions(data);
 	return (1);
+}
+
+void	reset_angles(t_info *data)
+{
+	data->x_angle = 0;
+	data->y_angle = 0;
+	data->z_angle = 0;
 }
