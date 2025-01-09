@@ -6,13 +6,12 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 15:33:35 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/12/17 19:49:20 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/09 19:34:57 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-// Tarviiko vielä error handlingin jos esim get_next_line palauttaa NULL heti?
 static uint32_t	hex_to_rgba(const char *hex);
 static int		free_split(char **split);
 

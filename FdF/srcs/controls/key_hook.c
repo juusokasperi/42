@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 12:04:13 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/01/08 15:58:29 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/09 17:42:23 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,18 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 static void	handle_toggles(mlx_key_data_t keydata, t_info *data)
 {
 	if (keydata.key == MLX_KEY_C && keydata.action == MLX_RELEASE)
-		data->default_colors = !data->default_colors;
+		data->default_colors = (data->default_colors + 1) % 4;
 	if (keydata.key == MLX_KEY_P && keydata.action == MLX_RELEASE)
 		handle_projection(data);
 	if (keydata.key == MLX_KEY_R && keydata.action == MLX_RELEASE)
 		reset_angles(data);
-	if (keydata.key == MLX_KEY_A && keydata.action == MLX_RELEASE)
+	if (keydata.key == MLX_KEY_T && keydata.action == MLX_RELEASE)
 		set_altitude(data);
+	if (keydata.key == MLX_KEY_Y && keydata.action == MLX_RELEASE)
+	{
+		data->shift_x = 0;
+		data->shift_y = 0;
+	}
 }
 
 static void	handle_projection(t_info *data)
@@ -46,6 +51,8 @@ static void	handle_projection(t_info *data)
 		data->projection++;
 	else
 		data->projection = 0;
+	data->shift_x = 0;
+	data->shift_y = 0;
+	calculate_cam(data);
 	reset_angles(data);
-//	calculate_position(data);
 }

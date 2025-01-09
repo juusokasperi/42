@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 01:38:23 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/01/08 18:11:55 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/09 18:03:37 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	init_variables(t_info *data)
 	data->height = 0;
 	data->xyz = NULL;
 	data->colors = NULL;
-	data->zoom = 50;
 	data->highest_z = 0;
 	data->lowest_z = 0;
 	data->z_scale = 1;
@@ -26,12 +25,18 @@ void	init_variables(t_info *data)
 	data->x_angle = 0;
 	data->y_angle = 0;
 	data->z_angle = 0;
-	data->default_colors = 1;
+	data->default_colors = 2;
 }
 
 void	calculate_cam(t_info *data)
 {
-	data->zoom = ft_min(HEIGHT / data->height * 0.7, WIDTH / data->width * 0.7);
+	int	zoom;
+
+	zoom = ft_min(HEIGHT / data->height * 0.7, WIDTH / data->width * 0.7);
+	if (zoom != 0)
+		data->zoom = zoom;
+	else
+		data->zoom = 1;
 }
 
 void	set_altitude(t_info *data)
@@ -44,19 +49,15 @@ void	set_altitude(t_info *data)
 		data->z_scale = 80;
 }
 
-int	init_data(t_info *data)
+void	init_data(t_info *data)
 {
-	data->mlx_ptr = mlx_init(WIDTH, HEIGHT, "FdF jrinta-42", false);
-	data->mlx_img = mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT);
+	data->mlx_ptr = mlx_init(WIDTH + INFO_W, HEIGHT, "FdF jrinta-42", false);
+	data->mlx_img = mlx_new_image(data->mlx_ptr, WIDTH + INFO_W, HEIGHT);
 	if (!data->mlx_ptr || !data->mlx_img
 		|| (mlx_image_to_window(data->mlx_ptr, data->mlx_img, 0, 0) < 0))
-	{
-		free(data);
-		return (0);
-	}
+		ft_exit_error(4, data);
 	clear_image(data);
 	draw_instructions(data);
-	return (1);
 }
 
 void	reset_angles(t_info *data)

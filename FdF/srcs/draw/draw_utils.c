@@ -6,11 +6,23 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 20:05:05 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/01/08 18:10:10 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/09 19:29:22 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+void	set_xy(t_bresenham *line, int x, int y, int x_or_y)
+{
+	line->x = x;
+	line->y = y;
+	line->x1 = x;
+	line->y1 = y;
+	if (x_or_y == 1)
+		line->x1++;
+	else
+		line->y1++;
+}
 
 void	zoom(t_bresenham *line, t_info *data)
 {
@@ -57,29 +69,5 @@ void	set_projection(t_bresenham *line, t_info *data)
 	{
 		orthographic(&line->x, &line->y, line->z, data);
 		orthographic(&line->x1, &line->y1, line->z1, data);
-	}
-}
-
-void	set_colors(t_bresenham *line, t_info *data)
-{
-	if (data->default_colors)
-	{
-		if (line->z > 0)
-			line->color_1 = RED;
-		else if (line->z < 0)
-			line->color_1 = BLUE;
-		else
-			line->color_1 = WHITE;
-		if (line->z1 > 0)
-			line->color_2 = RED;
-		else if (line->z1 < 0)
-			line->color_2 = BLUE;
-		else
-			line->color_2 = WHITE;
-	}
-	else
-	{
-		line->color_1 = data->colors[line->y][line->x];
-		line->color_2 = data->colors[line->y1][line->x1];
 	}
 }

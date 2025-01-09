@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 18:00:43 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/01/08 15:58:30 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/09 19:36:34 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static void	draw(t_bresenham *line, t_info *data);
 static void	prepare_line(int x, int y, int x_or_y, t_info *data);
+static int	within_bounds(int x, int y);
 
 void	draw_lines(t_info *data)
 {
@@ -56,17 +57,17 @@ static void	prepare_line(int x, int y, int x_or_y, t_info *data)
 	}
 }
 
-static int	within_bounds(t_bresenham *line)
+static int	within_bounds(int x, int y)
 {
-	return (line->x >= 0 && line->x < WIDTH
-		&& line->y >= 0 && line->y < HEIGHT);
+	return (x >= 0 && x < WIDTH
+		&& y >= 0 && y < HEIGHT);
 }
 
 static void	draw(t_bresenham *line, t_info *data)
 {
 	while (line->x != line->x1 || line->y != line->y1)
 	{
-		if (within_bounds(line))
+		if (within_bounds(line->x, line->y))
 			mlx_put_pixel(data->mlx_img, line->x,
 				line->y, interpolate_color(line));
 		line->err_2 = 2 * line->err;

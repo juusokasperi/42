@@ -2,9 +2,9 @@
 SRCS =	main.c \
 		read_map/read_map.c		read_map/read_map_utils.c	read_map/read_map_utils_2.c	\
 		draw/draw.c				draw/transformations.c		draw/draw_utils.c			\
-		draw/draw_utils_2.c																\
+		draw/colors.c																	\
 		controls/loop_hook.c	controls/key_hook.c										\
-		init/init.c																		\
+		init/init.c				init/info.c												\
 		exit.c
 SRC_DIR =	srcs/
 
@@ -13,7 +13,7 @@ OBJ_DIR =	objs/
 OBJS =		$(addprefix $(OBJ_DIR), $(SRCS:.c=.o))
 
 #	Headers
-HEADERS =		incs/fdf.h incs/terminal_colors.h
+HEADERS =		incs/fdf.h
 HEADERS_PATH =	-I./incs -I$(LIBMLX)/include -I./libft/includes
 
 #	Compiler
@@ -22,7 +22,7 @@ CFLAGS +=	-Wall -Wextra -Werror -Wunreachable-code -Ofast
 
 LIBS =		$(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm -L./libft -lft
 ##	Libs for MacOS:
-#LIBS +=		-framework Cocoa -framework OpenGL -framework IOKit
+LIBS +=		-framework Cocoa -framework OpenGL -framework IOKit
 LIBMLX =	./MLX42
 
 NAME =		fdf

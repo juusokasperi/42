@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 20:47:19 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/01/04 16:39:57 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/09 18:02:21 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ void	ft_exit_error(int i, t_info *data)
 		error_message = "Malloc failed.";
 	else if (i == 4)
 		error_message = "Found wrong line length. Exiting.";
+	else if (i == 5)
+		error_message = "MLX error.";
 	else
 		error_message = "Unknown error.";
 	ft_printf("%sERROR:%s ", TRED, TRESET);

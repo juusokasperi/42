@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 15:37:28 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/01/08 15:58:38 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/09 19:46:54 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,25 +20,18 @@
 # include "MLX42/MLX42.h"
 
 # ifdef __APPLE__
-#  define WIDTH 1080
-#  define HEIGHT 720
+#  define WIDTH 1024
+#  define HEIGHT 666
 # else
 #  define WIDTH 2160
 #  define HEIGHT 1440
 # endif
-
+# define INFO_W 256
 # define WHITE 0xFFFFFFFF
 # define BLACK 0x000000FF
 # define RED 0xFF0000FF
 # define BLUE 0x0000FFFF
-
-enum {
-	LEFT,
-	RIGHT,
-	TOP,
-	BOTTOM,
-	CENTER_X
-};
+# define TRANSPARENT 0x00000000
 
 typedef struct s_bresenham
 {
@@ -82,7 +75,7 @@ typedef struct s_info
 	mlx_image_t	*mlx_img;
 }	t_info;
 
-typedef struct	s_color
+typedef struct s_color
 {
 	uint8_t	r;
 	uint8_t	g;
@@ -90,39 +83,43 @@ typedef struct	s_color
 }	t_color;
 
 // Main.c
-int		main(int argc, char **argv);
-void	clear_image(t_info *data);
-void	draw_instructions(t_info *data);
-void	calculate_cam(t_info *data);
-// Init
-void	init_variables(t_info *data);
-int		init_data(t_info *data);
-void	set_altitude(t_info *data);
+void		clear_image(t_info *data);
+// Init.c
+void		init_variables(t_info *data);
+void		calculate_cam(t_info *data);
+void		init_data(t_info *data);
+void		set_altitude(t_info *data);
+void		reset_angles(t_info *data);
+// Info.c
+void		draw_instructions(t_info *data);
 // Read_map.c
-int		read_map(char *filename, t_info *data);
+int			read_map(char *filename, t_info *data);
 // Read_map_utils.c
-int		fill_xyz(int *z, char *line, t_info *data);
-int		fill_colors(uint32_t *colors, char *line, t_info *data);
-int		count_words(char *line);
-int		get_height(char *filename);
-int		get_width(char *filename);
+int			fill_xyz(int *z, char *line, t_info *data);
+int			fill_colors(uint32_t *colors, char *line, t_info *data);
+// Read_map_utils_2.c
+int			count_words(char *line);
+int			get_height(char *filename);
+int			get_width(char *filename);
 // Draw.c
-void	draw_lines(t_info *data);
-void	isometric(int *x, int *y, int *z, t_info *data);
-void	orthographic(int *x, int *y, int z, t_info *data);
-void	set_colors(t_bresenham *line, t_info *data);
-void	set_projection(t_bresenham *line, t_info *data);
-void	shift(t_bresenham *line, t_info *data);
-void	calculate_bresenham(t_bresenham *line);
-void	zoom(t_bresenham *line, t_info *data);
+void		draw_lines(t_info *data);
+// Draw_utils.c
+void		set_xy(t_bresenham *line, int x, int y, int x_or_y);
+void		zoom(t_bresenham *line, t_info *data);
+void		calculate_bresenham(t_bresenham *line);
+void		shift(t_bresenham *line, t_info *data);
+void		set_projection(t_bresenham *line, t_info *data);
+// Colors.c
+void		set_colors(t_bresenham *line, t_info *data);
 uint32_t	interpolate_color(t_bresenham *line);
-void	set_xy(t_bresenham *line, int x, int y, int x_or_y);
+// Transformations.c
+void		isometric(int *x, int *y, int *z, t_info *data);
+void		orthographic(int *x, int *y, int z, t_info *data);
 // Controls.c
-void	reset_angles(t_info *data);
-void	loop_hook(void *param);
-void	key_hook(mlx_key_data_t keydata, void *param);
+void		loop_hook(void *param);
+void		key_hook(mlx_key_data_t keydata, void *param);
 // Exit.c
-void	ft_exit(t_info *data);
-void	ft_exit_error(int i, t_info *data);
+void		ft_exit(t_info *data);
+void		ft_exit_error(int i, t_info *data);
 
 #endif
