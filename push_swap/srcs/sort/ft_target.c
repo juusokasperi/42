@@ -6,14 +6,14 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 21:51:11 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/12/27 18:45:22 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/10 18:10:21 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 static void	ft_current_position(t_stack **stack);
-static int	ft_get_target(t_stack **stack_a, int b_rank, int target_position);
+static int	ft_get_target(t_stack **stack_a, int b_rank);
 
 void	ft_target(t_stack **stack_a, t_stack **stack_b)
 {
@@ -23,10 +23,9 @@ void	ft_target(t_stack **stack_a, t_stack **stack_b)
 	tmp_b = *stack_b;
 	ft_current_position(stack_a);
 	ft_current_position(stack_b);
-	target = 0;
 	while (tmp_b)
 	{
-		target = ft_get_target(stack_a, tmp_b->rank, target);
+		target = ft_get_target(stack_a, tmp_b->rank);
 		tmp_b->target = target;
 		tmp_b = tmp_b->next;
 	}
@@ -46,12 +45,14 @@ static void	ft_current_position(t_stack **stack)
 	}
 }
 
-static int	ft_get_target(t_stack **stack_a, int b_rank, int target_position)
+static int	ft_get_target(t_stack **stack_a, int b_rank)
 {
 	t_stack	*tmp_a;
+	int		target_position;
 	int		target_rank;
 
 	tmp_a = *stack_a;
+	target_position = 0;
 	target_rank = INT_MAX;
 	while (tmp_a)
 	{
