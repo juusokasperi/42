@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 01:25:03 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/01/09 19:43:20 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/10 15:33:53 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,12 @@ static void	handle_changes(t_info *data);
 void	loop_hook(void *param)
 {
 	t_info	*data;
-//	struct timeval	stop, start;
 
-//	gettimeofday(&start, NULL);
 	data = (t_info *)param;
 	handle_shift(data);
 	handle_changes(data);
 	clear_image(data);
 	draw_lines(data);
-//	gettimeofday(&stop, NULL);
-//	printf("%d ms\n", ((stop.tv_usec - start.tv_usec)));
 }
 
 static void	handle_shift(t_info *data)

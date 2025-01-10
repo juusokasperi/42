@@ -14,16 +14,17 @@ OBJS =		$(addprefix $(OBJ_DIR), $(SRCS:.c=.o))
 
 #	Headers
 HEADERS =		incs/fdf.h
-HEADERS_PATH =	-I./incs -I$(LIBMLX)/include -I./libft/includes
+HEADERS_PATH =	-I./incs -I$(LIBMLX_DIR)/include -I./libft/includes
 
 #	Compiler
 CC =		cc
 CFLAGS +=	-Wall -Wextra -Werror -Wunreachable-code -Ofast
 
-LIBS =		$(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm -L./libft -lft
+LIBS =		$(LIBMLX) -ldl -lglfw -pthread -lm -L./libft -lft
 ##	Libs for MacOS:
-LIBS +=		-framework Cocoa -framework OpenGL -framework IOKit
-LIBMLX =	./MLX42
+#LIBS +=		-framework Cocoa -framework OpenGL -framework IOKit
+LIBMLX_DIR =	./MLX42
+LIBMLX = $(LIBMLX_DIR)/build/libmlx42.a
 
 NAME =		fdf
 LIBFT =		libft/libft.a
@@ -39,28 +40,28 @@ all: $(NAME)
 $(LIBFT): phony
 	@make -C libft
 
-libmlx: phony
-	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
+$(LIBMLX):
+	@cmake $(LIBMLX_DIR) -B $(LIBMLX_DIR)/build && make -C $(LIBMLX_DIR)/build -j4
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c $(HEADERS)
 	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS_PATH)
 
-$(NAME): $(LIBFT) libmlx $(OBJS)
+$(NAME): $(LIBFT) $(LIBMLX) $(OBJS)
 	@$(CC) $(OBJS) $(LIBS) $(HEADERS_PATH) -o $(NAME)
 	@echo "$(GREEN)✅ FdF: Compilation complete!$(ENDCOLOR)"
 
 clean:
 	@make -C ./libft clean
 	@rm -rf $(OBJ_DIR)
-	@rm -rf $(LIBMLX)/build
+	@rm -rf $(LIBMLX_DIR)/build
 	@echo "$(RED)✅ FdF: Clean complete.$(ENDCOLOR)"
 
 fclean:
 	@make -C ./libft fclean
-	@rm -rf $(OBJ_DIR) $(LIBMLX)/build $(NAME) $(LIBFT)
+	@rm -rf $(OBJ_DIR) $(LIBMLX_DIR)/build $(NAME) $(LIBFT)
 	@echo "$(RED)✅ FdF: FClean complete.$(ENDCOLOR)"
 
 re: fclean all
 
-.PHONY: all clean fclean re libmlx phony
+.PHONY: all clean fclean re libmlx_DIR phony

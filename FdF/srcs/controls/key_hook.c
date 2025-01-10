@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 12:04:13 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/01/09 17:42:23 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/10 14:11:40 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,13 @@ static void	handle_toggles(mlx_key_data_t keydata, t_info *data)
 	{
 		data->shift_x = 0;
 		data->shift_y = 0;
+		calculate_cam(data);
 	}
 }
 
 static void	handle_projection(t_info *data)
 {
-	if (data->projection < 3)
-		data->projection++;
-	else
-		data->projection = 0;
+	data->projection = (data->projection + 1) % 4;
 	data->shift_x = 0;
 	data->shift_y = 0;
 	calculate_cam(data);

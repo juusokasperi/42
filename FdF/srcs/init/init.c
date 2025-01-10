@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 01:38:23 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/01/09 18:03:37 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/10 15:33:28 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,23 +30,21 @@ void	init_variables(t_info *data)
 
 void	calculate_cam(t_info *data)
 {
-	int	zoom;
-
-	zoom = ft_min(HEIGHT / data->height * 0.7, WIDTH / data->width * 0.7);
-	if (zoom != 0)
-		data->zoom = zoom;
-	else
+	data->zoom = ceil(fmin(HEIGHT / data->height * 0.7, WIDTH / data->width * 0.7));
+	if (data->zoom == 0)
 		data->zoom = 1;
 }
 
 void	set_altitude(t_info *data)
 {
+	data->z_scale = 80;
 	if (ft_abs(data->highest_z) + ft_abs(data->lowest_z) > 50)
-		data->z_scale = 40;
-	else if (ft_abs(data->highest_z) + ft_abs(data->lowest_z) > 25)
-		data->z_scale = 60;
-	else
-		data->z_scale = 80;
+		data->z_scale /= 2;
+	else if (ft_min(data->height, data->width) > 20)
+		data->z_scale *= data->zoom / 2;
+	else if (ft_abs(data->highest_z) + ft_abs(data->lowest_z) <= 20
+		&& ft_min(data->height, data->width) <= 20)
+		data->z_scale *= 2;
 }
 
 void	init_data(t_info *data)
