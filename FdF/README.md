@@ -1,5 +1,5 @@
 ### FdF
-![<img src="./img/fdf.png" width="200" alt="FdF example" />](/FdF/img/fdf.png)
+![<img src="./img/fdf.png" width="100" alt="FdF example" />](/FdF/img/fdf.png)
 - Program that reads a 2D map (example below) and draws a 3D wireframe model of it.
 ```
 0 1 0
