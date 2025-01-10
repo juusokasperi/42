@@ -2,7 +2,7 @@
 SRCS =	main.c \
 		read_map/read_map.c		read_map/read_map_utils.c	read_map/read_map_utils_2.c	\
 		draw/draw.c				draw/transformations.c		draw/draw_utils.c			\
-		draw/colors.c																	\
+		draw/colors.c			draw/rotation.c											\
 		controls/loop_hook.c	controls/key_hook.c										\
 		init/init.c				init/info.c												\
 		exit.c

@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 01:25:03 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/01/10 15:33:53 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/11 00:27:59 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,13 @@ void	loop_hook(void *param)
 
 static void	handle_shift(t_info *data)
 {
-	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_UP))
+	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_UP) && data->projection != 4)
 		data->shift_y -= 10;
-	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_DOWN))
+	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_DOWN) && data->projection != 4)
 		data->shift_y += 10;
-	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_LEFT))
+	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_LEFT) && data->projection != 4)
 		data->shift_x -= 10;
-	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_RIGHT))
+	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_RIGHT) && data->projection != 4)
 		data->shift_x += 10;
 }
 

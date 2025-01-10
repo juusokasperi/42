@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 12:04:13 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/01/10 14:11:40 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/10 23:15:56 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void	handle_toggles(mlx_key_data_t keydata, t_info *data)
 
 static void	handle_projection(t_info *data)
 {
-	data->projection = (data->projection + 1) % 4;
+	data->projection = (data->projection + 1) % 5;
 	data->shift_x = 0;
 	data->shift_y = 0;
 	calculate_cam(data);

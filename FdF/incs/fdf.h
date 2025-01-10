@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 15:37:28 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/01/09 19:46:54 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/10 23:17:44 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,9 +112,14 @@ void		set_projection(t_bresenham *line, t_info *data);
 // Colors.c
 void		set_colors(t_bresenham *line, t_info *data);
 uint32_t	interpolate_color(t_bresenham *line);
+// Rotation.c
+void		rotate_x(int *y, int *z, t_info *data);
+void		rotate_y(int *x, int *z, t_info *data);
+void		rotate_z(int *x, int *y, t_info *data);
 // Transformations.c
-void		isometric(int *x, int *y, int *z, t_info *data);
+void		isometric(int *x, int *y, int z, t_info *data);
 void		orthographic(int *x, int *y, int z, t_info *data);
+void		perspective(int *x, int *y, int z, t_info *data);
 // Controls.c
 void		loop_hook(void *param);
 void		key_hook(mlx_key_data_t keydata, void *param);
