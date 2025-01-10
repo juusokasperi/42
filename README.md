@@ -1,31 +1,16 @@
 # My 42 projects
 
-### myLibft
-- My libft with additions:
-```
-ft_printf
-get_next_line
-ft_free
-ft_count_digits
-ft_abs
-ft_ltoi
-ft_strtol
-ft_error
-ft_realloc
-```
-- All the put -functions are edited to return the value of write.
-
 ## Rank 00
 
-### Libft
-- Finished, 125/100.
+### [myLibft](/myLibft)
+- Standard function library, includes the projects ft_printf and get_next_line
 
 ## Rank 01
 
-### Ft_printf
+### [Ft_printf](/myLibft)
 - Finished, 100/100.
 
-### Get_next_line
+### [Get_next_line](/myLibft)
 - Finished, 125/100.
 
 ### Born2beroot
@@ -40,4 +25,4 @@ _Wrote Dec 2024_
 - To test with a really long string, run `cat ./text.txt|xargs -0 ./client <SERVER_PID>`
 
 ### push_swap
-_Wrote Nov-Dec 2024_
+- Simple sorting algorithm that sorts stack_a using a predefined set of instructions and a spare stack_b.
