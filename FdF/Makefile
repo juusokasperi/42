@@ -63,14 +63,13 @@ $(NAME): $(LIBFT) $(LIBMLX) $(OBJS)
 clean:
 	@make -C ./libft clean
 	@rm -rf $(OBJ_DIR)
-	@rm -rf $(LIBMLX_DIR)/build
 	@echo "$(RED)✅ FdF: Clean complete.$(ENDCOLOR)"
 
 fclean:
 	@make -C ./libft fclean
-	@rm -rf $(OBJ_DIR) $(LIBMLX_DIR) $(NAME) $(LIBFT)
+	@rm -rf $(OBJ_DIR) $(LIBMLX_DIR) $(NAME)
 	@echo "$(RED)✅ FdF: FClean complete.$(ENDCOLOR)"
 
 re: fclean all
 
-.PHONY: all clean fclean re libmlx_DIR phony
+.PHONY: all clean fclean re phony
