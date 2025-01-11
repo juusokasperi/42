@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 01:25:03 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/01/11 00:27:59 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/11 14:07:51 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ static void	handle_shift(t_info *data)
 
 static void	handle_changes(t_info *data)
 {
-	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_X))
+	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_X) && data->projection != 4)
 		data->zoom += 1;
-	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_Z) && data->zoom > 1)
+	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_Z) && data->zoom > 1 && data->projection != 4)
 		data->zoom -= 1;
 	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_W))
 		data->z_scale += 20;

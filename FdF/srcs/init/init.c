@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 01:38:23 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/01/10 15:33:28 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/11 14:00:53 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,11 @@ void	reset_angles(t_info *data)
 	data->x_angle = 0;
 	data->y_angle = 0;
 	data->z_angle = 0;
+	if (data->projection == 2)
+		data->x_angle = 1.570796;
+	else if (data->projection == 3)
+	{
+		data->y_angle = 1.570796;
+		data->z_angle = -1.570796;
+	}
 }
