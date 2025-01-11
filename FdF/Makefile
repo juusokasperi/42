@@ -25,6 +25,9 @@ LIBS =		$(LIBMLX) -ldl -lglfw -pthread -lm -L./libft -lft
 #LIBS +=		-framework Cocoa -framework OpenGL -framework IOKit
 LIBMLX_DIR =	./MLX42
 LIBMLX = $(LIBMLX_DIR)/build/libmlx42.a
+LIBMLX_GIT = https://github.com/codam-coding-college/MLX42.git
+
+
 
 NAME =		fdf
 LIBFT =		libft/libft.a
@@ -32,6 +35,7 @@ LIBFT =		libft/libft.a
 #	Colors
 RED =		\033[0;31m
 GREEN =		\033[0;32m
+YELLOW =	\033[0;33m
 ENDCOLOR =	\033[0m
 
 #	Rules
@@ -41,7 +45,12 @@ $(LIBFT): phony
 	@make -C libft
 
 $(LIBMLX):
+	@if [ ! -d "$(LIBMLX_DIR)" ] || [ -z "$$(ls -A $(LIBMLX_DIR) 2>/dev/null)" ]; then \
+		echo "$(YELLOW)🟡 MLX42: Cloning MLX42 repository..$(ENDCOLOR)"; \
+		git clone $(LIBMLX_GIT) $(LIBMLX_DIR); \
+	fi
 	@cmake $(LIBMLX_DIR) -B $(LIBMLX_DIR)/build && make -C $(LIBMLX_DIR)/build -j4
+	@echo "$(GREEN)✅ MLX42: Library compiled.$(ENDCOLOR)"
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c $(HEADERS)
 	@mkdir -p $(dir $@)
@@ -59,7 +68,7 @@ clean:
 
 fclean:
 	@make -C ./libft fclean
-	@rm -rf $(OBJ_DIR) $(LIBMLX_DIR)/build $(NAME) $(LIBFT)
+	@rm -rf $(OBJ_DIR) $(LIBMLX_DIR) $(NAME) $(LIBFT)
 	@echo "$(RED)✅ FdF: FClean complete.$(ENDCOLOR)"
 
 re: fclean all
