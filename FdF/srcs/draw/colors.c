@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 18:06:09 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/01/09 19:40:19 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/11 22:05:46 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,9 @@ static void	handle_transparency(t_bresenham *line)
 		line->color_2 = TRANSPARENT;
 }
 
+// Calculates the gradient between colors.
+// For each pixel we draw in a line, we need to calculate a color.
+// For x0,y0 color will be c_1, x1,y1 will be c_2.
 uint32_t	interpolate_color(t_bresenham *line)
 {
 	t_color			c_1;
@@ -71,6 +74,8 @@ uint32_t	interpolate_color(t_bresenham *line)
 	return ((res.r << 24) | (res.g << 16) | (res.b << 8) | 0xFF);
 }
 
+// When drawing x0,y0 fraction will be 0.
+// It increments gradually to 255 at x1,y1.
 static int	calculate_fraction(t_bresenham *line)
 {
 	int	dx;

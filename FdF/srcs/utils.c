@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 17:51:13 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/01/11 17:52:31 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/11 22:53:14 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,13 @@ void	reset_angles(t_info *data)
 
 void	calculate_cam(t_info *data)
 {
-	data->zoom = ceil(fmin(HEIGHT / data->height * 0.7, WIDTH / data->width * 0.7));
+	data->zoom = ceil(fmin(HEIGHT / data->height * 0.7,
+				WIDTH / data->width * 0.7));
 	if (data->zoom == 0)
 		data->zoom = 1;
 }
 
+// Calculates a default z_scale based on the total height of the map.
 void	set_altitude(t_info *data)
 {
 	data->z_scale = 80;

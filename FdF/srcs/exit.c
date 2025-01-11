@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 20:47:19 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/01/09 18:02:21 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/11 23:02:38 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ void	ft_exit_error(int i, t_info *data)
 		error_message = "Found wrong line length. Exiting.";
 	else if (i == 5)
 		error_message = "MLX error.";
+	else if (i == 6)
+		error_message = "Error while reading map info.";
 	else
 		error_message = "Unknown error.";
 	ft_printf("%sERROR:%s ", TRED, TRESET);
@@ -49,16 +51,16 @@ void	ft_exit_error(int i, t_info *data)
 
 static void	free_xyz(t_info *data)
 {
-	int	y;
+	int	i;
 
 	if (data->xyz)
 	{
-		y = 0;
-		while (y < data->height)
+		i = 0;
+		while (i < data->height)
 		{
-			if (data->xyz[y])
-				ft_free((void **)&data->xyz[y]);
-			y++;
+			if (data->xyz[i])
+				ft_free((void **)&data->xyz[i]);
+			i++;
 		}
 		ft_free((void **)&data->xyz);
 	}
@@ -66,16 +68,16 @@ static void	free_xyz(t_info *data)
 
 static void	free_colors(t_info *data)
 {
-	int	y;
+	int	i;
 
 	if (data->colors)
 	{
-		y = 0;
-		while (y < data->height)
+		i = 0;
+		while (i < data->height)
 		{
-			if (data->colors[y])
-				ft_free((void **)&data->colors[y]);
-			y++;
+			if (data->colors[i])
+				ft_free((void **)&data->colors[i]);
+			i++;
 		}
 		ft_free((void **)&data->colors);
 	}

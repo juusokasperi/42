@@ -18,7 +18,7 @@ HEADERS_PATH =	-I./incs -I$(LIBMLX_DIR)/include -I./libft/includes
 
 #	Compiler
 CC =		cc
-CFLAGS +=	-Wall -Wextra -Werror -Wunreachable-code -Ofast
+CFLAGS +=	-Wall -Wextra -Werror -Ofast
 
 LIBS =		$(LIBMLX) -ldl -lglfw -pthread -lm -L./libft -lft
 ##	Libs for MacOS:
@@ -26,8 +26,6 @@ LIBS =		$(LIBMLX) -ldl -lglfw -pthread -lm -L./libft -lft
 LIBMLX_DIR =	./MLX42
 LIBMLX = $(LIBMLX_DIR)/build/libmlx42.a
 LIBMLX_GIT = https://github.com/codam-coding-college/MLX42.git
-
-
 
 NAME =		fdf
 LIBFT =		libft/libft.a
@@ -45,8 +43,7 @@ $(LIBFT): phony
 	@make -C libft
 
 $(LIBMLX):
-	@if [ ! -d "$(LIBMLX_DIR)" ] || [ -z "$$(ls -A $(LIBMLX_DIR) 2>/dev/null)" ]; then \
-		echo "$(YELLOW)🟡 MLX42: Cloning MLX42 repository..$(ENDCOLOR)"; \
+	@if [ ! -d "$(LIBMLX_DIR)" ] || [ -z "$(ls -A $(LIBMLX_DIR))" ]; then \
 		git clone $(LIBMLX_GIT) $(LIBMLX_DIR); \
 	fi
 	@cmake $(LIBMLX_DIR) -B $(LIBMLX_DIR)/build && make -C $(LIBMLX_DIR)/build -j4

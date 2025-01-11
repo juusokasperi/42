@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 20:05:05 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/01/11 18:12:16 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/11 22:07:38 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	set_xy(t_bresenham *line, int x, int y, int x_or_y)
 		line->y1++;
 }
 
+// Zooms to the center of the printed wireframe model.
 void	zoom(t_bresenham *line, t_info *data)
 {
 	line->x = line->x * data->zoom - (data->width / 2) * data->zoom;
@@ -50,6 +51,7 @@ void	calculate_bresenham(t_bresenham *line)
 	line->max = ft_max(ft_abs(line->step_x), ft_abs(line->step_y));
 }
 
+// Shifts by x,y or if both at 0, centers the wireframe model.
 void	shift(t_bresenham *line, t_info *data)
 {
 	line->x += data->shift_x + WIDTH / 2;

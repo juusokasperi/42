@@ -5,76 +5,85 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/08 15:33:35 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/01/09 19:34:57 by jrinta-          ###   ########.fr       */
+/*   Created: 2024/12/08 17:51:18 by jrinta-           #+#    #+#             */
+/*   Updated: 2025/01/11 23:08:13 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static uint32_t	hex_to_rgba(const char *hex);
-static int		free_split(char **split);
-
-int	fill_xyz(int *z, char *line, t_info *data)
+// Counts the 'words' or elements in each row (used by get_width).
+int	count_words(char *line)
 {
-	char	**split;
-	int		i;
+	int	count;
+	int	in_word;
 
-	i = 0;
-	split = ft_split(line, ' ');
-	if (!split)
-		return (0);
-	while (split[i])
+	count = 0;
+	in_word = 0;
+	while (*line)
 	{
-		z[i] = ft_atoi(split[i]);
-		if (z[i] > data->highest_z)
-			data->highest_z = z[i];
-		if (z[i] < data->lowest_z)
-			data->lowest_z = z[i];
-		i++;
-	}
-	free_split(split);
-	return (1);
-}
-
-int	fill_colors(uint32_t *colors, char *line, t_info *data)
-{
-	char		**split;
-	char		**colors_split;
-	int			i;
-
-	i = 0;
-	split = ft_split(line, ' ');
-	if (!split)
-		return (0);
-	while (split[i])
-	{
-		colors_split = ft_split(split[i], ',');
-		if (!colors_split)
-			return (free_split(split));
-		if (colors_split[1])
+		if (*line == 32 || *line == '\n')
+			in_word = 0;
+		else if (!in_word)
 		{
-			colors[i] = hex_to_rgba(colors_split[1]);
-			data->default_colors = 0;
+			in_word = 1;
+			count++;
 		}
-		else
-			colors[i] = WHITE;
-		free_split(colors_split);
-		i++;
+		line++;
 	}
-	free_split(split);
-	return (1);
+	return (count);
 }
 
-static uint32_t	hex_to_rgba(const char *hex)
+int	get_height(char *filename)
 {
-	uint32_t	rgb;
+	int		fd;
+	int		height;
+	char	*line;
 
-	rgb = (uint32_t)ft_strtol(hex, NULL, 16);
-	return (rgb << 8 | 0xFF);
+	fd = open(filename, O_RDONLY);
+	height = 0;
+	line = get_next_line(fd);
+	while (line)
+	{
+		height++;
+		free(line);
+		line = get_next_line(fd);
+	}
+	free(line);
+	close(fd);
+	return (height);
 }
 
-static int	free_split(char **split)
+// Gets the width of the map and checks that
+// all the lines are same width.
+int	get_width(char *filename)
+{
+	int		fd;
+	int		width;
+	char	*line;
+
+	fd = open(filename, O_RDONLY);
+	line = get_next_line(fd);
+	width = count_words(line);
+	free(line);
+	line = get_next_line(fd);
+	while (line)
+	{
+		if (count_words(line) != width)
+		{
+			free(line);
+			close(fd);
+			return (-1);
+		}
+		free(line);
+		line = get_next_line(fd);
+	}
+	free(line);
+	close(fd);
+	return (width);
+}
+
+int	free_split(char **split)
 {
 	int	i;
 

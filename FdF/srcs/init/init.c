@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 01:38:23 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/01/11 17:51:26 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/11 21:28:23 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	init_variables(t_info *data)
 	data->height = 0;
 	data->xyz = NULL;
 	data->colors = NULL;
+	data->shift_x = 0;
+	data->shift_y = 0;
 	data->highest_z = 0;
 	data->lowest_z = 0;
 	data->z_scale = 1;
@@ -34,7 +36,7 @@ void	init_data(t_info *data)
 	data->mlx_img = mlx_new_image(data->mlx_ptr, WIDTH + INFO_W, HEIGHT);
 	if (!data->mlx_ptr || !data->mlx_img
 		|| (mlx_image_to_window(data->mlx_ptr, data->mlx_img, 0, 0) < 0))
-		ft_exit_error(4, data);
+		ft_exit_error(5, data);
 	clear_image(data);
 	draw_instructions(data);
 }

@@ -6,13 +6,11 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 01:25:03 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/01/11 17:53:54 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/11 22:52:48 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <sys/time.h>
-#include <stdio.h>
 
 static void	handle_shift(t_info *data);
 static void	handle_changes(t_info *data);
@@ -30,14 +28,20 @@ void	loop_hook(void *param)
 
 static void	handle_shift(t_info *data)
 {
+	int	fast;
+
+	fast = 0;
+	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_KP_0))
+		fast = 50;
 	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_UP))
-		data->shift_y -= 10;
+		data->shift_y -= 10 + fast;
 	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_DOWN))
-		data->shift_y += 10;
+		data->shift_y += 10 + fast;
 	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_LEFT))
-		data->shift_x -= 10;
+		data->shift_x -= 10 + fast;
 	if (mlx_is_key_down(data->mlx_ptr, MLX_KEY_RIGHT))
-		data->shift_x += 10;
+		data->shift_x += 10 + fast;
+	fast = 0;
 }
 
 static void	handle_changes(t_info *data)

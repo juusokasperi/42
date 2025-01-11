@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 15:38:00 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/01/09 19:49:12 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/11 19:51:02 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ static int	valid_file(char *filename);
 int	main(int argc, char **argv)
 {
 	t_info	*data;
-	int		i;
 
 	if (argc != 2)
 		ft_exit_error(1, NULL);
@@ -26,9 +25,7 @@ int	main(int argc, char **argv)
 	data = (t_info *)malloc(sizeof(t_info));
 	if (!data)
 		ft_exit_error(3, NULL);
-	i = read_map(argv[1], data);
-	if (i != 0)
-		ft_exit_error(i, data);
+	read_map(argv[1], data);
 	init_data(data);
 	set_altitude(data);
 	draw_lines(data);

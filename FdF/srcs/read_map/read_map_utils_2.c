@@ -5,77 +5,36 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/08 17:51:18 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/12/13 00:44:01 by jrinta-          ###   ########.fr       */
+/*   Created: 2025/01/11 21:09:36 by jrinta-           #+#    #+#             */
+/*   Updated: 2025/01/11 21:20:45 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int	count_words(char *line)
+int	color_is_valid(const char *hex)
 {
-	int	count;
-	int	in_word;
+	int			i;
 
-	count = 0;
-	in_word = 0;
-	while (*line)
+	if (ft_strlen(hex) != 8)
+		if (hex[8] != '\n')
+			return (0);
+	if (hex[0] != '0' && (hex[1] != 'x' && hex[1] != 'X'))
+		return (0);
+	i = 2;
+	while (i < 8)
 	{
-		if (*line == 32 || *line == '\n')
-			in_word = 0;
-		else if (!in_word)
-		{
-			in_word = 1;
-			count++;
-		}
-		line++;
+		if (!ft_strrchr("0123456789ABCDEFabcdef", hex[i]))
+			return (0);
+		i++;
 	}
-	return (count);
+	return (1);
 }
 
-int	get_height(char *filename)
+uint32_t	hex_to_rgba(const char *hex)
 {
-	int		fd;
-	int		height;
-	char	*line;
+	uint32_t	rgb;
 
-	fd = open(filename, O_RDONLY);
-	height = 0;
-	line = get_next_line(fd);
-	while (line)
-	{
-		height++;
-		free(line);
-		line = get_next_line(fd);
-	}
-	free(line);
-	close(fd);
-	return (height);
-}
-
-int	get_width(char *filename)
-{
-	int		fd;
-	int		width;
-	char	*line;
-
-	fd = open(filename, O_RDONLY);
-	line = get_next_line(fd);
-	width = count_words(line);
-	free(line);
-	line = get_next_line(fd);
-	while (line)
-	{
-		if (count_words(line) != width)
-		{
-			free(line);
-			close(fd);
-			return (-1);
-		}
-		free(line);
-		line = get_next_line(fd);
-	}
-	free(line);
-	close(fd);
-	return (width);
+	rgb = (uint32_t)ft_strtol(hex, NULL, 16);
+	return (rgb << 8 | 0xFF);
 }
