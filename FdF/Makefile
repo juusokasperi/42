@@ -1,5 +1,5 @@
 #	Sources
-SRCS =	main.c \
+SRCS =	main.c 					utils.c													\
 		read_map/read_map.c		read_map/read_map_utils.c	read_map/read_map_utils_2.c	\
 		draw/draw.c				draw/transformations.c		draw/draw_utils.c			\
 		draw/colors.c			draw/rotation.c											\

@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 20:05:05 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/01/11 00:20:03 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/11 18:12:16 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,10 @@ void	calculate_bresenham(t_bresenham *line)
 
 void	shift(t_bresenham *line, t_info *data)
 {
-	if (data->projection != 4)
-	{
-		line->x += data->shift_x + WIDTH / 2;
-		line->x1 += data->shift_x + WIDTH / 2;
-		line->y += data->shift_y + HEIGHT / 2;
-		line->y1 += data->shift_y + HEIGHT / 2;
-	}
+	line->x += data->shift_x + WIDTH / 2;
+	line->x1 += data->shift_x + WIDTH / 2;
+	line->y += data->shift_y + HEIGHT / 2;
+	line->y1 += data->shift_y + HEIGHT / 2;
 }
 
 void	set_projection(t_bresenham *line, t_info *data)
@@ -68,14 +65,9 @@ void	set_projection(t_bresenham *line, t_info *data)
 		isometric(&line->x, &line->y, line->z, data);
 		isometric(&line->x1, &line->y1, line->z1, data);
 	}
-	else if (data->projection >= 1 && data->projection <= 3)
+	else
 	{
 		orthographic(&line->x, &line->y, line->z, data);
 		orthographic(&line->x1, &line->y1, line->z1, data);
-	}
-	else
-	{
-		perspective(&line->x, &line->y, line->z, data);
-		perspective(&line->x1, &line->y1, line->z1, data);
 	}
 }
