@@ -8,4 +8,4 @@
 0 1 0,0xFF0000
 ```
 - Uses the MLX42 library.
-- Controls allow for moving the model, zooming in/out, altering Z (altitude), changing color schemes, and going through projections (isometric, 2d top view, 2d side view, perspective)
+- Controls allow for moving the model, zooming in/out, altering Z (altitude), changing color schemes, and going through projections (isometric, 2d top view, 2d side view)
