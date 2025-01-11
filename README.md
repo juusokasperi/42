@@ -26,3 +26,5 @@ _Wrote Dec 2024_
 
 ### push_swap
 - Simple sorting algorithm that sorts stack_a using a predefined set of instructions and a spare stack_b.
+- Also includes a checker that takes in values as parameter and listens to stdin for instructions, and checks if instructions were correct.
+- Finished, 125/100.
