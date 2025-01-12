@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 15:38:00 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/01/11 19:51:02 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/12 17:18:37 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,17 @@ void	clear_image(t_info *data)
 
 static int	valid_file(char *filename)
 {
-	int	fd;
+	int		fd;
+	char	buffer[1];
 
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
 		return (0);
+	if (read(fd, buffer, 1) == -1)
+	{
+		close(fd);
+		return (0);
+	}
 	close(fd);
 	return (1);
 }
