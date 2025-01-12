@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 18:11:42 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/12/27 16:50:51 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/12 18:26:06 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,9 @@ int	main(int argc, char **argv)
 		ft_error("Incorrect server ID.");
 	sa.sa_sigaction = signal_handler;
 	sa.sa_flags = SA_SIGINFO;
+	sigemptyset(&sa.sa_mask);
+	sigaddset(&sa.sa_mask, SIGUSR1);
+	sigaddset(&sa.sa_mask, SIGUSR2);
 	if (sigaction(SIGUSR1, &sa, NULL) == -1
 		|| sigaction(SIGUSR2, &sa, NULL) == -1)
 		ft_error("Error setting up handlers.");
@@ -90,6 +93,7 @@ static void	ft_signal(int pid, int signal)
 				return ;
 			}
 		}
+		ft_printf("%sNo acknowledgement, retrying.%s\n", TYELLOW, TRESET);
 		usleep(DELAY);
 		retry++;
 	}
