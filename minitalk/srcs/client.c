@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 18:11:42 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/01/12 18:26:06 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/12 18:29:51 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ static void	ft_signal(int pid, int signal)
 			}
 		}
 		ft_printf("%sNo acknowledgement, retrying.%s\n", TYELLOW, TRESET);
-		usleep(DELAY);
+		usleep(DELAY_LONG);
 		retry++;
 	}
 	ft_error("Problem with signal transmission.");
