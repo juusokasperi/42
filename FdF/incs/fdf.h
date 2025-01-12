@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 15:37:28 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/01/11 21:20:24 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/12 17:54:21 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,7 @@ typedef struct s_bresenham
 	int			diff_y;
 	int			step_x;
 	int			step_y;
-	int			max;
 	int			err;
-	int			err_2;
 	int			z;
 	int			z1;
 	uint32_t	color_1;
@@ -121,7 +119,8 @@ void		rotate_z(int *x, int *y, t_info *data);
 // Transformations.c
 void		isometric(int *x, int *y, int z, t_info *data);
 void		orthographic(int *x, int *y, int z, t_info *data);
-void		perspective(int *x, int *y, int z, t_info *data);
+void		parallel(int *x, int *y, int z, t_info *data);
+void		conic(int *x, int *y, int z, t_info *data);
 // Controls.c
 void		loop_hook(void *param);
 void		key_hook(mlx_key_data_t keydata, void *param);
