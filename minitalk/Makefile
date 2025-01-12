@@ -1,27 +1,31 @@
+# Sources:
 SRCS_DIR = srcs/
-
 C_SRCS = client.c
 S_SRCS = server.c
 
+# Objects:
 OBJS_DIR = objs/
 C_OBJS = $(addprefix $(OBJS_DIR), $(C_SRCS:.c=.o))
 S_OBJS = $(addprefix $(OBJS_DIR), $(S_SRCS:.c=.o))
 
+# Header:
 H = incs/minitalk.h
 INCS = -I./libft/includes -I./incs/
 
+# Compiler:
 CC = cc
 CFLAGS += -Wall -Wextra -Werror $(INCS)
 LDFLAGS = -L./libft -lft
 
-LIBFT = libft/libft.a
-
+# Colors:
 GREEN = \033[0;32m
 RED = \033[0;31m
 ENDCOLOR = \033[0m
 
 NAME = minitalk
+LIBFT = libft/libft.a
 
+# Rules:
 all: $(NAME)
 
 $(NAME): server client
@@ -49,12 +53,12 @@ server_bonus: server
 
 clean:
 	@make -C ./libft clean
-	rm -rf $(OBJS_DIR)
+	@rm -rf $(OBJS_DIR)
 	@echo "$(RED)✅ MINITALK: Clean complete.$(ENDCOLOR)"
 
 fclean:
 	@make -C ./libft fclean
-	rm -rf $(OBJS_DIR) client server
+	@rm -rf $(OBJS_DIR) client server
 	@echo "$(RED)✅ MINITALK: FClean complete.$(ENDCOLOR)"
 
 re: fclean all

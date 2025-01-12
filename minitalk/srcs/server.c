@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 19:49:27 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/01/12 18:19:23 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/12 21:45:43 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 static void	ft_signal(int pid, int signal, char *str);
 static void	signal_handler(int signum, siginfo_t *info, void *context);
-static void	handle_byte(int *received_char, int *bit_count,
-				t_buffer *buffer, int pid);
+static void	handle_byte(t_buffer *buffer, int pid);
 
 volatile sig_atomic_t	g_pid = 0;
 
@@ -33,32 +32,28 @@ int	main(void)
 		ft_error("Error setting up handlers.");
 	ft_printf("%sServer PID:%s %d\n", TYELLOW, TRESET, getpid());
 	while (1)
-		usleep(200);
+		usleep(10);
 	return (0);
 }
 
 static void	signal_handler(int signum, siginfo_t *info, void *context)
 {
-	static int		received_char = 0;
-	static int		bit_count = 0;
 	static t_buffer	buffer = {0};
 
-	if (signum != SIGUSR1 && signum != SIGUSR2)
-		return ;
 	(void)context;
-	if (!info->si_pid)
+	if ((signum != SIGUSR1 && signum != SIGUSR2) || !info->si_pid)
 		return ;
 	if (!g_pid)
 		g_pid = info->si_pid;
 	else if (g_pid != info->si_pid)
 		return ;
 	if (signum == SIGUSR1)
-		received_char |= (1 << (7 - bit_count));
-	bit_count++;
-	if (bit_count == 8)
-		handle_byte(&received_char, &bit_count, &buffer, info->si_pid);
+		buffer.received_char |= (1 << (7 - buffer.bit_count));
+	buffer.bit_count++;
+	if (buffer.bit_count == 8)
+		handle_byte(&buffer, info->si_pid);
 	else
-		ft_signal(g_pid, SIGUSR2, buffer.str);
+		ft_signal(info->si_pid, SIGUSR2, buffer.str);
 }
 
 static void	clear_buffer(t_buffer *buffer)
@@ -68,8 +63,7 @@ static void	clear_buffer(t_buffer *buffer)
 	buffer->index = 0;
 }
 
-static void	handle_byte(int *received_char, int *bit_count,
-	t_buffer *buffer, int pid)
+static void	handle_byte(t_buffer *buffer, int pid)
 {
 	if (buffer->index >= buffer->size)
 	{
@@ -79,22 +73,19 @@ static void	handle_byte(int *received_char, int *bit_count,
 		if (!buffer->str)
 			ft_error("Malloc error.");
 	}
-	buffer->str[buffer->index++] = (char)*received_char;
-	if (*received_char == '\0')
+	buffer->str[buffer->index++] = (char)buffer->received_char;
+	if (buffer->received_char == '\0')
 	{
 		if (buffer->str)
 			ft_printf("%s\n", buffer->str);
 		clear_buffer(buffer);
-		if (pid != 0)
-		{
-			ft_signal(pid, SIGUSR1, buffer->str);
-			g_pid = 0;
-		}
+		ft_signal(pid, SIGUSR1, buffer->str);
+		g_pid = 0;
 	}
-	else if (pid != 0)
+	else
 		ft_signal(pid, SIGUSR2, buffer->str);
-	*received_char = 0;
-	*bit_count = 0;
+	buffer->received_char = 0;
+	buffer->bit_count = 0;
 }
 
 static void	ft_signal(int pid, int signal, char *str)

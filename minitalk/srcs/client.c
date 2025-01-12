@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 18:11:42 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/01/12 18:29:51 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/12 21:47:57 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static void	wait_server(int *ack)
 
 	timeout = 0;
 	usleep(DELAY);
-	while (!g_ack && timeout < 100)
+	while (!g_ack && timeout < 50)
 	{
 		usleep(DELAY);
 		timeout++;

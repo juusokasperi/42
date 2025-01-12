@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 19:36:39 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/01/12 18:24:22 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/12 20:58:45 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
 
 typedef struct	s_buffer
 {
+	char	received_char;
+	int		bit_count;
 	char	*str;
 	size_t	size;
 	size_t	index;
