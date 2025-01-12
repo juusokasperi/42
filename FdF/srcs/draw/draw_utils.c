@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 20:05:05 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/01/11 22:07:38 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/12 17:46:57 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void	calculate_bresenham(t_bresenham *line)
 		line->step_x = 1;
 	else
 		line->step_x = -1;
-	line->max = ft_max(ft_abs(line->step_x), ft_abs(line->step_y));
 }
 
 // Shifts by x,y or if both at 0, centers the wireframe model.
@@ -67,9 +66,19 @@ void	set_projection(t_bresenham *line, t_info *data)
 		isometric(&line->x, &line->y, line->z, data);
 		isometric(&line->x1, &line->y1, line->z1, data);
 	}
-	else
+	else if (data->projection >= 1 && data->projection <= 3)
 	{
 		orthographic(&line->x, &line->y, line->z, data);
 		orthographic(&line->x1, &line->y1, line->z1, data);
+	}
+	else if (data->projection == 4)
+	{
+		parallel(&line->x, &line->y, line->z, data);
+		parallel(&line->x1, &line->y1, line->z1, data);
+	}
+	else
+	{
+		conic(&line->x, &line->y, line->z, data);
+		conic(&line->x1, &line->y1, line->z1, data);
 	}
 }

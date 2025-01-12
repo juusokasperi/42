@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 18:00:43 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/01/11 00:29:42 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/12 17:54:33 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,18 +65,20 @@ static int	within_bounds(int x, int y)
 
 static void	draw(t_bresenham *line, t_info *data)
 {
+	int	err_2;
+
 	while (line->x != line->x1 || line->y != line->y1)
 	{
 		if (within_bounds(line->x, line->y))
 			mlx_put_pixel(data->mlx_img, line->x,
 				line->y, interpolate_color(line));
-		line->err_2 = 2 * line->err;
-		if (line->err_2 >= line->diff_y)
+		err_2 = 2 * line->err;
+		if (err_2 >= line->diff_y)
 		{
 			line->err += line->diff_y;
 			line->x += line->step_x;
 		}
-		if (line->err_2 <= line->diff_x)
+		if (err_2 <= line->diff_x)
 		{
 			line->err += line->diff_x;
 			line->y += line->step_y;
