@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 15:38:00 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/01/12 17:18:37 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/13 19:41:37 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,13 @@ static int	valid_file(char *filename)
 {
 	int		fd;
 	char	buffer[1];
+	size_t	len;
 
+	len = ft_strlen(filename);
+	if (len < 4 || ft_strncmp(filename + (len - 4), ".fdf", 4) != 0)
+		return (0);
 	fd = open(filename, O_RDONLY);
-	if (fd == -1)
+	if (fd < 0)
 		return (0);
 	if (read(fd, buffer, 1) == -1)
 	{
