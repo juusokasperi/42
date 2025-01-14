@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 19:49:27 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/01/12 21:45:43 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/14 12:52:03 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,21 +39,24 @@ int	main(void)
 static void	signal_handler(int signum, siginfo_t *info, void *context)
 {
 	static t_buffer	buffer = {0};
+	int				pid;
 
 	(void)context;
-	if ((signum != SIGUSR1 && signum != SIGUSR2) || !info->si_pid)
+	if ((signum != SIGUSR1 && signum != SIGUSR2) ||
+		(!info->si_pid && !g_pid))
 		return ;
 	if (!g_pid)
 		g_pid = info->si_pid;
-	else if (g_pid != info->si_pid)
+	else if (g_pid != info->si_pid && info->si_pid)
 		return ;
+	pid = g_pid;
 	if (signum == SIGUSR1)
 		buffer.received_char |= (1 << (7 - buffer.bit_count));
 	buffer.bit_count++;
 	if (buffer.bit_count == 8)
-		handle_byte(&buffer, info->si_pid);
+		handle_byte(&buffer, pid);
 	else
-		ft_signal(info->si_pid, SIGUSR2, buffer.str);
+		ft_signal(pid, SIGUSR2, buffer.str);
 }
 
 static void	clear_buffer(t_buffer *buffer)
@@ -95,5 +98,6 @@ static void	ft_signal(int pid, int signal, char *str)
 		if (str)
 			ft_free((void **)&str);
 		ft_error("Problem with signal transmission.");
+		g_pid = 0;
 	}
 }
