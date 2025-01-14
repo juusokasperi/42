@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 17:51:13 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/01/11 22:53:14 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/13 16:49:13 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,9 @@ void	reset_angles(t_info *data)
 	}
 }
 
-void	calculate_cam(t_info *data)
+void	calculate_zoom(t_info *data)
 {
-	data->zoom = ceil(fmin(HEIGHT / data->height * 0.7,
-				WIDTH / data->width * 0.7));
+	data->zoom = ft_min(HEIGHT / data->height * 0.7, WIDTH / data->width * 0.7);
 	if (data->zoom == 0)
 		data->zoom = 1;
 }
@@ -42,7 +41,4 @@ void	set_altitude(t_info *data)
 		data->z_scale /= 2;
 	else if (ft_min(data->height, data->width) > 20)
 		data->z_scale *= data->zoom / 2;
-	else if (ft_abs(data->highest_z) + ft_abs(data->lowest_z) <= 20
-		&& ft_min(data->height, data->width) <= 20)
-		data->z_scale *= 2;
 }

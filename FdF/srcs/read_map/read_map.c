@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 22:31:35 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/01/12 17:56:44 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/13 17:03:02 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	read_map(char *filename, t_info *data)
 		ft_exit_error(3, data);
 	if (!read_z_colors(filename, data))
 		ft_exit_error(6, data);
-	calculate_cam(data);
+	calculate_zoom(data);
 }
 
 // Allocates enough space for the 2D arrays "colors" and "xyz"

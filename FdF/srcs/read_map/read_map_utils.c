@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 17:51:18 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/01/11 23:08:13 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/13 19:41:04 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ int	get_height(char *filename)
 	char	*line;
 
 	fd = open(filename, O_RDONLY);
+	if (fd < 0)
+		return (0);
 	height = 0;
 	line = get_next_line(fd);
 	while (line)
@@ -49,7 +51,6 @@ int	get_height(char *filename)
 		free(line);
 		line = get_next_line(fd);
 	}
-	free(line);
 	close(fd);
 	return (height);
 }
@@ -63,6 +64,8 @@ int	get_width(char *filename)
 	char	*line;
 
 	fd = open(filename, O_RDONLY);
+	if (fd < 0)
+		return (-1);
 	line = get_next_line(fd);
 	width = count_words(line);
 	free(line);
@@ -78,7 +81,6 @@ int	get_width(char *filename)
 		free(line);
 		line = get_next_line(fd);
 	}
-	free(line);
 	close(fd);
 	return (width);
 }

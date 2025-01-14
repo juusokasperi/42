@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 15:37:28 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/01/12 17:54:21 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/13 17:02:20 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,8 @@
 # include "libft.h"
 # include "MLX42/MLX42.h"
 
-# ifdef __APPLE__
-#  define WIDTH 1024
-#  define HEIGHT 666
-# else
-#  define WIDTH 2160
-#  define HEIGHT 1440
-# endif
+# define WIDTH 1024
+# define HEIGHT 768
 # define INFO_W 256
 # define WHITE 0xFFFFFFFF
 # define BLACK 0x000000FF
@@ -85,7 +80,7 @@ void		clear_image(t_info *data);
 // Utils.c
 void		reset_angles(t_info *data);
 void		set_altitude(t_info *data);
-void		calculate_cam(t_info *data);
+void		calculate_zoom(t_info *data);
 // Init.c
 void		init_variables(t_info *data);
 void		init_data(t_info *data);
@@ -98,7 +93,7 @@ int			count_words(char *line);
 int			get_height(char *filename);
 int			get_width(char *filename);
 int			free_split(char **split);
-// Read_map_utils_2.c
+// Colors_utils.c
 int			color_is_valid(const char *hex);
 uint32_t	hex_to_rgba(const char *hex);
 // Draw.c

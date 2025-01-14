@@ -38,11 +38,11 @@ $(LIBFT): phony
 	@make -C ./libft
 
 client: $(LIBFT) $(C_OBJS)
-	$(CC) $(CFLAGS) $(C_OBJS) $(LDFLAGS) -o $@
+	@$(CC) $(CFLAGS) $(C_OBJS) $(LDFLAGS) -o $@
 	@echo "$(GREEN)✅ MINITALK: Client compilation complete!$(ENDCOLOR)"
 
 server: $(LIBFT) $(S_OBJS)
-	$(CC) $(CFLAGS) $(S_OBJS) $(LDFLAGS) -o $@
+	@$(CC) $(CFLAGS) $(S_OBJS) $(LDFLAGS) -o $@
 	@echo "$(GREEN)✅ MINITALK: Server compilation complete!$(ENDCOLOR)"
 
 bonus: server_bonus client_bonus
@@ -63,4 +63,4 @@ fclean:
 
 re: fclean all
 
-.PHONY: clean fclean re all client server bonus server_bonus client_bonus phony
+.PHONY: clean fclean re all bonus server_bonus client_bonus phony
