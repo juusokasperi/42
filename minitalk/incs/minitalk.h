@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 19:36:39 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/01/12 20:58:45 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/15 14:42:51 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,14 @@
 # define MINITALK_H
 
 # include "libft.h"
-# include <stdlib.h>
-# include <unistd.h>
 # include <signal.h>
-# include <stdio.h>
 
 # define DELAY 10000
 # define DELAY_LONG 50000
 # define RETRY_LIMIT 5
 # define BUFFER_SIZE 1024
 
-typedef struct	s_buffer
+typedef struct s_buffer
 {
 	char	received_char;
 	int		bit_count;

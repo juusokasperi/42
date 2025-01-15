@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 19:49:27 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/01/14 12:52:03 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/15 14:43:14 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,18 +36,22 @@ int	main(void)
 	return (0);
 }
 
+// On macOS, the system reroutes the signal to pid 0 at times, especially
+// when sending lots of signals rapidly. A workaround for that
+// is to change line 53 to 'else if (g_pid != info->si_pid && info->si_pid)'.
+// On Linux, this is not an issue.
 static void	signal_handler(int signum, siginfo_t *info, void *context)
 {
 	static t_buffer	buffer = {0};
 	int				pid;
 
 	(void)context;
-	if ((signum != SIGUSR1 && signum != SIGUSR2) ||
-		(!info->si_pid && !g_pid))
+	if ((signum != SIGUSR1 && signum != SIGUSR2)
+		|| (!info->si_pid && !g_pid))
 		return ;
 	if (!g_pid)
 		g_pid = info->si_pid;
-	else if (g_pid != info->si_pid && info->si_pid)
+	else if (g_pid != info->si_pid)
 		return ;
 	pid = g_pid;
 	if (signum == SIGUSR1)
