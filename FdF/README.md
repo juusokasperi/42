@@ -1,6 +1,7 @@
 ### FdF
 <img src="./img/fdf.png" width="600" alt="FdF example" />
 
+- The first graphical project in 42.
 - Program that reads a 2D map (example below) and draws a 3D wireframe model (above) of it.
 ```
 0 1 0

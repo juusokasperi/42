@@ -19,10 +19,11 @@
 ## Rank 02
 
 ### [FdF](/FdF)
-_Wrote Dec 2024_
+- Finished, 125/100.
 
 ### [minitalk](/minitalk)
-- To test with a really long string, run `cat ./text.txt|xargs -0 ./client <SERVER_PID>`
+- Data exchange program.
+- Communicates between a server and client process using `SIGUSR1` and `SIGUSR2` signals.
 
 ### [push_swap](/push_swap)
 - Simple sorting algorithm that sorts stack_a using a predefined set of instructions and a spare stack_b.
