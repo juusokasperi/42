@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 19:49:27 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/01/16 12:50:59 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/01/17 11:39:46 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,7 @@ static void	signal_handler(int signum, siginfo_t *info, void *context)
 	int				pid;
 
 	(void)context;
-	if ((signum != SIGUSR1 && signum != SIGUSR2)
-		|| (!info->si_pid && !g_pid))
+	if (!info->si_pid && !g_pid)
 		return ;
 	if (!g_pid)
 		g_pid = info->si_pid;
