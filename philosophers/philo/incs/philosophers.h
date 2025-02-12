@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 15:11:17 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/01/03 23:35:05 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/02/12 18:45:00 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <sys/time.h>
+# include <stdbool.h>
 # include "terminal_colors.h"
+
+typedef struct s_philo	t_philo;
 
 typedef struct s_data
 {
@@ -32,9 +35,10 @@ typedef struct s_data
 	int				philo_died;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	dead_lock;
+	t_philo			*philos;
 }	t_data;
 
-typedef struct s_philo
+struct s_philo
 {
 	int				id;
 	int				dead;
@@ -46,17 +50,17 @@ typedef struct s_philo
 	pthread_mutex_t	*right_fork;
 	pthread_mutex_t	meal_mutex;
 	t_data			*data;
-}	t_philo;
+};
 
 //	Init:
 int		parse_args(t_data *data, int argc, char **argv);
 int		init_mutexes(t_data *data);
-int		init_philos(t_data *data, t_philo *philos);
-int		init_threads(t_data *data, t_philo *philos);
+int		init_philos(t_data *data);
+int		init_threads(t_data *data);
 
 //	Exit:
 //		Ft_cleanup.c
-void	ft_cleanup(t_data *data, t_philo *philos, char *str);
+void	ft_cleanup(t_data *data, char *str);
 
 //	Utils:
 //		Ft_error.c

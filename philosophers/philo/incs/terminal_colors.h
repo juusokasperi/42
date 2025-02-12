@@ -6,12 +6,12 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 12:07:53 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/12/15 19:52:43 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/02/12 18:27:18 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef COLORS_H
-# define COLORS_H
+#ifndef TERMINAL_COLORS_H
+# define TERMINAL_COLORS_H
 
 # ifdef __APPLE__
 #  define TRESET	"\033[0m"

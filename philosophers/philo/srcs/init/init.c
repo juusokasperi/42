@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 16:04:45 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/01/03 23:35:19 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/02/12 18:32:53 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int	parse_args(t_data *data,int argc, char **argv)
 	if (!valid_args(argc, argv))
 		return (0);
 	data->philo_count = ft_atoi(argv[1]);
-	data->start_time = get_time_ms();
 	data->time_to_die = ft_atoi(argv[2]);
 	data->time_to_eat = ft_atoi(argv[3]);
 	data->time_to_sleep = ft_atoi(argv[4]);
@@ -80,7 +79,7 @@ static void	fill_data(t_philo *philo, t_data *data, int i)
 {
 	philo->id = i + 1;
 	philo->dead = 0;
-	philo->last_meal = get_time_ms();
+	philo->last_meal = 0;
 	philo->meals_ate = 0;
 	philo->data = data;
 	philo->right_fork = &data->forks[i];
@@ -91,22 +90,22 @@ static void	fill_data(t_philo *philo, t_data *data, int i)
 		philo->left_fork = &data->forks[i - 1];
 }
 
-int	init_philos(t_data *data, t_philo *philos)
+int	init_philos(t_data *data)
 {
 	int	i;
 
 	i = -1;
-	philos = malloc(sizeof(t_philo) * data->philo_count);
-	if (!philos)
+	data->philos = malloc(sizeof(t_philo) * data->philo_count);
+	if (!data->philos)
 		return (0);
 	while (++i < data->philo_count)
 	{
-		fill_data(&philos[i], data, i);
-		if (pthread_mutex_init(&philos[i].meal_mutex, NULL) != 0)
+		fill_data(&data->philos[i], data, i);
+		if (pthread_mutex_init(&data->philos[i].meal_mutex, NULL) != 0)
 		{
 			while (--i >= 0)
-				pthread_mutex_destroy(&philos[i].meal_mutex);
-			free(philos);
+				pthread_mutex_destroy(&data->philos[i].meal_mutex);
+			free(data->philos);
 			return (0);
 		}
 	}

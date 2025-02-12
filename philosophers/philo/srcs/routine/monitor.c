@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 22:26:08 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/01/03 23:39:15 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/02/12 18:37:25 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void		*philo_died(t_philo *philos, t_data *data, int i);
 static void	check_priority(t_philo *philos, t_data *data, int i);
+static int	check_all_ate_enough(t_philo *philos, t_data *data);
 
 void	*monitor_routine(void *arg)
 {
@@ -22,8 +23,8 @@ void	*monitor_routine(void *arg)
 	int		i;
 	size_t	time;
 
-	philos = (t_philo *)arg;
-	data = philos[0].data;
+	data = (t_data *)arg;
+	philos = data->philos;
 	while (1)
 	{
 		i = -1;
@@ -33,12 +34,38 @@ void	*monitor_routine(void *arg)
 			time = get_time_ms() - data->start_time;
 			if ((time - philos[i].last_meal) >= (size_t)data->time_to_die)
 				return (philo_died(philos, data, i));
-			check_priority(philos, data, i);
+			if (data->meals_to_eat != -1 &&
+				philos[i].meals_ate >= data->meals_to_eat)
+			{
+				if (check_all_ate_enough(philos, data))
+				{
+					pthread_mutex_lock(&data->dead_lock);
+					data->philo_died = 1;
+					pthread_mutex_unlock(&data->dead_lock);
+					pthread_mutex_unlock(&philos[i].meal_mutex);
+					return (NULL);
+				}
+			}
+			if (data->philo_count > 1)
+				check_priority(philos, data, i);
 			pthread_mutex_unlock(&philos[i].meal_mutex);
 		}
 		ft_usleep(1);
 	}
 	return (arg);
+}
+
+static int	check_all_ate_enough(t_philo *philos, t_data *data)
+{
+	int	i;
+
+	i = -1;
+	while (++i < data->philo_count)
+	{
+		if (philos[i].meals_ate < data->meals_to_eat)
+			return (0);
+	}
+	return (1);
 }
 
 void	*philo_died(t_philo *philos, t_data *data, int i)

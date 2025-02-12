@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 15:18:13 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/01/03 23:39:17 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/02/12 18:43:52 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int	main(int argc, char **argv)
 {
 	t_data	data;
-	t_philo	*philos = NULL;
 
 	if (argc < 5 || argc > 6)
 		ft_error("Invalid number of arguments.");
@@ -23,10 +22,10 @@ int	main(int argc, char **argv)
 		ft_error("Invalid arguments.");
 	if (!init_mutexes(&data))
 		ft_error("Error initializing mutexes.");
-	if (!init_philos(&data, philos))
-		ft_cleanup(&data, NULL, "Error initializing philosophers.");
-	if (!init_threads(&data, philos))
-		ft_cleanup(&data, philos, "Error initializing threads.");
-	ft_cleanup(&data, philos, NULL);
+	if (!init_philos(&data))
+		ft_cleanup(&data, "Error initializing philosophers.");
+	if (!init_threads(&data))
+		ft_cleanup(&data, "Error initializing threads.");
+	ft_cleanup(&data, NULL);
 	return (0);
 }

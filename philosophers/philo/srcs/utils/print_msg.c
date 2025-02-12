@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 23:32:15 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/01/03 23:39:15 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/02/12 17:50:09 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,6 @@ void	print_msg(t_philo *philo, char *str)
 
 	pthread_mutex_lock(&philo->data->dead_lock);
 	time = get_time_ms();
-	printf("%zu %d %s\n", time - philo->data->start_time, philo->id + 1, str);
+	printf("%zu %d %s\n", time - philo->data->start_time, philo->id, str);
 	pthread_mutex_unlock(&philo->data->dead_lock);
 }
