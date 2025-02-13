@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 15:11:17 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/02/12 18:45:00 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/02/13 10:59:45 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,23 +22,11 @@
 # include <stdbool.h>
 # include "terminal_colors.h"
 
-typedef struct s_philo	t_philo;
+# define PHILOS_MAX 200
 
-typedef struct s_data
-{
-	int				philo_count;
-	size_t			start_time;
-	int				time_to_die;
-	int				time_to_eat;
-	int				time_to_sleep;
-	int				meals_to_eat;
-	int				philo_died;
-	pthread_mutex_t	*forks;
-	pthread_mutex_t	dead_lock;
-	t_philo			*philos;
-}	t_data;
+typedef struct s_data	t_data;
 
-struct s_philo
+typedef struct s_philo
 {
 	int				id;
 	int				dead;
@@ -50,6 +38,20 @@ struct s_philo
 	pthread_mutex_t	*right_fork;
 	pthread_mutex_t	meal_mutex;
 	t_data			*data;
+}	t_philo;
+
+struct s_data
+{
+	int				philo_count;
+	size_t			start_time;
+	int				time_to_die;
+	int				time_to_eat;
+	int				time_to_sleep;
+	int				meals_to_eat;
+	int				philo_died;
+	pthread_mutex_t	forks[PHILOS_MAX];
+	pthread_mutex_t	dead_lock;
+	t_philo			philos[PHILOS_MAX];
 };
 
 //	Init:

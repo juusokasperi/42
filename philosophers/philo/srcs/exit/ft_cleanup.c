@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 15:59:14 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/02/12 18:45:31 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/02/13 11:00:55 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ void	ft_cleanup(t_data *data, char *str)
 	if (data)
 		cleanup_mutexes(data);
 	ate_enough_times = check_meals_eaten(data);
-	if (data->philos)
-		free(data->philos);
 	if (str)
 		ft_error(str);
 	if (ate_enough_times == false && philo_died)
@@ -62,12 +60,8 @@ static void	cleanup_mutexes(t_data *data)
 	i = -1;
 	while (++i < data->philo_count)
 	{
-		if (data->philos)
-			pthread_mutex_destroy(&data->philos[i].meal_mutex);
-		if (data->forks)
-			pthread_mutex_destroy(&data->forks[i]);
+		pthread_mutex_destroy(&data->philos[i].meal_mutex);
+		pthread_mutex_destroy(&data->forks[i]);
 	}
 	pthread_mutex_destroy(&data->dead_lock);
-	if (data->forks)
-		free(data->forks);
 }

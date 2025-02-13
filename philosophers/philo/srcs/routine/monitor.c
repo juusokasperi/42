@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 22:26:08 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/02/12 18:37:25 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/02/12 19:20:41 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,7 @@ void	*monitor_routine(void *arg)
 					return (NULL);
 				}
 			}
-			if (data->philo_count > 1)
-				check_priority(philos, data, i);
+			check_priority(philos, data, i);
 			pthread_mutex_unlock(&philos[i].meal_mutex);
 		}
 		ft_usleep(1);
@@ -85,6 +84,8 @@ static void	check_priority(t_philo *philos, t_data *data, int i)
 	int	left_meals;
 	int	right_meals;
 
+	if (data->philo_count == 1)
+		return ;
 	left_id = (i + data->philo_count - 1) % data->philo_count;
 	right_id = (i + 1) % data->philo_count;
 	pthread_mutex_lock(&philos[left_id].meal_mutex);

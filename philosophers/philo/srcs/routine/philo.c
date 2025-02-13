@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 22:26:05 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/02/12 18:42:50 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/02/12 19:19:31 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	*philo_routine(void *arg)
 	while (not_dead(philo))
 	{
 		pthread_mutex_lock(&philo->meal_mutex);
-		if (philo->data->philo_count > 1 && !philo->should_eat_next)
+		if (!philo->should_eat_next)
 		{
 			pthread_mutex_unlock(&philo->meal_mutex);
 			continue ;
