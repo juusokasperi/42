@@ -19,11 +19,14 @@ HDR =		incs/philosophers.h
 INCS =		-I./incs
 
 # Compiler
-CC = 		gcc
+CC = 		cc
 ifeq ($(MAKECMDGOALS), debug)
-	CFLAGS += -g
+	CFLAGS +=	-g
+else ifeq ($(MAKECMDGOALS), debug_docker)
+	CFLAGS +=	-g
+	CC =		gcc
 endif
-CFLAGS += 	-Wall -Wextra -Werror -pthread $(INCS)
+CFLAGS +=	-Wall -Wextra -Werror -pthread $(INCS)
 
 # Colors (for echo)
 RED = 		\033[0;31m
@@ -41,11 +44,13 @@ all: $(NAME)
 # Docker stuff
 CONTAINER_NAME =	valgrind-env
 valgrind: fclean
-	docker start $(CONTAINER_NAME) || docker run -it --name valgrind-env ubuntu bash -c "apt update && apt install -y make gcc valgrind"
-	docker exec $(CONTAINER_NAME) rm -rf /app/ || true
+	docker start $(CONTAINER_NAME) || docker run -dit --name valgrind-env ubuntu bash -c "apt update && apt install -y make gcc valgrind"
+	docker exec $(CONTAINER_NAME) rm -rf /app/
 	docker exec $(CONTAINER_NAME) mkdir -p /app/
 	docker cp . $(CONTAINER_NAME):/app/
-	docker exec $(CONTAINER_NAME) make -C /app/ debug
+	docker exec $(CONTAINER_NAME) make -C /app/ debug_docker
+
+debug_docker: re
 
 debug: re
 
@@ -63,4 +68,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: fclean clean re all
+.PHONY: fclean clean re all debug debug_docker valgrind
