@@ -17,7 +17,10 @@ HDR =		incs/philosophers.h
 INCS =		-I./incs
 
 # Compiler
-CC = 		cc
+CC = 		gcc
+ifeq ($(MAKECMDGOALS), debug)
+	CFLAGS += -g
+endif
 CFLAGS += 	-Wall -Wextra -Werror -pthread $(INCS)
 
 # Colors (for echo)
@@ -32,6 +35,17 @@ $(OBJS_DIR)%.o: $(SRCS_DIR)%.c $(HDR)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 all: $(NAME)
+
+# Docker stuff
+CONTAINER_NAME =	valgrind-env
+valgrind: fclean
+	docker start $(CONTAINER_NAME) || true
+	docker exec $(CONTAINER_NAME) rm -rf /app/$(NAME) || true
+	docker exec $(CONTAINER_NAME) mkdir -p /app/$(NAME)
+	docker cp . $(CONTAINER_NAME):/app/$(NAME)
+	docker exec $(CONTAINER_NAME) make -C /app/$(NAME) debug
+
+debug: re
 
 $(NAME): $(OBJS)
 	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
