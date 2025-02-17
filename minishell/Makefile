@@ -78,6 +78,9 @@ HDR_PATH =	incs/
 CC =		cc
 INCS =		-I./incs/ -I./libft/includes/
 CFLAGS +=	-Wall -Wextra -Werror $(INCS)
+ifeq ($(MAKECMDGOALS), debug)
+	CFLAGS += -g -fsanitize=address
+endif
 LDFLAGS =	-L./libft -lft -lreadline
 
 ########	macOS fix:
@@ -108,23 +111,23 @@ $(OBJS_DIR)%.o: $(SRCS_DIR)%.c $(HDR_PATH)$(HDR)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(LIBFT): phony
-	@make -C ./libft
+	@make -C ./libft --no-print-directory
 
 $(NAME): $(LIBFT) $(OBJS)
 	@$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) -o $(NAME)
 	@echo "$(GREEN)✅ MINISHELL: Compilation complete!$(ENDCOLOR)"
 
 debug: fclean $(LIBFT) $(OBJS)
-	@$(CC) $(CFLAGS) -g -fsanitize=address $(OBJS) $(LDFLAGS) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) -o $(NAME)
 	@echo "$(GREEN)✅ MINISHELL: FSanitize Compilation complete!$(ENDCOLOR)"
 
 clean:
-	@make -C ./libft clean
+	@make -C ./libft clean --no-print-directory
 	@rm -rf $(OBJS_DIR)
 	@echo "$(RED)✅ MINISHELL: Clean complete!$(ENDCOLOR)"
 
 fclean:
-	@make -C ./libft fclean
+	@make -C ./libft fclean --no-print-directory
 	@rm -rf $(OBJS_DIR) $(NAME)
 	@echo "$(RED)✅ MINISHELL: FClean complete!$(ENDCOLOR)"
 
