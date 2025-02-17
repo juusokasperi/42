@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 22:26:08 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/02/12 19:20:41 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/02/17 13:55:06 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,36 +18,26 @@ static int	check_all_ate_enough(t_philo *philos, t_data *data);
 
 void	*monitor_routine(void *arg)
 {
-	t_philo	*philos;
 	t_data	*data;
 	int		i;
 	size_t	time;
 
 	data = (t_data *)arg;
-	philos = data->philos;
 	while (1)
 	{
 		i = -1;
 		while (++i < data->philo_count)
 		{
-			pthread_mutex_lock(&philos[i].meal_mutex);
+			check_priority(data->philos, data, i);
+			pthread_mutex_lock(&data->philos[i].meal_mutex);
 			time = get_time_ms() - data->start_time;
-			if ((time - philos[i].last_meal) >= (size_t)data->time_to_die)
-				return (philo_died(philos, data, i));
-			if (data->meals_to_eat != -1 &&
-				philos[i].meals_ate >= data->meals_to_eat)
-			{
-				if (check_all_ate_enough(philos, data))
-				{
-					pthread_mutex_lock(&data->dead_lock);
-					data->philo_died = 1;
-					pthread_mutex_unlock(&data->dead_lock);
-					pthread_mutex_unlock(&philos[i].meal_mutex);
-					return (NULL);
-				}
-			}
-			check_priority(philos, data, i);
-			pthread_mutex_unlock(&philos[i].meal_mutex);
+			if ((time - data->philos[i].last_meal) >= (size_t)data->time_to_die)
+				return (philo_died(data->philos, data, i));
+			if (data->meals_to_eat != -1
+				&& data->philos[i].meals_ate >= data->meals_to_eat
+				&& check_all_ate_enough(data->philos, data))
+				return (NULL);
+			pthread_mutex_unlock(&data->philos[i].meal_mutex);
 		}
 		ft_usleep(1);
 	}
@@ -64,6 +54,10 @@ static int	check_all_ate_enough(t_philo *philos, t_data *data)
 		if (philos[i].meals_ate < data->meals_to_eat)
 			return (0);
 	}
+	pthread_mutex_lock(&data->dead_lock);
+	data->philo_died = 1;
+	pthread_mutex_unlock(&data->dead_lock);
+	pthread_mutex_unlock(&philos[i].meal_mutex);
 	return (1);
 }
 
@@ -73,28 +67,32 @@ void	*philo_died(t_philo *philos, t_data *data, int i)
 	data->philo_died = 1;
 	pthread_mutex_unlock(&data->dead_lock);
 	pthread_mutex_unlock(&philos[i].meal_mutex);
-	print_msg(&philos[i], "died");
+	if (print_msg(&philos[i], "died") == -1)
+		return (NULL);
 	return (NULL);
 }
 
 static void	check_priority(t_philo *philos, t_data *data, int i)
 {
-	int	left_id;
-	int	right_id;
-	int	left_meals;
-	int	right_meals;
+	t_priority	id_nums;
 
 	if (data->philo_count == 1)
-		return ;
-	left_id = (i + data->philo_count - 1) % data->philo_count;
-	right_id = (i + 1) % data->philo_count;
-	pthread_mutex_lock(&philos[left_id].meal_mutex);
-	left_meals = philos[left_id].meals_ate;
-	pthread_mutex_unlock(&philos[left_id].meal_mutex);
-	pthread_mutex_lock(&philos[right_id].meal_mutex);
-	right_meals = philos[right_id].meals_ate;
-	pthread_mutex_unlock(&philos[right_id].meal_mutex);
-	if (philos[i].meals_ate < left_meals &&
-		philos[i].meals_ate < right_meals)
 		philos[i].should_eat_next = 1;
+	else if (data->philo_count == 2)
+		priority_for_two(philos, data, i);
+	else
+	{
+		set_priority_struct(&id_nums, i, data);
+		pthread_mutex_lock(&philos[id_nums.first].meal_mutex);
+		pthread_mutex_lock(&philos[id_nums.second].meal_mutex);
+		pthread_mutex_lock(&philos[id_nums.third].meal_mutex);
+		id_nums.left_meals = philos[id_nums.left_id].meals_ate;
+		id_nums.right_meals = philos[id_nums.right_id].meals_ate;
+		if (philos[i].meals_ate < id_nums.left_meals
+			&& philos[i].meals_ate < id_nums.right_meals)
+			philos[i].should_eat_next = 1;
+		pthread_mutex_unlock(&philos[id_nums.third].meal_mutex);
+		pthread_mutex_unlock(&philos[id_nums.second].meal_mutex);
+		pthread_mutex_unlock(&philos[id_nums.first].meal_mutex);
+	}
 }

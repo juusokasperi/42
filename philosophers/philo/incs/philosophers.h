@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 15:11:17 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/02/13 10:59:45 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/02/17 13:48:43 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # include <stdbool.h>
 # include "terminal_colors.h"
 
+# define SYNTAX "Usage: ./philo n_philos time_to_die \
+time_to_eat time_to_sleep [x_each_philo_must_eat]"
 # define PHILOS_MAX 200
 
 typedef struct s_data	t_data;
@@ -31,8 +33,8 @@ typedef struct s_philo
 	int				id;
 	int				dead;
 	size_t			last_meal;
-	int				meals_ate;
-	int				should_eat_next;
+	_Atomic int		meals_ate;
+	_Atomic int		should_eat_next;
 	pthread_t		thread;
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*right_fork;
@@ -48,11 +50,25 @@ struct s_data
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				meals_to_eat;
-	int				philo_died;
+	_Atomic int		philo_died;
+	_Atomic int		error;
 	pthread_mutex_t	forks[PHILOS_MAX];
 	pthread_mutex_t	dead_lock;
 	t_philo			philos[PHILOS_MAX];
 };
+
+//	Monitor uses this struct to determine the right
+//	order for locking philosopher's meal mutexes.
+typedef struct s_priority
+{
+	int	left_id;
+	int	right_id;
+	int	left_meals;
+	int	right_meals;
+	int	first;
+	int	second;
+	int	third;
+}	t_priority;
 
 //	Init:
 int		parse_args(t_data *data, int argc, char **argv);
@@ -76,7 +92,10 @@ size_t	get_time_ms(void);
 //		Ft_usleep.c
 int		ft_usleep(size_t ms);
 //		Print_msg.c
-void	print_msg(t_philo *philo, char *str);
+int		print_msg(t_philo *philo, char *str);
+//		Monitor_priority_utils.c
+void	set_priority_struct(t_priority *id_nums, int i, t_data *data);
+void	priority_for_two(t_philo *philos, t_data *data, int i);
 
 //	Routines:
 //		Monitor.c

@@ -6,18 +6,25 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 23:32:15 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/02/12 17:50:09 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/02/17 13:46:59 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void	print_msg(t_philo *philo, char *str)
+int	print_msg(t_philo *philo, char *str)
 {
 	size_t	time;
 
 	pthread_mutex_lock(&philo->data->dead_lock);
 	time = get_time_ms();
-	printf("%zu %d %s\n", time - philo->data->start_time, philo->id, str);
+	if (printf("%zu %d %s\n", time - philo->data->start_time, \
+		philo->id, str) == -1)
+	{
+		philo->data->error = 1;
+		pthread_mutex_unlock(&philo->data->dead_lock);
+		return (-1);
+	}
 	pthread_mutex_unlock(&philo->data->dead_lock);
+	return (0);
 }
