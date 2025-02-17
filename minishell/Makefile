@@ -77,7 +77,7 @@ HDR_PATH =	incs/
 #	Compiler
 CC =		cc
 INCS =		-I./incs/ -I./libft/includes/
-CFLAGS +=	-Wall -Wextra -Werror $(INCS) -g
+CFLAGS +=	-Wall -Wextra -Werror $(INCS)
 LDFLAGS =	-L./libft -lft -lreadline
 
 ########	macOS fix:
@@ -100,6 +100,8 @@ LIBFT =		libft/libft.a
 
 #	Rules
 all: $(NAME)
+
+bonus: all
 
 $(OBJS_DIR)%.o: $(SRCS_DIR)%.c $(HDR_PATH)$(HDR)
 	@mkdir -p $(dir $@)
@@ -128,4 +130,4 @@ fclean:
 
 re: fclean all
 
-.PHONY: phony clean fclean re all
+.PHONY: phony clean fclean re all bonus
