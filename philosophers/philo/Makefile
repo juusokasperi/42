@@ -4,6 +4,7 @@ SRCS =		main.c 				utils/ft_error.c		utils/ft_strlen.c	\
 			utils/ft_atoi.c		utils/get_time_ms.c		utils/ft_usleep.c	\
 			utils/print_msg.c	init/init.c				init/init_threads.c	\
 			utils/monitor_priority_utils.c									\
+			utils/philo_unlock_forks.c										\
 			exit/ft_cleanup.c	routine/philo.c			routine/monitor.c
 
 # Objs
@@ -40,11 +41,11 @@ all: $(NAME)
 # Docker stuff
 CONTAINER_NAME =	valgrind-env
 valgrind: fclean
-	docker start $(CONTAINER_NAME) || true
-	docker exec $(CONTAINER_NAME) rm -rf /app/$(NAME) || true
-	docker exec $(CONTAINER_NAME) mkdir -p /app/$(NAME)
-	docker cp . $(CONTAINER_NAME):/app/$(NAME)
-	docker exec $(CONTAINER_NAME) make -C /app/$(NAME) debug
+	docker start $(CONTAINER_NAME) || docker run -it --name valgrind-env ubuntu bash -c "apt update && apt install -y make gcc valgrind"
+	docker exec $(CONTAINER_NAME) rm -rf /app/ || true
+	docker exec $(CONTAINER_NAME) mkdir -p /app/
+	docker cp . $(CONTAINER_NAME):/app/
+	docker exec $(CONTAINER_NAME) make -C /app/ debug
 
 debug: re
 
