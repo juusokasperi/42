@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 15:11:17 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/02/17 13:48:43 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/02/17 15:59:20 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,8 @@ int		print_msg(t_philo *philo, char *str);
 //		Monitor_priority_utils.c
 void	set_priority_struct(t_priority *id_nums, int i, t_data *data);
 void	priority_for_two(t_philo *philos, t_data *data, int i);
+//		Philo_unlock_forks.c
+int		unlock_forks(pthread_mutex_t *first, pthread_mutex_t *second, int i);
 
 //	Routines:
 //		Monitor.c
