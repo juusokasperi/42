@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 22:26:08 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/02/17 13:55:06 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/02/17 15:50:12 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void		*philo_died(t_philo *philos, t_data *data, int i);
 static void	check_priority(t_philo *philos, t_data *data, int i);
-static int	check_all_ate_enough(t_philo *philos, t_data *data);
+static int	check_all_ate_enough(t_philo *philos, t_data *data, int i);
 
 void	*monitor_routine(void *arg)
 {
@@ -35,7 +35,7 @@ void	*monitor_routine(void *arg)
 				return (philo_died(data->philos, data, i));
 			if (data->meals_to_eat != -1
 				&& data->philos[i].meals_ate >= data->meals_to_eat
-				&& check_all_ate_enough(data->philos, data))
+				&& check_all_ate_enough(data->philos, data, i))
 				return (NULL);
 			pthread_mutex_unlock(&data->philos[i].meal_mutex);
 		}
@@ -44,14 +44,14 @@ void	*monitor_routine(void *arg)
 	return (arg);
 }
 
-static int	check_all_ate_enough(t_philo *philos, t_data *data)
+static int	check_all_ate_enough(t_philo *philos, t_data *data, int i)
 {
-	int	i;
+	int	j;
 
-	i = -1;
-	while (++i < data->philo_count)
+	j = -1;
+	while (++j < data->philo_count)
 	{
-		if (philos[i].meals_ate < data->meals_to_eat)
+		if (philos[j].meals_ate < data->meals_to_eat)
 			return (0);
 	}
 	pthread_mutex_lock(&data->dead_lock);
