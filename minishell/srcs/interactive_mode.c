@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 01:06:45 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/02/15 12:42:06 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/02/17 15:33:19 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,6 @@ void	interactive_mode(t_shell *sh)
 
 //	if (!input) checks for Ctrl+D which will break out of the loop
 //	if (input[0]) checks that we don't pass empty strings to history
-//
-//	!! Now this handles unclosed quotes, if we don't want that,
-//	remove "hold_for_more_input" functionality.
 static char	*check_input(t_error *lex_error, t_error *exit_status)
 {
 	char	*input;
