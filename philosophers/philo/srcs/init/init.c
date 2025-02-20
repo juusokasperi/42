@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 16:04:45 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/02/20 17:06:54 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/02/20 17:36:25 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ int	init_mutexes(t_data *data)
 static void	fill_data(t_philo *philo, t_data *data, int i)
 {
 	philo->id = i + 1;
-	philo->dead = 0;
 	philo->last_meal = 0;
 	philo->meals_ate = 0;
 	philo->data = data;

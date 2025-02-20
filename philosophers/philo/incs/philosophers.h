@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 15:11:17 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/02/20 17:05:29 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/02/20 17:36:18 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ typedef struct s_data	t_data;
 typedef struct s_philo
 {
 	int				id;
-	int				dead;
 	size_t			last_meal;
 	int				meals_ate;
 	int				should_eat_next;
