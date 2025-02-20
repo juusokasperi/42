@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 15:11:17 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/02/20 17:01:03 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/02/20 17:05:29 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,9 @@
 
 # define SYNTAX "Usage: ./philo n_philos time_to_die \
 time_to_eat time_to_sleep [x_each_philo_must_eat]"
-# define PHILOS_MAX 200
+# ifndef PHILOS_MAX
+#  define PHILOS_MAX 200
+# endif
 
 typedef struct s_data	t_data;
 
@@ -53,7 +55,7 @@ struct s_data
 	int				philo_died;
 	_Atomic int		error;
 	pthread_mutex_t	forks[PHILOS_MAX];
-	pthread_mutex_t	dead_lock;
+	pthread_mutex_t	lock;
 	t_philo			philos[PHILOS_MAX];
 };
 

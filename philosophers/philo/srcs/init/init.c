@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 16:04:45 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/02/17 13:45:56 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/02/20 17:06:54 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	valid_args(int argc, char **argv)
 			if (argv[i][j] < '0' || argv[i][j] > '9')
 				return (0);
 	}
-	if (ft_atoi(argv[1]) > 200)
+	if (ft_atoi(argv[1]) > PHILOS_MAX)
 		return (0);
 	return (1);
 }
@@ -64,7 +64,7 @@ int	init_mutexes(t_data *data)
 			return (0);
 		}
 	}
-	if (pthread_mutex_init(&data->dead_lock, NULL) != 0)
+	if (pthread_mutex_init(&data->lock, NULL) != 0)
 	{
 		while (--i >= 0)
 			pthread_mutex_destroy(&data->forks[i]);

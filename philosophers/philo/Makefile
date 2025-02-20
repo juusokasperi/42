@@ -24,6 +24,9 @@ ifeq ($(MAKECMDGOALS), debug)
 	CFLAGS +=	-g
 endif
 CFLAGS +=	-Wall -Wextra -Werror -pthread $(INCS)
+ifdef PHILOS_MAX
+	CFLAGS += -DPHILOS_MAX=$(PHILOS_MAX)
+endif
 
 # Colors (for echo)
 RED = 		\033[0;31m
