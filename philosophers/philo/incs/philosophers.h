@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 15:11:17 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/02/20 15:11:37 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/02/20 17:01:03 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void	check_priority(t_philo *philos, t_data *data, int i);
 int		unlock_forks(pthread_mutex_t *first, pthread_mutex_t *second, int i);
 //	Routines:
 //		Monitor.c
-void	*monitor_routine(void *arg);
+void	monitor_routine(t_data *data);
 //		Philo_died.c
 void	*philo_routine(void *arg);
 

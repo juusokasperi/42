@@ -6,22 +6,20 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 22:26:08 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/02/20 15:09:25 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/02/20 17:00:43 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void		*philo_died(t_philo *philos, t_data *data, int i);
+void		philo_died(t_philo *philos, t_data *data, int i);
 static int	check_all_ate_enough(t_philo *philos, t_data *data);
 
-void	*monitor_routine(void *arg)
+void	monitor_routine(t_data *data)
 {
-	t_data	*data;
 	int		i;
 	size_t	time;
 
-	data = (t_data *)arg;
 	while (1)
 	{
 		i = -1;
@@ -35,11 +33,11 @@ void	*monitor_routine(void *arg)
 			pthread_mutex_unlock(&data->philos[i].meal_mutex);
 			if (data->meals_to_eat != -1
 				&& check_all_ate_enough(data->philos, data))
-				return (NULL);
+				return ;
 		}
 		ft_usleep(1);
 	}
-	return (arg);
+	return ;
 }
 
 static int	check_all_ate_enough(t_philo *philos, t_data *data)
@@ -66,13 +64,13 @@ static int	check_all_ate_enough(t_philo *philos, t_data *data)
 	return (0);
 }
 
-void	*philo_died(t_philo *philos, t_data *data, int i)
+void	philo_died(t_philo *philos, t_data *data, int i)
 {
 	pthread_mutex_lock(&data->dead_lock);
 	data->philo_died = 1;
 	pthread_mutex_unlock(&data->dead_lock);
 	pthread_mutex_unlock(&philos[i].meal_mutex);
 	if (print_msg(&philos[i], "died") == -1)
-		return (NULL);
-	return (NULL);
+		return ;
+	return ;
 }
