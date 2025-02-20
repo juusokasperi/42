@@ -6,14 +6,13 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 22:26:08 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/02/20 13:30:12 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/02/20 15:09:25 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
 void		*philo_died(t_philo *philos, t_data *data, int i);
-static void	check_priority(t_philo *philos, t_data *data, int i);
 static int	check_all_ate_enough(t_philo *philos, t_data *data);
 
 void	*monitor_routine(void *arg)
@@ -76,29 +75,4 @@ void	*philo_died(t_philo *philos, t_data *data, int i)
 	if (print_msg(&philos[i], "died") == -1)
 		return (NULL);
 	return (NULL);
-}
-
-static void	check_priority(t_philo *philos, t_data *data, int i)
-{
-	t_priority	id_nums;
-
-	if (data->philo_count == 1)
-		return ;
-	else if (data->philo_count == 2)
-		priority_for_two(philos, data, i);
-	else
-	{
-		set_priority_struct(&id_nums, i, data);
-		pthread_mutex_lock(&philos[id_nums.first].meal_mutex);
-		pthread_mutex_lock(&philos[id_nums.second].meal_mutex);
-		pthread_mutex_lock(&philos[id_nums.third].meal_mutex);
-		id_nums.left_meals = philos[id_nums.left_id].meals_ate;
-		id_nums.right_meals = philos[id_nums.right_id].meals_ate;
-		if (philos[i].meals_ate < id_nums.left_meals
-			&& philos[i].meals_ate < id_nums.right_meals)
-			philos[i].should_eat_next = 1;
-		pthread_mutex_unlock(&philos[id_nums.third].meal_mutex);
-		pthread_mutex_unlock(&philos[id_nums.second].meal_mutex);
-		pthread_mutex_unlock(&philos[id_nums.first].meal_mutex);
-	}
 }

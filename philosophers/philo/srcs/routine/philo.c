@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 22:26:05 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/02/20 10:35:17 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/02/20 15:00:18 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static int	p_think(t_philo *philo)
 static int	p_eat(t_philo *philo)
 {
 	pthread_mutex_lock(philo->left_fork);
-	if (print_msg(philo, "has taken a left fork") == -1)
+	if (print_msg(philo, "has taken a fork") == -1)
 		return (unlock_forks(philo->left_fork, NULL, -1));
 	if (philo->data->philo_count == 1)
 	{
@@ -73,7 +73,7 @@ static int	p_eat(t_philo *philo)
 		return (unlock_forks(philo->left_fork, NULL, 0));
 	}
 	pthread_mutex_lock(philo->right_fork);
-	if (print_msg(philo, "has taken a right fork") == -1)
+	if (print_msg(philo, "has taken a fork") == -1)
 		return (unlock_forks(philo->right_fork, philo->left_fork, -1));
 	pthread_mutex_lock(&philo->meal_mutex);
 	philo->last_meal = get_time_ms() - philo->data->start_time;

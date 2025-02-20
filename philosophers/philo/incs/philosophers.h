@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 15:11:17 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/02/20 10:34:00 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/02/20 15:11:37 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,15 @@ struct s_data
 //	order for locking philosopher's meal mutexes.
 typedef struct s_priority
 {
-	int	left_id;
-	int	right_id;
-	int	left_meals;
-	int	right_meals;
-	int	first;
-	int	second;
-	int	third;
+	int		left_id;
+	int		right_id;
+	int		left_meals;
+	int		right_meals;
+	size_t	l_last_meal;
+	size_t	r_last_meal;
+	int		first;
+	int		second;
+	int		third;
 }	t_priority;
 
 //	Init:
@@ -94,11 +96,9 @@ int		ft_usleep(size_t ms);
 //		Print_msg.c
 int		print_msg(t_philo *philo, char *str);
 //		Monitor_priority_utils.c
-void	set_priority_struct(t_priority *id_nums, int i, t_data *data);
-void	priority_for_two(t_philo *philos, t_data *data, int i);
+void	check_priority(t_philo *philos, t_data *data, int i);
 //		Philo_unlock_forks.c
 int		unlock_forks(pthread_mutex_t *first, pthread_mutex_t *second, int i);
-
 //	Routines:
 //		Monitor.c
 void	*monitor_routine(void *arg);
