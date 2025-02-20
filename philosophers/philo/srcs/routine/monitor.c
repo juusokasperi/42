@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 22:26:08 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/02/17 15:50:12 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/02/20 10:32:22 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void		*philo_died(t_philo *philos, t_data *data, int i);
 static void	check_priority(t_philo *philos, t_data *data, int i);
-static int	check_all_ate_enough(t_philo *philos, t_data *data, int i);
+static int	check_all_ate_enough(t_philo *philos, t_data *data);
 
 void	*monitor_routine(void *arg)
 {
@@ -33,32 +33,38 @@ void	*monitor_routine(void *arg)
 			time = get_time_ms() - data->start_time;
 			if ((time - data->philos[i].last_meal) >= (size_t)data->time_to_die)
 				return (philo_died(data->philos, data, i));
-			if (data->meals_to_eat != -1
-				&& data->philos[i].meals_ate >= data->meals_to_eat
-				&& check_all_ate_enough(data->philos, data, i))
-				return (NULL);
 			pthread_mutex_unlock(&data->philos[i].meal_mutex);
+			if (data->meals_to_eat != -1
+				&& check_all_ate_enough(data->philos, data))
+				return (NULL);
 		}
 		ft_usleep(1);
 	}
 	return (arg);
 }
 
-static int	check_all_ate_enough(t_philo *philos, t_data *data, int i)
+static int	check_all_ate_enough(t_philo *philos, t_data *data)
 {
 	int	j;
+	int	all_ate_enough;
 
 	j = -1;
-	while (++j < data->philo_count)
+	all_ate_enough = 1;
+	while (all_ate_enough && ++j < data->philo_count)
 	{
+		pthread_mutex_lock(&data->philos[j].meal_mutex);
 		if (philos[j].meals_ate < data->meals_to_eat)
-			return (0);
+			all_ate_enough = 0;
+		pthread_mutex_unlock(&data->philos[j].meal_mutex);
 	}
-	pthread_mutex_lock(&data->dead_lock);
-	data->philo_died = 1;
-	pthread_mutex_unlock(&data->dead_lock);
-	pthread_mutex_unlock(&philos[i].meal_mutex);
-	return (1);
+	if (all_ate_enough)
+	{
+		pthread_mutex_lock(&data->dead_lock);
+		data->philo_died = 1;
+		pthread_mutex_unlock(&data->dead_lock);
+		return (1);
+	}
+	return (0);
 }
 
 void	*philo_died(t_philo *philos, t_data *data, int i)
@@ -77,7 +83,7 @@ static void	check_priority(t_philo *philos, t_data *data, int i)
 	t_priority	id_nums;
 
 	if (data->philo_count == 1)
-		philos[i].should_eat_next = 1;
+		return ;
 	else if (data->philo_count == 2)
 		priority_for_two(philos, data, i);
 	else
