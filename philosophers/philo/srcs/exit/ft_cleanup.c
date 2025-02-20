@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 15:59:14 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/02/20 13:29:46 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/02/20 17:05:01 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,5 @@ static void	cleanup_mutexes(t_data *data)
 		pthread_mutex_destroy(&data->philos[i].meal_mutex);
 		pthread_mutex_destroy(&data->forks[i]);
 	}
-	pthread_mutex_destroy(&data->dead_lock);
+	pthread_mutex_destroy(&data->lock);
 }

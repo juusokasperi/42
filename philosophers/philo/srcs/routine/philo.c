@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 22:26:05 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/02/20 15:00:18 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/02/20 17:04:40 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ static int	is_dead(t_philo *philo)
 {
 	int	is_dead;
 
-	pthread_mutex_lock(&philo->data->dead_lock);
+	pthread_mutex_lock(&philo->data->lock);
 	is_dead = philo->data->philo_died;
-	pthread_mutex_unlock(&philo->data->dead_lock);
+	pthread_mutex_unlock(&philo->data->lock);
 	return (is_dead);
 }
 
