@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 15:11:17 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/02/17 15:59:20 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/02/20 10:34:00 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ typedef struct s_philo
 	int				id;
 	int				dead;
 	size_t			last_meal;
-	_Atomic int		meals_ate;
-	_Atomic int		should_eat_next;
+	int				meals_ate;
+	int				should_eat_next;
 	pthread_t		thread;
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*right_fork;
@@ -50,7 +50,7 @@ struct s_data
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				meals_to_eat;
-	_Atomic int		philo_died;
+	int				philo_died;
 	_Atomic int		error;
 	pthread_mutex_t	forks[PHILOS_MAX];
 	pthread_mutex_t	dead_lock;
