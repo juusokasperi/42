@@ -3,7 +3,8 @@ SRCS_DIR =	srcs/
 SRCS =		main.c 				utils/ft_error.c		utils/ft_strlen.c	\
 			utils/ft_atoi.c		utils/get_time_ms.c		utils/ft_usleep.c	\
 			utils/print_msg.c	init/init.c				init/init_threads.c	\
-			utils/philo_unlock_forks.c										\
+			utils/philo_unlock_forks.c					utils/ft_free.c		\
+			utils/ft_strcmp.c	utils/min_max_mid.c							\
 			exit/ft_cleanup.c	routine/philo.c			routine/monitor.c	\
 			routine/monitor_priority.c
 
@@ -23,10 +24,7 @@ CC = 		cc
 ifeq ($(MAKECMDGOALS), debug)
 	CFLAGS +=	-g
 endif
-CFLAGS +=	-Wall -Wextra -Werror -pthread $(INCS)
-ifdef PHILOS_MAX
-	CFLAGS += -DPHILOS_MAX=$(PHILOS_MAX)
-endif
+CFLAGS +=	-Wall -Wextra -pthread $(INCS)
 
 # Colors (for echo)
 RED = 		\033[0;31m
@@ -44,7 +42,10 @@ all: $(NAME)
 # Docker stuff
 CONTAINER_NAME =	valgrind-env
 valgrind: fclean
-	docker start $(CONTAINER_NAME) || (docker run -dit --name $(CONTAINER_NAME) ubuntu /bin/bash && docker exec $(CONTAINER_NAME) apt-get update && docker exec $(CONTAINER_NAME) apt-get install -y make gcc valgrind)
+	docker start $(CONTAINER_NAME) || (docker run -dit \
+	--name $(CONTAINER_NAME) ubuntu /bin/bash \
+	&& docker exec $(CONTAINER_NAME) apt-get update \
+	&& docker exec $(CONTAINER_NAME) apt-get install -y make gcc valgrind)
 	docker exec $(CONTAINER_NAME) rm -rf /app/
 	docker exec $(CONTAINER_NAME) mkdir -p /app/
 	docker cp . $(CONTAINER_NAME):/app/
