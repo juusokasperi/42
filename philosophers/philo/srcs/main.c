@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 15:18:13 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/02/17 12:24:11 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/02/21 17:35:02 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,12 @@ int	main(int argc, char **argv)
 	if (!init_mutexes(&data))
 		ft_error("Error initializing mutexes.");
 	if (!init_philos(&data))
-		ft_cleanup(&data, "Error initializing philosophers.");
+		ft_error("Error initializing philosophers.");
 	if (!init_threads(&data))
-		ft_cleanup(&data, "Error initializing threads.");
+		ft_error("Error initializing threads.");
+	monitor_routine(&data);
+	if (!join_threads(&data))
+		ft_error("Error joining threads.");
 	ft_cleanup(&data, NULL);
 	return (0);
 }
