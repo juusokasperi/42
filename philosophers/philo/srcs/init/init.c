@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 16:04:45 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/02/20 17:36:25 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/02/21 17:40:24 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ static int	valid_args(int argc, char **argv)
 			if (argv[i][j] < '0' || argv[i][j] > '9')
 				return (0);
 	}
-	if (ft_atoi(argv[1]) > PHILOS_MAX)
-		return (0);
 	return (1);
 }
 
@@ -54,6 +52,9 @@ int	init_mutexes(t_data *data)
 {
 	int	i;
 
+	data->forks = malloc(sizeof(pthread_mutex_t) * data->philo_count);
+	if (!data->forks)
+		return (0);
 	i = -1;
 	while (++i < data->philo_count)
 	{
@@ -61,13 +62,23 @@ int	init_mutexes(t_data *data)
 		{
 			while (--i >= 0)
 				pthread_mutex_destroy(&data->forks[i]);
+			ft_free((void **)data->forks);
 			return (0);
 		}
 	}
-	if (pthread_mutex_init(&data->lock, NULL) != 0)
+	if (pthread_mutex_init(&data->print_lock, NULL) != 0)
 	{
 		while (--i >= 0)
 			pthread_mutex_destroy(&data->forks[i]);
+		ft_free((void **)data->forks);
+		return (0);
+	}
+	if (pthread_mutex_init(&data->death_lock, NULL) != 0)
+	{
+		while (--i >= 0)
+			pthread_mutex_destroy(&data->forks[i]);
+		ft_free((void **)data->forks);
+		pthread_mutex_destroy(&data->print_lock);
 		return (0);
 	}
 	return (1);
@@ -75,21 +86,19 @@ int	init_mutexes(t_data *data)
 
 static void	fill_data(t_philo *philo, t_data *data, int i)
 {
+	pthread_mutex_t	*tmp;
 	philo->id = i + 1;
 	philo->last_meal = 0;
 	philo->meals_ate = 0;
 	philo->data = data;
 	philo->right_fork = &data->forks[i];
+	philo->left_fork = &data->forks[(i + 1) % data->philo_count];
 	philo->should_eat_next = 1;
-	if (i == 0)
+	if (philo->right_fork > philo->left_fork)
 	{
-		philo->left_fork = &data->forks[i];
-		philo->right_fork = &data->forks[data->philo_count - 1];
-	}
-	else
-	{
-		philo->left_fork = &data->forks[i - 1];
-		philo->right_fork = &data->forks[i];
+		tmp = philo->right_fork;
+		philo->right_fork = philo->left_fork;
+		philo->left_fork = tmp;
 	}
 }
 
@@ -97,6 +106,9 @@ int	init_philos(t_data *data)
 {
 	int	i;
 
+	data->philos = malloc(sizeof(t_philo) * data->philo_count);
+	if (!data->philos)
+		return (0);
 	i = -1;
 	while (++i < data->philo_count)
 	{
@@ -104,7 +116,12 @@ int	init_philos(t_data *data)
 		if (pthread_mutex_init(&data->philos[i].meal_mutex, NULL) != 0)
 		{
 			while (--i >= 0)
+			{
 				pthread_mutex_destroy(&data->philos[i].meal_mutex);
+				pthread_mutex_destroy(&data->forks[i]);
+			}
+			pthread_mutex_destroy(&data->print_lock);
+			ft_free((void **)data->philos);
 			return (0);
 		}
 	}
