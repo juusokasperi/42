@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 22:26:05 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/02/21 19:51:39 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/02/21 22:17:48 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@ void	*philo_routine(void *arg)
 	wait_for_start(philo);
 	if (philo->data->philo_count == 1)
 		return (handle_one_philo(philo));
-	if (philo->id % 2)
-		ft_usleep(philo->data->time_to_eat / 2);
+	stagger_start(philo);
 	while (philo->data->error == 0 && !is_dead(philo))
 	{
 		pthread_mutex_lock(&philo->meal_mutex);
@@ -48,10 +47,17 @@ void	*philo_routine(void *arg)
 
 static int	p_think(t_philo *philo)
 {
+	size_t	think_time;
+
 	if (is_dead(philo))
 		return (-1);
 	if (print_msg(philo, "is thinking") == -1)
 		return (-1);
+	think_time = (philo->data->time_to_die - \
+		(philo->data->time_to_eat + philo->data->time_to_sleep)) * 0.9;
+	if (think_time < 20)
+		think_time = 20;
+	ft_usleep(think_time);
 	return (0);
 }
 

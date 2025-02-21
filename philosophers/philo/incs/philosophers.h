@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 15:11:17 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/02/21 19:54:26 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/02/21 22:11:21 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,8 @@ void	ft_cleanup(t_data *data, char *str);
 void	cleanup_mutexes(t_data *data);
 
 //	Utils:
+//		Stagger_start.c
+void	stagger_start(t_philo *philo);
 //		Is_dead.c
 int		is_dead(t_philo *philo);
 //		Ft_error.c
