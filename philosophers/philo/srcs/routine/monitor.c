@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 22:26:08 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/02/21 22:17:30 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/02/21 23:30:11 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,12 @@
 
 void			philo_died(t_philo *philos, t_data *data, int i);
 static int		check_all_ate_enough(t_philo *philos, t_data *data);
-static size_t	determine_monitor_sleep(t_data *data);
 
 void	monitor_routine(t_data *data)
 {
 	int		i;
 	size_t	time_since_meal;
-	size_t	monitor_sleep;
 
-	monitor_sleep = determine_monitor_sleep(data);
 	while (1)
 	{
 		i = -1;
@@ -39,7 +36,7 @@ void	monitor_routine(t_data *data)
 				&& check_all_ate_enough(data->philos, data))
 				return ;
 		}
-		ft_usleep(monitor_sleep);
+		ft_usleep(10);
 	}
 	return ;
 }
@@ -66,15 +63,6 @@ static int	check_all_ate_enough(t_philo *philos, t_data *data)
 		return (1);
 	}
 	return (0);
-}
-
-static size_t	determine_monitor_sleep(t_data *data)
-{
-	if (data->time_to_die < 10)
-		return (1);
-	else
-		return (ft_min_three(data->time_to_die / 10,
-				data->time_to_eat / 2, data->time_to_sleep / 2));
 }
 
 void	philo_died(t_philo *philos, t_data *data, int i)
