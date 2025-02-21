@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 15:11:17 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/02/20 17:36:18 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/02/21 18:25:30 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,6 @@
 
 # define SYNTAX "Usage: ./philo n_philos time_to_die \
 time_to_eat time_to_sleep [x_each_philo_must_eat]"
-# ifndef PHILOS_MAX
-#  define PHILOS_MAX 200
-# endif
 
 typedef struct s_data	t_data;
 
@@ -53,9 +50,10 @@ struct s_data
 	int				meals_to_eat;
 	int				philo_died;
 	_Atomic int		error;
-	pthread_mutex_t	forks[PHILOS_MAX];
-	pthread_mutex_t	lock;
-	t_philo			philos[PHILOS_MAX];
+	pthread_mutex_t	*forks;
+	pthread_mutex_t	death_lock;
+	pthread_mutex_t	print_lock;
+	t_philo			*philos;
 };
 
 //	Monitor uses this struct to determine the right
@@ -78,10 +76,12 @@ int		parse_args(t_data *data, int argc, char **argv);
 int		init_mutexes(t_data *data);
 int		init_philos(t_data *data);
 int		init_threads(t_data *data);
+int		join_threads(t_data *data);
 
 //	Exit:
 //		Ft_cleanup.c
 void	ft_cleanup(t_data *data, char *str);
+void	cleanup_mutexes(t_data *data);
 
 //	Utils:
 //		Ft_error.c
@@ -90,12 +90,20 @@ void	ft_error(char *str);
 size_t	ft_strlen(char *str);
 //		Ft_atoi.c
 int		ft_atoi(const char *str);
+//		Ft_free.c
+void	*ft_free(void **ptr);
 //		Get_time_ms.c
 size_t	get_time_ms(void);
 //		Ft_usleep.c
 int		ft_usleep(size_t ms);
 //		Print_msg.c
 int		print_msg(t_philo *philo, char *str);
+//		Min_max_mid.c
+int		ft_min_three(int a, int b, int c);
+int		ft_mid_three(int a, int b, int c);
+int		ft_max_three(int a, int b, int c);
+//		Ft_strcmp.c
+int		ft_strcmp(const char *s1, const char *s2);
 //		Monitor_priority_utils.c
 void	check_priority(t_philo *philos, t_data *data, int i);
 //		Philo_unlock_forks.c
@@ -105,5 +113,6 @@ int		unlock_forks(pthread_mutex_t *first, pthread_mutex_t *second, int i);
 void	monitor_routine(t_data *data);
 //		Philo_died.c
 void	*philo_routine(void *arg);
+int		is_dead(t_philo *philo);
 
 #endif
