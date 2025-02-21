@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 15:11:17 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/02/21 19:09:12 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/02/21 19:54:26 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ struct s_data
 	int				philo_died;
 	_Atomic int		error;
 	pthread_mutex_t	*forks;
-	pthread_mutex_t	death_lock;
-	pthread_mutex_t	print_lock;
+	pthread_mutex_t	death_mutex;
+	pthread_mutex_t	print_mutex;
 	t_philo			*philos;
 };
 
@@ -84,6 +84,8 @@ void	ft_cleanup(t_data *data, char *str);
 void	cleanup_mutexes(t_data *data);
 
 //	Utils:
+//		Is_dead.c
+int		is_dead(t_philo *philo);
 //		Ft_error.c
 void	ft_error(char *str);
 //		Ft_strlen.c

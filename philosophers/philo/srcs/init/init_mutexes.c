@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 18:47:50 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/02/21 18:48:12 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/02/21 19:54:22 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ int	init_mutexes(t_data *data)
 		if (pthread_mutex_init(&data->forks[i], NULL) != 0)
 			return (destroy_and_free_forks(data, i));
 	}
-	if (pthread_mutex_init(&data->print_lock, NULL) != 0)
+	if (pthread_mutex_init(&data->print_mutex, NULL) != 0)
 		return (destroy_and_free_forks(data, i));
-	if (pthread_mutex_init(&data->death_lock, NULL) != 0)
+	if (pthread_mutex_init(&data->death_mutex, NULL) != 0)
 	{
-		pthread_mutex_destroy(&data->print_lock);
+		pthread_mutex_destroy(&data->print_mutex);
 		return (destroy_and_free_forks(data, i));
 	}
 	return (1);

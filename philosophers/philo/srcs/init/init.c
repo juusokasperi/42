@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 16:04:45 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/02/21 19:03:56 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/02/21 19:54:22 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int	init_philos(t_data *data)
 				pthread_mutex_destroy(&data->philos[i].meal_mutex);
 				pthread_mutex_destroy(&data->forks[i]);
 			}
-			pthread_mutex_destroy(&data->print_lock);
+			pthread_mutex_destroy(&data->print_mutex);
 			ft_free((void **)data->philos);
 			return (0);
 		}

@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 22:26:08 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/02/21 00:12:54 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/02/21 19:53:44 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ static int	check_all_ate_enough(t_philo *philos, t_data *data)
 	}
 	if (all_ate_enough)
 	{
-		pthread_mutex_lock(&data->death_lock);
+		pthread_mutex_lock(&data->death_mutex);
 		data->philo_died = 1;
-		pthread_mutex_unlock(&data->death_lock);
+		pthread_mutex_unlock(&data->death_mutex);
 		return (1);
 	}
 	return (0);
@@ -67,9 +67,9 @@ static int	check_all_ate_enough(t_philo *philos, t_data *data)
 
 void	philo_died(t_philo *philos, t_data *data, int i)
 {
-	pthread_mutex_lock(&data->death_lock);
+	pthread_mutex_lock(&data->death_mutex);
 	data->philo_died = 1;
-	pthread_mutex_unlock(&data->death_lock);
+	pthread_mutex_unlock(&data->death_mutex);
 	pthread_mutex_unlock(&philos[i].meal_mutex);
 	if (print_msg(&philos[i], "died") == -1)
 		return ;
