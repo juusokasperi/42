@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 15:59:14 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/02/20 17:05:01 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/02/20 20:44:43 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 static void	ft_success(void);
 static bool	check_meals_eaten(t_data *data);
-static void	cleanup_mutexes(t_data *data);
 
 void	ft_cleanup(t_data *data, char *str)
 {
@@ -25,6 +24,8 @@ void	ft_cleanup(t_data *data, char *str)
 	if (data)
 		cleanup_mutexes(data);
 	ate_enough_times = check_meals_eaten(data);
+	if (data->philos)
+		ft_free((void **)&data->philos);
 	if (str)
 		ft_error(str);
 	if (data->error)
@@ -50,12 +51,17 @@ static bool	check_meals_eaten(t_data *data)
 		return (false);
 	i = -1;
 	while (++i < data->philo_count)
+	{
 		if (data->philos[i].meals_ate < data->meals_to_eat)
+		{
+			printf("philo[%d] has ate %d times, meals to eat is %d\n",i, data->philos[i].meals_ate, data->meals_to_eat);
 			return (false);
+		}
+	}
 	return (true);
 }
 
-static void	cleanup_mutexes(t_data *data)
+void	cleanup_mutexes(t_data *data)
 {
 	int	i;
 
@@ -65,5 +71,8 @@ static void	cleanup_mutexes(t_data *data)
 		pthread_mutex_destroy(&data->philos[i].meal_mutex);
 		pthread_mutex_destroy(&data->forks[i]);
 	}
-	pthread_mutex_destroy(&data->lock);
+	pthread_mutex_destroy(&data->death_lock);
+	pthread_mutex_destroy(&data->print_lock);
+	if (data->forks)
+		ft_free((void **)&data->forks);
 }
