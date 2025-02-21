@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 15:11:17 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/02/21 18:25:30 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/02/21 19:09:12 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int		init_mutexes(t_data *data);
 int		init_philos(t_data *data);
 int		init_threads(t_data *data);
 int		join_threads(t_data *data);
-
+void	wait_for_start(t_philo *philo);
 //	Exit:
 //		Ft_cleanup.c
 void	ft_cleanup(t_data *data, char *str);
@@ -99,6 +99,8 @@ int		ft_usleep(size_t ms);
 //		Print_msg.c
 int		print_msg(t_philo *philo, char *str);
 //		Min_max_mid.c
+int		ft_min(int a, int b);
+int		ft_max(int a, int b);
 int		ft_min_three(int a, int b, int c);
 int		ft_mid_three(int a, int b, int c);
 int		ft_max_three(int a, int b, int c);

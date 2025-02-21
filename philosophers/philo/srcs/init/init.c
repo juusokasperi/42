@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 16:04:45 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/02/21 17:40:24 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/02/21 19:03:56 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,45 +48,10 @@ int	parse_args(t_data *data, int argc, char **argv)
 	return (1);
 }
 
-int	init_mutexes(t_data *data)
-{
-	int	i;
-
-	data->forks = malloc(sizeof(pthread_mutex_t) * data->philo_count);
-	if (!data->forks)
-		return (0);
-	i = -1;
-	while (++i < data->philo_count)
-	{
-		if (pthread_mutex_init(&data->forks[i], NULL) != 0)
-		{
-			while (--i >= 0)
-				pthread_mutex_destroy(&data->forks[i]);
-			ft_free((void **)data->forks);
-			return (0);
-		}
-	}
-	if (pthread_mutex_init(&data->print_lock, NULL) != 0)
-	{
-		while (--i >= 0)
-			pthread_mutex_destroy(&data->forks[i]);
-		ft_free((void **)data->forks);
-		return (0);
-	}
-	if (pthread_mutex_init(&data->death_lock, NULL) != 0)
-	{
-		while (--i >= 0)
-			pthread_mutex_destroy(&data->forks[i]);
-		ft_free((void **)data->forks);
-		pthread_mutex_destroy(&data->print_lock);
-		return (0);
-	}
-	return (1);
-}
-
 static void	fill_data(t_philo *philo, t_data *data, int i)
 {
 	pthread_mutex_t	*tmp;
+
 	philo->id = i + 1;
 	philo->last_meal = 0;
 	philo->meals_ate = 0;

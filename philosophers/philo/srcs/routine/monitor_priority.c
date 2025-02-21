@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:47:30 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/02/21 18:24:39 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/02/21 19:09:16 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ static void	set_priority_struct(t_priority *id_nums, int i, t_data *data)
 {
 	id_nums->left_id = (i + data->philo_count - 1) % data->philo_count;
 	id_nums->right_id = (i + 1) % data->philo_count;
-
 	id_nums->first = ft_min_three(id_nums->left_id, i, id_nums->right_id);
 	id_nums->second = ft_mid_three(id_nums->left_id, i, id_nums->right_id);
 	id_nums->third = ft_max_three(id_nums->left_id, i, id_nums->right_id);
@@ -69,22 +68,14 @@ static void	priority_for_bigger(t_philo *philos, t_data *data, int i)
 //	Determine eating priority for two philosophers.
 static void	priority_for_two(t_philo *philos, t_data *data, int i)
 {
-	int		first;
-	int		second;
-	int		other_id;
+	int			first;
+	int			second;
+	int			other_id;
 	size_t		cur_t;
 
 	other_id = (i + 1) % data->philo_count;
-	if (other_id < i)
-	{
-		first = other_id;
-		second = i;
-	}
-	else
-	{
-		first = i;
-		second = other_id;
-	}
+	first = ft_min(i, other_id);
+	second = ft_max(i, other_id);
 	pthread_mutex_lock(&philos[first].meal_mutex);
 	pthread_mutex_lock(&philos[second].meal_mutex);
 	cur_t = get_time_ms() - data->start_time;

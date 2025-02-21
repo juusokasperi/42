@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 15:59:14 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/02/20 20:44:43 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/02/21 19:09:52 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,7 @@ static bool	check_meals_eaten(t_data *data)
 	while (++i < data->philo_count)
 	{
 		if (data->philos[i].meals_ate < data->meals_to_eat)
-		{
-			printf("philo[%d] has ate %d times, meals to eat is %d\n",i, data->philos[i].meals_ate, data->meals_to_eat);
 			return (false);
-		}
 	}
 	return (true);
 }

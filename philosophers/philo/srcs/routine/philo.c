@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 22:26:05 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/02/21 18:28:40 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/02/21 19:10:10 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 static int		p_think(t_philo *philo);
 static int		p_eat(t_philo *philo);
 static int		p_sleep(t_philo *philo);
-static void		wait_for_start(t_philo *philo);
 
 void	*philo_routine(void *arg)
 {
@@ -42,12 +41,6 @@ void	*philo_routine(void *arg)
 			break ;
 	}
 	return (arg);
-}
-
-static void	wait_for_start(t_philo *philo)
-{
-	pthread_mutex_lock(&philo->data->death_lock);
-	pthread_mutex_unlock(&philo->data->death_lock);
 }
 
 int	is_dead(t_philo *philo)
