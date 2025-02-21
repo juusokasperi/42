@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 22:26:05 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/02/21 22:34:53 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/02/21 22:36:34 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,6 @@ void	*philo_routine(void *arg)
 
 static int	p_think(t_philo *philo)
 {
-//	size_t	think_time;
-
 	if (is_dead(philo))
 		return (-1);
 	if (print_msg(philo, "is thinking") == -1)
