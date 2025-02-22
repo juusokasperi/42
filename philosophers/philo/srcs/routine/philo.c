@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 22:26:05 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/02/22 14:04:29 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/02/22 16:19:25 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	*philo_routine(void *arg)
 		if (philo_ate_enough(philo))
 			break ;
 		if ((philo->data->time_to_die * 0.8) > (time_since_meal(philo)))
-			ft_usleep(5);
+			ft_usleep(3);
 		pthread_mutex_unlock(&philo->meal_mutex);
 		if (philo->data->error || is_dead(philo))
 			break ;
