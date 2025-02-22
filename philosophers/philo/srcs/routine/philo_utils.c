@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 13:45:31 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/02/22 17:47:26 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/02/22 20:38:26 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,18 @@ int	philo_ate_enough(t_philo *philo)
 
 void	wait_if_not_very_hungry(t_philo *philo)
 {
+	size_t	last_time_ate;
+	size_t	threshold;
+
 	pthread_mutex_lock(&philo->meal_mutex);
-	if ((time_since_meal(philo) > 0)
-		&& (philo->data->time_to_die * 0.8) > (time_since_meal(philo))
-		&& ((philo->data->time_to_die * 0.8) > 10))
-		ft_usleep(3);
+	last_time_ate = time_since_meal(philo);
+	threshold = philo->data->time_to_die * 0.8;
+	if (last_time_ate > 0 && threshold > last_time_ate)
+	{
+		if (threshold > 10)
+			ft_usleep(3);
+		else
+			ft_usleep(1);
+	}
 	pthread_mutex_unlock(&philo->meal_mutex);
 }
