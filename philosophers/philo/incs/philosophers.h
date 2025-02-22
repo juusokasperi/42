@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 15:11:17 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/02/22 14:04:45 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/02/22 16:22:28 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ typedef struct s_philo
 	int				id;
 	size_t			last_meal;
 	int				meals_ate;
-	int				should_eat_next;
 	pthread_t		thread;
+	bool			has_thread;
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*right_fork;
 	pthread_mutex_t	meal_mutex;
@@ -56,21 +56,6 @@ struct s_data
 	t_philo			*philos;
 };
 
-//	Monitor uses this struct to determine the right
-//	order for locking philosopher's meal mutexes.
-typedef struct s_priority
-{
-	int		left_id;
-	int		right_id;
-	int		left_meals;
-	int		right_meals;
-	size_t	l_last_meal;
-	size_t	r_last_meal;
-	int		first;
-	int		second;
-	int		third;
-}	t_priority;
-
 //	Init:
 int		parse_args(t_data *data, int argc, char **argv);
 int		init_mutexes(t_data *data);
@@ -83,7 +68,6 @@ int		ft_error(char *str);
 //		Ft_cleanup.c
 int		ft_cleanup(t_data *data);
 void	cleanup_mutexes(t_data *data);
-
 //	Utils:
 //		Philo_utils.c
 int		is_dead(t_philo *philo);
@@ -103,7 +87,7 @@ void	*ft_free(void **ptr);
 //	Routines:
 //		Monitor.c
 void	monitor_routine(t_data *data);
-//		Philo_died.c
+//		Philo.c
 void	*philo_routine(void *arg);
 
 #endif
