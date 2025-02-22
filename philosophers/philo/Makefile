@@ -19,7 +19,7 @@ INCS =		-I./incs
 # Compiler
 CC = 		cc
 ifeq ($(MAKECMDGOALS), debug)
-	CFLAGS +=	-g
+CFLAGS +=	-g
 endif
 CFLAGS +=	-Wall -Wextra -pthread $(INCS)
 
@@ -36,6 +36,7 @@ $(OBJS_DIR)%.o: $(SRCS_DIR)%.c $(HDR)
 
 all: $(NAME)
 
+ifeq ($(shell uname -s)-$(shell uname -m), Darwin-arm64)
 # Docker stuff
 CONTAINER_NAME =	valgrind-env
 valgrind: fclean
@@ -47,6 +48,7 @@ valgrind: fclean
 	docker exec $(CONTAINER_NAME) mkdir -p /app/
 	docker cp . $(CONTAINER_NAME):/app/
 	docker exec $(CONTAINER_NAME) make -C /app/ debug
+endif
 
 debug: re
 
