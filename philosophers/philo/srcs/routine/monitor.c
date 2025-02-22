@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 22:26:08 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/02/22 15:19:09 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/02/22 16:27:35 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	monitor_routine(t_data *data)
 				&& check_all_ate_enough(data->philos, data))
 				return ;
 		}
-		ft_usleep(10);
+		ft_usleep(5);
 	}
 	return ;
 }
