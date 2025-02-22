@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 13:45:31 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/02/22 14:04:32 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/02/22 17:17:56 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,13 @@ int	philo_ate_enough(t_philo *philo)
 		return (1);
 	}
 	return (0);
+}
+
+void	wait_if_not_very_hungry(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->meal_mutex);
+	if ((philo->data->time_to_die * 0.8) > (time_since_meal(philo))
+			&& (philo->data->time_to_die * 0.8) > 10)
+		ft_usleep(3);
+	pthread_mutex_unlock(&philo->meal_mutex);
 }

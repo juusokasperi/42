@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 15:11:17 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/02/22 16:22:28 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/02/22 17:17:54 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ int		is_dead(t_philo *philo);
 int		print_msg(t_philo *philo, char *str);
 int		unlock_forks(pthread_mutex_t *first, pthread_mutex_t *second, int i);
 int		philo_ate_enough(t_philo *philo);
+void	wait_if_not_very_hungry(t_philo *philo);
 //		Get_time_ms.c
 size_t	get_time_ms(void);
 size_t	time_now(t_data *data);

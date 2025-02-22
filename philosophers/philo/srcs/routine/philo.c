@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 22:26:05 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/02/22 16:43:19 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/02/22 17:17:40 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,6 @@ void	*philo_routine(void *arg)
 		pthread_mutex_lock(&philo->meal_mutex);
 		if (philo_ate_enough(philo))
 			break ;
-		if ((philo->data->time_to_die * 0.8) > (time_since_meal(philo))
-			&& (philo->data->time_to_die * 0.8) > 10)
-			ft_usleep(3);
 		pthread_mutex_unlock(&philo->meal_mutex);
 		if (philo->data->error || is_dead(philo))
 			break ;
@@ -57,6 +54,7 @@ static int	p_think(t_philo *philo)
 
 static int	p_eat(t_philo *philo)
 {
+	wait_if_not_very_hungry(philo);
 	pthread_mutex_lock(philo->right_fork);
 	if (is_dead(philo) || print_msg(philo, "has taken a fork") == -1)
 		return (unlock_forks(philo->right_fork, NULL, -1));
