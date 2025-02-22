@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 15:18:13 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/02/22 13:46:42 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/02/22 16:01:47 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ int	main(int argc, char **argv)
 	if (!init_philos(&data))
 		return (ft_error("Error initializing philosophers."));
 	if (!init_threads(&data))
-		return (ft_error("Error initializing threads."));
+		return (1);
 	monitor_routine(&data);
 	if (!join_threads(&data))
-		return (ft_error("Error joining threads."));
+		return (1);
 	return (ft_cleanup(&data));
 }
 
