@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 15:11:17 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/02/21 23:57:54 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/02/22 14:04:45 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,45 +78,32 @@ int		init_philos(t_data *data);
 int		init_threads(t_data *data);
 int		join_threads(t_data *data);
 void	wait_for_start(t_philo *philo);
+int		ft_error(char *str);
 //	Exit:
 //		Ft_cleanup.c
-void	ft_cleanup(t_data *data, char *str);
+int		ft_cleanup(t_data *data);
 void	cleanup_mutexes(t_data *data);
 
 //	Utils:
-//		Is_dead.c
+//		Philo_utils.c
 int		is_dead(t_philo *philo);
-//		Ft_error.c
-void	ft_error(char *str);
-//		Ft_strlen.c
-size_t	ft_strlen(char *str);
+int		print_msg(t_philo *philo, char *str);
+int		unlock_forks(pthread_mutex_t *first, pthread_mutex_t *second, int i);
+int		philo_ate_enough(t_philo *philo);
+//		Get_time_ms.c
+size_t	get_time_ms(void);
+size_t	time_now(t_data *data);
+size_t	time_since_meal(t_philo *philo);
+//		Ft_usleep.c
+int		ft_usleep(size_t ms);
 //		Ft_atoi.c
 int		ft_atoi(const char *str);
 //		Ft_free.c
 void	*ft_free(void **ptr);
-//		Get_time_ms.c
-size_t	get_time_ms(void);
-//		Ft_usleep.c
-int		ft_usleep(size_t ms);
-//		Print_msg.c
-int		print_msg(t_philo *philo, char *str);
-//		Min_max_mid.c
-int		ft_min(int a, int b);
-int		ft_max(int a, int b);
-int		ft_min_three(int a, int b, int c);
-int		ft_mid_three(int a, int b, int c);
-int		ft_max_three(int a, int b, int c);
-//		Ft_strcmp.c
-int		ft_strcmp(const char *s1, const char *s2);
-//		Monitor_priority_utils.c
-void	check_priority(t_philo *philos, t_data *data, int i);
-//		Philo_unlock_forks.c
-int		unlock_forks(pthread_mutex_t *first, pthread_mutex_t *second, int i);
 //	Routines:
 //		Monitor.c
 void	monitor_routine(t_data *data);
 //		Philo_died.c
 void	*philo_routine(void *arg);
-int		is_dead(t_philo *philo);
 
 #endif

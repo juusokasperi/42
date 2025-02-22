@@ -1,13 +1,9 @@
 # Srcs
 SRCS_DIR =	srcs/
-SRCS =		main.c 				utils/ft_error.c		utils/ft_strlen.c	\
-			init/init.c			init/init_threads.c		init/init_mutexes.c	\
-			utils/ft_atoi.c		utils/get_time_ms.c		utils/ft_usleep.c	\
-			utils/print_msg.c	utils/is_dead.c								\
-			utils/philo_unlock_forks.c					utils/ft_free.c		\
-			utils/ft_strcmp.c	utils/min_max_mid.c							\
-			exit/ft_cleanup.c	routine/philo.c			routine/monitor.c	\
-			routine/monitor_priority.c
+SRCS =		main.c				init/init.c				init/init_threads.c	\
+			init/init_mutexes.c	utils/ft_atoi.c			utils/get_time_ms.c	\
+			utils/ft_usleep.c	utils/ft_free.c			exit/ft_cleanup.c	\
+			routine/philo.c		routine/philo_utils.c	routine/monitor.c
 
 # Objs
 OBJS_DIR =	objs/

@@ -6,11 +6,13 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 22:18:41 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/02/21 19:53:29 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/02/22 11:51:13 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+
+static void	join_threads_on_error(t_data *data, int i);
 
 int	init_threads(t_data *data)
 {
@@ -24,6 +26,7 @@ int	init_threads(t_data *data)
 				&philo_routine, &data->philos[i]) != 0)
 		{
 			pthread_mutex_unlock(&data->death_mutex);
+			join_threads_on_error(data, i);
 			cleanup_mutexes(data);
 			ft_free((void **)&data->philos);
 			return (0);
@@ -32,6 +35,18 @@ int	init_threads(t_data *data)
 	data->start_time = get_time_ms();
 	pthread_mutex_unlock(&data->death_mutex);
 	return (1);
+}
+
+static void	join_threads_on_error(t_data *data, int i)
+{
+	int	j;
+
+	j = -1;
+	while (++j <= i)
+	{
+		if (data->philos[j].thread != 0)
+			pthread_join(data->philos[j].thread, NULL);
+	}
 }
 
 int	join_threads(t_data *data)
