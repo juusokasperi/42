@@ -6,14 +6,15 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 22:26:08 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/02/22 14:01:15 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/02/22 15:19:09 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void			philo_died(t_philo *philo, t_data *data);
 static int		check_all_ate_enough(t_philo *philos, t_data *data);
+static void		philo_died(t_philo *philo, t_data *data);
+static int		died_while_waiting(t_philo *philo, t_data *data);
 
 void	monitor_routine(t_data *data)
 {
@@ -25,13 +26,7 @@ void	monitor_routine(t_data *data)
 		while (++i < data->philo_count)
 		{
 			pthread_mutex_lock(&data->philos[i].meal_mutex);
-			if (data->meals_to_eat != -1)
-			{
-				if (data->philos[i].meals_ate < data->meals_to_eat
-					&& time_since_meal(&data->philos[i]) >= (size_t)data->time_to_die)
-					return (philo_died(&data->philos[i], data));
-			}
-			else if (time_since_meal(&data->philos[i]) >= (size_t)data->time_to_die)
+			if (died_while_waiting(&data->philos[i], data))
 				return (philo_died(&data->philos[i], data));
 			pthread_mutex_unlock(&data->philos[i].meal_mutex);
 			if (data->meals_to_eat != -1
@@ -67,7 +62,7 @@ static int	check_all_ate_enough(t_philo *philos, t_data *data)
 	return (0);
 }
 
-void	philo_died(t_philo *philo, t_data *data)
+static void	philo_died(t_philo *philo, t_data *data)
 {
 	pthread_mutex_lock(&data->death_mutex);
 	data->philo_died = 1;
@@ -78,4 +73,13 @@ void	philo_died(t_philo *philo, t_data *data)
 		data->error = 1;
 	pthread_mutex_unlock(&data->print_mutex);
 	return ;
+}
+
+static int	died_while_waiting(t_philo *philo, t_data *data)
+{
+	if (data->meals_to_eat != -1)
+		return (philo->meals_ate < data->meals_to_eat
+			&& time_since_meal(philo) >= (size_t)data->time_to_die);
+	else
+		return (time_since_meal(philo) >= (size_t)data->time_to_die);
 }
