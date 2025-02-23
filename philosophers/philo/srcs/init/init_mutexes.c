@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 18:47:50 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/02/21 19:54:22 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/02/23 18:24:03 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@ static int	destroy_and_free_forks(t_data *data, int i)
 	return (0);
 }
 
+/*
+	Initializes the mutexes that are shared between threads;
+	forks, print_mutex and deaths_mutex.
+*/
 int	init_mutexes(t_data *data)
 {
 	int	i;

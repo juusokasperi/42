@@ -6,45 +6,33 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 16:04:45 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/02/22 15:40:21 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/02/23 18:45:30 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-static int	valid_args(int argc, char **argv)
+static void	fill_data(t_philo *philo, t_data *data, int i);
+static int			init_meal_mutex(t_data *data);
+static int			init_fulfill_mutex(t_data *data);
+
+/*
+	Allocates the philos, initalizes their data and each philos own mutexes;
+	meal_mutex and if meals_to_eat is set, fulfill_mutex
+*/
+int	init_philos(t_data *data)
 {
 	int	i;
-	int	j;
 
-	i = 0;
-	while (++i < argc)
-	{
-		j = -1;
-		while (argv[i][++j])
-			if (argv[i][j] < '0' || argv[i][j] > '9')
-				return (0);
-	}
-	return (1);
-}
-
-int	parse_args(t_data *data, int argc, char **argv)
-{
-	if (!valid_args(argc, argv))
+	data->philos = malloc(sizeof(t_philo) * data->philo_count);
+	if (!data->philos)
 		return (0);
-	data->philo_count = ft_atoi(argv[1]);
-	data->time_to_die = ft_atoi(argv[2]);
-	data->time_to_eat = ft_atoi(argv[3]);
-	data->time_to_sleep = ft_atoi(argv[4]);
-	data->start_time = 0;
-	data->error = 0;
-	data->philo_died = 0;
-	if (argc == 6)
-		data->meals_to_eat = ft_atoi(argv[5]);
-	else
-		data->meals_to_eat = -1;
-	if (data->philo_count < 1 || data->time_to_die < 0
-		|| data->time_to_eat < 0 || data->time_to_sleep < 0)
+	i = -1;
+	while (++i < data->philo_count)
+		fill_data(&data->philos[i], data, i);
+	if (!init_meal_mutex(data))
+		return (0);
+	if (data->meals_to_eat != -1 && !init_fulfill_mutex(data))
 		return (0);
 	return (1);
 }
@@ -60,6 +48,7 @@ static void	fill_data(t_philo *philo, t_data *data, int i)
 	philo->right_fork = &data->forks[i];
 	philo->left_fork = &data->forks[(i + 1) % data->philo_count];
 	philo->has_thread = false;
+	philo->ate_enough = false;
 	if (philo->right_fork > philo->left_fork)
 	{
 		tmp = philo->right_fork;
@@ -68,17 +57,16 @@ static void	fill_data(t_philo *philo, t_data *data, int i)
 	}
 }
 
-int	init_philos(t_data *data)
+/*
+	The meal_mutex is used when checking last_meal and meals_ate.
+*/
+static int	init_meal_mutex(t_data *data)
 {
 	int	i;
 
-	data->philos = malloc(sizeof(t_philo) * data->philo_count);
-	if (!data->philos)
-		return (0);
 	i = -1;
 	while (++i < data->philo_count)
 	{
-		fill_data(&data->philos[i], data, i);
 		if (pthread_mutex_init(&data->philos[i].meal_mutex, NULL) != 0)
 		{
 			while (--i >= 0)
@@ -88,6 +76,35 @@ int	init_philos(t_data *data)
 			}
 			pthread_mutex_destroy(&data->print_mutex);
 			ft_free((void **)data->philos);
+			return (0);
+		}
+	}
+	return (1);
+}
+
+/*
+	Fulfill_mutex used to check whether a philosopher has
+	set their bool ate_enough to true.
+*/
+static int	init_fulfill_mutex(t_data *data)
+{
+	int	i;
+
+	i = -1;
+	while (++i < data->philo_count)
+	{
+		if (pthread_mutex_init(&data->philos[i].fulfill_mutex, NULL) != 0)
+		{
+			while (--i >= 0)
+				pthread_mutex_destroy(&data->philos[i].fulfill_mutex);
+			pthread_mutex_destroy(&data->print_mutex);
+			ft_free((void **)data->philos);
+			i = -1;
+			while (++i < data->philo_count)
+			{
+				pthread_mutex_destroy(&data->philos[i].meal_mutex);
+				pthread_mutex_destroy(&data->forks[i]);
+			}
 			return (0);
 		}
 	}

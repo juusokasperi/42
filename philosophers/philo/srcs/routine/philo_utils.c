@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 13:45:31 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/02/23 17:40:42 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/02/23 18:32:43 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,25 +58,32 @@ int	philo_ate_enough(t_philo *philo)
 	int	meals_to_eat;
 	int	meals_ate;
 
-	pthread_mutex_lock(&philo->meal_mutex);
-		meals_to_eat = philo->data->meals_to_eat;
-		meals_ate = philo->meals_ate;
-	pthread_mutex_unlock(&philo->meal_mutex);
+	meals_to_eat = philo->data->meals_to_eat;
 	if (meals_to_eat == -1)
 		return (0);
-	return (meals_ate >= meals_to_eat);
+	pthread_mutex_lock(&philo->meal_mutex);
+	meals_ate = philo->meals_ate;
+	pthread_mutex_unlock(&philo->meal_mutex);
+	if (meals_ate >= meals_to_eat)
+	{
+		pthread_mutex_lock(&philo->fulfill_mutex);
+		philo->ate_enough = true;
+		pthread_mutex_unlock(&philo->fulfill_mutex);
+		return (1);
+	}
+	return (0);
 }
 
 void	wait_if_not_very_hungry(t_philo *philo)
 {
-	size_t	last_time_ate;
+	size_t	last_meal;
 	size_t	threshold;
 
 	pthread_mutex_lock(&philo->meal_mutex);
-	last_time_ate = time_since_meal(philo);
-	threshold = philo->data->time_to_die * 0.8;
+	last_meal = time_since_meal(philo);
 	pthread_mutex_unlock(&philo->meal_mutex);
-	if (last_time_ate > 0 && threshold > last_time_ate)
+	threshold = philo->data->time_to_die * 0.8;
+	if (last_meal > 0 && threshold > last_meal)
 	{
 		if (threshold > 10)
 			ft_usleep(3);

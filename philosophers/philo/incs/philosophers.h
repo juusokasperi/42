@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 15:11:17 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/02/22 17:17:54 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/02/23 18:48:37 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,13 @@ typedef struct s_philo
 	int				id;
 	size_t			last_meal;
 	int				meals_ate;
+	bool			ate_enough;
 	pthread_t		thread;
 	bool			has_thread;
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*right_fork;
 	pthread_mutex_t	meal_mutex;
+	pthread_mutex_t	fulfill_mutex;
 	t_data			*data;
 }	t_philo;
 
@@ -57,7 +59,6 @@ struct s_data
 };
 
 //	Init:
-int		parse_args(t_data *data, int argc, char **argv);
 int		init_mutexes(t_data *data);
 int		init_philos(t_data *data);
 int		init_threads(t_data *data);

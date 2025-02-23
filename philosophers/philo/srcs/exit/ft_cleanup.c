@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 15:59:14 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/02/22 13:52:44 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/02/23 18:30:23 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ void	cleanup_mutexes(t_data *data)
 	{
 		pthread_mutex_destroy(&data->philos[i].meal_mutex);
 		pthread_mutex_destroy(&data->forks[i]);
+		if (data->meals_to_eat != -1)
+			pthread_mutex_destroy(&data->philos[i].fulfill_mutex);
 	}
 	pthread_mutex_destroy(&data->death_mutex);
 	pthread_mutex_destroy(&data->print_mutex);
