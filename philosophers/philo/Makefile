@@ -48,7 +48,7 @@ valgrind: fclean
 	@docker exec $(CONTAINER_NAME) mkdir -p /app/
 	@docker cp . $(CONTAINER_NAME):/app/
 	@docker exec $(CONTAINER_NAME) make -C /app/ debug --no-print-directory
-	@echo "$(GREEN)✅: Valgrind docker compilation complete!$(ENDCOLOR)"
+	@echo "$(GREEN)✅ PHILO: Valgrind docker compilation complete!$(ENDCOLOR)"
 valgrind_clean:
 	@docker start $(CONTAINER_NAME)
 	@docker exec $(CONTAINER_NAME) rm -rf /app/
