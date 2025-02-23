@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 15:18:13 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/02/23 18:46:53 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/02/23 19:45:15 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	main(int argc, char **argv)
 }
 
 /*
-	Checks the arguments contain only digits.
+	Checks that the arguments contain only digits.
 */
 static int	valid_args(int argc, char **argv)
 {

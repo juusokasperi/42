@@ -6,19 +6,19 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 15:59:14 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/02/23 18:30:23 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/02/24 00:13:34 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
 static int	ft_end(char *str);
-static bool	check_meals_eaten(t_data *data);
+static int	check_meals_eaten(t_data *data);
 
 int	ft_cleanup(t_data *data)
 {
 	int		philo_died;
-	bool	ate_enough_times;
+	int		ate_enough_times;
 
 	philo_died = data->philo_died;
 	if (data)
@@ -28,7 +28,7 @@ int	ft_cleanup(t_data *data)
 		ft_free((void **)&data->philos);
 	if (data->error)
 		return (ft_error("Write call failed in a thread."));
-	if (ate_enough_times == false && philo_died)
+	if (ate_enough_times == 0 && philo_died)
 		return (ft_end("Simulation ended, a philosopher has starved."));
 	else
 		return (ft_end("Simulation ended, philosophers have finished eating."));
@@ -41,19 +41,19 @@ static int	ft_end(char *str)
 	return (0);
 }
 
-static bool	check_meals_eaten(t_data *data)
+static int	check_meals_eaten(t_data *data)
 {
 	int	i;
 
 	if (data->meals_to_eat == -1)
-		return (false);
+		return (0);
 	i = -1;
 	while (++i < data->philo_count)
 	{
 		if (data->philos[i].meals_ate < data->meals_to_eat)
-			return (false);
+			return (0);
 	}
-	return (true);
+	return (1);
 }
 
 void	cleanup_mutexes(t_data *data)
@@ -66,7 +66,7 @@ void	cleanup_mutexes(t_data *data)
 		pthread_mutex_destroy(&data->philos[i].meal_mutex);
 		pthread_mutex_destroy(&data->forks[i]);
 		if (data->meals_to_eat != -1)
-			pthread_mutex_destroy(&data->philos[i].fulfill_mutex);
+			pthread_mutex_destroy(&data->philos[i].done_mutex);
 	}
 	pthread_mutex_destroy(&data->death_mutex);
 	pthread_mutex_destroy(&data->print_mutex);

@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 22:26:05 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/02/23 16:44:30 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/02/23 19:44:24 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,13 @@ static int		p_eat(t_philo *philo);
 static int		p_sleep(t_philo *philo);
 static void		*handle_one_philo(t_philo *philo);
 
+/*
+	Each philosopher waits for init_threads() to unlock the death_mutex.
+	When that happens, simulation can begin.
+
+	Philosopher alternatively eats, sleeps and thinks. If meals_to_eat is set,
+	philosopher will stop eating once they have eaten enough times.
+*/
 void	*philo_routine(void *arg)
 {
 	t_philo	*philo;

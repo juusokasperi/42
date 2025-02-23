@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 22:18:41 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/02/22 16:05:32 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/02/24 00:12:52 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,14 @@
 
 static int	pthread_create_failed(t_data *data, int i);
 
+/*
+	Creates the threads. In case of an error, sets data.error flag to 1 and
+	joins the threads that were created up to that point.
+
+	Upon successful creation of threads, sets the simulation start_time and
+	unlocks death_mutex, which philosophers are waiting for and simulation
+	begins.
+*/
 int	init_threads(t_data *data)
 {
 	int	i;
@@ -38,6 +46,7 @@ static int	pthread_create_failed(t_data *data, int i)
 
 	printf("%sERROR:%s pthread_create failed for philo[%d]\n",
 		TRED, TRESET, i);
+	data->error = 1;
 	pthread_mutex_unlock(&data->death_mutex);
 	j = -1;
 	while (++j < i)

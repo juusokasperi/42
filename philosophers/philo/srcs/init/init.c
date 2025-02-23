@@ -6,19 +6,23 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 16:04:45 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/02/23 18:45:30 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/02/24 00:13:58 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
 static void	fill_data(t_philo *philo, t_data *data, int i);
-static int			init_meal_mutex(t_data *data);
-static int			init_fulfill_mutex(t_data *data);
+static int	init_meal_mutex(t_data *data);
+static int	init_done_mutex(t_data *data);
 
 /*
 	Allocates the philos, initalizes their data and each philos own mutexes;
-	meal_mutex and if meals_to_eat is set, fulfill_mutex
+	meal_mutex and if meals_to_eat is set, done_mutex
+
+	The meal_mutex is used when checking last_meal and meals_ate.
+	done_mutex is used to check whether a philosopher has
+	set their bool ate_enough to true.
 */
 int	init_philos(t_data *data)
 {
@@ -32,7 +36,7 @@ int	init_philos(t_data *data)
 		fill_data(&data->philos[i], data, i);
 	if (!init_meal_mutex(data))
 		return (0);
-	if (data->meals_to_eat != -1 && !init_fulfill_mutex(data))
+	if (data->meals_to_eat != -1 && !init_done_mutex(data))
 		return (0);
 	return (1);
 }
@@ -57,9 +61,6 @@ static void	fill_data(t_philo *philo, t_data *data, int i)
 	}
 }
 
-/*
-	The meal_mutex is used when checking last_meal and meals_ate.
-*/
 static int	init_meal_mutex(t_data *data)
 {
 	int	i;
@@ -82,21 +83,17 @@ static int	init_meal_mutex(t_data *data)
 	return (1);
 }
 
-/*
-	Fulfill_mutex used to check whether a philosopher has
-	set their bool ate_enough to true.
-*/
-static int	init_fulfill_mutex(t_data *data)
+static int	init_done_mutex(t_data *data)
 {
 	int	i;
 
 	i = -1;
 	while (++i < data->philo_count)
 	{
-		if (pthread_mutex_init(&data->philos[i].fulfill_mutex, NULL) != 0)
+		if (pthread_mutex_init(&data->philos[i].done_mutex, NULL) != 0)
 		{
 			while (--i >= 0)
-				pthread_mutex_destroy(&data->philos[i].fulfill_mutex);
+				pthread_mutex_destroy(&data->philos[i].done_mutex);
 			pthread_mutex_destroy(&data->print_mutex);
 			ft_free((void **)data->philos);
 			i = -1;

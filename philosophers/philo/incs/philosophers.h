@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 15:11:17 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/02/23 18:48:37 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/02/24 00:13:34 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct s_philo
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*right_fork;
 	pthread_mutex_t	meal_mutex;
-	pthread_mutex_t	fulfill_mutex;
+	pthread_mutex_t	done_mutex;
 	t_data			*data;
 }	t_philo;
 

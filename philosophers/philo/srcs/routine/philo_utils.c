@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 13:45:31 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/02/23 18:32:43 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/02/24 00:13:34 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,14 +66,17 @@ int	philo_ate_enough(t_philo *philo)
 	pthread_mutex_unlock(&philo->meal_mutex);
 	if (meals_ate >= meals_to_eat)
 	{
-		pthread_mutex_lock(&philo->fulfill_mutex);
+		pthread_mutex_lock(&philo->done_mutex);
 		philo->ate_enough = true;
-		pthread_mutex_unlock(&philo->fulfill_mutex);
+		pthread_mutex_unlock(&philo->done_mutex);
 		return (1);
 	}
 	return (0);
 }
 
+/*
+	If philosopher is not yet hungry, they wait a bit.
+*/
 void	wait_if_not_very_hungry(t_philo *philo)
 {
 	size_t	last_meal;

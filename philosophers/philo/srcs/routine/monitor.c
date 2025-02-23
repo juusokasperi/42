@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 22:26:08 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/02/23 18:48:11 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/02/24 00:13:34 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,10 @@ static int		check_all_ate_enough(t_philo *philos, t_data *data);
 static void		philo_died(t_philo *philo, t_data *data);
 static int		died_while_waiting(t_philo *philo, t_data *data);
 
+/*
+	Monitor checks whether a philosopher has died
+	or all philosophers have eaten enough.
+*/
 void	monitor_routine(t_data *data)
 {
 	int		i;
@@ -45,10 +49,10 @@ static int	check_all_ate_enough(t_philo *philos, t_data *data)
 	all_ate_enough = 1;
 	while (all_ate_enough && ++i < data->philo_count)
 	{
-		pthread_mutex_lock(&data->philos[i].fulfill_mutex);
+		pthread_mutex_lock(&data->philos[i].done_mutex);
 		if (philos[i].ate_enough == false)
 			all_ate_enough = 0;
-		pthread_mutex_unlock(&data->philos[i].fulfill_mutex);
+		pthread_mutex_unlock(&data->philos[i].done_mutex);
 	}
 	if (all_ate_enough == 1)
 	{
