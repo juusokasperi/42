@@ -21,7 +21,7 @@ CC = 		cc
 ifeq ($(MAKECMDGOALS), debug)
 CFLAGS +=	-g
 endif
-CFLAGS +=	-Wall -Wextra -pthread $(INCS)
+CFLAGS +=	-Wall -Werror -Wextra -pthread $(INCS)
 
 # Colors (for echo)
 RED = 		\033[0;31m
