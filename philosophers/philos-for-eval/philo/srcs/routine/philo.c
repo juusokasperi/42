@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 22:26:05 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/02/24 14:52:48 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/02/24 19:43:27 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,10 @@ static int	p_eat(t_philo *philo)
 {
 	wait_if_not_very_hungry(philo);
 	pthread_mutex_lock(philo->right_fork);
-	if (is_dead(philo) || print_msg(philo, "has taken a fork") == -1)
+	if (print_msg(philo, "has taken a fork") == -1)
 		return (unlock_forks(philo->right_fork, NULL, -1));
 	pthread_mutex_lock(philo->left_fork);
-	if (is_dead(philo) || print_msg(philo, "has taken a fork") == -1)
+	if (print_msg(philo, "has taken a fork") == -1 || is_dead(philo))
 		return (unlock_forks(philo->left_fork, philo->right_fork, -1));
 	pthread_mutex_lock(&philo->meal_mutex);
 	philo->last_meal = time_now(philo->data);
