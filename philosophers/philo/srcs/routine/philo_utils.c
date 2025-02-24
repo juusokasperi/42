@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 13:45:31 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/02/24 11:41:57 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/02/24 12:02:42 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,8 @@ void	wait_if_not_very_hungry(t_philo *philo)
 	if (last_meal > 0 && threshold > last_meal)
 	{
 		if (threshold > 10)
-			usleep(280);
+			usleep(250);
 		else
-			ft_usleep(250);
+			usleep(50);
 	}
 }
