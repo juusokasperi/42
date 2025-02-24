@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 22:26:08 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/02/24 10:04:03 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/02/24 11:48:50 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	monitor_routine(t_data *data)
 
 	while (1)
 	{
+		usleep(200);
 		i = -1;
 		while (++i < data->philo_count)
 		{
@@ -35,7 +36,6 @@ void	monitor_routine(t_data *data)
 				&& check_all_ate_enough(data->philos, data))
 				return ;
 		}
-		usleep(250);
 	}
 	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 22:26:05 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/02/23 19:44:24 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/02/24 11:51:16 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,10 @@ static int	p_sleep(t_philo *philo)
 	return (0);
 }
 
+/*
+	With only one philosopher, the philosopher dies since there
+	is only one fork available.
+*/
 static void	*handle_one_philo(t_philo *philo)
 {
 	pthread_mutex_lock(philo->right_fork);
