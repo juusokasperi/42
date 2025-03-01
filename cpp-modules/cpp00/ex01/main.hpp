@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   simpleClass.cpp                                    :+:      :+:    :+:   */
+/*   main.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/28 15:53:57 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/02/28 15:54:27 by jrinta-          ###   ########.fr       */
+/*   Created: 2025/03/01 15:19:50 by jrinta-           #+#    #+#             */
+/*   Updated: 2025/03/01 17:50:49 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "simpleClass.hpp"
+#ifndef MAIN_HPP
+# define MAIN_HPP
 
-SimpleClass::SimpleClass(std::string name, int val): name(name), val(val)
-{
-	std::cout << "Constructing simple object" << std::endl;
-}
+# include <string>
+# include <iomanip>
+# include <iostream>
+# include "PhoneBook.hpp"
 
-SimpleClass::~SimpleClass()
-{
-	std::cout << "Destructing simple object" << std::endl;
-}
+# define TMAGENTA		"\033[95m"
+# define TYELLOW		"\033[93m"
+# define TRESET			"\033[0m"
 
-void	SimpleClass::print()
-{
-	std::cout << "Name " << this->name << std::endl;
-	std::cout << "Val " << this->val << std::endl;
-}
+void	add_contact(PhoneBook *phoneBook);
+void	search_contact(PhoneBook *phoneBook);
+
+#endif /* MAIN_HPP */

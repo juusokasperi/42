@@ -1,4 +1,4 @@
-SRCS = main.cpp simpleClass.cpp
+SRCS = main.cpp PhoneBook.cpp Contact.cpp handle_contacts.cpp
 
 OBJS = $(SRCS:.cpp=.o)
 
@@ -20,9 +20,11 @@ $(NAME): $(OBJS)
 
 clean:
 	@rm -rf $(OBJS)
+	@echo "Clean OK."
 
-fclean: clean
-	@rm -rf $(NAME)
+fclean:
+	@rm -rf $(NAME) $(OBJS)
+	@echo "FClean OK."
 
 re: fclean all
 
