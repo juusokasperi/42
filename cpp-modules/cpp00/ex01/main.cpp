@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 15:38:53 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/02 13:00:55 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/03/03 00:11:39 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ int	main()
 
 static void	printStatus()
 {
-	std::cout << TYELLOW
-	<< "Type ADD to save a new contact, "	\
-	<< "SEARCH to search for contacts, "	\
-	<< "EXIT to quit the book"				\
-	<< std::endl << std::endl << TRESET;
+	std::cout	<< TYELLOW
+				<< "Type ADD to save a new contact, "
+				<< "SEARCH to search for contacts, "
+				<< "EXIT to quit the book"
+				<< std::endl << std::endl << TRESET;
 }

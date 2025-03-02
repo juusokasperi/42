@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 16:41:14 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/02 17:07:02 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/03/03 00:08:45 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ void	HumanB::setWeapon(Weapon &weapon)
 void	HumanB::attack(void) const
 {
 	if (weapon)
-		std::cout << name << " attacks with their " << (*weapon).getType() << std::endl;
+		std::cout	<< name << " attacks with their "
+					<< (*weapon).getType() << std::endl;
 	else
-		std::cout << name << " does not have a weapon." << std::endl;
+		std::cout	<< name << " does not have a weapon." << std::endl;
 }

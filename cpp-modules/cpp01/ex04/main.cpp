@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 18:31:01 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/02 19:33:26 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/03/03 00:08:08 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,9 @@ static int	ft_readfile(char *filename, std::string *content)
 
 static int	incorrect_syntax(char **argv)
 {
-	std::cout << "Usage: " << argv[0]
-	<< " <filename> <string_to_replace> <replacement>" << std::endl;
+	std::cout	<< "Usage: " << argv[0]
+				<< " <filename> <string_to_replace> <replacement>"
+				<< std::endl;
 	return (1);
 }
 

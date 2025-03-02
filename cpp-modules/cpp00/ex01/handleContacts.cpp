@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 17:42:11 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/02 13:00:23 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/03/03 00:11:16 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,8 @@ void	searchContact(PhoneBook *phoneBook)
 		}
 		catch (...)
 		{
-			std::cout << "Invalid input, back to menu."	\
-			<< std::endl << std::endl;
+			std::cout	<< "Invalid input, back to menu."
+						<< std::endl << std::endl;
 		}
 	}
 }
@@ -109,8 +109,8 @@ static int	printBook(PhoneBook *phoneBook)
 	contact = phoneBook->getContact(0);
 	if (contact.getFilled() == 0)
 	{
-		std::cout << "Phonebook still empty, back to menu."	\
-		<< std::endl << std::endl;
+		std::cout	<< "Phonebook still empty, back to menu."
+					<< std::endl << std::endl;
 		return (0);
 	}
 	printColumn("index", '|');
