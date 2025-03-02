@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 15:03:28 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/02 13:12:35 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/03/02 13:28:46 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@ void	PhoneBook::addContact(std::string first, std::string last,
 {
 	contacts_[index] = Contact(first, last, nick, phone, secret);
 	index = (index + 1) % 8;
+}
+
+PhoneBook::PhoneBook()
+{
+	index = 0;
 }
 
 PhoneBook::~PhoneBook()
