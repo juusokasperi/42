@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 16:04:45 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/02/24 00:13:58 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/02/24 14:41:55 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ static void	fill_data(t_philo *philo, t_data *data, int i)
 	philo->data = data;
 	philo->right_fork = &data->forks[i];
 	philo->left_fork = &data->forks[(i + 1) % data->philo_count];
-	philo->has_thread = false;
 	philo->ate_enough = false;
 	if (philo->right_fork > philo->left_fork)
 	{

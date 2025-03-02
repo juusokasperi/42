@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 22:26:05 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/02/24 11:51:16 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/02/24 19:43:27 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,7 @@ void	*philo_routine(void *arg)
 
 static int	p_think(t_philo *philo)
 {
-	if (is_dead(philo))
-		return (-1);
-	if (print_msg(philo, "is thinking") == -1)
+	if (is_dead(philo) || print_msg(philo, "is thinking") == -1)
 		return (-1);
 	return (0);
 }
@@ -61,10 +59,10 @@ static int	p_eat(t_philo *philo)
 {
 	wait_if_not_very_hungry(philo);
 	pthread_mutex_lock(philo->right_fork);
-	if (is_dead(philo) || print_msg(philo, "has taken a fork") == -1)
+	if (print_msg(philo, "has taken a fork") == -1)
 		return (unlock_forks(philo->right_fork, NULL, -1));
 	pthread_mutex_lock(philo->left_fork);
-	if (is_dead(philo) || print_msg(philo, "has taken a fork") == -1)
+	if (print_msg(philo, "has taken a fork") == -1 || is_dead(philo))
 		return (unlock_forks(philo->left_fork, philo->right_fork, -1));
 	pthread_mutex_lock(&philo->meal_mutex);
 	philo->last_meal = time_now(philo->data);
@@ -78,9 +76,7 @@ static int	p_eat(t_philo *philo)
 
 static int	p_sleep(t_philo *philo)
 {
-	if (is_dead(philo))
-		return (-1);
-	if (print_msg(philo, "is sleeping") == -1)
+	if (is_dead(philo) || print_msg(philo, "is sleeping") == -1)
 		return (-1);
 	ft_usleep(philo->data->time_to_sleep);
 	return (0);

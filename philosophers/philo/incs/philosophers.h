@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 15:11:17 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/02/24 00:13:34 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/02/24 15:30:01 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define PHILOSOPHERS_H
 
 # include <pthread.h>
-# include <limits.h>
 # include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
@@ -34,7 +33,6 @@ typedef struct s_philo
 	int				meals_ate;
 	bool			ate_enough;
 	pthread_t		thread;
-	bool			has_thread;
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*right_fork;
 	pthread_mutex_t	meal_mutex;
@@ -65,31 +63,27 @@ int		init_threads(t_data *data);
 int		join_threads(t_data *data);
 void	wait_for_start(t_philo *philo);
 int		ft_error(char *str);
-//	Exit:
 //		Ft_cleanup.c
 int		ft_cleanup(t_data *data);
 void	cleanup_mutexes(t_data *data);
-//	Utils:
+//	Routines:
+//		Monitor.c
+void	monitor_routine(t_data *data);
+//		Philo.c
+void	*philo_routine(void *arg);
 //		Philo_utils.c
 int		is_dead(t_philo *philo);
 int		print_msg(t_philo *philo, char *str);
 int		unlock_forks(pthread_mutex_t *first, pthread_mutex_t *second, int i);
 int		philo_ate_enough(t_philo *philo);
 void	wait_if_not_very_hungry(t_philo *philo);
-//		Get_time_ms.c
+//		Utils.c
 size_t	get_time_ms(void);
 size_t	time_now(t_data *data);
 size_t	time_since_meal(t_philo *philo);
-//		Ft_usleep.c
 int		ft_usleep(size_t ms);
+void	*ft_free(void **ptr);
 //		Ft_atoi.c
 int		ft_atoi(const char *str);
-//		Ft_free.c
-void	*ft_free(void **ptr);
-//	Routines:
-//		Monitor.c
-void	monitor_routine(t_data *data);
-//		Philo.c
-void	*philo_routine(void *arg);
 
 #endif

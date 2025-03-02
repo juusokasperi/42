@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 15:18:13 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/02/23 19:45:15 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/02/24 15:09:50 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,25 +36,6 @@ int	main(int argc, char **argv)
 }
 
 /*
-	Checks that the arguments contain only digits.
-*/
-static int	valid_args(int argc, char **argv)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (++i < argc)
-	{
-		j = -1;
-		while (argv[i][++j])
-			if (argv[i][j] < '0' || argv[i][j] > '9')
-				return (0);
-	}
-	return (1);
-}
-
-/*
 	Parse and set the initial info for the simulation data.
 */
 static int	parse_args(t_data *data, int argc, char **argv)
@@ -75,6 +56,25 @@ static int	parse_args(t_data *data, int argc, char **argv)
 	if (data->philo_count < 1 || data->time_to_die < 0
 		|| data->time_to_eat < 0 || data->time_to_sleep < 0)
 		return (0);
+	return (1);
+}
+
+/*
+	Checks that the arguments contain only digits.
+*/
+static int	valid_args(int argc, char **argv)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (++i < argc)
+	{
+		j = -1;
+		while (argv[i][++j])
+			if (argv[i][j] < '0' || argv[i][j] > '9')
+				return (0);
+	}
 	return (1);
 }
 

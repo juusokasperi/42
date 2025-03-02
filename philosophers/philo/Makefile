@@ -1,9 +1,10 @@
 # Srcs
 SRCS_DIR =	srcs/
-SRCS =		main.c				init/init.c				init/init_threads.c	\
-			init/init_mutexes.c	utils/ft_atoi.c			utils/get_time_ms.c	\
-			utils/ft_usleep.c	utils/ft_free.c			exit/ft_cleanup.c	\
-			routine/philo.c		routine/philo_utils.c	routine/monitor.c
+SRCS =		main.c				ft_cleanup.c								\
+			init/init.c			init/init_threads.c		init/init_mutexes.c	\
+			utils/ft_atoi.c		utils/utils.c								\
+			routine/philo.c		routine/philo_utils.c	routine/monitor.c	\
+
 
 # Objs
 OBJS_DIR =	objs/
@@ -18,10 +19,7 @@ INCS =		-I./incs
 
 # Compiler
 CC = 		cc
-ifeq ($(MAKECMDGOALS), debug)
-CFLAGS +=	-g
-endif
-CFLAGS +=	-Wall -Werror -Wextra -pthread $(INCS)
+CFLAGS +=	-Wall -Wextra -Werror -pthread $(INCS)
 
 # Colors (for echo)
 RED = 		\033[0;31m
@@ -36,27 +34,6 @@ $(OBJS_DIR)%.o: $(SRCS_DIR)%.c $(HDR)
 
 all: $(NAME)
 
-ifeq ($(shell uname -s)-$(shell uname -m), Darwin-arm64)
-# Docker stuff
-CONTAINER_NAME =	valgrind-env
-valgrind: fclean
-	@docker start $(CONTAINER_NAME) || (docker run -dit \
-	--name $(CONTAINER_NAME) ubuntu /bin/bash \
-	&& docker exec $(CONTAINER_NAME) apt-get update \
-	&& docker exec $(CONTAINER_NAME) apt-get install -y make gcc valgrind)
-	@docker exec $(CONTAINER_NAME) rm -rf /app/
-	@docker exec $(CONTAINER_NAME) mkdir -p /app/
-	@docker cp . $(CONTAINER_NAME):/app/
-	@docker exec $(CONTAINER_NAME) make -C /app/ debug --no-print-directory
-	@echo "$(GREEN)✅ PHILO: Valgrind docker compilation complete!$(ENDCOLOR)"
-valgrind_clean:
-	@docker start $(CONTAINER_NAME)
-	@docker exec $(CONTAINER_NAME) rm -rf /app/
-	@echo "$(RED)✅ PHILO: Valgrind FClean complete.$(ENDCOLOR)"
-endif
-
-debug: re
-
 $(NAME): $(OBJS)
 	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 	@echo "$(GREEN)✅ PHILO: Compilation complete!$(ENDCOLOR)"
@@ -65,10 +42,10 @@ clean:
 	@rm -rf $(OBJS_DIR)
 	@echo "$(RED)✅ PHILO: Clean complete.$(ENDCOLOR)"
 
-fclean: clean
-	@rm -f $(NAME)
+fclean:
+	@rm -rf $(NAME) $(OBJS_DIR)
 	@echo "$(RED)✅ PHILO: FClean complete.$(ENDCOLOR)"
 
 re: fclean all
 
-.PHONY: fclean clean re all debug valgrind
+.PHONY: fclean clean re all

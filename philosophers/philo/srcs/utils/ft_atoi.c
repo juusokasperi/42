@@ -6,11 +6,12 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 23:11:39 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/01/03 15:38:39 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/02/24 15:30:04 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+#include <limits.h>
 
 static int	ft_isdigit(int c)
 {
