@@ -6,24 +6,18 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 14:32:13 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/02/28 14:55:41 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/03/02 13:17:02 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 
-void	print_arg(char *string)
+void	printStr(char *s)
 {
-	int	i;
-
-	i = 0;
-	while (string[i])
+	while (*s)
 	{
-		if (std::isalpha(string[i]))
-			std::cout << (char)std::toupper(string[i]);
-		else
-			std::cout << (char)string[i];
-		i++;
+		std::cout << (char)std::toupper(*s);
+		s++;
 	}
 }
 
@@ -34,9 +28,9 @@ int	main(int argc, char **argv)
 	else
 	{
 		argv++;
-		while (*argv != NULL)
+		while (*argv)
 		{
-			print_arg(*argv);
+			printStr(*argv);
 			argv++;
 		}
 	}

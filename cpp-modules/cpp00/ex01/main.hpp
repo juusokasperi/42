@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 15:19:50 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/01 17:50:49 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/03/02 13:00:53 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # define TYELLOW		"\033[93m"
 # define TRESET			"\033[0m"
 
-void	add_contact(PhoneBook *phoneBook);
-void	search_contact(PhoneBook *phoneBook);
+void	addContact(PhoneBook *phoneBook);
+void	searchContact(PhoneBook *phoneBook);
 
 #endif /* MAIN_HPP */

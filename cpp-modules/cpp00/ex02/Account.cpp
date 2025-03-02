@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 21:30:41 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/02 11:57:08 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/03/02 13:05:42 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,18 @@ Account::~Account()
 	_displayTimestamp();
 	std::cout << "index:" << _accountIndex << ";"
 	<< "amount:" << _amount << ";closed" << std::endl;
+}
+
+Account::Account()
+{
+	_accountIndex = _nbAccounts;
+	_nbAccounts++;
+	_nbDeposits = 0;
+	_nbWithdrawals = 0;
+	_totalAmount = 0;
+	_displayTimestamp();
+	std::cout << "index:" << _accountIndex << ";"
+	<< "amount:" << _amount << ";created" << std::endl;
 }
 
 Account::Account(int initial_deposit)

@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_contacts.cpp                                :+:      :+:    :+:   */
+/*   handleContacts.cpp                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 17:42:11 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/01 17:50:56 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/03/02 13:00:23 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.hpp"
 
 static std::string	getInput(std::string prompt);
-static void			print_column(std::string str, char c);
-static int			print_book(PhoneBook *phoneBook);
+static void			printColumn(std::string str, char c);
+static int			printBook(PhoneBook *phoneBook);
 
-void	add_contact(PhoneBook *phoneBook)
+void	addContact(PhoneBook *phoneBook)
 {
 	std::string first;
 	std::string last;
@@ -43,12 +43,13 @@ void	add_contact(PhoneBook *phoneBook)
 	std::cout << std::endl;
 }
 
-void	search_contact(PhoneBook *phoneBook)
+void	searchContact(PhoneBook *phoneBook)
 {
-	int					i = 0;
+	int					i;
 	std::string 		input;
 
-	if (print_book(phoneBook) == 0)
+	i = 0;
+	if (printBook(phoneBook) == 0)
 		return ;
 	std::cout << TMAGENTA << "Enter index (1 - 8): " << TRESET;
 	std::getline(std::cin, input);
@@ -65,7 +66,8 @@ void	search_contact(PhoneBook *phoneBook)
 		}
 		catch (...)
 		{
-			std::cout << "Invalid input, back to menu." << std::endl << std::endl;
+			std::cout << "Invalid input, back to menu."	\
+			<< std::endl << std::endl;
 		}
 	}
 }
@@ -90,41 +92,40 @@ static std::string getInput(std::string prompt)
 	return (input);
 }
 
-static void	print_column(std::string str, char c)
+static void	printColumn(std::string str, char c)
 {
 	if (str.length() > 10)
 	{
 		str.resize(9);
 		str.append(".");
 	}
-	std::cout << std::right << std::setw(10) << str;
-	std::cout << TYELLOW << c << TRESET;
+	std::cout << std::right << std::setw(10) << str << TYELLOW << c << TRESET;
 }
 
-static int	print_book(PhoneBook *phoneBook)
+static int	printBook(PhoneBook *phoneBook)
 {
 	Contact	contact;
 
 	contact = phoneBook->getContact(0);
 	if (contact.getFilled() == 0)
 	{
-		std::cout << "Phonebook still empty, back to menu.";
-		std::cout << std::endl << std::endl;
+		std::cout << "Phonebook still empty, back to menu."	\
+		<< std::endl << std::endl;
 		return (0);
 	}
-	print_column("index", '|');
-	print_column("firstname", '|');
-	print_column("lastname", '|');
-	print_column("nickname", '\n');
+	printColumn("index", '|');
+	printColumn("firstname", '|');
+	printColumn("lastname", '|');
+	printColumn("nickname", '\n');
 	for (int i = 0; i < 8; i++)
 	{
 		contact = phoneBook->getContact(i);
 		if (contact.getFilled() == 0)
 			continue ;
-		print_column(std::to_string(i + 1), '|');
-		print_column(contact.getFirstName(), '|');
-		print_column(contact.getLastName(), '|');
-		print_column(contact.getNickName(), '\n');
+		printColumn(std::to_string(i + 1), '|');
+		printColumn(contact.getFirstName(), '|');
+		printColumn(contact.getLastName(), '|');
+		printColumn(contact.getNickName(), '\n');
 	}
 	return (1);
 }

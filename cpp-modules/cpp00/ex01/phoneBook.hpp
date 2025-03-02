@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   phoneBook.hpp                                      :+:      :+:    :+:   */
+/*   PhoneBook.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 15:44:31 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/01 17:52:04 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/03/02 13:12:37 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ class PhoneBook {
 		~PhoneBook();
 		void	addContact(std::string first, std::string last,
 			std::string nick, std::string phone, std::string secret);
-		void	printContact(int i);
-		Contact getContact(int i);
+		void	printContact(int i) const;
+		Contact getContact(int i) const;
 };
 
 #endif /* PHONEBOOK_HPP */

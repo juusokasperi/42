@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 15:03:28 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/01 17:48:51 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/03/02 13:12:35 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,17 @@ void	PhoneBook::addContact(std::string first, std::string last,
 	index = (index + 1) % 8;
 }
 
-void	printPrompt(std::string prompt, std::string field)
+PhoneBook::~PhoneBook()
+{
+}
+
+static void	printPrompt(std::string prompt, std::string field)
 {
 	std::cout << std::left << std::setw(18) << prompt;
 	std::cout << field << std::endl;
 }
 
-void	PhoneBook::printContact(int i)
+void	PhoneBook::printContact(int i) const
 {
 	Contact	contact;
 
@@ -52,11 +56,7 @@ void	PhoneBook::printContact(int i)
 	std::cout << std::endl;
 }
 
-PhoneBook::~PhoneBook()
-{
-}
-
-Contact	PhoneBook::getContact(int i)
+Contact	PhoneBook::getContact(int i) const
 {
 	return (contacts_[i]);
 }
