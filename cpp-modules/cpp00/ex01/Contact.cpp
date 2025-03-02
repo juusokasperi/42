@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 14:36:15 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/01 17:28:35 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/03/02 13:19:32 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ Contact::Contact()
 	filled = 0;
 }
 
-Contact::Contact(std::string first_name, std::string last_name,
-	std::string nick_name, std::string phone, std::string secret)
+Contact::Contact(std::string firstName, std::string lastName,
+	std::string nickName, std::string phone, std::string secret)
 {
-	first_ = first_name;
-	last_ = last_name;
-	nick_ = nick_name;
+	first_ = firstName;
+	last_ = lastName;
+	nick_ = nickName;
 	phone_ = phone;
 	secret_ = secret;
 	filled = 1;

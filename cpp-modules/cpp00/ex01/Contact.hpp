@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 14:20:04 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/01 17:26:19 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/03/02 13:19:46 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ class Contact {
 	public:
 		Contact();
 		~Contact();
-		Contact(std::string first_name, std::string last_name,
-			std::string nick_name, std::string phone, std::string secret);
+		Contact(std::string firstName, std::string lastName,
+			std::string nickName, std::string phone, std::string secret);
 		const	std::string& getFirstName() const;
 		const	std::string& getLastName() const;
 		const	std::string& getNickName() const;
