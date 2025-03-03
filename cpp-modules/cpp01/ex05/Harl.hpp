@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 23:04:21 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/02 23:22:14 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/03/03 12:19:41 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,7 @@ class Harl {
 		~Harl();
 		void	complain( std::string level);
 };
+
+typedef void	(Harl::*HarlFunc)();
 
 #endif /* HARL_HPP */
