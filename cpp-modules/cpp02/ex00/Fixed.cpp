@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 14:08:14 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/03 18:07:38 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/03/05 16:47:46 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,9 @@ Fixed::Fixed() : _value(0)
 }
 
 //	Copy constructor
-Fixed::Fixed(const Fixed &src)
+Fixed::Fixed(const Fixed &src): _value(src._value)
 {
 	std::cout << "Copy constructor called" << std::endl;
-	*this = src;
 }
 
 //	Copy assignment operator overload
@@ -30,26 +29,7 @@ Fixed& Fixed::operator=(const Fixed &rhs)
 {
 	std::cout << "Copy assignment operator called" << std::endl;
 	if (this != &rhs)
-		this->setRawBits(rhs.getRawBits());
-	return (*this);
-}
-
-//	Move constructor
-Fixed::Fixed(Fixed &&other) noexcept: _value(other._value)
-{
-	std::cout << "Move constructor called" << std::endl;
-	other.setRawBits(0);
-}
-
-//	Move assignment operator overload
-Fixed& Fixed::operator=(Fixed&& rhs) noexcept
-{
-	std::cout << "Move assignment operator called" << std::endl;
-	if (this != &rhs)
-	{
-		_value = rhs.getRawBits();
-		rhs.setRawBits(0);
-	}
+		_value = rhs._value;
 	return (*this);
 }
 

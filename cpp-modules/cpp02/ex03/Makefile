@@ -1,10 +1,10 @@
-SRCS =		main.cpp	Fixed.cpp
+SRCS =		main.cpp	Fixed.cpp	Point.cpp	bsp.cpp
 OBJS =		$(SRCS:.cpp=.o)
 
 CC =		c++
-CFLAGS =	-Wall -Wextra -Werror -std=c++98 -I./
+CFLAGS =	-Wall -Wextra -Werror -std=c++11 -I./
 
-NAME =		fixedPoint
+NAME =		triangleCheck
 
 %.o: %.cpp
 	@$(CC) $(CFLAGS) -c $< -o $@

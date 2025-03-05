@@ -1,31 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Fixed.hpp                                          :+:      :+:    :+:   */
+/*   Point.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/03 14:01:05 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/05 16:48:09 by jrinta-          ###   ########.fr       */
+/*   Created: 2025/03/04 15:01:10 by jrinta-           #+#    #+#             */
+/*   Updated: 2025/03/05 17:04:38 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FIXED_HPP
-# define FIXED_HPP
+#ifndef POINT_HPP
+# define POINT_HPP
 
-# include <iostream>
+# include "Fixed.hpp"
 
-class Fixed {
+class Point {
 	private:
-		int					_value;
-		static const int	_bits = 8;
+		const Fixed _x;
+		const Fixed _y;
 	public:
-		Fixed();
-		Fixed(const Fixed &src);
-		Fixed& operator=(const Fixed &rhs);
-		~Fixed();
-		const int&	getRawBits( void ) const;
-		void		setRawBits ( int const raw );
+		Point();
+		Point(const float x, const float y);
+		Point(const Point &src);
+		Point& operator=(const Point &rhs) = delete;
+		~Point();
+
+		Fixed		getX(void) const;
+		Fixed		getY(void) const;
 };
 
-#endif /* FIXED_HPP */
+#endif /* POINT_HPP */

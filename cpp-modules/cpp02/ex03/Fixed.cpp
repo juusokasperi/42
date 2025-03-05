@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 14:08:14 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/05 17:11:18 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/03/05 16:59:44 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,47 +18,36 @@
 
 Fixed::Fixed() : _value(0)
 {
-	std::cout << "Default constructor called" << std::endl;
 }
 
 Fixed::Fixed(const int value): _value(value << _fractionalBits)
 {
-	std::cout << "Int constructor called" << std::endl;
 }
 
 Fixed::Fixed(const float value): _value(static_cast<int>(roundf(value * (1 << _fractionalBits))))
 {
-	std::cout << "Float constructor called" << std::endl;
 }
 
 /* Copy constructor */
 Fixed::Fixed(const Fixed &src): _value(src._value)
 {
-	std::cout << "Copy constructor called" << std::endl;
 }
-
-/* **************************** */
-/* Assignment operator overload */
-/* **************************** */
 
 /* Copy assignment operator */
 Fixed& Fixed::operator=(const Fixed &rhs)
 {
-	std::cout << "Copy assignment operator called" << std::endl;
 	if (this != &rhs)
-		this->_value = rhs._value;
+		_value = rhs._value;
 	return (*this);
 }
 
 /* Destructor */
 Fixed::~Fixed()
 {
-	std::cout << "Destructor called" << std::endl;
 }
 
-const int&	Fixed::getRawBits(void) const
+int	Fixed::getRawBits(void) const
 {
-	std::cout << "getRawBits member function called" << std::endl;
 	return (_value);
 }
 
@@ -148,8 +137,9 @@ Fixed	Fixed::operator/(const Fixed &rhs) const
 
 	if (rhs._value == 0)
 	{
-		std::cerr << "Fatal error: Division by zero" << std::endl;
-		std::exit(EXIT_FAILURE);
+		std::cerr << "Error: Division by zero" << std::endl;
+		dest._value = 0;
+		return (dest);
 	}
 	result = (static_cast<long long>(_value) << _fractionalBits) / rhs._value;
 	dest._value = result;
