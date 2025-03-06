@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 14:41:45 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/04 17:13:00 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/03/06 10:26:24 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /* **************************************** */
 /*		0,0		x							*/
-/* 			 ------------------------		*/
+/* 			------------------------		*/
 /*		y	|			  B					*/
 /* 			|			  /\				*/
 /*			|			 /  \				*/
@@ -26,28 +26,16 @@
 /*				  A	 			  C			*/
 /* **************************************** */
 
-static Fixed	abs(Fixed x)
-{
-	if (x < 0)
-		return (x * -1);
-	return (x);
-}
-
-static Fixed	area(Point const a, Point const b, Point const c)
-{
-	return (((a.getX() * ( b.getY() - c.getY())) +
-			(b.getX() * ( c.getY() - a.getY())) +
-			(c.getX() * (a.getY() - b.getY()))) / 2 );
-}
-
 bool bsp(Point const a, Point const b, Point const c, Point const point)
 {
-	Fixed	abcArea = abs(area(a, b, c));
-	Fixed	pabArea = abs(area(point, a, b));
-	Fixed	pbcArea = abs(area(point, b, c));
-	Fixed	pcaArea = abs(area(point, c, a));
+	Fixed	sideAB	= (b.getX() - a.getX()) * (point.getY() - a.getY())
+						- (b.getY() - a.getY()) * (point.getX() - a.getX());
+	Fixed	sideBC	= (c.getX() - b.getX()) * (point.getY() - b.getY())
+						- (c.getY() - b.getY()) * (point.getX() - b.getX());
+	Fixed	sideCA	= (a.getX() - c.getX()) * (point.getY() - c.getY())
+						- (a.getY() - c.getY()) * (point.getX() - c.getX());
+	bool		allPositive	= (sideAB > 0) && (sideBC > 0) && (sideCA > 0);
+	bool		allNegative = (sideAB < 0) && (sideBC < 0) && (sideCA < 0);
 
-	if (pabArea == 0 || pbcArea == 0 || pcaArea == 0)
-		return (false);
-	return (abcArea == pabArea + pbcArea + pcaArea);
+	return (allPositive || allNegative);
 }
