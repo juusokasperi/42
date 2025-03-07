@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 13:00:55 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/07 13:25:50 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/03/07 14:46:35 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ void	ScavTrap::attack(const std::string &target)
 {
 if (_energy == 0)
 	std::cout	<< SCAVTRAP << _name << " has no energy to attack." << std::endl;
+else if (_hp == 0)
+	std::cout	<< SCAVTRAP << _name << " has 0 HP." << std::endl;
 else
 {
 	_energy -= 1;
