@@ -1,27 +1,32 @@
 SRCS =		ClapTrap.cpp	main.cpp	ScavTrap.cpp	FragTrap.cpp \
 			DiamondTrap.cpp
-OBJS = 		$(SRCS:.cpp=.o)
+
+OBJS = 		$(addprefix $(OBJS_DIR), $(SRCS:.cpp=.o))
+OBJS_DIR =	objs/
+
+HDR =		ClapTrap.hpp	ScavTrap.hpp	FragTrap.hpp	DiamondTrap.hpp
 
 CC = 		c++
 CFLAGS = 	-Wall -Wextra -Werror -std=c++98 -I./
 
 NAME = diamondTrap
 
-%.o: %.cpp
+$(OBJS_DIR)%.o: %.cpp $(HDR)
+	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
+$(NAME): $(OBJS) $(HDR)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 	@echo "Compilation ok, executable ./$(NAME)"
 
 clean:
-	@rm -rf $(OBJS)
+	@rm -rf $(OBJS_DIR)
 	@echo "Clean OK"
 
 fclean:
-	@rm -rf $(OBJS) $(NAME)
+	@rm -rf $(OBJS_DIR) $(NAME)
 	@echo "Fclean OK"
 
 re: fclean all
