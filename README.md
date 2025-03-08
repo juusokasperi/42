@@ -1,8 +1,17 @@
 # 42 Projects
 
+## Rank 04
+### [cpp-modules](/cpp-modules/)
+- Simple exercises to get acquainted with C++.
+
 ## Rank 03
 ### [minishell](/minishell)
+- A simple bash copy.
 - Finished, 125/100.
+
+### [philosophers](/philosophers/philo)
+- The dining philosophers problem using threads.
+- Finished, 100/100.
 
 ## Rank 02
 
