@@ -1,34 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   WrongAnimal.hpp                                         :+:      :+:    :+:   */
+/*   Brain.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/07 14:49:37 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/07 23:22:52 by jrinta-          ###   ########.fr       */
+/*   Created: 2025/03/07 23:37:30 by jrinta-           #+#    #+#             */
+/*   Updated: 2025/03/08 01:03:54 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef WRONGANIMAL_HPP
-# define WRONGANIMAL_HPP
+#ifndef BRAIN_HPP
+# define BRAIN_HPP
 
 # include <iostream>
 
-# define WRONGANIMAL "\033[95m[WrongAnimal]\033[0m "
+# define BRAIN "\033[0;93m[BRAIN]\033[0m "
 
-class WrongAnimal {
-	protected:
-		std::string	_type;
+class Brain {
+	private:
+		std::string _ideas[100];
 	public:
-		WrongAnimal();
-		WrongAnimal(std::string type);
-		~WrongAnimal();
-		WrongAnimal(const WrongAnimal &src);
-		WrongAnimal& operator=(const WrongAnimal &rhs);
+		Brain();
+		Brain(const Brain &src);
+		Brain& operator=(const Brain &rhs);
+		~Brain();
 
-		void		makeSound() const;
-		const std::string	&getType() const;
+		void	setIdea(int i, std::string idea);
+		const std::string&	getIdea(int i) const;
 };
 
-#endif /* WRONGANIMAL_HPP */
+#endif /* BRAIN_HPP */

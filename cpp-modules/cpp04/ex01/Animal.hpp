@@ -1,34 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   WrongAnimal.hpp                                         :+:      :+:    :+:   */
+/*   Animal.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 14:49:37 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/07 23:22:52 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/03/07 23:27:58 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef WRONGANIMAL_HPP
-# define WRONGANIMAL_HPP
+#ifndef ANIMAL_HPP
+# define ANIMAL_HPP
 
 # include <iostream>
 
-# define WRONGANIMAL "\033[95m[WrongAnimal]\033[0m "
+# define ANIMAL "\033[95m[Animal]\033[0m "
 
-class WrongAnimal {
+class Animal {
 	protected:
 		std::string	_type;
 	public:
-		WrongAnimal();
-		WrongAnimal(std::string type);
-		~WrongAnimal();
-		WrongAnimal(const WrongAnimal &src);
-		WrongAnimal& operator=(const WrongAnimal &rhs);
+		Animal();
+		Animal(std::string type);
+		virtual ~Animal();
+		Animal(const Animal &src);
+		Animal& operator=(const Animal &rhs);
 
-		void		makeSound() const;
+		virtual void		makeSound() const;
 		const std::string	&getType() const;
 };
 
-#endif /* WRONGANIMAL_HPP */
+#endif /* ANIMAL_HPP */
