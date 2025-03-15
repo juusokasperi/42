@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 19:06:48 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/15 09:46:46 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/03/15 09:54:43 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,6 @@ static int	printf_logic(const char *format, int *i,
 			(*trailing_percent) = true;
 		res = print_char(format[*i], flags);
 	}
-	if (res == -1)
-		return (-1);
 	return (res);
 }
 
