@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 20:26:24 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/14 17:37:00 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/03/15 09:59:21 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	print_nbr_handler(int nbr, t_flags flags)
 	char	*nbr_itoa;
 
 	if (flags.prec == 0 && nbr == 0 && flags.positive)
-		return (print_c(flags.positive));
+		return (ft_putchar_fd(flags.positive, 1));
 	else if (flags.prec == 0 && nbr == 0)
 		return (0);
 	if (nbr < 0)

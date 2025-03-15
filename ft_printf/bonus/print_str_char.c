@@ -1,21 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_str.c                                        :+:      :+:    :+:   */
+/*   print_str_char.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 20:26:53 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/14 14:29:31 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/03/15 10:22:55 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-int	print_s(const char *str)
-{
-	return (write(1, str, ft_strlen(str)));
-}
 
 static char	*truncate_str(const char *str, int prec)
 {
@@ -71,21 +66,68 @@ int	print_str_handler(const char *str, t_flags flags)
 	int		res;
 
 	if (!str)
-		return (print_s("(null)"));
+		return (ft_putstr_fd("(null)", 1));
 	len = ft_strlen(str);
 	if (flags.prec == 0)
 		return (0);
 	if (flags.prec >= 0 && flags.prec < (int)len)
 		len = flags.prec;
 	if (flags.width < (int)len && flags.prec == -1)
-		return (print_s(str));
+		return (ft_putstr_fd((char *)str, 1));
 	pad = pad_width(flags.width, len, flags.zero);
 	if (!pad)
 		return (-1);
 	str_width = format_string(str, pad, flags.left, flags.prec);
 	if (!str_width)
 		return (-1);
-	res = print_s(str_width);
+	res = ft_putstr_fd(str_width, 1);
 	free(str_width);
+	return (res);
+}
+
+
+static char	*append_padding(char const c, t_flags flags)
+{
+	char	*result;
+	char	*pad;
+	int		i;
+	int		j;
+
+	pad = pad_width(flags.width, 1, flags.zero);
+	if (!pad)
+		return (NULL);
+	i = 0;
+	j = 0;
+	if (c == 0)
+		result = (char *)malloc((ft_strlen(pad) + 1) * sizeof(char));
+	else
+		result = (char *)malloc((ft_strlen(pad) + 2) * sizeof(char));
+	if (!result)
+		return (ft_free((void **)&pad));
+	if (flags.left == 1 && c)
+		result[j++] = c;
+	while (pad[i])
+		result[j++] = pad[i++];
+	if (flags.left == 0 && c)
+		result[j++] = c;
+	result[j] = '\0';
+	ft_free((void **)&pad);
+	return (result);
+}
+
+int	print_char(int c, t_flags flags)
+{
+	char	*new_str;
+	int		res;
+
+	if (flags.width < 2)
+		return (ft_putchar_fd(c, 1));
+	new_str = append_padding(c, flags);
+	if (!new_str)
+		return (-1);
+	res = ft_putstr_fd(new_str, 1);
+	if (c == 0 && res != -1)
+		res += 1;
+	ft_free((void **)&new_str);
 	return (res);
 }

@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 19:06:48 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/15 09:54:43 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/03/15 10:02:09 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	type_handler(char c, va_list *args, t_flags flags)
 
 	res = 0;
 	if (c == '%')
-		res = print_c('%');
+		res = ft_putchar_fd('%', 1);
 	else if (c == 'c')
 		res = print_char(va_arg(*args, int), flags);
 	else if (c == 's')

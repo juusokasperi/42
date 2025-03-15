@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 15:44:26 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/14 13:57:33 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/03/15 10:23:16 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	test_str(void)
 {
+	char *str = "Test String";
 	int	ret;
 	int	ret_ft;
 	printf("%s--------------------\n-  TESTING STRING  -\n--------------------\n%s", KYEL, KNRM);
@@ -21,7 +22,7 @@ void	test_str(void)
 	ret_ft = ft_printf("FT: %s\n", (char *)NULL);
 	cmp(ret, ret_ft);
 
-	char *str = "Test String";
+
 	ret = printf("PF: %s\n", str);
 	ret_ft = ft_printf("FT: %s\n", str);
 	cmp(ret, ret_ft);

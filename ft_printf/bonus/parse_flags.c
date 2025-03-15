@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 19:51:20 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/15 09:46:32 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/03/15 10:22:13 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int	parse_flags(const char *format, t_flags *f, va_list args, int i)
 			i = flag_precision(format, i + 1, args, f);
 		else if (ft_isdigit(format[i]))
 			flag_digit(format[i], f);
-		else if (ft_strchr("cspdiuxX%", format[i]))
+		if (ft_strchr("cspdiuxX%", format[i]))
 		{
 			f->specifier = format[i];
 			break ;

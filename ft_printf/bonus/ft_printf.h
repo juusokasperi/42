@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 19:07:43 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/15 09:47:56 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/03/15 09:59:34 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ char	flag_positive(char positive, char c);
 void	init_flags(t_flags *flags);
 
 char	*pad_width(int width, int size, int zero_pad);
-int		print_c(char c);
 int		is_flag(char c);
 int		print_char(int c, t_flags flags);
 int		print_hex_handler(unsigned int nbr, int capital, t_flags flags);
@@ -46,7 +45,6 @@ int		print_ptr_handler(uintptr_t n, t_flags flags);
 int		print_unsigned_handler(unsigned int nbr, t_flags flags);
 int		print_nbr_handler(int nbr, t_flags flags);
 int		print_str_handler(const char *str, t_flags flags);
-int		print_s(const char *str);
 int		ft_printf(const char *, ...);
 char	*ft_ltoa(long n);
 char	*ft_xtoa(uintptr_t n, int capital);

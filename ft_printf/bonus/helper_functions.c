@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 20:45:13 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/14 14:26:45 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/03/15 09:59:44 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	print_and_free(char *str)
 {
 	int	res;
 
-	res = print_s(str);
+	res = ft_putstr_fd(str, 1);
 	ft_free((void **)&str);
 	return (res);
 }
