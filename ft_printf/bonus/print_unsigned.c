@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 20:25:54 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/14 17:37:53 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/03/14 22:19:42 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ char	*handle_precision(char *nbr_itoa, int prec)
 	ft_free((void **)&nbr_itoa);
 	return (res);
 }
-
 
 static char	*handle_zero_flag(char *nbr_itoa, char *pad)
 {

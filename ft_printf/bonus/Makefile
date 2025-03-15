@@ -1,6 +1,6 @@
 S := ft_printf.c ft_ltoa.c ft_xtoa.c print_hex.c print_nbr.c \
 	print_ptr.c print_str.c print_unsigned.c helper_functions.c \
-	parse_flags.c print_char.c
+	parse_flags.c print_char.c parse_utils.c
 #S := ft_printf.c print_str.c helper_functions.c \
 	parse_flags.c print_char.c print_ptr.c ft_xtoa.c
 O := $(S:.c=.o)
