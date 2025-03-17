@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 14:08:14 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/05 17:11:18 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/03/17 12:55:38 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,14 +146,19 @@ Fixed	Fixed::operator/(const Fixed &rhs) const
 	Fixed		dest;
 	long long	result;
 
-	if (rhs._value == 0)
+	try
 	{
-		std::cerr << "Fatal error: Division by zero" << std::endl;
+		if (rhs._value == 0)
+			throw ("Division by zero not allowed.");
+		result = (static_cast<long long>(_value) << _fractionalBits) / rhs._value;
+		dest._value = result;
+		return (dest);
+	}
+	catch (const char *errorMessage)
+	{
+		std::cerr << "Error: " << errorMessage << std::endl;
 		std::exit(EXIT_FAILURE);
 	}
-	result = (static_cast<long long>(_value) << _fractionalBits) / rhs._value;
-	dest._value = result;
-	return (dest);
 }
 
 /* **************************** */
