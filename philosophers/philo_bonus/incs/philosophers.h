@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 15:11:17 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/12 12:32:00 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/03/18 21:57:40 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ size_t	time_since_meal(t_philo *philo);
 int		ft_usleep(size_t ms);
 //		Ft_atoi.c
 int		ft_atoi(const char *str);
+//		Ft_strlen.c
+size_t	ft_strlen(char *s);
 //		Ft_free.c
 void	*ft_free(void **ptr);
 //	Routines:

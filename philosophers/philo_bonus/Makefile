@@ -1,7 +1,7 @@
 # Srcs
 SRCS_DIR =	srcs/
 SRCS =		main.c				init/init.c		utils/ft_atoi.c \
-			init/fork.c			utils/utils.c \
+			init/fork.c			utils/utils.c	utils/ft_strlen.c \
 			routine/philo.c		routine/philo_utils.c	routine/philo_actions.c
 
 # Objs

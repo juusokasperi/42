@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 16:04:45 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/12 12:12:59 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/03/18 23:17:03 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@ static int	valid_args(int argc, char **argv)
 	while (++i < argc)
 	{
 		j = -1;
+		if (ft_strlen(argv[i]) > 10
+			|| (ft_strlen(argv[i]) == 10 && argv[i][9] > 7))
+			return (0);
 		while (argv[i][++j])
 			if (argv[i][j] < '0' || argv[i][j] > '9')
 				return (0);
@@ -97,7 +100,8 @@ int	parse_args(t_data *data, int argc, char **argv)
 	data->philo->last_meal = 0;
 	data->philo->meals_ate = 0;
 	if (data->philo_count < 1 || data->time_to_die < 0
-		|| data->time_to_eat < 0 || data->time_to_sleep < 0)
+		|| data->time_to_eat < 0 || data->time_to_sleep < 0
+		|| data->meals_to_eat == 0)
 		return (0);
 	if (allocate_pids(data) == -1)
 		return (0);

@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 13:45:31 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/12 11:55:05 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/03/18 22:23:01 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	is_dead(t_philo *philo)
 	{
 		sem_wait(philo->data->print_lock);
 		printf("%zu %d %s\n", time_now(philo->data), \
-			philo->id, "is dead");
+			philo->id, "died");
 		return (1);
 	}
 	return (0);
