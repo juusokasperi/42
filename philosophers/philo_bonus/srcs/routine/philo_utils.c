@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 13:45:31 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/18 22:23:01 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/03/19 14:45:10 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,6 @@ void	unlock_forks(sem_t *forks, int amount)
 int	print_msg(t_philo *philo, char *str)
 {
 	sem_wait(philo->data->print_lock);
-	if (is_dead(philo))
-	{
-		sem_post(philo->data->print_lock);
-		return (-1);
-	}
 	if (printf("%zu %d %s\n", time_now(philo->data), \
 		philo->id, str) == -1)
 	{

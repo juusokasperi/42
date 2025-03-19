@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 12:10:26 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/12 12:17:00 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/03/19 14:45:49 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@ void	p_eat(t_philo *philo, t_state *state, size_t *state_start)
 {
 	wait_if_not_very_hungry(philo);
 	sem_wait(philo->data->forks);
-	if (is_dead(philo) || print_msg(philo, "has taken a fork") == -1)
+	if (print_msg(philo, "has taken a fork") == -1)
 	{
 		unlock_forks(philo->data->forks, 1);
 		exit (1);
 	}
 	sem_wait(philo->data->forks);
-	if (is_dead(philo) || print_msg(philo, "has taken a fork") == -1)
+	if (print_msg(philo, "has taken a fork") == -1)
 	{
 		unlock_forks(philo->data->forks, 2);
 		exit (1);
