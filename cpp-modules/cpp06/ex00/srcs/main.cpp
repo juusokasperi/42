@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 15:18:07 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/23 16:08:51 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/03/23 16:54:01 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,3 @@ int main(int argc, char **argv)
 	ScalarConverter::convert(argv[1]);
 	return (0);
 }
-
-/*
-
-1.	Ottaa stringin sisään
-2.	Tarkistaa mikä se on (char, int, double, float)
-3.	Convertaa sen kaikkiin muihin tyyppeihin
-4.	Printtaa kaikki vaihtoehdot
-
-*/
