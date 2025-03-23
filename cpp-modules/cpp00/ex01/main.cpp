@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 15:38:53 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/03 00:11:39 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/03/23 23:37:46 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ int	main()
 		std::cout << TMAGENTA << "Enter command:  " << TRESET;
 		if (!(std::getline(std::cin, input)))
 			return (1);
-		if (input.compare("ADD") == 0)
+		if (input == "ADD")
 			addContact(&phoneBook);
-		else if (input.compare("SEARCH") == 0)
+		else if (input == "SEARCH")
 			searchContact(&phoneBook);
-		else if (input.compare("EXIT") == 0)
+		else if (input == "EXIT")
 			break ;
 		else
 		{
