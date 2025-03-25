@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 15:44:26 by jrinta-           #+#    #+#             */
-/*   Updated: 2024/11/22 16:55:10 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/03/25 14:12:45 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,16 @@ void	test_str(void)
 	char *str = "Test String";
 	ret = printf("PF: %s\n", str);
 	ret_ft = ft_printf("FT: %s\n", str);
+	cmp(ret, ret_ft);
+
+	ret = printf("PF: %020s\n", str);
+	ret_ft = ft_printf("FT: %020s\n", str);
+	cmp(ret, ret_ft);
+
+	ret = printf(" %.s ", "-");
+	printf("\n");
+	ret_ft = ft_printf(" %.s ", "-");
+	printf("\n");
 	cmp(ret, ret_ft);
 
 	printf("%s--------------------\nUnprintables\n%s", KCYN, KNRM);

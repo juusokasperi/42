@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 20:26:53 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/15 10:22:55 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/03/25 14:13:12 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,6 @@ static char	*format_string(const char *str, char *pad, int left, int prec)
 	return (res);
 }
 
-//	Tsekkaa koulun koneella toimiiko precision stringin kanssa,
-//	macilla ei toimi.
-//	Tsekkaa koulun koneella toimiiko zero pad stringin kanssa.
 int	print_str_handler(const char *str, t_flags flags)
 {
 	size_t	len;
@@ -67,14 +64,14 @@ int	print_str_handler(const char *str, t_flags flags)
 
 	if (!str)
 		return (ft_putstr_fd("(null)", 1));
-	len = ft_strlen(str);
 	if (flags.prec == 0)
 		return (0);
+	len = ft_strlen(str);
 	if (flags.prec >= 0 && flags.prec < (int)len)
 		len = flags.prec;
 	if (flags.width < (int)len && flags.prec == -1)
 		return (ft_putstr_fd((char *)str, 1));
-	pad = pad_width(flags.width, len, flags.zero);
+	pad = pad_width(flags.width, len, 0);
 	if (!pad)
 		return (-1);
 	str_width = format_string(str, pad, flags.left, flags.prec);

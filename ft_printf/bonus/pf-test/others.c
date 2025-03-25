@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 14:44:13 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/14 19:49:32 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/03/25 14:27:08 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void	test_others(void)
 	ft_printf("\n");
 	cmp(ret, ret_ft);
 
+	//Don't match: should print AY and return -1
 	ret = printf("PF: %cY%", 'A');
 	printf("\n");
 	ret_ft = ft_printf("FT: %cY%", 'A');
@@ -63,6 +64,7 @@ void	test_others(void)
 	ft_printf("\n");
 	cmp(ret, ret_ft);
 
+	//Don't match: should print nothing and return -1
 	ret = printf("PF: %");
 	printf("\n");
 	ret_ft = ft_printf("FT: %");
@@ -97,18 +99,21 @@ void	test_others(void)
 	printf("\n");
 	cmp(ret, ret_ft);
 
+	//Don't match: should print %%% and return -1
 	ret = printf("FT: %%%%%%%");
 	printf("\n");
 	ret_ft = ft_printf("PF: %%%%%%%");
 	printf("\n");
 	cmp(ret, ret_ft);
 
+	//Don't match: should print %+7.5YX%7ysa%7 and return 18
 	ret = printf("PF: %+7.5YX%7ysa%7");
 	printf("\n");
 	ret_ft = ft_printf("FT: %+7.5YX%7ysa%7");
 	printf("\n");
 	cmp(ret, ret_ft);
 
+	//Don't match: should print	%+.5YX%7ysa%7 and return 17
 	ret = printf("PF: %+.5YX%7ysa%7");
 	printf("\n");
 	ret_ft = ft_printf("FT: %+.5YX%7ysa%7");
@@ -129,6 +134,7 @@ void	test_others(void)
 	ft_printf("\n");
 	cmp(ret, ret_ft);
 
+	//Don't match: should print ads and return -1
 	ret = printf("PF: adsa%");
 	printf("\n");
 	ret_ft = ft_printf("FT: adsa%");

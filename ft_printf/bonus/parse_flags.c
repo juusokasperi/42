@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 19:51:20 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/15 10:22:13 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/03/25 14:22:58 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,29 +63,35 @@ static void	flag_digit(char c, t_flags *flags)
 
 int	parse_flags(const char *format, t_flags *f, va_list args, int i)
 {
-	while (format[++i] && (is_flag(format[i])))
+	int	j = i;
+	while (format[++j] && (is_flag(format[j])))
 	{
-		if (format[i] == '-')
+		if (format[j] == '-')
 			flag_left(f);
-		else if (format[i] == '0' && f->prec == -1 && !f->left && !f->width)
+		else if (format[j] == '0' && f->prec == -1 && !f->left && !f->width)
 			f->zero = 1;
-		else if (format[i] == '#')
+		else if (format[j] == '#')
 			f->hash = 1;
-		else if (format[i] == ' ' || format[i] == '+')
+		else if (format[j] == ' ' || format[i] == '+')
 			f->positive = flag_positive(f->positive, format[i]);
-		else if (format[i] == '*')
+		else if (format[j] == '*')
 			flag_width(args, f);
-		else if (format[i] == '.')
-			i = flag_precision(format, i + 1, args, f);
-		else if (ft_isdigit(format[i]))
-			flag_digit(format[i], f);
-		if (ft_strchr("cspdiuxX%", format[i]))
+		else if (format[j] == '.')
+			i = flag_precision(format, j + 1, args, f);
+		else if (ft_isdigit(format[j]))
+			flag_digit(format[j], f);
+		if (ft_strchr("cspdiuxX%", format[j]))
 		{
-			f->specifier = format[i];
+			f->specifier = format[j];
 			break ;
 		}
-		if (!ft_strchr(ARGS, format[i]))
+		if (!ft_strchr(ARGS, format[j]))
 			break ;
 	}
-	return (i);
+	if (!f->specifier)
+	{
+		init_flags(f);
+		return (i);
+	}
+	return (j);
 }
