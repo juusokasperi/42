@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 15:38:53 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/23 23:37:46 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/03/26 11:58:23 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ int	main()
 			std::cout << "Invalid input, try again." << std::endl;
 			continue ;
 		}
-		if (std::cin.eof())
-			break ;
 		printStatus();
 	}
 	return (0);
