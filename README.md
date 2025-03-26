@@ -12,6 +12,7 @@
 ### [philosophers](/philosophers/philo)
 - The dining philosophers problem using threads.
 - Finished, 100/100.
+- The [bonus version](/philosophers/philo_bonus/) uses processes instead of threads to achieve a similar result - each philosopher is their own process, and each philosopher has their own monitoring thread that keeps track of the philosopher's death status. Not yet evaluated.
 
 ## Rank 02
 
@@ -21,6 +22,7 @@
 ### [minitalk](/minitalk)
 - Data exchange program.
 - Communicates between a server and client process using `SIGUSR1` and `SIGUSR2` signals.
+- Finished, 125/100.
 
 ### [push_swap](/push_swap)
 - Simple sorting algorithm that sorts stack_a using a predefined set of instructions and a spare stack_b.
@@ -31,6 +33,7 @@
 
 ### [Ft_printf](/myLibft)
 - Finished, 100/100.
+- [Bonus part](/ft_printf/bonus/) supports the flags '-0.#+' and '*' for width and precision (e.g. ft_printf("%\*.\*s", 10, 10, "Test");). Not yet evaluated.
 
 ### [Get_next_line](/myLibft)
 - Finished, 125/100.
