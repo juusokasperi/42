@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 20:26:53 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/25 14:13:12 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/03/26 11:18:45 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ int	print_str_handler(const char *str, t_flags flags)
 	free(str_width);
 	return (res);
 }
-
 
 static char	*append_padding(char const c, t_flags flags)
 {

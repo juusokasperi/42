@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 15:44:26 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/25 14:12:45 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/03/26 12:10:34 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,18 @@ void	test_str(void)
 	ret = printf(" %.s ", "-");
 	printf("\n");
 	ret_ft = ft_printf(" %.s ", "-");
+	printf("\n");
+	cmp(ret, ret_ft);
+
+	ret = printf("%*s", 10, "-");
+	printf("\n");
+	ret_ft = ft_printf("%*s", 10, "-");
+	printf("\n");
+	cmp(ret, ret_ft);
+
+	ret = printf("%.*s", 5, "-");
+	printf("\n");
+	ret_ft = ft_printf("%.*s", 5, "-");
 	printf("\n");
 	cmp(ret, ret_ft);
 

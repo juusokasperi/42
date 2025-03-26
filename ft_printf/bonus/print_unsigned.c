@@ -6,13 +6,13 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 20:25:54 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/14 22:19:42 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/03/26 12:13:18 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*handle_precision(char *nbr_itoa, int prec)
+static char	*handle_precision(char *nbr_itoa, int prec)
 {
 	char	*res;
 	int		nbr_len;

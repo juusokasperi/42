@@ -12,7 +12,7 @@ RED = \033[0;91m
 ENDCOLOR = \033[0m
 
 CC := cc
-CFLAGS = -Wall -Wextra -Werror -I./
+CFLAGS = -Wall -Wextra -Werror -I./ -g
 
 ARFLAGS = rcs
 

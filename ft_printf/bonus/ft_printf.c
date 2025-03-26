@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 19:06:48 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/25 14:24:23 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/03/26 12:08:55 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ static int	printf_logic(const char *format, int *i,
 	res = 0;
 	init_flags(&flags);
 	if (format[*i] == '%' && format[*i + 1] && ft_strchr(ARGS, format[*i + 1]))
-		*i = parse_flags(format, &flags, *args, (*i)++);
+		*i = parse_flags(format, &flags, args, *i);
 	if (flags.specifier > 0 && ft_strchr("cspdiuxX%", format[*i]))
 		res = type_handler(format[*i], args, flags);
-	else if (format[*i] == '%' && !format[*i + 1] && !trailing_percent)
+	else if (format[*i] == '%' && !format[*i + 1] && !(*trailing_percent))
 		return (-1);
 	else if (format[*i])
 	{

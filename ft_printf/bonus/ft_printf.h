@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 19:07:43 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/25 14:03:23 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/03/26 12:09:42 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <stdlib.h>
 # include <stdbool.h>
 
-# define ARGS "cspdiuxX%-.# +0123456789"
+# define ARGS "cspdiuxX%-.# +0123456789*"
 
 typedef struct s_flags
 {
@@ -33,7 +33,7 @@ typedef struct s_flags
 	int		star;
 }		t_flags;
 
-int		parse_flags(const char *format, t_flags *f, va_list args, int i);
+int		parse_flags(const char *format, t_flags *f, va_list *args, int i);
 char	flag_positive(char positive, char c);
 void	init_flags(t_flags *flags);
 

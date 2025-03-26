@@ -6,22 +6,16 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 19:51:20 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/25 14:22:58 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/03/26 12:09:35 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void	flag_left(t_flags *flags)
-{
-	flags->left = 1;
-	flags->zero = 0;
-}
-
-static void	flag_width(va_list args, t_flags *flags)
+static void	flag_width(va_list *args, t_flags *flags)
 {
 	flags->star = 1;
-	flags->width = va_arg(args, int);
+	flags->width = va_arg(*args, int);
 	if (flags->width < 0)
 	{
 		flags->left = 1;
@@ -30,7 +24,7 @@ static void	flag_width(va_list args, t_flags *flags)
 }
 
 static int	flag_precision(const char *format,
-	int i, va_list args, t_flags *flags)
+	int i, va_list *args, t_flags *flags)
 {
 	int	j;
 
@@ -38,7 +32,7 @@ static int	flag_precision(const char *format,
 	flags->zero = 0;
 	if (format[j] == '*')
 	{
-		flags->prec = va_arg(args, int);
+		flags->prec = va_arg(*args, int);
 		if (flags->prec < 0)
 			flags->prec = 0;
 		return (i++);
@@ -61,25 +55,36 @@ static void	flag_digit(char c, t_flags *flags)
 	flags->width = (flags->width * 10) + (c - '0');
 }
 
-int	parse_flags(const char *format, t_flags *f, va_list args, int i)
+int	store_flag_info(const char *format, t_flags *f, va_list *args, int j)
 {
-	int	j = i;
+	if (format[j] == '-')
+	{
+		f->left = 1;
+		f->zero = 0;
+	}
+	else if (format[j] == '0' && f->prec == -1 && !f->left && !f->width)
+		f->zero = 1;
+	else if (format[j] == '#')
+		f->hash = 1;
+	else if (format[j] == ' ' || format[j] == '+')
+		f->positive = flag_positive(f->positive, format[j]);
+	else if (format[j] == '*')
+		flag_width(args, f);
+	else if (format[j] == '.')
+		j = flag_precision(format, j + 1, args, f);
+	else if (ft_isdigit(format[j]))
+		flag_digit(format[j], f);
+	return (j);
+}
+
+int	parse_flags(const char *format, t_flags *f, va_list *args, int i)
+{
+	int	j;
+
+	j = i;
 	while (format[++j] && (is_flag(format[j])))
 	{
-		if (format[j] == '-')
-			flag_left(f);
-		else if (format[j] == '0' && f->prec == -1 && !f->left && !f->width)
-			f->zero = 1;
-		else if (format[j] == '#')
-			f->hash = 1;
-		else if (format[j] == ' ' || format[i] == '+')
-			f->positive = flag_positive(f->positive, format[i]);
-		else if (format[j] == '*')
-			flag_width(args, f);
-		else if (format[j] == '.')
-			i = flag_precision(format, j + 1, args, f);
-		else if (ft_isdigit(format[j]))
-			flag_digit(format[j], f);
+		j = store_flag_info(format, f, args, j);
 		if (ft_strchr("cspdiuxX%", format[j]))
 		{
 			f->specifier = format[j];
