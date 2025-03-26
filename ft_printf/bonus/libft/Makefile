@@ -25,7 +25,7 @@ NAME := libft.a
 all: $(NAME)
 
 %.o: %.c $H
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 bonus: $(NAME) $(O_BONUS)
 	@ar $(ARFLAGS) $(NAME) $(O_BONUS)
@@ -34,10 +34,10 @@ $(NAME): $O
 	@ar $(ARFLAGS) $(NAME) $^
 
 clean:
-	rm -f $O $(O_BONUS)
+	@rm -f $O $(O_BONUS)
 
 fclean: clean
-	rm  -f $(NAME)
+	@rm  -f $(NAME)
 
 re: fclean all
 

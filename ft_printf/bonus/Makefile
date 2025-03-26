@@ -1,8 +1,6 @@
 S := ft_printf.c ft_ltoa.c ft_xtoa.c print_hex.c print_nbr.c \
 	print_ptr.c print_str_char.c print_unsigned.c helper_functions.c \
 	parse_flags.c parse_utils.c
-#S := ft_printf.c print_str.c helper_functions.c \
-	parse_flags.c print_char.c print_ptr.c ft_xtoa.c
 O := $(S:.c=.o)
 
 H := ft_printf.h
@@ -12,7 +10,7 @@ RED = \033[0;91m
 ENDCOLOR = \033[0m
 
 CC := cc
-CFLAGS = -Wall -Wextra -Werror -I./ -g
+CFLAGS = -Wall -Wextra -Werror -I./
 
 ARFLAGS = rcs
 
@@ -22,9 +20,8 @@ NAME := libftprintf.a
 
 all: $(NAME)
 
-$(LIBFT):
+$(LIBFT): phony
 	@make -C ./libft
-	@make -C ./libft clean
 
 bonus: all
 
@@ -40,12 +37,14 @@ $(NAME): $(LIBFT) $O
 
 clean:
 	@rm -f $O $(O_BONUS)
+	@make -C ./libft clean
 	@echo "$(RED)✅ FT_PRINTF: Clean complete.$(ENDCOLOR)"
 
 fclean: clean
 	@rm  -f $(NAME) $(LIBFT)
+	@make -C ./libft fclean
 	@echo "$(RED)✅ FT_PRINTF: FClean complete.$(ENDCOLOR)"
 
 re: fclean all
 
-.PHONY: clean fclean re all bonus
+.PHONY: clean fclean re all bonus phony
