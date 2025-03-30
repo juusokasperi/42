@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 18:40:22 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/30 23:41:46 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/03/31 00:13:10 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ public:
 	RPN& operator=(RPN &&other);
 	~RPN();
 
-	int	calculate(const std::string &input);
+	long	calculate(const std::string &input);
 };
 
 #endif /* RPN_HPP */

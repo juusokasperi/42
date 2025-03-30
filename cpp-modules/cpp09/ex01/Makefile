@@ -20,7 +20,7 @@ clean:
 	@echo "Clean ok."
 
 fclean:
-	@rm -rf $(OBJS)
+	@rm -rf $(OBJS) $(NAME)
 	@echo "FClean ok."
 
 re: fclean all

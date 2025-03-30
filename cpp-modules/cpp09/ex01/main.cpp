@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 20:59:11 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/30 21:28:14 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/03/31 00:13:19 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ int main(int argc, char **argv)
 	}
 	try {
 		RPN rpn;
-		int result = rpn.calculate(argv[1]);
+		long result = rpn.calculate(argv[1]);
 		std::cout << "Result: " << argv[1] << " = " << result << std::endl;
-	} catch (std::runtime_error &e) {
+	} catch (std::exception &e) {
 		std::cerr << "Error: " << e.what() << std::endl;
 	}
 	return (0);

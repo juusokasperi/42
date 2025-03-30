@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 18:44:25 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/30 23:43:30 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/03/31 00:12:59 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,26 +42,34 @@ RPN&	RPN::operator=(RPN &&other)
 	return (*this);
 }
 
-static int doMath(int firstOperand, int secondOperand, char c)
+static long doMath(long firstOperand, long secondOperand, char c)
 {
 	switch (c)
 	{
 		case ('+'):
+			if (firstOperand > LONG_MAX - secondOperand || firstOperand < LONG_MIN + secondOperand)
+				throw std::out_of_range("Calculation out of range.");
 			return (firstOperand + secondOperand);
 		case ('-'):
+			if (firstOperand > LONG_MAX + secondOperand || firstOperand < LONG_MIN - secondOperand)
+				throw std::out_of_range("Calculation out of range.");
 			return (firstOperand - secondOperand);
 		case ('*'):
+			if (secondOperand != 0 && (firstOperand > LONG_MAX / secondOperand || firstOperand < LONG_MIN / secondOperand))
+				throw std::out_of_range("Calculation out of range.");
 			return (firstOperand * secondOperand);
 		case ('/'):
 			if (secondOperand == 0)
 				throw std::runtime_error("Division by zero.");
+			if (firstOperand == LONG_MIN && secondOperand == -1)
+				throw std::out_of_range("Calculation out of range.");
 			return (firstOperand / secondOperand);
 		default:
 			throw std::runtime_error("Invalid operator " + std::string(1, c));
 	}
 }
 
-static int	isNumber(std::string s)
+static int	isNumber(std::string &s)
 {
 	int	i = 0;
 	if (s.length() > 1 && (s[0] == '+' || s[0] == '-'))
@@ -75,12 +83,12 @@ static int	isNumber(std::string s)
 	return (1);
 }
 
-static int	isOperator(std::string s)
+static int	isOperator(std::string &s)
 {
 	return (s.length() == 1 && std::strchr("+-/*", s[0]));
 }
 
-int	RPN::calculate(const std::string &input)
+long	RPN::calculate(const std::string &input)
 {
 	std::stringstream ss(input);
 	std::string	token;
@@ -89,7 +97,7 @@ int	RPN::calculate(const std::string &input)
 		if (isNumber(token))
 		{
 			try {
-				_stack.push(std::stol(token));
+				_stack.push(std::stoi(token));
 			} catch (std::exception &e) {
 				throw std::runtime_error("Invalid number " + token);
 			}
@@ -98,9 +106,9 @@ int	RPN::calculate(const std::string &input)
 		{
 			if (_stack.size() < 2)
 				throw std::runtime_error("Unexpected operator " + token);
-			int secondOperand = _stack.top();
+			long secondOperand = _stack.top();
 			_stack.pop();
-			int	firstOperand = _stack.top();
+			long firstOperand = _stack.top();
 			_stack.pop();
 			_stack.push(doMath(firstOperand, secondOperand, token[0]));
 		}
