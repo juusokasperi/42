@@ -4,7 +4,7 @@ OBJS = $(SRCS:.cpp=.o)
 CC = c++
 CFLAGS = -Wall -Wextra -Werror -I./ -std=c++11
 
-NAME = bitcoinExchange
+NAME = btc
 
 %.o: %.cpp BitcoinExchange.hpp
 	@$(CC) $(CFLAGS) -c $< -o $@
