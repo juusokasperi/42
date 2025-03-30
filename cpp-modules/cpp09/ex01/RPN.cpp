@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 18:44:25 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/31 00:12:59 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/03/31 01:15:55 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,34 +42,45 @@ RPN&	RPN::operator=(RPN &&other)
 	return (*this);
 }
 
-static long doMath(long firstOperand, long secondOperand, char c)
+static bool	outOfRange(long firstOperand, long secondOperand, char op)
 {
-	switch (c)
+	switch (op)
 	{
-		case ('+'):
-			if (firstOperand > LONG_MAX - secondOperand || firstOperand < LONG_MIN + secondOperand)
-				throw std::out_of_range("Calculation out of range.");
-			return (firstOperand + secondOperand);
-		case ('-'):
-			if (firstOperand > LONG_MAX + secondOperand || firstOperand < LONG_MIN - secondOperand)
-				throw std::out_of_range("Calculation out of range.");
-			return (firstOperand - secondOperand);
-		case ('*'):
-			if (secondOperand != 0 && (firstOperand > LONG_MAX / secondOperand || firstOperand < LONG_MIN / secondOperand))
-				throw std::out_of_range("Calculation out of range.");
-			return (firstOperand * secondOperand);
-		case ('/'):
-			if (secondOperand == 0)
-				throw std::runtime_error("Division by zero.");
-			if (firstOperand == LONG_MIN && secondOperand == -1)
-				throw std::out_of_range("Calculation out of range.");
-			return (firstOperand / secondOperand);
+		case '+':
+			return (firstOperand > LONG_MAX - secondOperand || firstOperand < LONG_MIN + secondOperand);
+		case '-':
+			return (firstOperand > LONG_MAX + secondOperand || firstOperand < LONG_MIN - secondOperand);
+		case '*':
+			return (secondOperand != 0 && (firstOperand > LONG_MAX / secondOperand || firstOperand < LONG_MIN / secondOperand));
+		case '/':
+			return (firstOperand == LONG_MIN && secondOperand == -1);
 		default:
-			throw std::runtime_error("Invalid operator " + std::string(1, c));
+			throw std::runtime_error("Invalid operator " + std::string(1, op));
 	}
 }
 
-static int	isNumber(std::string &s)
+static long doMath(long firstOperand, long secondOperand, char op)
+{
+	if (outOfRange(firstOperand, secondOperand, op))
+		throw std::out_of_range("Calculation out of range.");
+	switch (op)
+	{
+		case '+':
+			return (firstOperand + secondOperand);
+		case '-':
+			return (firstOperand - secondOperand);
+		case '*':
+			return (firstOperand * secondOperand);
+		case '/':
+			if (secondOperand == 0)
+				throw std::runtime_error("Division by zero.");
+			return (firstOperand / secondOperand);
+		default:
+			throw std::runtime_error("Invalid operator " + std::string(1, op));
+	}
+}
+
+static bool	isNumber(std::string &s)
 {
 	int	i = 0;
 	if (s.length() > 1 && (s[0] == '+' || s[0] == '-'))
@@ -77,13 +88,13 @@ static int	isNumber(std::string &s)
 	while (s[i])
 	{
 		if (!std::isdigit(s[i]))
-			return (0);
+			return (false);
 		i++;
 	}
-	return (1);
+	return (true);
 }
 
-static int	isOperator(std::string &s)
+static bool	isOperator(std::string &s)
 {
 	return (s.length() == 1 && std::strchr("+-/*", s[0]));
 }
