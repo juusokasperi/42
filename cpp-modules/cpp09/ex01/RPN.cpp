@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 18:44:25 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/31 12:10:10 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/03/31 12:48:12 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static bool	outOfRange(long firstOperand, long secondOperand, char op)
 		case '/':
 			return (firstOperand == LONG_MIN && secondOperand == -1);
 		default:
-			throw std::runtime_error("Invalid operator " + std::string(1, op));
+			throw std::logic_error("Invalid operator " + std::string(1, op));
 	}
 }
 
@@ -104,10 +104,10 @@ long RPN::_doMath(long firstOperand, long secondOperand, char op)
 			return (firstOperand * secondOperand);
 		case '/':
 			if (secondOperand == 0)
-				throw std::runtime_error("Division by zero.");
+				throw std::logic_error("Division by zero.");
 			return (firstOperand / secondOperand);
 		default:
-			throw std::runtime_error("Invalid operator " + std::string(1, op));
+			throw std::logic_error("Invalid operator " + std::string(1, op));
 	}
 }
 
@@ -128,7 +128,7 @@ long	RPN::calculate(const std::string &input)
 		else if (isOperator(token))
 		{
 			if (_stack.size() < 2)
-				throw std::runtime_error("Unexpected operator " + token);
+				throw std::logic_error("Unexpected operator " + token);
 			long secondOperand = _stack.top();
 			_stack.pop();
 			long firstOperand = _stack.top();
@@ -136,11 +136,11 @@ long	RPN::calculate(const std::string &input)
 			_stack.push(_doMath(firstOperand, secondOperand, token[0]));
 		}
 		else
-			throw std::runtime_error("Invalid operator " + token);
+			throw std::logic_error("Invalid operator " + token);
 	}
 	if (_stack.size() > 1)
-		throw std::runtime_error("Input missing " + std::to_string(_stack.size() - 1) + " operator(s).");
+		throw std::logic_error("Input missing " + std::to_string(_stack.size() - 1) + " operator(s).");
 	if (_stack.empty())
-		throw std::runtime_error("Input missing an operand.");
+		throw std::logic_error("Input missing an operand.");
 	return (_stack.top());
 }
