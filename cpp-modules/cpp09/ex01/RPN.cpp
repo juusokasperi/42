@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 18:44:25 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/31 11:50:07 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/03/31 12:10:10 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,22 @@ static bool	outOfRange(long firstOperand, long secondOperand, char op)
 	switch (op)
 	{
 		case '+':
-			return (firstOperand > LONG_MAX - secondOperand || firstOperand < LONG_MIN + secondOperand);
+			return ((secondOperand > 0 && firstOperand > LONG_MAX - secondOperand)
+				|| (secondOperand < 0 && firstOperand < LONG_MIN - secondOperand));
 		case '-':
-			return (firstOperand > LONG_MAX + secondOperand || firstOperand < LONG_MIN - secondOperand);
+			return ((secondOperand < 0 && firstOperand > LONG_MAX + secondOperand)
+				|| (secondOperand > 0 && firstOperand < LONG_MIN + secondOperand));
 		case '*':
-			return (secondOperand != 0 && (firstOperand > LONG_MAX / secondOperand || firstOperand < LONG_MIN / secondOperand));
+			if (secondOperand == 0)
+				return (false);
+			else if (secondOperand == -1)
+				return (firstOperand == LONG_MIN);
+			else if (secondOperand > 0)
+				return (firstOperand > LONG_MAX / secondOperand
+					|| firstOperand < LONG_MIN / secondOperand);
+			else
+				return (firstOperand < LONG_MAX / secondOperand
+					|| firstOperand > LONG_MIN / secondOperand);
 		case '/':
 			return (firstOperand == LONG_MIN && secondOperand == -1);
 		default:
