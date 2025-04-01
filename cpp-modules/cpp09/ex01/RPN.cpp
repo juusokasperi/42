@@ -6,13 +6,13 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 18:44:25 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/31 12:53:08 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/04/01 23:51:41 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RPN.hpp"
 
-RPN::RPN(): _stack()
+RPN::RPN()
 {
 }
 
@@ -20,25 +20,25 @@ RPN::~RPN()
 {
 }
 
-RPN::RPN(const RPN &src): _stack(src._stack)
+RPN::RPN(const RPN &src)
 {
+	(void)src;
 }
 
-RPN::RPN(RPN &&other): _stack(std::move(other._stack))
+RPN::RPN(RPN &&other)
 {
+	(void)other;
 }
 
 RPN&	RPN::operator=(const RPN &rhs)
 {
-	if (this != &rhs)
-		_stack = rhs._stack;
+	(void)rhs;
 	return (*this);
 }
 
 RPN&	RPN::operator=(RPN &&other)
 {
-	if (this != &other)
-		_stack = std::move(other._stack);
+	(void)other;
 	return (*this);
 }
 
@@ -113,6 +113,7 @@ long RPN::_doMath(long firstOperand, long secondOperand, char op)
 
 long	RPN::calculate(const std::string &input)
 {
+	std::stack<long>	stack;
 	std::stringstream ss(input);
 	std::string	token;
 	while (ss >> token)
@@ -120,27 +121,27 @@ long	RPN::calculate(const std::string &input)
 		if (isNumber(token))
 		{
 			try {
-				_stack.push(std::stoi(token));
+				stack.push(std::stoi(token));
 			} catch (std::exception &e) {
 				throw std::out_of_range("Invalid integer " + token);
 			}
 		}
 		else if (isOperator(token))
 		{
-			if (_stack.size() < 2)
+			if (stack.size() < 2)
 				throw std::runtime_error("Unexpected operator " + token);
-			long secondOperand = _stack.top();
-			_stack.pop();
-			long firstOperand = _stack.top();
-			_stack.pop();
-			_stack.push(_doMath(firstOperand, secondOperand, token[0]));
+			long secondOperand = stack.top();
+			stack.pop();
+			long firstOperand = stack.top();
+			stack.pop();
+			stack.push(_doMath(firstOperand, secondOperand, token[0]));
 		}
 		else
 			throw std::runtime_error("Invalid operator " + token);
 	}
-	if (_stack.size() > 1)
-		throw std::runtime_error("Input missing " + std::to_string(_stack.size() - 1) + " operator(s).");
-	if (_stack.empty())
+	if (stack.size() > 1)
+		throw std::runtime_error("Input missing " + std::to_string(stack.size() - 1) + " operator(s).");
+	if (stack.empty())
 		throw std::runtime_error("Input missing an operand.");
-	return (_stack.top());
+	return (stack.top());
 }
