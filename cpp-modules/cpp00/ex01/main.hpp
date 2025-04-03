@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 15:19:50 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/26 12:00:20 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/04/03 17:25:34 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <iomanip>
 # include <iostream>
+# include <cstdlib>
 # include "PhoneBook.hpp"
 
 # define TMAGENTA		"\033[95m"

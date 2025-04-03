@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 17:42:11 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/26 11:55:58 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/04/03 17:25:21 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ void	addContact(PhoneBook *phoneBook)
 
 void	searchContact(PhoneBook *phoneBook)
 {
-	int					i;
-	std::string 		input;
+	int			i;
+	std::string	input;
 
 	i = 0;
 	if (printBook(phoneBook) == 0)
@@ -59,23 +59,34 @@ void	searchContact(PhoneBook *phoneBook)
 	{
 		try
 		{
-			i = std::stoi(input);
+			i = std::strtol(input.c_str(), NULL, 10);
 			if (i < 1 || i > 8)
-				throw std::exception();
+				throw std::runtime_error("Invalid input, back to menu.");
 			phoneBook->printContact(i);
 		}
-		catch (...)
+		catch (std::exception &e)
 		{
-			std::cout	<< "Invalid input, back to menu."
+			std::cerr	<< e.what()
 						<< std::endl << std::endl;
 		}
 	}
 }
 
+static bool	checkForValidNumber(std::string &input)
+{
+	size_t	i = 0;
+	std::string::size_type	sz;
+	if (input[i] == '+')
+		i++;
+	sz = input.find_first_of("0123456789- ", i);
+	if (sz)
+		return (false);
+	return (true);
+}
+
 static std::string getInput(std::string prompt)
 {
 	std::string input;
-
 	while (1)
 	{
 		std::cout << std::left << std::setw(16) << prompt;
@@ -84,6 +95,11 @@ static std::string getInput(std::string prompt)
 		{
 			std::cout << std::endl;
 			return ("");
+		}
+		if (prompt == "Phone number:" && checkForValidNumber(input) == false)
+		{
+			std::cout << "Phone number can start with a '+', and afterwards contain only digits, ' ' '-'" << std::endl;
+			continue;
 		}
 		if (input.length() > 0)
 			break ;
@@ -122,7 +138,8 @@ static int	printBook(PhoneBook *phoneBook)
 		contact = phoneBook->getContact(i);
 		if (contact.getFilled() == 0)
 			continue ;
-		printColumn(std::to_string(i + 1), '|');
+		std::string index(1, (i + 1 + '0'));
+		printColumn(index, '|');
 		printColumn(contact.getFirstName(), '|');
 		printColumn(contact.getLastName(), '|');
 		printColumn(contact.getNickName(), '\n');

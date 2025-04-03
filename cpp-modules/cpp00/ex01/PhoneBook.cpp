@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 15:03:28 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/02 13:28:46 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/04/03 16:48:58 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	PhoneBook::printContact(int i) const
 	Contact	contact;
 
 	if (i < 1 || i > 8)
-		std::cout << "Error: Index must be a value between 1-8" << std::endl;
+		std::cerr << "Error: Index must be a value between 1-8" << std::endl;
 	else
 	{
 		i--;
