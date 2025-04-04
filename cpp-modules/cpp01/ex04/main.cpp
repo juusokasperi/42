@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 18:31:01 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/03 00:08:08 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/04/04 16:39:34 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,9 @@ static void	ft_sed(std::string content, std::string filename,
 {
 	std::ofstream	ofs;
 	size_t			pos;
+	std::string		fileReplace = filename + ".replace";
 
-	ofs.open(filename + ".replace");
+	ofs.open(fileReplace.c_str());
 	if (content.length() == 0)
 	{
 		ofs.close();
