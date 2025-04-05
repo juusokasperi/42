@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 15:08:54 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/04/05 19:13:12 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/04/05 20:33:48 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ Point::~Point()
 {
 }
 
-Fixed	Point::getX(void) const
+const Fixed	Point::getX(void) const
 {
 	return (_x);
 }
 
-Fixed	Point::getY(void) const
+const Fixed	Point::getY(void) const
 {
 	return (_y);
 }
