@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 14:08:14 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/17 12:58:42 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/04/05 19:10:09 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,41 +18,59 @@
 
 Fixed::Fixed() : _value(0)
 {
+//	std::cout << "Default constructor called" << std::endl;
 }
 
-Fixed::Fixed(const int value): _value(value << _fractionalBits)
+Fixed::Fixed(const int value)
 {
+//	std::cout << "Int constructor called" << std::endl;
+	if (value > FIXED_INT_MAX || value < FIXED_INT_MIN)
+		throw std::overflow_error("Int value out of range.");
+	_value = value << _fractionalBits;
 }
 
-Fixed::Fixed(const float value): _value(static_cast<int>(roundf(value * (1 << _fractionalBits))))
+Fixed::Fixed(const float value)
 {
+//	std::cout << "Float constructor called" << std::endl;
+	if (value > FIXED_FLOAT_MAX || value < FIXED_FLOAT_MIN)
+		throw std::overflow_error("Float value out of range.");
+	_value = static_cast<int>(roundf(value * (1 << _fractionalBits)));
 }
 
 /* Copy constructor */
 Fixed::Fixed(const Fixed &src): _value(src._value)
 {
+//	std::cout << "Copy constructor called" << std::endl;
 }
+
+/* **************************** */
+/* Assignment operator overload */
+/* **************************** */
 
 /* Copy assignment operator */
 Fixed& Fixed::operator=(const Fixed &rhs)
 {
+//	std::cout << "Copy assignment operator called" << std::endl;
 	if (this != &rhs)
-		_value = rhs._value;
+		this->_value = rhs._value;
 	return (*this);
 }
 
 /* Destructor */
 Fixed::~Fixed()
 {
+//	std::cout << "Destructor called" << std::endl;
 }
 
 int	Fixed::getRawBits(void) const
 {
+//	std::cout << "getRawBits member function called" << std::endl;
 	return (_value);
 }
 
 void	Fixed::setRawBits(int raw)
 {
+//	std::cout << "setRawBits member function called" << std::endl;
 	_value = raw;
 }
 
@@ -108,6 +126,9 @@ Fixed	Fixed::operator+(const Fixed &rhs) const
 {
 	Fixed	dest;
 
+	if ((_value > 0 && rhs._value > INT_MAX - _value)
+		|| (_value < 0 && rhs._value < INT_MIN - _value))
+		throw std::overflow_error("Addition overflow.");
 	dest._value = _value + rhs._value;
 	return (dest);
 }
@@ -116,8 +137,24 @@ Fixed	Fixed::operator-(const Fixed &rhs) const
 {
 	Fixed	dest;
 
+	if ((_value < 0 && rhs._value > INT_MAX + _value)
+		|| (_value > 0 && rhs._value < INT_MIN + _value))
+		throw std::overflow_error("Substraction overflow.");
 	dest._value = _value - rhs._value;
 	return (dest);
+}
+
+static bool multiplicationOverflows(int l, int r)
+{
+	if (l > 0 && r > 0 && l > LLONG_MAX / r)
+		return (true);
+	if (l < 0 && r < 0 && l < LLONG_MAX / r)
+		return (true);
+	if (l < 0 & r > 0 && l < LLONG_MIN / r)
+		return (true);
+	if (l > 0 && r < 0 && r < LLONG_MIN / l)
+		return (true);
+	return (false);
 }
 
 Fixed	Fixed::operator*(const Fixed &rhs) const
@@ -125,8 +162,16 @@ Fixed	Fixed::operator*(const Fixed &rhs) const
 	Fixed		dest;
 	long long	result;
 
-	result = (static_cast<long long>(_value) * rhs._value) >> _fractionalBits;
-	dest._value = static_cast<int>(result);
+	if (_value == 0 || rhs._value == 0)
+		dest._value = 0;
+	else {
+		if (multiplicationOverflows(_value, rhs._value))
+			throw std::overflow_error("Multiplication overflow.");
+		result = (static_cast<long long>(_value) * rhs._value) >> _fractionalBits;
+		if (result > INT_MAX || result < INT_MIN)
+			throw std::overflow_error("Multiplication overflow.");
+		dest._value = static_cast<int>(result);
+	}
 	return (dest);
 }
 
@@ -135,19 +180,17 @@ Fixed	Fixed::operator/(const Fixed &rhs) const
 	Fixed		dest;
 	long long	result;
 
-	try
-	{
-		if (rhs._value == 0)
-			throw ("Division by zero not allowed.");
-		result = (static_cast<long long>(_value) << _fractionalBits) / rhs._value;
-		dest._value = result;
-		return (dest);
-	}
-	catch (const char *errorMessage)
-	{
-		std::cerr << "Error: " << errorMessage << std::endl;
-		std::exit(EXIT_FAILURE);
-	}
+	if (rhs._value == 0)
+		throw std::runtime_error("Division by zero not allowed.");
+	if (_value == INT_MIN && rhs._value == -1)
+		throw std::overflow_error("Division overflow.");
+	if (_value != 0 && abs(static_cast<long long>(_value)) > (LLONG_MAX >> _fractionalBits))
+		throw std::overflow_error("Left shift overflow in division.");
+	result = (static_cast<long long>(_value) << _fractionalBits) / rhs._value;
+	if (result > INT_MAX || result < INT_MIN)
+		throw std::overflow_error("Division result overflow.");
+	dest._value = result;
+	return (dest);
 }
 
 /* **************************** */
@@ -156,6 +199,8 @@ Fixed	Fixed::operator/(const Fixed &rhs) const
 
 Fixed&	Fixed::operator++()
 {
+	if (_value >= (FIXED_INT_MAX << _fractionalBits))
+		throw std::overflow_error("Increment results in an overflow.");
 	_value++;
 	return (*this);
 }
@@ -164,12 +209,16 @@ Fixed	Fixed::operator++(int)
 {
 	Fixed	temp(*this);
 
+	if (_value >= (FIXED_INT_MAX << _fractionalBits))
+		throw std::overflow_error("Increment results in an overflow.");
 	_value++;
 	return (temp);
 }
 
 Fixed&	Fixed::operator--()
 {
+	if (_value <= (FIXED_INT_MIN * (1 << _fractionalBits)))
+		throw std::overflow_error("Decrement results in an overflow.");
 	_value--;
 	return (*this);
 }
@@ -178,6 +227,8 @@ Fixed	Fixed::operator--(int)
 {
 	Fixed temp(*this);
 
+	if (_value <= (FIXED_INT_MIN * (1 << _fractionalBits)))
+		throw std::overflow_error("Decrement results in an overflow.");
 	_value--;
 	return (temp);
 }

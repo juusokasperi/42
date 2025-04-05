@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 15:08:54 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/05 17:06:15 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/04/05 19:13:12 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,10 @@ Fixed	Point::getX(void) const
 Fixed	Point::getY(void) const
 {
 	return (_y);
+}
+
+std::ostream& operator<<(std::ostream &os, const Point& point)
+{
+	os << "(" << point.getX() << "," << point.getY() << ")";
+	return (os);
 }
