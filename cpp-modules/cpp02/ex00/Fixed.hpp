@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 14:01:05 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/05 16:48:09 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/04/05 12:46:57 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ class Fixed {
 		Fixed(const Fixed &src);
 		Fixed& operator=(const Fixed &rhs);
 		~Fixed();
-		const int&	getRawBits( void ) const;
+
+		int			getRawBits( void ) const;
 		void		setRawBits ( int const raw );
 };
 
