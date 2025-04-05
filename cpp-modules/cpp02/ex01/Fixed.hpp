@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 14:01:05 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/05 16:51:30 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/04/05 12:49:30 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 # define FIXED_HPP
 
 # include <iostream>
+
+const int	FIXED_INT_MAX = 8388607;
+const int	FIXED_INT_MIN = -8388608;
+const float	FIXED_FLOAT_MAX = 8388607.0f;
+const float	FIXED_FLOAT_MIN = -8388608.0f;
 
 class Fixed {
 	private:
@@ -27,7 +32,7 @@ class Fixed {
 		Fixed& operator=(const Fixed &rhs);
 		~Fixed();
 
-		const int&	getRawBits( void ) const;
+		int			getRawBits( void ) const;
 		void		setRawBits ( int const raw );
 		float		toFloat( void ) const;
 		int			toInt( void ) const;

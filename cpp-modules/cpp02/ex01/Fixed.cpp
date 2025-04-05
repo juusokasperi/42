@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 14:08:14 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/05 16:52:28 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/04/05 12:49:49 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,20 @@ Fixed::Fixed() : _value(0)
 	std::cout << "Default constructor called" << std::endl;
 }
 
-Fixed::Fixed(const int value): _value(value << _fractionalBits)
+Fixed::Fixed(const int value)
 {
 	std::cout << "Int constructor called" << std::endl;
+	if (value > FIXED_INT_MAX || value < FIXED_INT_MIN)
+		throw std::overflow_error("Int value out of range.");
+	_value = value << _fractionalBits;
 }
 
-Fixed::Fixed(const float value): _value(static_cast<int>(roundf(value * (1 << _fractionalBits))))
+Fixed::Fixed(const float value)
 {
 	std::cout << "Float constructor called" << std::endl;
+	if (value > FIXED_FLOAT_MAX || value < FIXED_FLOAT_MIN)
+		throw std::overflow_error("Float value out of range.");
+	_value = static_cast<int>(roundf(value * (1 << _fractionalBits)));
 }
 
 //	Copy constructor
@@ -48,7 +54,7 @@ Fixed::~Fixed()
 	std::cout << "Destructor called" << std::endl;
 }
 
-const int&	Fixed::getRawBits(void) const
+int	Fixed::getRawBits(void) const
 {
 	std::cout << "getRawBits member function called" << std::endl;
 	return (_value);
@@ -56,6 +62,7 @@ const int&	Fixed::getRawBits(void) const
 
 void	Fixed::setRawBits(int raw)
 {
+	std::cout << "setRawBits member function called" << std::endl;
 	_value = raw;
 }
 
