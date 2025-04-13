@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 10:59:10 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/07 13:16:38 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/04/13 16:19:09 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ class ClapTrap {
 		unsigned int	_hp;
 		unsigned int	_energy;
 		unsigned int	_damage;
+		ClapTrap();
 	public:
 		ClapTrap(std::string const name);
 		ClapTrap(ClapTrap const &src);

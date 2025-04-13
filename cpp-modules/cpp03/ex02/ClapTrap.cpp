@@ -6,11 +6,16 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 11:03:51 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/07 13:18:27 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/04/13 16:18:43 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ClapTrap.hpp"
+
+ClapTrap::ClapTrap(): _name("Unnamed"), _hp(10), _energy(10), _damage(0)
+{
+	std::cout	<< CLAPTRAP << _name << " default constructor has been called" << std::endl;
+}
 
 ClapTrap::ClapTrap(std::string const name): _name(name), _hp(10),
 								_energy(10), _damage(0)
@@ -77,7 +82,9 @@ void	ClapTrap::takeDamage(unsigned int amount)
 
 void	ClapTrap::attack(const std::string& target)
 {
-	if (_energy == 0)
+	if (_hp == 0)
+		std::cout	<< CLAPTRAP << _name << " is dead and thus, cannot attack." << std::endl;
+	else if (_energy == 0)
 		std::cout	<< CLAPTRAP << _name << " has no energy to attack." << std::endl;
 	else
 	{

@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 13:36:16 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/07 13:55:33 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/04/13 16:34:12 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 class DiamondTrap: public FragTrap, public ScavTrap {
 	private:
 		std::string _name;
+
+		DiamondTrap();
 	public:
 		DiamondTrap(std::string name);
 		DiamondTrap(const DiamondTrap &src);
