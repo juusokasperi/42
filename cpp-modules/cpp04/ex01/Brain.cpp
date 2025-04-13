@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 23:39:43 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/08 00:54:53 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/04/13 16:41:16 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 Brain::Brain()
 {
-	std::cout << BRAIN << "constructor called" << std::endl;
+	std::cout << BRAIN << "default constructor called" << std::endl;
 }
 
 Brain::Brain(const Brain &src)

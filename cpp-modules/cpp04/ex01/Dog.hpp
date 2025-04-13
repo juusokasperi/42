@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 23:01:24 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/08 01:10:16 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/04/13 16:41:45 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ class Dog: public Animal {
 	private:
 		Brain* _brain;
 	public:
-		Dog(void);
+		Dog();
 		Dog(const Dog &src);
 		Dog& operator=(const Dog &rhs);
-		~Dog(void);
+		~Dog();
 
 		void	makeSound() const;
 		Brain*	getBrain()	const;

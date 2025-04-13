@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 22:48:59 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/08 01:09:49 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/04/13 16:42:20 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 AAnimal::AAnimal(): _type("Random Animal")
 {
-	std::cout << AANIMAL << "void constructor called" << std::endl;
+	std::cout << AANIMAL << "default constructor called" << std::endl;
 }
 
 AAnimal::AAnimal(std::string type): _type(type)

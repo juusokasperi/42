@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 23:01:24 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/08 01:10:43 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/04/13 16:43:05 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ class Cat: public AAnimal {
 	private:
 		Brain* _brain;
 	public:
-		Cat(void);
+		Cat();
 		Cat(const Cat &src);
 		Cat& operator=(const Cat &rhs);
-		~Cat(void);
+		~Cat();
 
 		void	makeSound() const;
 		Brain*	getBrain() const;
