@@ -25,7 +25,7 @@ $(LIBFT): phony
 
 bonus: all
 
-$O: $(LIBFT) $(LIBFT_H)
+$O: $(LIBFT)
 
 %.o: %.c $H
 	@$(CC) $(CFLAGS) -c $< -o $@
@@ -36,7 +36,7 @@ $(NAME): $(LIBFT) $O
 	@echo "$(GREEN)✅ FT_PRINTF: Library compilation complete!$(ENDCOLOR)"
 
 clean:
-	@rm -f $O $(O_BONUS)
+	@rm -f $O
 	@make -C ./libft clean
 	@echo "$(RED)✅ FT_PRINTF: Clean complete.$(ENDCOLOR)"
 
