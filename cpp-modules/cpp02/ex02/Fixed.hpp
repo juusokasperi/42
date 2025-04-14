@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 14:01:05 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/04/05 15:43:18 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/04/14 16:18:37 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define FIXED_HPP
 
 # include <iostream>
+# include <cmath>
+# include <limits>
 
 const int	FIXED_INT_MAX = 8388607;
 const int	FIXED_INT_MIN = -8388608;

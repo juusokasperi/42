@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 14:41:45 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/06 10:26:24 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/04/14 16:19:39 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ bool bsp(Point const a, Point const b, Point const c, Point const point)
 						- (c.getY() - b.getY()) * (point.getX() - b.getX());
 	Fixed	sideCA	= (a.getX() - c.getX()) * (point.getY() - c.getY())
 						- (a.getY() - c.getY()) * (point.getX() - c.getX());
-	bool		allPositive	= (sideAB > 0) && (sideBC > 0) && (sideCA > 0);
-	bool		allNegative = (sideAB < 0) && (sideBC < 0) && (sideCA < 0);
+	bool	allPositive	= (sideAB > 0) && (sideBC > 0) && (sideCA > 0);
+	bool	allNegative = (sideAB < 0) && (sideBC < 0) && (sideCA < 0);
 
 	return (allPositive || allNegative);
 }

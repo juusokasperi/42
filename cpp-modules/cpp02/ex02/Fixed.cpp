@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 14:08:14 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/04/05 18:59:06 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/04/14 16:21:45 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,8 +126,8 @@ Fixed	Fixed::operator+(const Fixed &rhs) const
 {
 	Fixed	dest;
 
-	if ((_value > 0 && rhs._value > INT_MAX - _value)
-		|| (_value < 0 && rhs._value < INT_MIN - _value))
+	if ((_value > 0 && rhs._value > std::numeric_limits<int>::max() - _value)
+		|| (_value < 0 && rhs._value < std::numeric_limits<int>::min() - _value))
 		throw std::overflow_error("Addition overflow.");
 	dest._value = _value + rhs._value;
 	return (dest);
@@ -137,8 +137,8 @@ Fixed	Fixed::operator-(const Fixed &rhs) const
 {
 	Fixed	dest;
 
-	if ((_value < 0 && rhs._value > INT_MAX + _value)
-		|| (_value > 0 && rhs._value < INT_MIN + _value))
+	if ((_value < 0 && rhs._value > std::numeric_limits<int>::max() + _value)
+		|| (_value > 0 && rhs._value < std::numeric_limits<int>::min() + _value))
 		throw std::overflow_error("Substraction overflow.");
 	dest._value = _value - rhs._value;
 	return (dest);
@@ -146,13 +146,13 @@ Fixed	Fixed::operator-(const Fixed &rhs) const
 
 static bool multiplicationOverflows(int l, int r)
 {
-	if (l > 0 && r > 0 && l > LLONG_MAX / r)
+	if (l > 0 && r > 0 && l > std::numeric_limits<long long>::max() / r)
 		return (true);
-	if (l < 0 && r < 0 && l < LLONG_MAX / r)
+	if (l < 0 && r < 0 && l < std::numeric_limits<long long>::max() / r)
 		return (true);
-	if (l < 0 & r > 0 && l < LLONG_MIN / r)
+	if (l < 0 & r > 0 && l < std::numeric_limits<long long>::min() / r)
 		return (true);
-	if (l > 0 && r < 0 && r < LLONG_MIN / l)
+	if (l > 0 && r < 0 && r < std::numeric_limits<long long>::min() / l)
 		return (true);
 	return (false);
 }
@@ -168,7 +168,7 @@ Fixed	Fixed::operator*(const Fixed &rhs) const
 		if (multiplicationOverflows(_value, rhs._value))
 			throw std::overflow_error("Multiplication overflow.");
 		result = (static_cast<long long>(_value) * rhs._value) >> _fractionalBits;
-		if (result > INT_MAX || result < INT_MIN)
+		if (result > std::numeric_limits<int>::max() || result < std::numeric_limits<int>::min())
 			throw std::overflow_error("Multiplication overflow.");
 		dest._value = static_cast<int>(result);
 	}
@@ -182,16 +182,17 @@ Fixed	Fixed::operator/(const Fixed &rhs) const
 
 	if (rhs._value == 0)
 		throw std::runtime_error("Division by zero not allowed.");
-	if (_value == INT_MIN && rhs._value == -1)
+	if (_value == std::numeric_limits<int>::min() && rhs._value == -1)
 		throw std::overflow_error("Division overflow.");
-	if (_value != 0 && abs(static_cast<long long>(_value)) > (LLONG_MAX >> _fractionalBits))
+	if (_value != 0 && std::abs(static_cast<long long>(_value)) > (std::numeric_limits<long long>::max() >> _fractionalBits))
 		throw std::overflow_error("Left shift overflow in division.");
 	result = (static_cast<long long>(_value) << _fractionalBits) / rhs._value;
-	if (result > INT_MAX || result < INT_MIN)
+	if (result > std::numeric_limits<int>::max() || result < std::numeric_limits<int>::min())
 		throw std::overflow_error("Division result overflow.");
 	dest._value = result;
 	return (dest);
 }
+
 
 /* **************************** */
 /* Pre/post increment/decrement */
