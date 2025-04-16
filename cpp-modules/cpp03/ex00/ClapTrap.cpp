@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 11:03:51 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/04/13 16:17:40 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/04/16 11:37:12 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ ClapTrap::ClapTrap(ClapTrap const &src): _name(src._name), _hp(src._hp),
 
 ClapTrap& ClapTrap::operator=(const ClapTrap &rhs)
 {
-	std::cout	<< "ClapTrap" << _name << "Copy assignment operator has been called" << std::endl;
+	std::cout	<< "ClapTrap " << _name << " copy assignment operator has been called" << std::endl;
 	if (this != &rhs)
 	{
 		_name = rhs._name;
@@ -44,7 +44,7 @@ ClapTrap& ClapTrap::operator=(const ClapTrap &rhs)
 
 ClapTrap::~ClapTrap()
 {
-	std::cout	<< "ClapTrap" << _name << " destructor has been called" << std::endl;
+	std::cout	<< "ClapTrap " << _name << " destructor has been called" << std::endl;
 }
 
 void	ClapTrap::beRepaired(unsigned int amount)

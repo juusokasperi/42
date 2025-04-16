@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 11:30:07 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/04/13 16:38:22 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/04/16 11:45:15 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 int	main(void)
 {
 	DiamondTrap	bill("Bill");
+	DiamondTrap unnamed;
 
+	unnamed.whoAmI();
 	for (int i = 0; i < 11; i++)
 	{
 		bill.attack("Test Robot");

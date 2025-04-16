@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 13:00:55 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/04/13 16:33:50 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/04/16 11:44:09 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 FragTrap::FragTrap(): ClapTrap()
 {
-	std::cout	<< FRAGTRAP << _name << " constructor called" << std::endl;
+	std::cout	<< FRAGTRAP << _name << " default constructor called" << std::endl;
 	_hp = 100;
 	_energy = 100;
 	_damage = 30;

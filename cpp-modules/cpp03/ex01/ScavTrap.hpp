@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 12:57:40 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/04/13 16:28:28 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/04/16 11:42:37 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,9 @@
 
 class ScavTrap: public ClapTrap {
 	private:
-		ScavTrap();
+
 	public:
+		ScavTrap();
 		ScavTrap(std::string name);
 		ScavTrap(ScavTrap const &src);
 		~ScavTrap();

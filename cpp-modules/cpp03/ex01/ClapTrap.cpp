@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 11:03:51 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/04/13 16:17:34 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/04/16 11:40:29 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	ClapTrap::takeDamage(unsigned int amount)
 {
 	if (_hp == 0)
 	{
-		std::cout << CLAPTRAP << _name << " is already dead!" << std::endl;\
+		std::cout << CLAPTRAP << _name << " is already dead!" << std::endl;
 		return ;
 	}
 	if (amount > _hp)

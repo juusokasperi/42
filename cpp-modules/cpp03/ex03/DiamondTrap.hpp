@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 13:36:16 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/04/13 16:34:12 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/04/16 11:44:51 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@
 # include "FragTrap.hpp"
 # include "ScavTrap.hpp"
 
-# define DIAMONDTRAP "\033[0;90m[DiamondTrap]\033[0m "
+# define DIAMONDTRAP "\033[0;97m[DiamondTrap]\033[0m "
 
 class DiamondTrap: public FragTrap, public ScavTrap {
 	private:
 		std::string _name;
 
-		DiamondTrap();
 	public:
+		DiamondTrap();
 		DiamondTrap(std::string name);
 		DiamondTrap(const DiamondTrap &src);
 		~DiamondTrap();

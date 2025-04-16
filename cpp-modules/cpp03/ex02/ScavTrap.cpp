@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 13:00:55 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/04/13 16:29:43 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/04/16 11:43:01 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 ScavTrap::ScavTrap(): ClapTrap()
 {
-	std::cout	<< SCAVTRAP << _name << " constructor called" << std::endl;
+	std::cout	<< SCAVTRAP << _name << " default constructor called" << std::endl;
 	_hp = 100;
 	_energy = 50;
 	_damage = 20;
