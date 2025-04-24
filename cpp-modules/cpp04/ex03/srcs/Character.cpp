@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 13:03:08 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/04/24 16:57:50 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/04/24 19:10:49 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,26 +84,33 @@ const std::string&	Character::getName() const
 
 void	Character::equip(AMateria *m)
 {
+	if (m == NULL)
+	{
+		std::cout	<< CHARACTER << _name << " cannot equip a NULL AMateria." << std::endl;
+		return ;
+	}
+	bool	materiaAlreadyEquipped = false;
 	for (int i = 0; i < 4; i++)
 	{
 		if (_inventory[i] == m)
 		{
-			std::cout	<< CHARACTER << _name
-						<< " has already equipped this materia!"
-						<< std::endl;
-			return ;
+			materiaAlreadyEquipped = true;
+			break ;
 		}
-	}
-	for (int i = 0; i < 4; i++)
-	{
-		if (_inventory[i] == NULL)
+		else if (_inventory[i] == NULL)
 		{
 			_inventory[i] = m;
-			std::cout << CHARACTER << _name << " equipped " << m->getType() << std::endl;
+			std::cout	<< CHARACTER << _name << " equipped " << m->getType()
+						<< " into inventory index " << i << std::endl;
 			return ;
 		}
 	}
-	std::cout << CHARACTER << _name << "'s inventory appears to be full." << std::endl;
+	if (materiaAlreadyEquipped)
+		std::cout	<< CHARACTER << _name
+				<< " has already equipped this materia!"
+				<< std::endl;
+	else
+		std::cout << CHARACTER << _name << "'s inventory appears to be full." << std::endl;
 }
 
 void	Character::unequip(int idx)

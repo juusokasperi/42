@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 13:35:14 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/04/24 17:18:10 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/04/24 19:13:25 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,31 +29,41 @@ static void	fullInventory()
 	ICharacter* joe = new Character("Joe");
 	std::cout << std::endl;
 
-	AMateria* ice;
-	AMateria* ice2;
-	AMateria* cure;
-	AMateria* cure2;
-	ice = src->createMateria("ice");
-	cure = src->createMateria("cure");
+	AMateria* iceBolt = src->createMateria("ice");
+	AMateria* cure = src->createMateria("cure");
+	AMateria* cure2 = src->createMateria("cure");
+	AMateria* ice = src->createMateria("ice");
+	AMateria* snow = src->createMateria("snow");
+	AMateria* kissa = src->createMateria("ice");
 	std::cout << std::endl;
 
-	ice2 = ice->clone();
-	cure2 = ice->clone();
+	*cure2 = *cure;
+	*ice = *iceBolt;
 	std::cout << std::endl;
 
+	//	Inv is still empty;
 	joe->unequip(0);
 	joe->unequip(1);
 	joe->unequip(2);
 	joe->unequip(3);
+	//	Invalid index:
 	joe->unequip(4);
 	std::cout << std::endl;
-
-	joe->equip(ice);
+	//	Equipping the materias
+	joe->equip(iceBolt);
 	joe->equip(cure);
-	joe->equip(ice2);
+	joe->equip(ice);
 	joe->equip(cure2);
-	joe->equip(ice);
-	joe->equip(cure);
+	//	Invalid materia:
+	joe->equip(snow);
+	//	Inv full
+	joe->equip(kissa);
+	//	Using all the materias, which are;
+	//	Ice, Cure, Ice, Cure
+	for (int i = 0; i < 4; ++i)
+		joe->use(i, *joe);
+	//	Invalid index:
+	joe->use(4, *joe);
 
 	delete (joe);
 	delete (src);
@@ -82,13 +92,13 @@ static void	subject()
 
 int	main(int argc, char **argv)
 {
-	std::string usage = "Usage: " + (std::string)argv[0] + " <fullInv>/<subject>";
+	std::string usage = "Usage: " + (std::string)argv[0] + " <inv>/<subject>";
 	if (argc != 2)
 	std::cout << usage << std::endl;
 	else
 	{
 		std::string arg = argv[1];
-		if (arg == "fullInv")
+		if (arg == "inv")
 			fullInventory();
 		else if (arg == "subject")
 			subject();

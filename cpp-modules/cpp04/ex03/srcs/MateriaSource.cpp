@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 13:56:10 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/08 16:45:04 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/04/24 18:58:21 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,6 @@ AMateria*	MateriaSource::createMateria(std::string const &type)
 		if (_materias[i] && _materias[i]->getType() == type)
 			return (_materias[i]->clone());
 	}
+	std::cout << AMATERIA << "Materia " << type << " has not been learned." << std::endl;
 	return (NULL);
 }
