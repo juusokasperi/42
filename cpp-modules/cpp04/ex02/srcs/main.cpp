@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 22:53:31 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/08 01:11:49 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/04/24 16:15:16 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,10 @@
 #include "Cat.hpp"
 #include "WrongCat.hpp"
 
-int main()
+static void	subjectTest()
 {
-	// No leaks:
-	const AAnimal* j = new Dog();
-	const AAnimal* i = new Cat();
-	delete (j);
-	delete (i);
-	// Test for deep copy:
-	const Cat* dog = new Cat();
-	dog->getBrain()->setIdea(0, "I want a bone");
-	Cat *copy = new Cat(*dog);
-	copy->getBrain()->setIdea(0, "I wanna play!");
-	std::cout << "Original dog's idea: " << dog->getBrain()->getIdea(0) << std::endl;
-	std::cout << "Copy dog's idea: " << copy->getBrain()->getIdea(0) << std::endl;
-	delete(dog);
-	delete(copy);
-	// Main test:
-	const AAnimal* animals[4];
-	std::cout << std::endl;
+	std::cout	<< "\033[0;32m*** SUBJECT TEST ***\033[0m" << std::endl;
+	const AAnimal* animals[12];
 	for (int i = 0; i < 4; i++)
 	{
 		if (i % 2)
@@ -46,5 +31,50 @@ int main()
 	std::cout << std::endl;
 	for (int i = 0; i < 4; i++)
 		delete (animals[i]);
+}
+
+static void	deepCopyTest()
+{
+	std::cout	<< "\033[0;32m*** TEST DEEP COPY ***\033[0m" << std::endl;
+	const Cat* catOne = new Cat();
+	catOne->getBrain()->setIdea(0, "I should sleep.");
+	const Cat* catTwo = new Cat(*catOne);
+	catTwo->getBrain()->setIdea(0, "I wanna play!");
+
+	std::cout << "Original cat's idea: " << catOne->getBrain()->getIdea(0) << std::endl;
+	std::cout << "Copy cat's idea: " << catTwo->getBrain()->getIdea(0) << std::endl;
+	delete(catOne);
+	delete(catTwo);
+}
+
+static void	leakTest()
+{
+	std::cout	<< "\033[0;32m*** SIMPLE LEAK TEST ***\033[0m" << std::endl;
+	const AAnimal* j = new Dog();
+	const AAnimal* i = new Cat();
+	delete (j);
+	delete (i);
+}
+
+int main(int argc, char **argv)
+{
+	std::string	usage = "Usage: " + std::string(argv[0]) + " <subject>/<leak>/<deep>";
+	if (argc != 2)
+		std::cout << usage << std::endl;
+	else
+	{
+		std::string	arg = argv[1];
+		if (arg == "subject")
+			subjectTest();
+		else if (arg == "leak")
+			leakTest();
+		else if (arg == "deep")
+			deepCopyTest();
+		else
+		{
+			std::cerr << "Invalid command.\n" << usage << std::endl;
+			return (1);
+		}
+	}
 	return (0);
 }
