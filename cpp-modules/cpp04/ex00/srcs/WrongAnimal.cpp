@@ -41,7 +41,7 @@ WrongAnimal::~WrongAnimal()
 
 void	WrongAnimal::makeSound() const
 {
-	std::cout << WRONGANIMAL << "Moo Meow Bark!" << std::endl;
+	std::cout << WRONGANIMAL << "Moo Meow Bark, says Wrong Animal!" << std::endl;
 }
 
 const std::string&	WrongAnimal::getType() const
