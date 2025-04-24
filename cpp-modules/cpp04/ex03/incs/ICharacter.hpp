@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 12:41:18 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/08 16:36:17 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/04/13 16:58:50 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "AMateria.hpp"
 # include <iostream>
 
-	class AMateria;
+class AMateria;
 
 class ICharacter {
 	public:

@@ -14,7 +14,7 @@
 
 WrongAnimal::WrongAnimal(): _type("Random WrongAnimal")
 {
-	std::cout << WRONGANIMAL << "void constructor called" << std::endl;
+	std::cout << WRONGANIMAL << "default constructor called" << std::endl;
 }
 
 WrongAnimal::WrongAnimal(std::string type): _type(type)

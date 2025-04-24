@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 12:57:40 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/07 13:55:08 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/04/16 11:44:31 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,9 @@
 
 class FragTrap: virtual public ClapTrap {
 	private:
-		FragTrap();
+
 	public:
+		FragTrap();
 		FragTrap(std::string name);
 		FragTrap(FragTrap const &src);
 		~FragTrap();

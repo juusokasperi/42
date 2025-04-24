@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 13:03:08 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/08 17:08:50 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/04/13 16:55:37 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,6 @@ void	Character::equip(AMateria *m)
 	std::cout << CHARACTER << _name << "'s inventory appears to be full." << std::endl;
 }
 
-// Unequip doesn't delete the materia, so in main remember to save the address
-// for further deletion to avoid memory leaks.
 void	Character::unequip(int idx)
 {
 	if (idx < 0 || idx > 3)
@@ -114,20 +112,17 @@ void	Character::unequip(int idx)
 
 void	Character::drop(AMateria *m)
 {
-	_droppedIndex++;
-	if (_droppedIndex == 4)
-	{
-		_droppedIndex = 0;
+	if (_dropped[_droppedIndex] != NULL)
 		delete (_dropped[_droppedIndex]);
-	}
 	_dropped[_droppedIndex] = m;
+	_droppedIndex += 1 % 4;
 	std::cout << CHARACTER << _name << " dropped " << m->getType() << " on the floor" << std::endl;
 }
 
 void	Character::use(int idx, ICharacter &target)
 {
 	if (idx < 0 || idx > 3)
-		std::cout << CHARACTER << "Selecter inventory index is out of bounds (0-3)." << std::endl;
+		std::cout << CHARACTER << "Selected inventory index is out of bounds (0-3)." << std::endl;
 	else if (_inventory[idx])
 		_inventory[idx]->use(target);
 	else
