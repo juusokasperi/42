@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 13:35:14 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/04/24 19:13:25 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/04/25 09:56:03 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ static void	fullInventory()
 	//	Invalid index:
 	joe->use(4, *joe);
 
+	delete (kissa);
 	delete (joe);
 	delete (src);
 }
@@ -90,9 +91,43 @@ static void	subject()
 	delete (src);
 }
 
+static void	deepCopy()
+{
+	std::cout << "\033[0;32m *** TESTING DEEP COPY TEST ***\033[0m" << std::endl;
+
+	IMateriaSource* src = new MateriaSource();
+	src->learnMateria(new Ice());
+	src->learnMateria(new Cure());
+
+	Character	matt("Matt");
+	Character	don("Don");
+	std::cout << std::endl;
+
+	matt.equip(src->createMateria("ice"));
+	matt.equip(src->createMateria("ice"));
+	don.equip(src->createMateria("cure"));
+	don.equip(src->createMateria("cure"));
+	std::cout << std::endl;
+	// Don uses "cure"
+	don.use(0, matt);
+
+	std::cout << std::endl;
+	// Don becomes Matt -> the two cures are destroyed and the two ices from original Matt's
+	// inv are cloned to new Matt (old Don)
+	don = matt;
+	// So now Don (now Matt) uses ice, then we unequip that, try using it to
+	// make sure it was destroyed, and then try using slot 0 from original Matt to see
+	// that the unequip of Don didn't affect Matt.
+	don.use(0, matt);
+	don.unequip(0);
+	don.use(0, matt);
+	matt.use(0, don);
+	delete (src);
+}
+
 int	main(int argc, char **argv)
 {
-	std::string usage = "Usage: " + (std::string)argv[0] + " <inv>/<subject>";
+	std::string usage = "Usage: " + (std::string)argv[0] + " <inv>/<subject>/<deep>";
 	if (argc != 2)
 	std::cout << usage << std::endl;
 	else
@@ -102,6 +137,8 @@ int	main(int argc, char **argv)
 			fullInventory();
 		else if (arg == "subject")
 			subject();
+		else if (arg == "deep")
+			deepCopy();
 		else
 		{
 			std::cerr << "Invalid input.\n" << usage << std::endl;

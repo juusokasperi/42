@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 12:58:59 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/08 17:09:07 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/04/25 09:37:25 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,12 @@
 class Character: public ICharacter {
 	private:
 		AMateria*	_inventory[4];
-		AMateria*	_dropped[4];
+		AMateria*	_dropped[50];
 		std::string	_name;
 		int			_droppedIndex;
 		void		drop(AMateria *m);
 	public:
+		Character();
 		Character(std::string name);
 		Character(const Character &src);
 		Character& operator=(const Character &rhs);

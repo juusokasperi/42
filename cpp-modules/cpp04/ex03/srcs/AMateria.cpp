@@ -6,11 +6,16 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 12:43:43 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/08 16:39:59 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/04/25 09:11:40 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "AMateria.hpp"
+
+AMateria::AMateria(): _type("default")
+{
+	std::cout << AMATERIA << " default constructor called." << std::endl;
+}
 
 AMateria::AMateria(std::string const &type): _type(type)
 {
@@ -38,4 +43,9 @@ AMateria::~AMateria()
 const std::string&	AMateria::getType() const
 {
 	return (_type);
+}
+
+void	AMateria::use(ICharacter &target)
+{
+	std::cout << "* uses default materia on " << target.getName() << " *" << std::endl;
 }
