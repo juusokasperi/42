@@ -1,9 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/30 16:26:51 by jrinta-           #+#    #+#             */
+/*   Updated: 2025/04/30 16:27:34 by jrinta-          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "FordJohnsonVec.hpp"
 #include "FordJohnsonDeq.hpp"
-#include <iostream>
-#include <iomanip>
-#include <vector>
-#include <sstream>
 
 static void				numBeforeSorting(std::vector<int> numbers);
 static bool				isPositiveNumber(std::string s);

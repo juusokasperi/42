@@ -13,10 +13,8 @@
 #pragma once
 
 #include <vector>
-#include <algorithm>
 #include <iostream>
 #include <iomanip>
-#include <cmath>
 #include <chrono>
 
 class FordJohnsonVec {

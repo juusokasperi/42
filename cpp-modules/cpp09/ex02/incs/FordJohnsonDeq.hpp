@@ -6,17 +6,15 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 17:41:31 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/04/30 15:50:48 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/04/30 16:29:06 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
-#include <vector>
-#include <algorithm>
+#include <deque>
 #include <iostream>
 #include <iomanip>
-#include <cmath>
 #include <chrono>
 
 class FordJohnsonDeq {
