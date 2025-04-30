@@ -42,7 +42,11 @@ static bool isPositiveNumber(std::string s)
 {
 	size_t i = 0;
 	if (s[0] == '-')
-		return (false);
+	{
+		if (s.length() != 2 || s[1] != '0')
+			return (false);
+		return (true);
+	}
 	else if (s.length() > 1 && s[0] == '+')
 		i++;
 	while (i < s.length())
