@@ -6,11 +6,15 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 15:19:54 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/18 15:30:02 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/05/02 12:08:37 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "Bureaucrat.hpp"
+
+Bureaucrat::Bureaucrat(): _name("Default Bureaucrat"), _grade(150)
+{
+}
 
 Bureaucrat::Bureaucrat(const std::string name, int grade): _name(name), _grade(grade)
 {
