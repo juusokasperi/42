@@ -6,37 +6,36 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 16:26:51 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/04/30 16:27:34 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/05/24 00:46:28 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "FordJohnsonVec.hpp"
-#include "FordJohnsonDeq.hpp"
+#include "PmergeMe.hpp"
 
-static void				numBeforeSorting(std::vector<int> numbers);
-static bool				isPositiveNumber(std::string s);
-static std::vector<int>	pushToVec(int argc, char **argv);
-static std::deque<int>	pushToDeq(std::vector<int> &numsVec);
+static void					printNumBeforeSorting(std::vector<int> numbers);
+static bool					isPositiveNumber(std::string s);
+static std::vector<int32_t>	pushToVec(int argc, char **argv);
+static std::deque<int32_t>	pushToDeq(std::vector<int> &numsVec);
 
 int main(int argc, char **argv)
 {
 	if (argc < 2)
 		return (1);
 	try {
-		std::vector<int> numbersVec = pushToVec(argc - 1, argv + 1);
-		std::deque<int> numbersDeq = pushToDeq(numbersVec);
-		numBeforeSorting(numbersVec);
-		FordJohnsonDeq::displaySorted(numbersDeq);
-		FordJohnsonVec::displaySorted(numbersVec);
+		std::vector<int32_t> numbersVec = pushToVec(argc - 1, argv + 1);
+		std::deque<int32_t> numbersDeq = pushToDeq(numbersVec);
+		printNumBeforeSorting(numbersVec);
+		PmergeMe<std::deque<int32_t>>::fordJohnson(numbersDeq, false, true);
+		PmergeMe<std::vector<int32_t>>::fordJohnson(numbersVec, true, false);
 	} catch (std::exception &e) {
 		std::cerr << "Error: " << e.what() << "\n";
 	}
 	return (0);
 }
 
-static void	numBeforeSorting(std::vector<int> numbers)
+static void	printNumBeforeSorting(std::vector<int32_t> numbers)
 {
-	std::cout << std::setw(15) << std::left << "Before:" << "[ ";
+	std::cout << std::setw(15) << std::left << "Before:" << "[";
 	for (size_t i = 0; i < numbers.size(); ++i)
 	{
 		std::cout << numbers[i];
@@ -66,9 +65,9 @@ static bool isPositiveNumber(std::string s)
 	return (true);
 }
 
-static std::vector<int>	pushToVec(int argc, char **argv)
+static std::vector<int32_t>	pushToVec(int argc, char **argv)
 {
-	std::vector<int>	nums;
+	std::vector<int32_t>	nums;
 
 	for (int i = 0; i < argc; ++i)
 	{
@@ -83,9 +82,9 @@ static std::vector<int>	pushToVec(int argc, char **argv)
 	return (nums);
 }
 
-static std::deque<int>	pushToDeq(std::vector<int> &numsVec)
+static std::deque<int32_t>	pushToDeq(std::vector<int> &numsVec)
 {
-	std::deque<int>	nums;
+	std::deque<int32_t>	nums;
 
 	for (size_t i = 0; i < numsVec.size(); ++i)
 		nums.push_back(numsVec[i]);

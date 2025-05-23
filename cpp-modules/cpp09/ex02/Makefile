@@ -1,4 +1,4 @@
-SRCS = FordJohnsonDeq.cpp FordJohnsonVec.cpp main.cpp
+SRCS = main.cpp
 SRCS_DIR = srcs/
 
 OBJS_DIR = objs/
