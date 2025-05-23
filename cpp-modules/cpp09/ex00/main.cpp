@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 12:47:38 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/30 16:32:15 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/05/23 19:17:31 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	main(int argc, char **argv)
 {
 	if (argc != 2)
 	{
-		std::cerr << "Usage: " << argv[0] << " <inputfile>" << std::endl;
+		std::cerr << "Usage: " << argv[0] << " <inputFile>" << std::endl;
 		return (1);
 	}
 	try {
@@ -26,7 +26,7 @@ int	main(int argc, char **argv)
 		std::string	line;
 		std::ifstream file(argv[1]);
 		if (!file)
-			throw std::runtime_error("Failure to open input file.");
+			throw std::runtime_error("failure to open input file.");
 		checkHeader(file, argv[1]);
 		while (std::getline(file, line))
 		{

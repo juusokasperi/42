@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 12:47:59 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/30 18:19:04 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/05/23 19:17:12 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,12 @@ constexpr char CONVERT_REGEX[] = R"(^(\d{4})-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01
 
 class BitcoinExchange {
 	private:
-		std::map<std::string, double> _data;
+	std::map<std::string, double> _data;
 
-		void			_parseData(std::ifstream &ifs);
-		std::string		_validateDate(std::smatch &match) const;
+	void			_parseData(std::ifstream &ifs);
+	std::string		_validateDate(std::smatch &match) const;
 	public:
+		BitcoinExchange() = delete;
 		BitcoinExchange(std::string database);
 		~BitcoinExchange();
 		BitcoinExchange(const BitcoinExchange &src);

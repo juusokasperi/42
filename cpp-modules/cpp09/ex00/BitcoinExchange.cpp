@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 14:06:54 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/30 18:18:57 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/05/23 19:27:40 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,13 +66,15 @@ std::string	BitcoinExchange::_validateDate(std::smatch &match) const
 	int month = std::stoi(match[2].str());
 	int day = std::stoi(match[3].str());
 	if (year < 0 || year > thisYear)
-		throw std::runtime_error("Invalid year => " + match[0].str());
+		throw std::runtime_error("invalid year => " + match[0].str());
+	if (month < 1 || month > 12)
+		throw std::runtime_error("invalid month >= " + match[1].str());
 	static const int daysInMonth[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 	int maxDay = daysInMonth[month - 1];
 	if (month == 2 && isLeapYear(year))
 		maxDay = 29;
 	if (day < 1 || day > maxDay)
-		throw std::runtime_error("Invalid day => " + match[0].str());
+		throw std::runtime_error("invalid day => " + match[0].str());
 	return (match[1].str() + "-" + match[2].str() + "-" + match[3].str());
 }
 
@@ -84,17 +86,19 @@ void	BitcoinExchange::_parseData(std::ifstream &ifs)
 	{
 		std::smatch	match;
 		if (!std::regex_match(line, match, dataRegex))
-			throw std::runtime_error("Bad input => " + line);
+			throw std::runtime_error("bad input => " + line);
 		std::string date = _validateDate(match);
 		double exchangeRate = std::stod(match[4].str());
 		if (exchangeRate < 0)
-			throw std::runtime_error("Invalid exchange rate => " + line);
+			throw std::runtime_error("invalid exchange rate => " + line);
 		_data.insert({date, exchangeRate});
 	}
 }
 
 void	BitcoinExchange::convert(std::string input) const
 {
+	if (input.empty())
+		return;
 	std::regex dataRegex(CONVERT_REGEX);
 	std::smatch	match;
 	if (!std::regex_match(input, match, dataRegex))
@@ -106,7 +110,7 @@ void	BitcoinExchange::convert(std::string input) const
 	if (value > 1000)
 		throw std::runtime_error("too large a number.");
 	if (_data.empty())
-		throw std::runtime_error("Exchange database is empty.");
+		throw std::runtime_error("exchange database is empty.");
 	auto it = _data.lower_bound(date);
 	if (it == _data.end() || (it != _data.begin() && it->first != date))
 		--it;
