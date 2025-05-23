@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 18:44:25 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/04/01 23:51:41 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/05/23 18:51:13 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static bool	outOfRange(long firstOperand, long secondOperand, char op)
 	}
 }
 
-static bool	isNumber(std::string &s)
+static bool	isNumber(const std::string &s)
 {
 	size_t	i = 0;
 	if (s.length() > 1 && (s[0] == '+' || s[0] == '-'))
@@ -84,7 +84,7 @@ static bool	isNumber(std::string &s)
 	return (true);
 }
 
-static bool	isOperator(std::string &s)
+static bool	isOperator(const std::string &s)
 {
 	return (s.length() == 1 && std::strchr("+-/*", s[0]));
 }
@@ -111,8 +111,16 @@ long RPN::_doMath(long firstOperand, long secondOperand, char op)
 	}
 }
 
+/*
+	Remove the if (num < 0 || num > 9) check at 137-138 to
+	make the calculator work with all integers.
+*/
 long	RPN::calculate(const std::string &input)
 {
+	if (input.empty())
+		throw std::runtime_error("Empty input.");
+	if (!std::isdigit(input[0]))
+		throw std::runtime_error("Invalid syntax.");
 	std::stack<long>	stack;
 	std::stringstream ss(input);
 	std::string	token;
@@ -120,11 +128,15 @@ long	RPN::calculate(const std::string &input)
 	{
 		if (isNumber(token))
 		{
+			int	num;
 			try {
-				stack.push(std::stoi(token));
+				num = std::stoi(token);
 			} catch (std::exception &e) {
 				throw std::out_of_range("Invalid integer " + token);
 			}
+			if (num < 0 || num > 9)
+				throw std::runtime_error("Number " + token + " not in range (0-9).");
+			stack.push(num);
 		}
 		else if (isOperator(token))
 		{
