@@ -44,10 +44,10 @@ C	0,0,0		0,0,1	 			50
 
 # Lights (any amount)
 	position	ratio (0-1)		rgb
-L	0,0,0		1			255,255,255
+L	0,0,0		1		255,255,255
 
 # Cylinder
-	center	direction	diameter	  height  	rgb
+	center	direction	diameter	    height  	rgb
 cy	0,0,0	1,0,0		10			10 		200,200,200
 
 # Sphere
@@ -59,7 +59,7 @@ sp	0,0,0		16				195,160,50
 pl	0,0,0	0,1,0		225,225,225
 
 # Cone
-	center	direction	diameter  	height	  rgb
+	center	direction	diameter  	  height	rgb
 co	0,0,0	0,1,0 		10			10 		255,255,100
 
 # Checkerboard pattern (works for every object)
