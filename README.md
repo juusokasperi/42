@@ -1,6 +1,12 @@
 # 42 Projects
 
 ## Rank 04
+### [miniRT](/miniRT/)
+- A raytracer written in C.
+- Utilizes Bounding Volume Hierarchy and multithreading for efficiency.
+- Uses the MLX42 graphic library.
+- Finished, 125/100.
+
 ### [cpp-modules](/cpp-modules/)
 - Simple exercises to get acquainted with C++.
 
