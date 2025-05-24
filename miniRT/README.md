@@ -1,7 +1,7 @@
 ## miniRT
-<img src="./img/movement.gif" width="428" alt="miniRT controls" />
+<img src="./img/miniRT_1.png" width="400" alt="miniRT_1" />
 
-- A raytracer written from scratch using C and the MLX42 graphical library.
+- A raytracer written from scratch with C. Uses the MLX42 graphical library.
 - To utilize multithreading, run `make bonus` and use the `./miniRT_bonus` executable.
 - Has a BVH implementation for efficiency.
 - Supports planes, cylinders, cones and spheres. Has diffuse and specular shading and falloff. Supports multiple coloured lights. Has a checkerboard pattern implementation.
@@ -36,22 +36,22 @@ Other:
 ```
 # Ambient light
 	ratio (0-1)		rgb
-A	0 				255,255,255
+A	0				255,255,255
 
 # Camera
 	position	direction (-1,1)		fov(0-180)
-C	0,0,0		0,0,1	 				50
+C	0,0,0		0,0,1	 			50
 
 # Lights (any amount)
 	position	ratio (0-1)		rgb
-L	0,0,0		1				255,255,255
+L	0,0,0		1			255,255,255
 
 # Cylinder
-	center	direction	diameter	height	rgb
+	center	direction	diameter	  height  	rgb
 cy	0,0,0	1,0,0		10			10 		200,200,200
 
 # Sphere
-	center		diameter		rgb
+	center		diameter	  	rgb
 sp	0,0,0		16				195,160,50
 
 # Plane
@@ -59,7 +59,7 @@ sp	0,0,0		16				195,160,50
 pl	0,0,0	0,1,0		225,225,225
 
 # Cone
-	center	direction	diameter	height	rgb
+	center	direction	diameter  	height	  rgb
 co	0,0,0	0,1,0 		10			10 		255,255,100
 
 # Checkerboard pattern (works for every object)
@@ -68,7 +68,7 @@ pl:ck:0.5 0,0,0 0,1,0 225,225,225/100,100,100
 
 ### Example scenes:
 
-<img src="./img/miniRT_1.png" width="400" alt="miniRT_1" />
+
 <img src="./img/miniRT_2.png" width="400" alt="miniRT_2" />
 <img src="./img/miniRT_3.png" width="400" alt="miniRT_3" />
 <img src="./img/miniRT_4.png" width="400" alt="miniRT_4" />
