@@ -1,5 +1,5 @@
 ## miniRT
-<img src="./img/movement.png" width="428" alt="miniRT controls" />
+<img src="./img/movement.gif" width="428" alt="miniRT controls" />
 
 - A raytracer written from scratch using C and the MLX42 graphical library.
 - To utilize multithreading, run `make bonus` and use the `./miniRT_bonus` executable.
