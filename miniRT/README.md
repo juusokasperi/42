@@ -36,31 +36,31 @@ Other:
 ```
 # Ambient light
 	ratio (0-1)		rgb
-A	0				255,255,255
+A	0			255,255,255
 
 # Camera
 	position	direction (-1,1)		fov(0-180)
 C	0,0,0		0,0,1	 			50
 
 # Lights (any amount)
-	position	ratio (0-1)		rgb
+	position	ratio (0-1)	rgb
 L	0,0,0		1		255,255,255
 
 # Cylinder
-	center	direction	diameter	    height  	rgb
+	center	direction	diameter			height		rgb
 cy	0,0,0	1,0,0		10			10 		200,200,200
 
 # Sphere
-	center		diameter	  	rgb
-sp	0,0,0		16				195,160,50
+	center		diameter		rgb
+sp	0,0,0		16			195,160,50
 
 # Plane
 	point	direction	rgb
 pl	0,0,0	0,1,0		225,225,225
 
 # Cone
-	center	direction	diameter  	  height	rgb
-co	0,0,0	0,1,0 		10			10 		255,255,100
+	center	direction	diameter	height	rgb
+co	0,0,0	0,1,0 		10		10		255,255,100
 
 # Checkerboard pattern (works for every object)
 pl:ck:0.5 0,0,0 0,1,0 225,225,225/100,100,100
