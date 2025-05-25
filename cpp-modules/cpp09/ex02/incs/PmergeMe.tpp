@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 19:42:30 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/05/24 00:39:19 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/05/25 17:52:53 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,14 @@
 template<typename Container>
 size_t PmergeMe<Container>::_comparisons = 0;
 
+/**
+ * Sorts the values using Ford-Johnson algorithm using index tracking.
+**/
 template<typename Container>
 Container	PmergeMe<Container>::sort(const Container &values)
 {
 	if (values.size() <= 1)
-	return values;
+		return values;
 	_comparisons = 0;
 	Container sortedIndices = sortIndices(values);
 	Container result(values.size());
@@ -28,6 +31,9 @@ Container	PmergeMe<Container>::sort(const Container &values)
 	return result;
 }
 
+/**
+ * Sort a sequence when n <= 2
+**/
 template<typename Container>
 Container	PmergeMe<Container>::sortSmall(const Container &values, size_t n)
 {
@@ -51,6 +57,10 @@ Container	PmergeMe<Container>::sortSmall(const Container &values, size_t n)
 	return indices;
 }
 
+/**
+ * Pairs adjacent elements, storing larger/smaller indices separately.
+ * Updates pairMap to track which smaller index pairs with which larger.
+**/
 template<typename Container>
 void PmergeMe<Container>::createPairs(const Container &values, Container &indices,
 		Container &largerIndices, Container &smallerIndices, Container &pairMap, size_t n)
@@ -73,6 +83,10 @@ void PmergeMe<Container>::createPairs(const Container &values, Container &indice
 	}
 }
 
+/**
+ * Reorders smaller indices to match the sorted order of their paired larger indices.
+ * Maintains the pair relationships after recursive sorting of the larger indices.
+**/
 template<typename Container>
 Container PmergeMe<Container>::orderToSortedLarger(Container smallerIndices,
 		Container pairMap, Container sortedLargerIndices)
@@ -94,12 +108,20 @@ Container PmergeMe<Container>::orderToSortedLarger(Container smallerIndices,
 	return reOrderedSmaller;
 }
 
+/**
+ * The main Ford Johnson algorithm.
+ * 1.	Pair elements, separate larger/smaller indices
+ * 2.	Recursively sort larger elements
+ * 3.	Build main chain from sorted larger indices
+ * 4.	Insert smaller indices using Jacobsthal-ordered binary insertion
+**/
 template<typename Container>
 Container PmergeMe<Container>::sortIndices(const Container &values)
 {
 	size_t n = values.size();
 	if (n <= 2)
 		return sortSmall(values, n);
+
 	Container indices(n);
 	for (size_t i = 0; i < n; ++i)
 		indices[i] = i;
@@ -139,6 +161,10 @@ Container PmergeMe<Container>::sortIndices(const Container &values)
 	return mainChain;
 }
 
+/**
+ * Binary insert with the optimization that the upper bound is the
+ * pair of the inserted value.
+**/
 template<typename Container>
 void PmergeMe<Container>::binaryInsert(Container &chain, const Container &values,
 		size_t indexToInsert, const Container &pairMap)
@@ -161,6 +187,12 @@ void PmergeMe<Container>::binaryInsert(Container &chain, const Container &values
 	chain.insert(chain.begin() + left, indexToInsert);
 }
 
+/**
+ * Generates optimal insertion order using Jacobsthal sequence
+ * The sequence (1, 1, 3, 5, 11, 21, ...) minimizes comparisons
+ * by inserting elements in groups that maximize binary insertion efficiency.
+ * Returns indices in the order the should be inserted into the main chain.
+**/
 template<typename Container>
 Container PmergeMe<Container>::calculateInsertionOrder(size_t n)
 {
@@ -196,6 +228,9 @@ Container PmergeMe<Container>::calculateInsertionOrder(size_t n)
 	return order;
 }
 
+/**
+ * Generates the Jacobsthal sequence: J(n) = J(n-1) + 2 * J(n-2)
+**/
 template<typename Container>
 Container PmergeMe<Container>::generateJacobsthal(size_t n)
 {
@@ -207,19 +242,10 @@ Container PmergeMe<Container>::generateJacobsthal(size_t n)
 	return jacob;
 }
 
-template<typename Container>
-void PmergeMe<Container>::printSortedNumbers(const Container &sorted)
-{
-	std::cout << std::setw(15) << std::left << "After:" << "[";
-	for (size_t i = 0; i < sorted.size(); ++i)
-	{
-		std::cout << sorted[i];
-		if (i + 1 != sorted.size())
-			std::cout << " ";
-	}
-	std::cout << "]\n";
-}
-
+/**
+ * Times the sorting, prints the sorted values if printSorted == true,
+ * and checks against the theoretical maximum for n values if checkCompare == true
+**/
 template<typename Container>
 void PmergeMe<Container>::fordJohnson(const Container &values, bool checkCompare, bool printSorted)
 {
@@ -240,6 +266,19 @@ void PmergeMe<Container>::fordJohnson(const Container &values, bool checkCompare
 				<< std::fixed << std::setprecision(6) << duration << " ms\n";
 	if (checkCompare == true)
 		checkComparisons(sorted.size(), _comparisons);
+}
+
+template<typename Container>
+void PmergeMe<Container>::printSortedNumbers(const Container &sorted)
+{
+	std::cout << std::setw(15) << std::left << "After:" << "[";
+	for (size_t i = 0; i < sorted.size(); ++i)
+	{
+		std::cout << sorted[i];
+		if (i + 1 != sorted.size())
+			std::cout << " ";
+	}
+	std::cout << "]\n";
 }
 
 template<typename Container>
