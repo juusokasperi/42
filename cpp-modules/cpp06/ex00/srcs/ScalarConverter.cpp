@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 15:59:52 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/23 16:46:37 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/06/01 14:32:53 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -235,7 +235,7 @@ void	ScalarConverter::convert(const std::string s)
 {
 	srcType type;
 	char	c;
-	long	num_l;
+	long	num_i;
 	float	num_f;
 	double	num_d;
 
@@ -255,27 +255,43 @@ void	ScalarConverter::convert(const std::string s)
 			printDouble(static_cast<double>(c), s);
 			break ;
 		case (INT):
-			num_l = std::stol(s);
-			printChar(num_l);
-			printInt(num_l);
-			printFloat(static_cast<float>(num_l), s);
-			printDouble(static_cast<double>(num_l), s);
+			try {
+				num_i = std::stoi(s);
+			} catch(std::exception &e) {
+				emptyInput();
+				break;
+			}
+			printChar(num_i);
+			printInt(num_i);
+			printFloat(static_cast<float>(num_i), s);
+			printDouble(static_cast<double>(num_i), s);
 			break ;
 		case (FLOAT):
-			num_f = std::stof(s);
+			try {
+				num_f = std::stof(s);
+			} catch(std::exception &e) {
+				emptyInput();
+				break;
+			}
 			printChar(static_cast<long>(num_f));
 			printInt(static_cast<long>(num_f));
 			printFloat(num_f, s);
 			printDouble(static_cast<double>(num_f), s);
 			break ;
 		case (DOUBLE):
-			num_d = std::stod(s);
+			try {
+				num_d = std::stod(s);
+			} catch(std::exception &e) {
+				emptyInput();
+				break;
+			}
 			printChar(static_cast<long>(num_d));
 			printInt(static_cast<long>(num_d));
 			printFloat(static_cast<float>(num_d), s);
 			printDouble(num_d, s);
 			break ;
-		case (UNKNOWN):
+		default:
 			emptyInput();
+			break ;
 	}
 }
