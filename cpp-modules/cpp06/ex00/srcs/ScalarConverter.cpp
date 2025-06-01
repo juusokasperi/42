@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 15:59:52 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/06/01 14:32:53 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/06/01 20:51:49 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -235,7 +235,7 @@ void	ScalarConverter::convert(const std::string s)
 {
 	srcType type;
 	char	c;
-	long	num_i;
+	int		num_i;
 	float	num_f;
 	double	num_d;
 
