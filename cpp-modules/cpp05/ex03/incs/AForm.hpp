@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 20:20:48 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/18 16:44:28 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/06/04 12:50:07 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ class AForm {
 		const int			_gradeToExecute;
 		bool				_isSigned;
 	public:
+		AForm();
 		AForm(const std::string name, const int gradeToSign, const int gradeToExecute);
 		AForm(const AForm &source);
 		AForm& operator=(const AForm &rhs) = delete;

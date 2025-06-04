@@ -6,11 +6,15 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 12:07:52 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/18 17:00:36 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/06/04 12:50:35 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "AForm.hpp"
+
+AForm::AForm(): _name("Default Form"), _gradeToSign(150), _gradeToExecute(150), _isSigned(false)
+{
+}
 
 AForm::AForm(const std::string name, const int gradeToSign, const int gradeToExecute):
 		_name(name), _gradeToSign(gradeToSign), _gradeToExecute(gradeToExecute)
