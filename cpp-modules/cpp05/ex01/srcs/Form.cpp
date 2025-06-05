@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 12:07:52 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/05/02 12:57:02 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/06/05 13:49:49 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,14 @@ void	Form::beSigned(const Bureaucrat &bureaucrat)
 {
 	if (bureaucrat.getGrade() > _gradeToSign)
 		throw (Form::GradeTooLowException());
+	if (_isSigned)
+		throw (Form::FormAlreadySignedException());
 	_isSigned = true;
+}
+
+const char	*Form::FormAlreadySignedException::what() const noexcept
+{
+	return ("form is already signed");
 }
 
 const char	*Form::GradeTooHighException::what() const noexcept

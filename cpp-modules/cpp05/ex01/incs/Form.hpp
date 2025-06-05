@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 20:20:48 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/05/02 12:55:19 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/06/05 13:49:18 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,10 @@ class Form {
 				virtual const char* what() const noexcept;
 		};
 		class GradeTooLowException: public std::exception {
+			public:
+				virtual const char* what() const noexcept;
+		};
+		class FormAlreadySignedException: public std::exception {
 			public:
 				virtual const char* what() const noexcept;
 		};
