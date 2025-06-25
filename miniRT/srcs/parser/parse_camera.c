@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 18:09:02 by phuocngu          #+#    #+#             */
-/*   Updated: 2025/05/12 21:51:39 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/06/25 19:37:41 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,10 @@ bool	parse_fov(char **parts, int index, int *fov)
 		return (false);
 	if (!validate_range_float(temp_fov, 0.0, 180.0, "FOV"))
 		return (false);
-	*fov = (int)temp_fov;
+	if (temp_fov > 179.0f)
+		*fov = 179;
+	else
+		*fov = (int)temp_fov;
 	return (true);
 }
 
