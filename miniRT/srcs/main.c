@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phuocngu <phuocngu@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 18:38:16 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/05/19 09:53:06 by phuocngu         ###   ########.fr       */
+/*   Updated: 2025/06/25 19:30:34 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	init_data(t_data *data)
 	data->should_update = false;
 	data->width = WIDTH;
 	data->height = HEIGHT;
-	data->cam.vp.width = 2.0f * sinf(data->cam.vp.fov / 2 * M_PI / 180.0f);
+	data->cam.vp.width = 2.0f * tanf(data->cam.vp.fov / 2 * M_PI / 180.0f);
 	data->cam.vp.height = data->cam.vp.width
 		/ ((float)data->width / (float)data->height);
 	data->mlx_ptr = mlx_init(data->width, data->height, "miniRT", true);

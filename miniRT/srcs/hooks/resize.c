@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 20:27:46 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/05/17 16:32:13 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/06/25 19:30:45 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	resize_hook(int width, int height, void *param)
 	mlx_resize_image(data->mlx_img, width, height);
 	data->width = width;
 	data->height = height;
-	data->cam.vp.width = 2.0f * sinf(data->cam.vp.fov / 2 * M_PI / 180.0f);
+	data->cam.vp.width = 2.0f * tanf(data->cam.vp.fov / 2 * M_PI / 180.0f);
 	data->cam.vp.height = data->cam.vp.width
 		/ ((float)data->width / (float)data->height);
 	data->should_update = true;
