@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 22:21:51 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/23 23:23:56 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/07/03 18:36:12 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,20 +26,20 @@ Base	*generate(void)
 	switch (random)
 	{
 		case (0):
-			return (new A());
+			return new A();
 		case (1):
-			return (new B());
+			return new B();
 		case (2):
-			return (new C());
+			return new C();
 	}
 	std::cerr << "Error generating object" << std::endl;
-	return (NULL);
+	return nullptr;
 }
 
 void	identify(Base *p)
 {
-	if (p == NULL)
-		std::cerr << "Pointer is NULL, cannot identify type" << std::endl;
+	if (p == nullptr)
+		std::cerr << "Pointer is nullptr, cannot identify type" << std::endl;
 	else if (dynamic_cast<A*>(p))
 		std::cout << "Pointer is of type A" << std::endl;
 	else if (dynamic_cast<B*>(p))
@@ -103,6 +103,7 @@ int	main(void)
 	identify(obj2);
 	identify(*obj2);
 
-	delete (obj);
-	return (0);
+	delete obj;
+	delete obj2;
+	return 0;
 }

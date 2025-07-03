@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 15:56:06 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/23 16:35:35 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/07/03 18:15:45 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <iostream>
 # include <iomanip>
+# include <limits>
 
 typedef enum	e_type {
 	CHAR,
@@ -44,8 +45,8 @@ class ScalarConverter {
 		static void		printDouble(double n, const std::string s);
 		static void		printFloat(float n, const std::string s);
 		static int		countPrecision(const std::string s);
-		static void		printInt(long n);
-		static void		printChar(long n);
+		static void		printInt(int n);
+		static void		printChar(char n);
 		static void		pseudoLiterals(const std::string s);
 		static void		emptyInput(void);
 		static srcType	getType(const std::string s);
@@ -53,6 +54,10 @@ class ScalarConverter {
 		static bool		isFloat(const std::string s);
 		static bool		isInt(const std::string s);
 		static bool		isChar(const std::string s);
+		static bool 	isPseudoLiteral(const std::string &s);
+		static bool		isOverIntLimits(double n);
+		static bool		isOverIntLimits(float n);
+		static void		charAndIntImpossible();
 	public:
 		static void convert(const std::string s);
 };

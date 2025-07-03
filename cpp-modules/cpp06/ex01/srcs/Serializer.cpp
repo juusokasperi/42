@@ -6,19 +6,14 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 22:00:05 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/23 22:02:06 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/07/03 18:31:06 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Serializer.hpp"
 
-Serializer::Serializer()
-{}
-
-Serializer::Serializer(const Serializer &src)
-{
-	(void)src;
-}
+Serializer::Serializer() {}
+Serializer::Serializer(const Serializer &src) { (void)src; }
 
 Serializer&	Serializer::operator=(const Serializer &rhs)
 {
@@ -26,8 +21,7 @@ Serializer&	Serializer::operator=(const Serializer &rhs)
 	return (*this);
 }
 
-Serializer::~Serializer()
-{}
+Serializer::~Serializer() {}
 
 uintptr_t	Serializer::serialize(Data* ptr)
 {

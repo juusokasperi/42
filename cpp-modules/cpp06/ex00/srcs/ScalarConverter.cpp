@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 15:59:52 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/06/01 20:51:49 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/07/03 18:18:12 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,31 +32,100 @@ ScalarConverter::ScalarConverter(const ScalarConverter &src)
 ScalarConverter& ScalarConverter::operator=(const ScalarConverter &rhs)
 {
 	(void)rhs;
-	return (*this);
+	return *this;
 }
 
-/*
-	Type checking functions
-*/
+void	ScalarConverter::convert(const std::string s)
+{
+	srcType type;
+	char	c;
+	int		num_i;
+	float	num_f;
+	double	num_d;
 
+	if (s.empty())
+		return emptyInput();
+	if (isPseudoLiteral(s))
+		return pseudoLiterals(s);
+	type = getType(s);
+	switch (type)
+	{
+		case CHAR:
+			c = s[0];
+			printChar(c);
+			printInt(static_cast<int>(c));
+			printFloat(static_cast<float>(c), s);
+			printDouble(static_cast<double>(c), s);
+			break ;
+		case INT:
+			try {
+				num_i = std::stoi(s);
+			} catch(std::exception &e) {
+				emptyInput();
+				break;
+			}
+			printChar(static_cast<char>(num_i));
+			printInt(num_i);
+			printFloat(static_cast<float>(num_i), s);
+			printDouble(static_cast<double>(num_i), s);
+			break ;
+		case FLOAT:
+			try {
+				num_f = std::stof(s);
+			} catch(std::exception &e) {
+				emptyInput();
+				break;
+			}
+			if (isOverIntLimits(num_f))
+				charAndIntImpossible();
+			else
+			{
+				printChar(static_cast<char>(num_f));
+				printInt(static_cast<int>(num_f));
+			}
+			printFloat(num_f, s);
+			printDouble(static_cast<double>(num_f), s);
+			break ;
+		case DOUBLE:
+			try {
+				num_d = std::stod(s);
+			} catch(std::exception &e) {
+				emptyInput();
+				break;
+			}
+			if (isOverIntLimits(num_d))
+				charAndIntImpossible();
+			else
+			{
+				printChar(static_cast<char>(num_d));
+				printInt(static_cast<int>(num_d));
+			}
+			printFloat(static_cast<float>(num_d), s);
+			printDouble(num_d, s);
+			break ;
+		default:
+			emptyInput();
+			break ;
+	}
+}
 
 bool	ScalarConverter::isChar(const std::string s)
 {
 	if (s.length() == 1 && std::isdigit(s[0]) == 0 && (s[0] >= 0 && s[0] <= 126))
-		return (true);
-	return (false);
+		return true;
+	return false;
 }
 
 bool	ScalarConverter::isInt(const std::string s)
 {
-	for (size_t i = 0; i < s.length(); i++)
+	for (size_t i = 0; i < s.length(); ++i)
 	{
 		if (i == 0 && (s[0] == '-' || s[0] == '+'))
-			continue ;
+			continue;
 		if (std::isdigit(s[i]) == 0)
-			return (false);
+			return false;
 	}
-	return (true);
+	return true;
 }
 
 bool	ScalarConverter::isFloat(const std::string s)
@@ -65,7 +134,7 @@ bool	ScalarConverter::isFloat(const std::string s)
 	bool	dot = false;
 
 	if (s[len - 1] != 'f')
-		return (false);
+		return false;
 	for (size_t i = 0; i < (len - 1); i++)
 	{
 		if (i == 0 && (s[0] == '-' || s[0] == '+'))
@@ -73,11 +142,11 @@ bool	ScalarConverter::isFloat(const std::string s)
 		if (s[i] == '.' && dot == false)
 			dot = true;
 		else if (s[i] == '.' && dot == true)
-			return (false);
+			return false;
 		else if (std::isdigit(s[i]) == 0)
-			return (false);
+			return false;
 	}
-	return (true);
+	return true;
 }
 
 bool	ScalarConverter::isDouble(const std::string s)
@@ -86,7 +155,7 @@ bool	ScalarConverter::isDouble(const std::string s)
 	bool	dot = false;
 
 	if (s[len - 1] == 'f')
-		return (false);
+		return false;
 	for (size_t i = 0; i < len; i++)
 	{
 		if (i == 0 && (s[0] == '-' || s[0] == '+'))
@@ -94,30 +163,26 @@ bool	ScalarConverter::isDouble(const std::string s)
 		if (s[i] == '.' && dot == false)
 			dot = true;
 		else if (s[i] == '.' && dot == true)
-			return (false);
+			return false;
 		else if (std::isdigit(s[i]) == 0)
-			return (false);
+			return false;
 	}
-	return (true);
+	return true;
 }
 
 srcType	ScalarConverter::getType(const std::string s)
 {
 	if (isChar(s))
-		return (CHAR);
+		return CHAR;
 	else if (isInt(s))
-		return (INT);
+		return INT;
 	else if (isFloat(s))
-		return (FLOAT);
+		return FLOAT;
 	else if (isDouble(s))
-		return (DOUBLE);
+		return DOUBLE;
 	else
-		return (UNKNOWN);
+		return UNKNOWN;
 }
-
-/*
-	Printing functions
-*/
 
 void	ScalarConverter::printFloat(float n, const std::string s)
 {
@@ -130,7 +195,7 @@ void	ScalarConverter::printFloat(float n, const std::string s)
 }
 
 
-void	ScalarConverter::printChar(long n)
+void	ScalarConverter::printChar(char n)
 {
 	if (n < 0 || n > 127)
 		std::cout << "char: impossible" << std::endl;
@@ -140,13 +205,13 @@ void	ScalarConverter::printChar(long n)
 		std::cout << "char: '" << n << "'" << std::endl;
 }
 
-void	ScalarConverter::printInt(long n)
+void	ScalarConverter::printInt(int n)
 {
 	if (n < std::numeric_limits<int>::min()
 		|| n > std::numeric_limits<int>::max())
 		std::cout << "int: impossible" << std::endl;
 	else
-		std::cout << "int: " << static_cast<int>(n) << std::endl;
+		std::cout << "int: " << n << std::endl;
 }
 
 int	ScalarConverter::countPrecision(const std::string s)
@@ -162,7 +227,7 @@ int	ScalarConverter::countPrecision(const std::string s)
 		len--;
 	if (len > i)
 		return (len - i);
-	return (1);
+	return 1;
 }
 
 void	ScalarConverter::printDouble(double n, const std::string s)
@@ -183,10 +248,6 @@ void	ScalarConverter::emptyInput(void)
 				<< "double: impossible" << std::endl;
 }
 
-/*
-	Handlers
-*/
-
 void	ScalarConverter::pseudoLiterals(const std::string s)
 {
 	const std::string	cases[] = {"+inf", "+inff", "-inf", "-inff", "nan", "nanf" };
@@ -197,31 +258,31 @@ void	ScalarConverter::pseudoLiterals(const std::string s)
 	while (++i < 6 && cases[i] != s);
 	switch (i)
 	{
-		case (INF_P):
+		case INF_P:
 			num_d = std::numeric_limits<double>::infinity();
 			num_f = static_cast<float>(num_d);
 			break ;
-		case (INFF_P):
+		case INFF_P:
 			num_f = std::numeric_limits<float>::infinity();
 			num_d = static_cast<double>(num_f);
 			break ;
-		case (INF_N):
+		case INF_N:
 			num_d = -std::numeric_limits<double>::infinity();
 			num_f = static_cast<float>(num_d);
 			break ;
-		case (INFF_N):
+		case INFF_N:
 			num_f = -std::numeric_limits<float>::infinity();
 			num_d = static_cast<double>(num_f);
 			break ;
-		case (NAND):
+		case NAND:
 			num_d = std::numeric_limits<double>::quiet_NaN();
 			num_f = static_cast<float>(num_d);
 			break ;
-		case (NANF):
+		case NANF:
 			num_f = std::numeric_limits<float>::quiet_NaN();
 			num_d = static_cast<double>(num_f);
 			break ;
-		case (INVALID):
+		default:
 			return ;
 	}
 	std::cout	<< "char: impossible" << std::endl
@@ -230,68 +291,12 @@ void	ScalarConverter::pseudoLiterals(const std::string s)
 				<< "double: " << num_d << std::endl;
 }
 
+bool ScalarConverter::isPseudoLiteral(const std::string &s) { return s == "nan" || s == "nanf" || s == "+inff" || s == "-inff"; }
+bool ScalarConverter::isOverIntLimits(double n) { return static_cast<long>(n) < std::numeric_limits<int>::min() || static_cast<long>(n) > std::numeric_limits<int>::max(); }
+bool ScalarConverter::isOverIntLimits(float n) { return static_cast<long>(n) < std::numeric_limits<int>::min() || static_cast<long>(n) > std::numeric_limits<int>::max(); }
 
-void	ScalarConverter::convert(const std::string s)
+void ScalarConverter::charAndIntImpossible()
 {
-	srcType type;
-	char	c;
-	int		num_i;
-	float	num_f;
-	double	num_d;
-
-	if (s.empty())
-		return (emptyInput());
-	if (s == "nan" || s == "nanf" || s == "-inf" || s == "+inf"
-		|| s == "+inff" || s == "-inff")
-		return (pseudoLiterals(s));
-	type = getType(s);
-	switch (type)
-	{
-		case (CHAR):
-			c = s[0];
-			printChar(c);
-			printInt(static_cast<long>(c));
-			printFloat(static_cast<float>(c), s);
-			printDouble(static_cast<double>(c), s);
-			break ;
-		case (INT):
-			try {
-				num_i = std::stoi(s);
-			} catch(std::exception &e) {
-				emptyInput();
-				break;
-			}
-			printChar(num_i);
-			printInt(num_i);
-			printFloat(static_cast<float>(num_i), s);
-			printDouble(static_cast<double>(num_i), s);
-			break ;
-		case (FLOAT):
-			try {
-				num_f = std::stof(s);
-			} catch(std::exception &e) {
-				emptyInput();
-				break;
-			}
-			printChar(static_cast<long>(num_f));
-			printInt(static_cast<long>(num_f));
-			printFloat(num_f, s);
-			printDouble(static_cast<double>(num_f), s);
-			break ;
-		case (DOUBLE):
-			try {
-				num_d = std::stod(s);
-			} catch(std::exception &e) {
-				emptyInput();
-				break;
-			}
-			printChar(static_cast<long>(num_d));
-			printInt(static_cast<long>(num_d));
-			printFloat(static_cast<float>(num_d), s);
-			printDouble(num_d, s);
-			break ;
-		default:
-			emptyInput();
-			break ;
-	}
+	std::cout	<< "char: impossible" << std::endl
+				<< "int: impossible" << std::endl;
 }

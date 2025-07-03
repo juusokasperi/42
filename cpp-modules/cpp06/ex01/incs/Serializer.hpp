@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 21:25:59 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/23 22:05:01 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/07/03 18:20:55 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define SERIALIZER_HPP
 
 # include <cstdint>
-# include "Data.h"
+# include "Data.hpp"
 
 class Serializer
 {
