@@ -1,0 +1,79 @@
+# Create the volumes, driver ? driver opts ?
+# Restart always vai on-failure ?
+# Set up the env variables and env file
+# Is there a need to expose ports since it's in a network?
+# At least just publish - ports:.. for nginx
+
+# To use docker secrets;
+#   docker swarm init
+#   docker stack deploy -c docker-compose.yml inception
+version: '3.8'
+
+secrets:
+  mysql_root_password:
+    file: ./secrets/mysql_root_password.txt
+  mysql_password:
+    file: ./secrets/mysql_password.txt
+  wp_admin_password:
+    file: ./secrets/wp_admin_password.txt
+
+services:
+  nginx:
+    container-name: nginx
+    init: true
+    restart: always
+    build:
+      context: ./requirements/nginx
+      dockerfile: Dockerfile
+    environment:
+      - DOMAIN_NAME=${DOMAIN_NAME}
+    networks:
+      - docker-network
+    volumes:
+      - wordpress_data:/var/www/html
+  wordpress:
+    container-name: wordpress
+    init: true
+    restart: always
+    build:
+      context: ./requirements/wordpress
+      dockerfile: Dockerfile
+      depends_on: mariadb
+    environment:
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - WP_ADMIN_USER=${WP_ADMIN_USER}
+    secrets:
+      - mysql_password
+      - wp_admin_password
+    networks:
+      - docker-network
+    volumes:
+      - wordpress_data:/var/www/html
+
+  mariadb:
+    container-name: mariadb
+    init: true
+    restart: always
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    environment:
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+    secrets:
+      - mysql_root_password
+      - mysql_password
+    networks:
+      - docker-network
+    volumes:
+      - mariadb_data:/var/lib/mysql
+
+networks:
+  docker-network:
+    driver: bridge
+
+volumes:
+  wordpress_data:
+
+  mariadb_data:
