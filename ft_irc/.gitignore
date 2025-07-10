@@ -1,0 +1,6 @@
+deps/
+objs/
+ircbot
+ircserv
+server_log
+bot_log
