@@ -1,0 +1,5 @@
+srcs/maria_data
+srcs/wp_data
+srcs/redis_data
+.vscode/
+secrets/
