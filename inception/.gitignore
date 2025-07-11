@@ -1,5 +1,6 @@
 srcs/maria_data
 srcs/wp_data
 srcs/redis_data
+srcs/portfolio_data
 .vscode/
 secrets/
