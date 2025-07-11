@@ -16,12 +16,6 @@ DOCKER_COMPOSE = srcs/docker-compose.yml
 
 all: up
 
-build_portfolio:
-	@if [ ! -f $(PORTFOLIO_DATA_DIR)/index.html ]; then \
-		echo "Building portfolio site into $(PORTFOLIO_DATA_DIR).."; \
-		cd $(PORTFOLIO_DIR) && npm install && OUT_DIR=../../../$(PORTFOLIO_DATA_DIR) npm run build -- --emptyOutDir; \
-	fi
-
 create_dirs:
 	@mkdir -p $(WP_DATA_DIR)
 	@mkdir -p $(MARIA_DATA_DIR)
@@ -40,10 +34,10 @@ remove_hosts_entry:
 		sudo sed -i '' '/$(HOSTS_ENTRY)/d' $(HOSTS_FILE); \
 	fi
 
-up: add_hosts_entry create_dirs build_portfolio
+up: add_hosts_entry create_dirs
 	@docker compose -f $(DOCKER_COMPOSE) up -d
 
-build: add_hosts_entry create_dirs build_portfolio
+build: add_hosts_entry create_dirs
 	@docker compose -f $(DOCKER_COMPOSE) up --build -d
 	@timeout=40; elapsed=0; \
 	spinner="⠋⠙⠹⠸⠼⠴⠦⠧"; \

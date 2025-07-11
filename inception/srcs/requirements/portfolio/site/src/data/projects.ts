@@ -64,6 +64,8 @@ export const projects: Project[] = [
 		description: "The site you're currently viewing – built with React and styled using Styled Components.",
 		languages: ["REACT", "TS"],
 		technologies: ["Vite", "Styled Components"],
+		githubUrl: "https://github.com/juusokasperi/42/tree/main/inception/srcs/requirements/portfolio/site",
+		liveUrl: "/portfolio"
 	},
 ]
 

@@ -28,7 +28,7 @@ services:
       - 443:443
     volumes:
       - wordpress_data:/var/www/html:ro
-      - portfolio_data:/var/www/portfolio
+      - portfolio_data:/var/www/portfolio:ro
 
   wordpress:
     container_name: wordpress
@@ -90,6 +90,14 @@ services:
     volumes:
       - redis_data:/data
 
+  portfolio:
+    container_name: portfolio
+    build:
+      context: ./requirements/portfolio
+      dockerfile: Dockerfile
+    volumes:
+      - portfolio_data:/app/dist/
+
 networks:
   docker-network:
     driver: bridge
@@ -114,8 +122,10 @@ volumes:
       o: bind
       device: ./maria_data
   portfolio_data:
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: ./portfolio_data
+#    driver: local
+#    driver_opts:
+#      type: none
+#      o: bind
+#      device: ./portfolio_data
+## Unnecessary to bind it to device,
+## but subject may require it?

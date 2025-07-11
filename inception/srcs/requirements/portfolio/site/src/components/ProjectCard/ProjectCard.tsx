@@ -12,7 +12,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
 				{project.title}
 			</Title>
 			{project.image &&
-					<ProjectImg src={`${import.meta.env.BASE_URL}${project.image}`} alt={project.title} />}
+					<ProjectImg src={`${import.meta.env.BASE_URL}/${project.image}`} alt={project.title} />}
 			{project.description &&
 					<Element padBottom="0.75em">{project.description}</Element>}
 			<Element>
