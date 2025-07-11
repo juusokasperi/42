@@ -21,6 +21,10 @@ if [ ! -d "/var/www/html" ]; then
     mkdir -p /var/www/html
 fi
 
+if [ ! -d "/var/www/portfolio" ]; then
+    mkdir -p /var/www/portfolio
+fi
+
 cd /var/www/html
 if [ ! -f wp-config.php ]; then
     wp core download --allow-root --version=6.8.1  --locale=en_US

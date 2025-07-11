@@ -28,6 +28,7 @@ services:
       - 443:443
     volumes:
       - wordpress_data:/var/www/html:ro
+      - portfolio_data:/var/www/portfolio
 
   wordpress:
     container_name: wordpress
@@ -112,3 +113,9 @@ volumes:
       type: none
       o: bind
       device: ./maria_data
+  portfolio_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./portfolio_data

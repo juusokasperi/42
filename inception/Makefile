@@ -9,15 +9,24 @@ HOSTS_FILE = /etc/hosts
 WP_DATA_DIR = srcs/wp_data/
 MARIA_DATA_DIR = srcs/maria_data/
 REDIS_DATA_DIR = srcs/redis_data
+PORTFOLIO_DATA_DIR = srcs/portfolio_data
+PORTFOLIO_DIR = srcs/requirements/portfolio
 
 DOCKER_COMPOSE = srcs/docker-compose.yml
 
 all: up
 
+build_portfolio:
+	@if [ ! -f $(PORTFOLIO_DATA_DIR)/index.html ]; then \
+		echo "Building portfolio site into $(PORTFOLIO_DATA_DIR).."; \
+		cd $(PORTFOLIO_DIR) && npm install && OUT_DIR=../../../$(PORTFOLIO_DATA_DIR) npm run build -- --emptyOutDir; \
+	fi
+
 create_dirs:
 	@mkdir -p $(WP_DATA_DIR)
 	@mkdir -p $(MARIA_DATA_DIR)
 	@mkdir -p $(REDIS_DATA_DIR)
+	@mkdir -p $(PORTFOLIO_DATA_DIR)
 
 add_hosts_entry:
 	@if ! grep -q "$(HOSTS_ENTRY)" $(HOSTS_FILE); then \
@@ -31,11 +40,11 @@ remove_hosts_entry:
 		sudo sed -i '' '/$(HOSTS_ENTRY)/d' $(HOSTS_FILE); \
 	fi
 
-up: add_hosts_entry create_dirs
-	@docker-compose -f $(DOCKER_COMPOSE) up -d
+up: add_hosts_entry create_dirs build_portfolio
+	@docker compose -f $(DOCKER_COMPOSE) up -d
 
-build: add_hosts_entry create_dirs
-	@docker-compose -f $(DOCKER_COMPOSE) up --build -d
+build: add_hosts_entry create_dirs build_portfolio
+	@docker compose -f $(DOCKER_COMPOSE) up --build -d
 	@timeout=40; elapsed=0; \
 	spinner="⠋⠙⠹⠸⠼⠴⠦⠧"; \
 	while [ $$elapsed -lt $$timeout ]; do \
@@ -55,11 +64,11 @@ build: add_hosts_entry create_dirs
 	fi
 
 down:
-	@docker-compose -f $(DOCKER_COMPOSE) down
+	@docker compose -f $(DOCKER_COMPOSE) down
 
 fclean:
-	@docker-compose -f $(DOCKER_COMPOSE) down -v --rmi all --remove-orphans
-	@rm -rf $(MARIA_DATA_DIR) $(WP_DATA_DIR) $(REDIS_DATA_DIR)
+	@docker compose -f $(DOCKER_COMPOSE) down -v --rmi all --remove-orphans
+	@rm -rf $(MARIA_DATA_DIR) $(WP_DATA_DIR) $(REDIS_DATA_DIR) $(PORTFOLIO_DATA_DIR)
 	@$(MAKE) remove_hosts_entry
 
-.PHONY: add_hosts_entry remove_hosts_entry build up fclean down create_dirs
+.PHONY: add_hosts_entry remove_hosts_entry build up fclean down create_dirs build_portfolio
