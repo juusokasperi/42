@@ -118,6 +118,18 @@ services:
       - 20:20
       - 21100-21110:21100-21110
 
+  adminer:
+    container_name: adminer
+    build:
+      context: ./requirements/adminer
+      dockerfile: Dockerfile
+    depends_on:
+      - mariadb
+    networks:
+      - docker-network
+    ports:
+      - 8080:8080
+
 networks:
   docker-network:
     driver: bridge
