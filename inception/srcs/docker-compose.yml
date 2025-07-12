@@ -156,10 +156,8 @@ volumes:
       o: bind
       device: ./maria_data
   portfolio_data:
-#    driver: local
-#    driver_opts:
-#      type: none
-#      o: bind
-#      device: ./portfolio_data
-## Unnecessary to bind it to device,
-## but subject may require it?
+     driver: local
+     driver_opts:
+       type: none
+       o: bind
+       device: ./portfolio_data

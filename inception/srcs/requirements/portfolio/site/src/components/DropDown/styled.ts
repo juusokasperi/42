@@ -15,10 +15,16 @@ export const Select = styled.select`
   padding-left: 20px;
   padding-right: 20px;
   text-align: center;
+  text-transform: uppercase;
+  font-family: ${({ theme }) => theme.font };
   font-size: ${({ theme }) => theme.fontSize };
   color: ${({ theme }) => theme.colors.accent };
   cursor: pointer;
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
+
+  option {
+    text-transform: none;
+  }
 `
