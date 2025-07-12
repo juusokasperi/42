@@ -102,6 +102,8 @@ services:
 
   ftp:
     container_name: ftp
+    init: true
+    restart: always
     build:
       context: ./requirements/ftp
       dockerfile: Dockerfile
@@ -120,6 +122,8 @@ services:
 
   adminer:
     container_name: adminer
+    init: true
+    restart: always
     build:
       context: ./requirements/adminer
       dockerfile: Dockerfile
