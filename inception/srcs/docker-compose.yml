@@ -127,8 +127,6 @@ services:
       - mariadb
     networks:
       - docker-network
-    ports:
-      - 8080:8080
 
 networks:
   docker-network:
