@@ -7,27 +7,12 @@ tcp-keepalive 60
 maxmemory 256mb
 maxmemory-policy allkeys-lru
 
-save 900 1
-save 300 10
-save 60 10000
-
 loglevel notice
 logfile ""
-
-protected-mode no
 
 dir /data
 
 appendonly yes
 appendfsync everysec
-
-rename-command KEYS ""
-rename-command CONFIG ""
-rename-command SHUTDOWN REDIS_SHUTDOWN
-rename-command DEBUG ""
-rename-command EVAL ""
-
-tcp-backlog 511
-databases 16
 
 requirepass "${REDIS_PASSWORD}"
