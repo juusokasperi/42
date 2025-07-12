@@ -65,4 +65,6 @@ fclean:
 	@rm -rf $(MARIA_DATA_DIR) $(WP_DATA_DIR) $(REDIS_DATA_DIR) $(PORTFOLIO_DATA_DIR)
 	@$(MAKE) remove_hosts_entry
 
-.PHONY: add_hosts_entry remove_hosts_entry build up fclean down create_dirs build_portfolio
+re: fclean build
+
+.PHONY: add_hosts_entry remove_hosts_entry build up fclean down create_dirs build_portfolio re

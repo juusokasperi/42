@@ -9,6 +9,8 @@ secrets:
     file: ./secrets/wp_password.txt
   redis_password:
     file: ./secrets/redis_password.txt
+  ftp_password:
+    file: ./secrets/ftp_password.txt
 
 services:
   nginx:
@@ -97,6 +99,24 @@ services:
       dockerfile: Dockerfile
     volumes:
       - portfolio_data:/app/dist/
+
+  ftp:
+    container_name: ftp
+    build:
+      context: ./requirements/ftp
+      dockerfile: Dockerfile
+    depends_on:
+      - wordpress
+    secrets:
+      - ftp_password
+    environment:
+      - FTP_USER=${FTP_USER}
+    volumes:
+      - wordpress_data:/home/${FTP_USER}
+    ports:
+      - 21:21
+      - 20:20
+      - 21100-21110:21100-21110
 
 networks:
   docker-network:
