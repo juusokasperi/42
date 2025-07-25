@@ -13,6 +13,15 @@ export interface Project {
 
 export const projects: Project[] = [
 	{
+		id: 7,
+		title: "1176 Compressor Audio Plugin",
+		description: "A compressor plugin that emulates the behavior of the classic 1176 compressor.",
+		languages: ["CPP"],
+		technologies: ["JUCE framework", "Digital Signal Processing", "FET modeling"],
+		image: "imgs/compressor.png",
+		githubUrl: "https://github.com/juusokasperi/1176-compressor/"
+	},
+	{
 		id: 6,
 		title: "IRC Server",
 		description: "An IRC server implementation compliant with IRC clients, featuring a basic bot.",
