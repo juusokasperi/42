@@ -1,0 +1,2 @@
+INSERT INTO website (website_id, name, domain, user_id) VALUES ('10000000-0000-4000-8000-000000000001', 'wordpress', 'jrinta-.42.fr', '${UMAMI_ADMIN_ID}');
+INSERT INTO website (website_id, name, domain, user_id) VALUES ('20000000-0000-4000-8000-000000000002', 'portfolio', 'jrinta-.42.fr/portfolio', '${UMAMI_ADMIN_ID}');

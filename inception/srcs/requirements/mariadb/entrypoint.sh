@@ -5,8 +5,9 @@ ls -la /run/secrets/
 
 export MYSQL_PASSWORD=$(cat /run/secrets/mysql_password | tr -d '\n')
 export MYSQL_ROOT_PASSWORD=$(cat /run/secrets/mysql_root_password | tr -d '\n')
+export UMAMI_MYSQL_PASSWORD=$(cat /run/secrets/umami_mysql_password | tr -d '\n')
 
-envsubst '${MYSQL_DATABASE},${MYSQL_USER},${MYSQL_PASSWORD},${MYSQL_ROOT_PASSWORD}' < /etc/mysql/init.sql.template > /etc/mysql/init.sql
+envsubst '${MYSQL_DATABASE},${MYSQL_USER},${MYSQL_PASSWORD},${MYSQL_ROOT_PASSWORD},${UMAMI_USER},${UMAMI_DB},${UMAMI_MYSQL_PASSWORD}' < /etc/mysql/init.sql.template > /etc/mysql/init.sql
 
 if [ ! -d "/var/lib/mysql/mysql" ]; then
 	echo "Creating MariaDB database"

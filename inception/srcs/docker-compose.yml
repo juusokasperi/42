@@ -11,6 +11,10 @@ secrets:
     file: ./secrets/redis_password.txt
   ftp_password:
     file: ./secrets/ftp_password.txt
+  umami_mysql_password:
+    file: ./secrets/umami_mysql_password.txt
+  umami_admin_password:
+    file: ./secrets/umami_admin_password.txt
 
 services:
   nginx:
@@ -70,9 +74,12 @@ services:
     environment:
       - MYSQL_DATABASE=${MYSQL_DATABASE}
       - MYSQL_USER=${MYSQL_USER}
+      - UMAMI_DB=${UMAMI_DB}
+      - UMAMI_USER=${UMAMI_USER}
     secrets:
       - mysql_root_password
       - mysql_password
+      - umami_mysql_password
     networks:
       - docker-network
     volumes:
@@ -99,6 +106,8 @@ services:
       dockerfile: Dockerfile
     volumes:
       - portfolio_data:/app/dist/
+    networks:
+      - docker-network
 
   ftp:
     container_name: ftp
@@ -119,6 +128,8 @@ services:
       - 21:21
       - 20:20
       - 21100-21110:21100-21110
+    networks:
+      - docker-network
 
   adminer:
     container_name: adminer
@@ -131,6 +142,29 @@ services:
       - mariadb
     networks:
       - docker-network
+
+  umami:
+    container_name: umami
+    init: true
+    restart: always
+    build:
+      context: ./requirements/umami
+      dockerfile: Dockerfile
+    secrets:
+      - umami_mysql_password
+      - umami_admin_password
+    environment:
+      - UMAMI_DB=${UMAMI_DB}
+      - UMAMI_USER=${UMAMI_USER}
+      - UMAMI_ADMIN_USERNAME=${UMAMI_ADMIN_USERNAME}
+      - BASE_PATH=/umami
+    depends_on:
+      - mariadb
+      - wordpress
+      - portfolio
+    networks:
+      - docker-network
+
 
 networks:
   docker-network:
