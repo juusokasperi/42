@@ -3,7 +3,7 @@ ifeq ($(DOMAIN_NAME),)
 	DOMAIN_NAME := jrinta-.42.fr
 endif
 
-HOSTS_ENTRY = 127.0.0.1 $(DOMAIN_NAME)
+HOSTS_ENTRY = ::1 $(DOMAIN_NAME)
 HOSTS_FILE = /etc/hosts
 
 WP_DATA_DIR = srcs/wp_data/
