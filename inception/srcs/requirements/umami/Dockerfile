@@ -1,8 +1,8 @@
 FROM alpine:3.18
 
-RUN	apk update && apk add --no-cache npm nodejs gettext
+RUN	apk update && apk add --no-cache npm nodejs gettext git
 
-COPY /umami /app
+RUN git clone https://github.com/juusokasperi/umami.git /app
 
 WORKDIR /app
 

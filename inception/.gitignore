@@ -4,3 +4,4 @@ srcs/redis_data
 srcs/portfolio_data
 .vscode/
 secrets/
+.env
