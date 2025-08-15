@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 19:48:40 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/26 21:33:54 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/08/15 19:59:08 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ static void	test_str(void)
 
 	for (int i = 0; i < 10; i++)
 	{
-		strArray[i] = "First str Array n. " + std::to_string(i + 1);
-		strArray2[i] = "Second str Array n. " + std::to_string(i + 1);
+		strArray[i] = "strArray [" + std::to_string(i) + "]: " + std::to_string(i + 1);
+		strArray2[i] = "strArray2[" + std::to_string(i) + "]: " + std::to_string(i + 1);
 	}
 	std::cout << std::endl;
 	for (int i = 0; i < 10; i++)
@@ -72,7 +72,7 @@ static void	test_float(void)
 	std::cout <<  "Moving array2 to array so second array size is " << array2.size() << std::endl;
 	for (int i = 0; i < 10; i++)
 		std::cout << array[i] << std::endl;
-	Array<float> array3 = std::move(array);
+	Array<float> array3(std::move(array));
 	std::cout <<  "Moving array to array3 so first array size is " << array.size() << std::endl;
 	for (int i = 0; i < 10; i++)
 		std::cout << array3[i] << std::endl;

@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 17:39:05 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/26 18:01:55 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/08/15 19:29:03 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,36 +14,12 @@
 #include <iostream>
 #include <iomanip>
 
-void	powerOf2(int &i)
-{
-	i = i * 2;
-}
-
-void	decrement(int &i)
-{
-	i--;
-}
-
-void	upperCase(char &c)
-{
-	c = std::toupper(c);
-}
-
-void	lowerCase(char &c)
-{
-	c = std::tolower(c);
-}
-
-void	addBar(std::string &s)
-{
-	s += "_bar";
-}
-
-void	addFoo(std::string &s)
-{
-	std::string tmp = "foo_" + s;
-	s = tmp;
-}
+void	powerOf2(int &i) { i = i * 2; }
+void	decrement(int &i) { i--; }
+void	upperCase(char &c) { c = std::toupper(c); }
+void	lowerCase(char &c) { c = std::tolower(c); }
+void	addBar(std::string &s) { s += "_bar"; }
+void	addFoo(std::string &s) { s = "foo_" + s; }
 
 static void	test_numbers(void)
 {
@@ -102,5 +78,5 @@ int	main(void)
 	test_char();
 	test_string();
 
-	return (0);
+	return 0;
 }
