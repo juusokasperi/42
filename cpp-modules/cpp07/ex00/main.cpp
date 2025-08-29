@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 17:17:52 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/08/15 19:25:11 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/08/29 09:20:55 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ int	main(void)
 	std::cout << "---- After swap: ----\n";
 	std::cout << "c = " << c << ", d = " << d << "\n\n";
 
-	std::cout << "min( " << c << ", " << d << ") = " << ::min( c, d ) << std::endl;
-	std::cout << "max( " << c << ", " << d << ") = " << ::max( c, d ) << std::endl;
+	std::cout << "min(" << c << ", " << d << ") = " << ::min( c, d ) << std::endl;
+	std::cout << "max(" << c << ", " << d << ") = " << ::max( c, d ) << std::endl;
+	
 	return 0;
 }

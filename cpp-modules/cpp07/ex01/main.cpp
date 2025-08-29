@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 17:39:05 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/08/15 19:29:03 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/08/29 10:33:31 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <iostream>
 #include <iomanip>
 
-void	powerOf2(int &i) { i = i * 2; }
+void	multiplyBy2(int &i) { i = i * 2; }
 void	decrement(int &i) { i--; }
 void	upperCase(char &c) { c = std::toupper(c); }
 void	lowerCase(char &c) { c = std::tolower(c); }
@@ -27,8 +27,8 @@ static void	test_numbers(void)
 	std::cout << "Numbers before iteration:" << std::endl;
 	for (int i = 0; i < 4; i++)
 		std::cout << numbers[i] << " ";
-	std::cout << std::endl << "Numbers after running power of 2:" << std::endl;
-	iter(numbers, 4, powerOf2);
+	std::cout << std::endl << "Numbers after multiplying by 2:" << std::endl;
+	iter(numbers, 4, multiplyBy2);
 	for (int i = 0; i < 4; i++)
 		std::cout << numbers[i] << " ";
 	std::cout << std::endl << "Numbers after decrement:" << std::endl;
