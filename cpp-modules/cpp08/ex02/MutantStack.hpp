@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 15:36:02 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/28 22:45:26 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/09/02 12:19:35 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define MUTANTSTACK_HPP
 
 # include <iostream>
+# include <stack>
 
 template<typename T>
 class MutantStack {
@@ -40,8 +41,13 @@ class MutantStack {
 		void		pop();
 		void		swap(MutantStack &other);
 
+		template<typename... Args>
+		void		emplace(Args&&... args);
+
 		iterator	begin() const;
 		iterator	end() const;
 };
+
+# include "MutantStack.tpp"
 
 #endif /* MUTANTSTACK_HPP */

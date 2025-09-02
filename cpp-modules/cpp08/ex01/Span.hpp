@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 11:20:02 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/27 15:12:31 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/09/01 19:14:28 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,16 @@
 # define SPAN_HPP
 
 # include <iostream>
+# include <vector>
+# include <algorithm>
+# include <stdint.h> 
 
 class Span {
 	private:
 		std::vector<int>	_array;
 		unsigned int		_max;
 	public:
+		Span() = delete;
 		Span(unsigned int N);
 		Span(const Span &src);
 		Span& operator=(const Span &rhs);

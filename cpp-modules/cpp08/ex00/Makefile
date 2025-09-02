@@ -6,7 +6,7 @@ CFLAGS = -Wall -Wextra -Werror -I./ -std=c++11
 
 NAME = easyFinder
 
-%.o: %.cpp
+%.o: %.cpp easyfind.hpp
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 all: $(NAME)

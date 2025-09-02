@@ -6,29 +6,24 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 17:27:05 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/03/28 22:46:39 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/09/02 12:15:03 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "MutantStack.hpp"
 
 template <typename T>
-MutantStack<T>::MutantStack(): _stack(nullptr), _size(0), _capacity(0)
-{
-	std::cout << "Default constructor called" << std::endl;
-}
+MutantStack<T>::MutantStack(): _stack(nullptr), _size(0), _capacity(0) {}
 
 template <typename T>
 MutantStack<T>::~MutantStack()
 {
-	std::cout << "Destructor called" << std::endl;
 	delete [] _stack;
 }
 
 template <typename T>
 MutantStack<T>::MutantStack(const MutantStack &src): _size(src._size), _capacity(src._capacity)
 {
-	std::cout << "Copy constructor called" << std::endl;
 	_stack = new T[_capacity];
 	std::copy(src._stack, src._stack + _size, _stack);
 }
@@ -36,7 +31,6 @@ MutantStack<T>::MutantStack(const MutantStack &src): _size(src._size), _capacity
 template <typename T>
 MutantStack<T>& MutantStack<T>::operator=(const MutantStack &rhs)
 {
-	std::cout << "Copy assignment called" << std::endl;
 	if (this != &rhs)
 	{
 		delete[] _stack;
@@ -51,7 +45,6 @@ MutantStack<T>& MutantStack<T>::operator=(const MutantStack &rhs)
 template <typename T>
 MutantStack<T>::MutantStack(MutantStack &&other): _stack(other._stack), _size(other._size), _capacity(other._capacity)
 {
-	std::cout << "Move constructor called" << std::endl;
 	other._stack = nullptr;
 	other._size = 0;
 	other._capacity = 0;
@@ -119,8 +112,8 @@ void	MutantStack<T>::push(T N)
 template <typename T>
 void	MutantStack<T>::pop()
 {
-	_stack[_size - 1] = 0;
-	_size -= 1;
+	if (_size > 0)
+		_size -= 1;
 }
 
 template <typename T>
@@ -141,6 +134,25 @@ template<typename T>
 typename MutantStack<T>::iterator	MutantStack<T>::end() const
 {
 	return (_stack + _size);
+}
+
+template<typename T>
+template<typename... Args>
+void MutantStack<T>::emplace(Args&&... args)
+{
+	if (_size == _capacity)
+	{
+		if (_capacity == 0)
+			_capacity = 1;
+		else
+			_capacity *= 2;
+		T* emplacedStack = new T[_capacity];
+		for (size_t i = 0; i < _size; ++i)
+			emplacedStack[i] = std::move(_stack[i]);
+		delete[] _stack;
+		_stack = emplacedStack;
+	}
+	_stack[_size++] = T(std::forward<Args>(args)...);
 }
 
 template<typename T>

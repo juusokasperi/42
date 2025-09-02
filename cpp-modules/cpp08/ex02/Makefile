@@ -6,7 +6,7 @@ CFLAGS = -Wall -Wextra -Werror -std=c++11
 
 NAME = mutantStack
 
-%.o: %.cpp MutantStack.hpp
+%.o: %.cpp MutantStack.hpp MutantStack.tpp
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 all: $(NAME)
