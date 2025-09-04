@@ -3,6 +3,46 @@
 #include <list>
 #include <iostream>
 
+class Person {
+	private:
+		std::string _name;
+		int _age;
+	public:
+		Person(std::string name, int age): _name(name), _age(age) {};
+		~Person() {};
+		Person() {};
+		Person(const Person &rhs): _name(rhs._name), _age(rhs._age) {};
+
+		const std::string &getName() const { return _name; };
+		int getAge() const { return _age; };
+		const std::string getPerson() const { return _name + ", " + std::to_string(_age); };
+};
+std::ostream& operator<<(std::ostream &os, const Person &person) { os << person.getPerson(); return os; };
+
+static void testMutantStackPerson()
+{
+	std::cout << "\033[0;33m** Testing with mutantstack and person class **\033[0m\n";
+	MutantStack<Person> mstack;
+	Person joe("Joe", 15);
+	mstack.push(joe);
+	mstack.emplace("Bob", 42);
+	std::cout << "Top: " << mstack.top() << std::endl;
+	std::cout << "Size: " << mstack.size() << std::endl;
+	MutantStack<Person>::iterator it = mstack.begin();
+	MutantStack<Person>::iterator ite = mstack.end();
+	++it;
+	--it;
+	while (it != ite)
+	{
+		std::cout << it->getPerson() << std::endl;
+		++it;
+	}
+	mstack.pop();
+	std::cout << "Top: " << mstack.top() << std::endl;
+	std::cout << "Size: " << mstack.size() << std::endl;
+	std::cout << std::endl;
+}
+
 static void testMutantStack()
 {
 	std::cout << "\033[0;33m** Testing with mutantstack **\033[0m\n";
@@ -80,6 +120,7 @@ static void testList()
 
 int main()
 {
+	testMutantStackPerson();
 	testMutantStack();
 	testStack();
 	testList();
