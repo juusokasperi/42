@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 19:31:16 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/05/24 00:43:03 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/09/05 11:18:52 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <iostream>
 #include <iomanip>
 #include <chrono>
+#include <cmath>
 
 template<typename Container>
 class PmergeMe {

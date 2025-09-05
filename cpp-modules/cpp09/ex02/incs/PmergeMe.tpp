@@ -6,11 +6,13 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 19:42:30 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/05/25 17:52:53 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/09/05 11:34:35 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
+
+#include "PmergeMe.hpp"
 
 template<typename Container>
 size_t PmergeMe<Container>::_comparisons = 0;
@@ -288,7 +290,7 @@ int PmergeMe<Container>::F(int n)
 	for (int k = 1; k <= n; ++k)
 	{
 		double value = (3.0 / 4.0) * k;
-		sum += static_cast<int>(ceil(log2(value)));
+		sum += static_cast<int>(ceil(std::log2(value)));
 	}
 	return (sum);
 }
