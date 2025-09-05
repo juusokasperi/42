@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 12:47:38 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/05/23 19:17:31 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/09/05 10:28:43 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ int	main(int argc, char **argv)
 		{
 			try {
 				exchange.convert(line);
-			} catch (std::runtime_error &e) {
+			} catch (std::exception &e) {
 				std::cerr << "Error: " << e.what() << std::endl;
 			}
 		}
-	} catch (std::runtime_error &e) {
+	} catch (std::exception &e) {
 		std::cerr << "Error: " << e.what() << std::endl;
 	}
 	return (0);
