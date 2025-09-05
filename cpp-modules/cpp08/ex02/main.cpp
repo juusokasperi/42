@@ -65,6 +65,17 @@ static void testMutantStack()
 		std::cout << *it << std::endl;
 		++it;
 	}
+
+	std::cout << "\033[0;33m-\033[0m Or with reverse iterators mutantstack\n";
+	MutantStack<int>::reverse_iterator rit = mstack.rbegin();
+	MutantStack<int>::reverse_iterator rite = mstack.rend();
+	++rit;
+	--rit;
+	while (rit != rite)
+	{
+		std::cout << *rit << std::endl;
+		++rit;
+	}
 	std::stack<int> s(mstack);
 	std::cout << std::endl;
 }
@@ -72,7 +83,6 @@ static void testMutantStack()
 static void testStack()
 {
 	std::cout << "\033[0;33m** Testing with stack (no iterators) **\033[0m\n";
-	std::cout << "\033[0;33m-\033[0m The iterated output will be reverse\n";
 	std::stack<int> mstack;
 	mstack.push(5);
 	mstack.push(17);
@@ -83,6 +93,7 @@ static void testStack()
 	mstack.push(5);
 	mstack.push(737);
 	mstack.push(0);
+	std::cout << "\033[0;33m-\033[0m The iterated output will be same as the reverse iterators\n";
 	while (mstack.size())
 	{
 		std::cout << mstack.top() << std::endl;

@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 11:20:02 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/09/01 19:14:28 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/09/05 09:49:12 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <vector>
 # include <algorithm>
 # include <stdint.h> 
+# include <numeric>
 
 class Span {
 	private:
@@ -37,14 +38,28 @@ class Span {
 		void		addRange(it begin, it end);
 		uint32_t	shortestSpan() const;
 		uint32_t	longestSpan() const;
+
+		class ArrayCapacityFullException: public std::exception {
+			public:
+				const char *what() const noexcept;
+		};
+
+		class ArrayRangeExceedsCapacityException: public std::exception {
+			public:
+				const char *what() const noexcept;
+		};
+
+		class NotEnoughElementsException: public std::exception {
+			public:
+				const char *what() const noexcept;
+		};
 };
 
 template <typename it>
 void	Span::addRange(it begin, it end)
 {
-	std::cout << "AddRange called with range of iterators" << std::endl;
 	if (_array.size() + std::distance(begin, end) > _max)
-		throw std::runtime_error("Array will exceed maximum capacity with range.");
+		throw ArrayRangeExceedsCapacityException();
 	_array.insert(_array.end(), begin, end);
 }
 

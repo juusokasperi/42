@@ -6,13 +6,14 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 14:54:30 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/09/01 19:40:08 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/09/05 09:48:42 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Span.hpp"
 #include <iostream>
 #include <list>
+#include <vector>
 
 static void	subjectTest(void)
 {
@@ -24,7 +25,7 @@ static void	subjectTest(void)
 		sp.addNumber(17);
 		sp.addNumber(9);
 		sp.addNumber(11);
-	} catch (std::runtime_error &e) {
+	} catch (std::exception &e) {
 		std::cerr << "Error: " << e.what() << std::endl;
 	}
 	std::cout << sp.shortestSpan() << std::endl;
@@ -38,7 +39,7 @@ static void bigTest(void)
 	try {
 		sp.addNumber(150000);
 		sp.addRange(49999);
-	} catch (std::runtime_error &e) {
+	} catch (std::exception &e) {
 		std::cerr << "Error: " << e.what() << std::endl;
 	}
 	std::cout << sp.shortestSpan() << std::endl;
@@ -54,13 +55,13 @@ static void	addIteratorTest(void)
 	try {
 		sp.addRange(vec.begin(), vec.end());
 		sp.addRange(lst.begin(), lst.end());
-	} catch (std::runtime_error &e) {
+	} catch (std::exception &e) {
 		std::cerr << "Error: " << e.what() << std::endl;
 	}
 	try {
 		std::vector<int>	vec = { 3, 2, 1, 0 };
 		sp.addRange(vec.begin(), vec.end());
-	} catch (std::runtime_error &e) {
+	} catch (std::exception &e) {
 		std::cerr << "Error: " << e.what() << std::endl;
 	}
 	std::cout << sp.shortestSpan() << std::endl;
@@ -74,12 +75,12 @@ static void	invalidTest(void)
 	Span spEmpty = Span(0);
 	try {
 		sp.addRange(6);
-	} catch (std::runtime_error &e) {
+	} catch (std::exception &e) {
 		std::cerr << "Error: " << e.what() << std::endl;
 	}
 	try {
 		spEmpty.addNumber(1);
-	} catch (std::runtime_error &e) {
+	} catch (std::exception &e) {
 		std::cerr << "Error: " << e.what() << std::endl;
 	}
 }
@@ -95,12 +96,12 @@ static void copyTest(void)
 	std::cout << sp.shortestSpan() << std::endl;
 	try {
 		std::cout << sp2.shortestSpan() << std::endl;
-	} catch (std::runtime_error &e) {
+	} catch (std::exception &e) {
 		std::cerr << "Error: " << e.what() << std::endl;
 	}
 	try {
 		std::cout << sp3.shortestSpan() << std::endl;
-	} catch (std::runtime_error &e) {
+	} catch (std::exception &e) {
 		std::cerr << "Error: " << e.what() << std::endl;
 	}
 	Span sp4(sp);
@@ -117,12 +118,14 @@ static void moveTest(void)
 	sp.addRange(vec.begin(), vec.end());
 	std::cout << "  Printing shortestSpan on sp\n";	
 	std::cout << sp.shortestSpan() << std::endl;
+	std::cout << "  Printing longestSpan on sp\n";	
+	std::cout << sp.longestSpan() << std::endl;
 	std::cout << "  Moving contents of sp to sp2 with move assignment, printing first shortestSpan of sp2, then trying to print sp\n";	
 	Span sp2 = std::move(sp);
 	std::cout << sp2.shortestSpan() << std::endl;
 	try {
 		std::cout << sp.shortestSpan() << std::endl;
-	} catch (std::runtime_error &e) {
+	} catch (std::exception &e) {
 		std::cerr << "Error: " << e.what() << std::endl;
 	}
 	std::cout << "  Moving contents of sp2 to sp3 with move constructor, printing first shortestSpan of sp3, then trying to print sp2\n";	
@@ -130,7 +133,7 @@ static void moveTest(void)
 	std::cout << sp3.shortestSpan() << std::endl;
 	try {
 		std::cout << sp2.shortestSpan() << std::endl;
-	} catch (std::runtime_error &e) {
+	} catch (std::exception &e) {
 		std::cerr << "Error: " << e.what() << std::endl;
 	}
 }
