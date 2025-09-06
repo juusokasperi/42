@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 18:44:25 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/09/06 19:43:58 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/09/06 19:51:00 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,24 +17,24 @@ static bool	outOfRange(long firstOperand, long secondOperand, char op)
 	switch (op)
 	{
 		case '+':
-			return ((secondOperand > 0 && firstOperand > LONG_MAX - secondOperand)
-				|| (secondOperand < 0 && firstOperand < LONG_MIN - secondOperand));
+			return ((secondOperand > 0 && firstOperand > std::numeric_limits<long>::max() - secondOperand)
+				|| (secondOperand < 0 && firstOperand < std::numeric_limits<long>::min() - secondOperand));
 		case '-':
-			return ((secondOperand < 0 && firstOperand > LONG_MAX + secondOperand)
-				|| (secondOperand > 0 && firstOperand < LONG_MIN + secondOperand));
+			return ((secondOperand < 0 && firstOperand > std::numeric_limits<long>::max() + secondOperand)
+				|| (secondOperand > 0 && firstOperand < std::numeric_limits<long>::min() + secondOperand));
 		case '*':
 			if (secondOperand == 0)
 				return (false);
 			else if (secondOperand == -1)
-				return (firstOperand == LONG_MIN);
+				return (firstOperand == std::numeric_limits<long>::min());
 			else if (secondOperand > 0)
-				return (firstOperand > LONG_MAX / secondOperand
-					|| firstOperand < LONG_MIN / secondOperand);
+				return (firstOperand > std::numeric_limits<long>::max() / secondOperand
+					|| firstOperand < std::numeric_limits<long>::min() / secondOperand);
 			else
-				return (firstOperand < LONG_MAX / secondOperand
-					|| firstOperand > LONG_MIN / secondOperand);
+				return (firstOperand < std::numeric_limits<long>::max() / secondOperand
+					|| firstOperand > std::numeric_limits<long>::min() / secondOperand);
 		case '/':
-			return (firstOperand == LONG_MIN && secondOperand == -1);
+			return (firstOperand == std::numeric_limits<long>::min() && secondOperand == -1);
 		default:
 			throw std::runtime_error("Invalid operator " + std::string(1, op));
 	}

@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 18:40:22 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/09/06 19:45:07 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/09/06 19:51:21 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include <stack>
 # include <iostream>
 # include <sstream>
+# include <limits>
+# include <cstring>
 
 class RPN {
 	private:

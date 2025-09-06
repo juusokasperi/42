@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 14:06:54 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/05/23 19:27:40 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/09/05 11:45:22 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ std::string	BitcoinExchange::_validateDate(std::smatch &match) const
 	int	year = std::stoi(match[1].str());
 	int month = std::stoi(match[2].str());
 	int day = std::stoi(match[3].str());
-	if (year < 0 || year > thisYear)
+	if (year < 2009 || year > thisYear)
 		throw std::runtime_error("invalid year => " + match[0].str());
 	if (month < 1 || month > 12)
 		throw std::runtime_error("invalid month >= " + match[1].str());
@@ -75,6 +75,8 @@ std::string	BitcoinExchange::_validateDate(std::smatch &match) const
 		maxDay = 29;
 	if (day < 1 || day > maxDay)
 		throw std::runtime_error("invalid day => " + match[0].str());
+	if (year == 2009 && month == 1 && day < 2)
+		throw std::runtime_error("invalid date => " + match[0].str());
 	return (match[1].str() + "-" + match[2].str() + "-" + match[3].str());
 }
 

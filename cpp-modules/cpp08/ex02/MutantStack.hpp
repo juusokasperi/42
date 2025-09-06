@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 15:36:02 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/09/02 12:19:35 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/09/05 08:42:14 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,9 @@
 # include <stack>
 
 template<typename T>
-class MutantStack {
+class MutantStack: public std::stack<T> {
 	private:
-		T*		_stack;
-		size_t	_size;
-		size_t	_capacity;
 	public:
-		typedef T* iterator;
-
 		MutantStack();
 		~MutantStack();
 		MutantStack(const MutantStack &src);
@@ -32,20 +27,22 @@ class MutantStack {
 		MutantStack(MutantStack &&other);
 		MutantStack& operator=(MutantStack &&other);
 
-		operator	std::stack<T>() const;
-
-		size_t		size() const;
-		bool		empty() const;
-		T&			top();
-		void		push(T N);
-		void		pop();
-		void		swap(MutantStack &other);
-
-		template<typename... Args>
-		void		emplace(Args&&... args);
-
-		iterator	begin() const;
-		iterator	end() const;
+		typedef typename std::stack<T>::container_type::iterator iterator;
+		typedef typename std::stack<T>::container_type::const_iterator const_iterator;
+		typedef typename std::stack<T>::container_type::reverse_iterator reverse_iterator;
+		typedef typename std::stack<T>::container_type::const_reverse_iterator const_reverse_iterator;
+		
+		iterator	begin();
+		iterator	end();
+		
+		const_iterator begin() const;
+		const_iterator end() const;
+		
+		reverse_iterator rbegin();
+		reverse_iterator rend();
+		
+		const_reverse_iterator rbegin() const;
+		const_reverse_iterator rend() const;
 };
 
 # include "MutantStack.tpp"

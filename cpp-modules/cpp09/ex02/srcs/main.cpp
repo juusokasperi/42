@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 16:26:51 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/05/24 00:46:28 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/09/05 11:20:03 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static std::deque<int32_t>	pushToDeq(std::vector<int> &numsVec);
 
 int main(int argc, char **argv)
 {
-	if (argc < 2)
+	if (argc < 2 || argc > 100000)
 		return (1);
 	try {
 		std::vector<int32_t> numbersVec = pushToVec(argc - 1, argv + 1);
