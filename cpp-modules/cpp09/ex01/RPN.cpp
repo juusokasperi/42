@@ -6,41 +6,11 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 18:44:25 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/05/23 18:51:13 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/09/06 19:43:58 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RPN.hpp"
-
-RPN::RPN()
-{
-}
-
-RPN::~RPN()
-{
-}
-
-RPN::RPN(const RPN &src)
-{
-	(void)src;
-}
-
-RPN::RPN(RPN &&other)
-{
-	(void)other;
-}
-
-RPN&	RPN::operator=(const RPN &rhs)
-{
-	(void)rhs;
-	return (*this);
-}
-
-RPN&	RPN::operator=(RPN &&other)
-{
-	(void)other;
-	return (*this);
-}
 
 static bool	outOfRange(long firstOperand, long secondOperand, char op)
 {

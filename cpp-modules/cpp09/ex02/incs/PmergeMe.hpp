@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 19:31:16 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/05/24 00:43:03 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/09/06 19:46:32 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,6 @@
 template<typename Container>
 class PmergeMe {
 	private:
-		PmergeMe() = delete;
-		PmergeMe(const PmergeMe &src) = delete;
-		PmergeMe& operator=(const PmergeMe &rhs) = delete;
-		~PmergeMe() = delete;
-		
 		static size_t	_comparisons;
 
 		static Container	sort(const Container &values);
@@ -48,6 +43,13 @@ class PmergeMe {
 		static void			checkComparisons(size_t n, int comp);
 		static int			F(int n);
 	public:
+		PmergeMe() = delete;
+		PmergeMe(const PmergeMe &src) = delete;
+		PmergeMe(PmergeMe &&other) = delete;
+		PmergeMe& operator=(const PmergeMe &rhs) = delete;
+		PmergeMe& operator=(PmergeMe &&other) = delete;
+		~PmergeMe() = delete;
+
 		static void			fordJohnson(const Container &values,
 								bool checkCompare, bool printSorted);
 };
