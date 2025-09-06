@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 19:42:30 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/09/05 11:34:35 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/09/06 22:34:17 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,6 @@
 
 template<typename Container>
 size_t PmergeMe<Container>::_comparisons = 0;
-
-/**
- * Sorts the values using Ford-Johnson algorithm using index tracking.
-**/
-template<typename Container>
-Container	PmergeMe<Container>::sort(const Container &values)
-{
-	if (values.size() <= 1)
-		return values;
-	_comparisons = 0;
-	Container sortedIndices = sortIndices(values);
-	Container result(values.size());
-	for (size_t i = 0; i< values.size(); ++i)
-		result[i] = values[sortedIndices[i]];
-	return result;
-}
 
 /**
  * Sort a sequence when n <= 2
@@ -245,63 +229,18 @@ Container PmergeMe<Container>::generateJacobsthal(size_t n)
 }
 
 /**
- * Times the sorting, prints the sorted values if printSorted == true,
- * and checks against the theoretical maximum for n values if checkCompare == true
+ * Sorts the container using index-based tracking
 **/
 template<typename Container>
-void PmergeMe<Container>::fordJohnson(const Container &values, bool checkCompare, bool printSorted)
+Container PmergeMe<Container>::sort(const Container &values, size_t &comparisons)
 {
-	auto start = std::chrono::high_resolution_clock::now();
-	Container sorted = sort(values);
-	auto end = std::chrono::high_resolution_clock::now();
-	if (printSorted == true)
-		printSortedNumbers(sorted);
-	double duration =
-		(std::chrono::duration_cast<std::chrono::microseconds>(end - start).count()) / 1000.0;
-	std::string containerName = "container";
-	if (typeid(Container) == typeid(std::vector<typename Container::value_type>))
-		containerName = "std::vector";
-	else if (typeid(Container) == typeid(std::deque<typename Container::value_type>))
-		containerName = "std::deque";
-	std::cout	<< "Time to process a range of " << std::setw(5) << std::right
-				<< sorted.size() << " elements with " << containerName << ": "
-				<< std::fixed << std::setprecision(6) << duration << " ms\n";
-	if (checkCompare == true)
-		checkComparisons(sorted.size(), _comparisons);
-}
-
-template<typename Container>
-void PmergeMe<Container>::printSortedNumbers(const Container &sorted)
-{
-	std::cout << std::setw(15) << std::left << "After:" << "[";
-	for (size_t i = 0; i < sorted.size(); ++i)
-	{
-		std::cout << sorted[i];
-		if (i + 1 != sorted.size())
-			std::cout << " ";
-	}
-	std::cout << "]\n";
-}
-
-template<typename Container>
-int PmergeMe<Container>::F(int n)
-{
-	int sum = 0;
-	for (int k = 1; k <= n; ++k)
-	{
-		double value = (3.0 / 4.0) * k;
-		sum += static_cast<int>(ceil(std::log2(value)));
-	}
-	return (sum);
-}
-
-template<typename Container>
-void PmergeMe<Container>::checkComparisons(size_t n, int comp)
-{
-	int max = F(n);
-	if (comp <= max)
-		std::cout << "\033[0;92mOK:\033[0m " << comp << " comparisons ";
-	else
-		std::cout << "\033[0;92mKO:\033[0m " << comp << " comparisons ";
-	std::cout << "(max for n = " << n << " is " << max << ")\n";
+	comparisons = 0;
+	if (values.size() <= 1)
+		return values;
+	Container sortedIndices = sortIndices(values);
+	Container sorted(values.size());
+	for (size_t i = 0; i < values.size(); ++i)
+		sorted[i] = values[sortedIndices[i]];
+	comparisons = _comparisons;
+	return sorted;
 }

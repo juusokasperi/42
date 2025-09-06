@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 19:31:16 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/09/06 19:51:37 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/09/06 22:09:06 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ class PmergeMe {
 	private:
 		static size_t	_comparisons;
 
-		static Container	sort(const Container &values);
 		static Container	sortIndices(const Container &value);
 		static Container	sortSmall(const Container &values, size_t n);
 
@@ -40,7 +39,6 @@ class PmergeMe {
 		static Container	orderToSortedLarger(Container smallerIndices,
 								Container largerIndices, Container sortedLargerIndices);
 
-		static void			printSortedNumbers(const Container &sorted);
 		static void			checkComparisons(size_t n, int comp);
 		static int			F(int n);
 	public:
@@ -51,8 +49,7 @@ class PmergeMe {
 		PmergeMe& operator=(PmergeMe &&other) = delete;
 		~PmergeMe() = delete;
 
-		static void			fordJohnson(const Container &values,
-								bool checkCompare, bool printSorted);
+		static Container	sort(const Container &values, size_t &comparisons);
 };
 
 #include "PmergeMe.tpp"
