@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 14:06:54 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/09/05 11:45:22 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/09/10 14:14:28 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,19 +65,18 @@ std::string	BitcoinExchange::_validateDate(std::smatch &match) const
 	int	year = std::stoi(match[1].str());
 	int month = std::stoi(match[2].str());
 	int day = std::stoi(match[3].str());
+	std::string ymdString = match[0].str().substr(0, 10);
 	if (year < 2009 || year > thisYear)
-		throw std::runtime_error("invalid year => " + match[0].str());
+		throw std::runtime_error("invalid year => " + ymdString);
 	if (month < 1 || month > 12)
-		throw std::runtime_error("invalid month >= " + match[1].str());
+		throw std::runtime_error("invalid month => " + ymdString);
 	static const int daysInMonth[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 	int maxDay = daysInMonth[month - 1];
 	if (month == 2 && isLeapYear(year))
 		maxDay = 29;
 	if (day < 1 || day > maxDay)
-		throw std::runtime_error("invalid day => " + match[0].str());
-	if (year == 2009 && month == 1 && day < 2)
-		throw std::runtime_error("invalid date => " + match[0].str());
-	return (match[1].str() + "-" + match[2].str() + "-" + match[3].str());
+		throw std::runtime_error("invalid day => " + ymdString);
+	return (ymdString);
 }
 
 void	BitcoinExchange::_parseData(std::ifstream &ifs)
