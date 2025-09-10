@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 19:42:30 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/09/06 22:34:17 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/09/09 14:45:43by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ size_t PmergeMe<Container>::_comparisons = 0;
  * Sort a sequence when n <= 2
 **/
 template<typename Container>
-Container	PmergeMe<Container>::sortSmall(const Container &values, size_t n)
+Container	PmergeMe<Container>::sortSmall(const Container &values, int32_t n)
 {
 	Container indices(n);
 	if (n == 1)
@@ -48,23 +48,23 @@ Container	PmergeMe<Container>::sortSmall(const Container &values, size_t n)
  * Updates pairMap to track which smaller index pairs with which larger.
 **/
 template<typename Container>
-void PmergeMe<Container>::createPairs(const Container &values, Container &indices,
-		Container &largerIndices, Container &smallerIndices, Container &pairMap, size_t n)
+void PmergeMe<Container>::createPairs(const Container &values, Container &largerIndices,
+	Container &smallerIndices, Container &pairMap, int32_t n)
 {
-	for (size_t i = 0; i + 1 < n; i += 2)
+	for (int32_t i = 0; i + 1 < n; i += 2)
 	{
 		_comparisons++;
-		if (values[indices[i]] <= values[indices[i + 1]])
+		if (values[i] <= values[i + 1])
 		{
-			largerIndices.push_back(indices[i + 1]);
-			smallerIndices.push_back(indices[i]);
-			pairMap[indices[i]] = indices[i + 1];
+			largerIndices.push_back(i + 1);
+			smallerIndices.push_back(i);
+			pairMap[i] = i + 1;
 		}
 		else
 		{
-			largerIndices.push_back(indices[i]);
-			smallerIndices.push_back(indices[i + 1]);
-			pairMap[indices[i + 1]] = indices[i];
+			largerIndices.push_back(i);
+			smallerIndices.push_back(i + 1);
+			pairMap[i + 1] = i;
 		}
 	}
 }
@@ -86,7 +86,7 @@ Container PmergeMe<Container>::orderToSortedLarger(Container smallerIndices,
 				continue;
 			else if (pairMap[j] == sortedLargerIndices[i])
 			{
-				reOrderedSmaller[i] = j;
+				reOrderedSmaller[i] = static_cast<int32_t>(j);
 				break ;
 			}
 		}
@@ -104,42 +104,39 @@ Container PmergeMe<Container>::orderToSortedLarger(Container smallerIndices,
 template<typename Container>
 Container PmergeMe<Container>::sortIndices(const Container &values)
 {
-	size_t n = values.size();
+	int32_t n = static_cast<int32_t>(values.size());
 	if (n <= 2)
 		return sortSmall(values, n);
 
-	Container indices(n);
-	for (size_t i = 0; i < n; ++i)
-		indices[i] = i;
 	Container largerIndices;
 	Container smallerIndices;
 	Container pairMap(n, -1);
-	createPairs(values, indices, largerIndices, smallerIndices, pairMap, n);
-	size_t oddIndex = -1;
+	createPairs(values, largerIndices, smallerIndices, pairMap, n);
+	int32_t oddIndex = -1;
 	if (n % 2 == 1)
-		oddIndex = indices[n - 1];
+		oddIndex = n - 1;
 
 	Container largerValues(largerIndices.size());
-	for (size_t i = 0; i < largerIndices.size(); ++i)
-		largerValues[i] = values[largerIndices[i]];
+	std::transform(largerIndices.begin(), largerIndices.end(), largerValues.begin(),
+		[&](int32_t idx) { return values[idx]; });
 	Container sortedLargerIndices = sortIndices(largerValues);
-	for (size_t i = 0; i < sortedLargerIndices.size(); ++i)
-		sortedLargerIndices[i] = largerIndices[sortedLargerIndices[i]];
+	std::transform(sortedLargerIndices.begin(), sortedLargerIndices.end(),
+		sortedLargerIndices.begin(), [&](int32_t idx) { return largerIndices[idx]; });
 	smallerIndices = orderToSortedLarger(smallerIndices, pairMap, sortedLargerIndices);
 
 	Container mainChain;
 	mainChain.insert(mainChain.end(), sortedLargerIndices.begin(), sortedLargerIndices.end());
-	if (oddIndex != (size_t)-1)
+	if (oddIndex != -1)
 		smallerIndices.push_back(oddIndex);
 	if (!smallerIndices.empty())
 	{
-		Container insertionOrder = calculateInsertionOrder(smallerIndices.size());
+		Container insertionOrder = calculateInsertionOrder(static_cast<int32_t>(smallerIndices.size()));
 		for (size_t j = 0; j < smallerIndices.size(); ++j)
 		{
 			size_t idx = insertionOrder[j];
 			if (idx < smallerIndices.size())
 			{
-				size_t indexToInsert = smallerIndices[idx];
+				int32_t indexToInsert = smallerIndices[idx];
 				binaryInsert(mainChain, values, indexToInsert, pairMap);
 			}
 		}
@@ -153,12 +150,10 @@ Container PmergeMe<Container>::sortIndices(const Container &values)
 **/
 template<typename Container>
 void PmergeMe<Container>::binaryInsert(Container &chain, const Container &values,
-		size_t indexToInsert, const Container &pairMap)
+		int32_t indexToInsert, const Container &pairMap)
 {
-	size_t pairIndex = pairMap[indexToInsert];
-	size_t pairPos = 0;
-	while (pairPos < chain.size() && static_cast<size_t>(chain[pairPos]) != pairIndex)
-		pairPos++;
+	auto it = std::find(chain.begin(), chain.end(), pairMap[indexToInsert]);
+	size_t pairPos = std::distance(chain.begin(), it);
 	size_t left = 0;
 	size_t right = pairPos;
 	while (left < right)
@@ -180,7 +175,7 @@ void PmergeMe<Container>::binaryInsert(Container &chain, const Container &values
  * Returns indices in the order the should be inserted into the main chain.
 **/
 template<typename Container>
-Container PmergeMe<Container>::calculateInsertionOrder(size_t n)
+Container PmergeMe<Container>::calculateInsertionOrder(int32_t n)
 {
 	Container order;
 	if (n <= 1)
@@ -190,27 +185,18 @@ Container PmergeMe<Container>::calculateInsertionOrder(size_t n)
 		return order;
 	}
 	Container jacob = generateJacobsthal(n);
-	Container used(n, 0);
-	for (size_t i = 2; i < jacob.size() && static_cast<size_t>(jacob[i - 1]) < n; ++i)
+	for (size_t i = 1; i < jacob.size(); ++i)
 	{
-		for (size_t j = static_cast<size_t>(jacob[i - 1]);
-		j > static_cast<size_t>(jacob[i - 2]) && j <= n; --j)
+		int32_t currentJacob = jacob[i];
+		int32_t previousJacob = jacob[i - 1];
+		while (currentJacob > previousJacob)
 		{
-			if (j - 1 < n && used[j - 1] == 0)
-			{
-				order.push_back(j - 1);
-				used[j - 1] = 1;
-			}
+			order.push_back(currentJacob - 1);
+			--currentJacob;
 		}
 	}
-	for (int i = n - 1; i >= 0; --i)
-	{
-		if (used[i] == 0)
-		{
-			order.push_back(i);
-			used[i] = 1;
-		}
-	}
+	for (int32_t i = n; i > jacob.back(); --i)
+		order.push_back(i - 1);
 	return order;
 }
 
@@ -218,13 +204,18 @@ Container PmergeMe<Container>::calculateInsertionOrder(size_t n)
  * Generates the Jacobsthal sequence: J(n) = J(n-1) + 2 * J(n-2)
 **/
 template<typename Container>
-Container PmergeMe<Container>::generateJacobsthal(size_t n)
+Container PmergeMe<Container>::generateJacobsthal(int32_t n)
 {
 	Container jacob;
 	jacob.push_back(0);
 	jacob.push_back(1);
-	while (static_cast<size_t>(jacob.back()) < n)
-		jacob.push_back(jacob[jacob.size() - 1] + 2 * jacob[jacob.size() - 2]);
+	while (jacob.back() < n)
+	{
+		int32_t jacobNumber = jacob[jacob.size() - 1] + 2 * jacob[jacob.size() - 2];
+		if (jacobNumber > n)
+			break;
+		jacob.push_back(jacobNumber);
+	}
 	return jacob;
 }
 
