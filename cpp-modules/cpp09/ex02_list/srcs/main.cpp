@@ -6,15 +6,15 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 16:26:51 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/09/10 22:22:56 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/09/10 22:24:06 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
-#include <iomanip>
-#include <cmath>
-#include <chrono>
 #include <iostream>
+#include <iomanip>
+#include <chrono>
+#include <cmath>
 
 template<typename Container>
 static void					printSortedNumbers(const Container &sorted);
@@ -33,6 +33,7 @@ int main(int argc, char **argv)
 	try {
 		std::vector<int32_t> numbersVec = pushToVec(argc - 1, argv + 1);
 		std::deque<int32_t> numbersDeq(numbersVec.begin(), numbersVec.end());
+		std::list<int32_t> numbersLst(numbersVec.begin(), numbersVec.end());
 		printNumBeforeSorting(numbersVec);
 		size_t comparisons = 0;
 
@@ -48,15 +49,24 @@ int main(int argc, char **argv)
 		end = std::chrono::high_resolution_clock::now();
 		double durationVec = (std::chrono::duration_cast<std::chrono::microseconds>(end - start).count()) / 1000.0;
 
-		printSortedNumbers(numbersVec);
+		// Time sorting of vector
+		start = std::chrono::high_resolution_clock::now();
+		numbersLst = PmergeMe<std::list<int32_t>>::sort(numbersLst, comparisons);
+		end = std::chrono::high_resolution_clock::now();
+		double durationLst = (std::chrono::duration_cast<std::chrono::microseconds>(end - start).count()) / 1000.0;
+
+		printSortedNumbers(numbersLst);
 		std::cout	<< "Time to process a range of " << std::setw(5) << std::right
 				<< numbersDeq.size() << " elements with std::deque:  "
 				<< std::fixed << std::setprecision(6) << durationDeq << " ms\n";
 		std::cout	<< "Time to process a range of " << std::setw(5) << std::right
 				<< numbersVec.size() << " elements with std::vector: "
 				<< std::fixed << std::setprecision(6) << durationVec << " ms\n";
+		std::cout	<< "Time to process a range of " << std::setw(5) << std::right
+				<< numbersVec.size() << " elements with std::list:   "
+				<< std::fixed << std::setprecision(6) << durationLst << " ms\n";
 		// Check that the amount of comparisons is within the limits of FJ algorithm
-		checkComparisons(numbersVec.size(), comparisons);
+		checkComparisons(numbersLst.size(), comparisons);
 	} catch (std::exception &e) {
 		std::cerr << "Error: " << e.what() << "\n";
 	}

@@ -1,4 +1,4 @@
-SRCS = main.cpp
+SRCS = main.cpp PmergeMe.cpp
 SRCS_DIR = srcs/
 
 OBJS_DIR = objs/

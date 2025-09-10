@@ -1,21 +1,73 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   PmergeMe.tpp                                       :+:      :+:    :+:   */
+/*   PmergeMe.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/23 19:42:30 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/09/09 14:45:43by jrinta-          ###   ########.fr       */
+/*   Created: 2025/05/23 19:31:16 by jrinta-           #+#    #+#             */
+/*   Updated: 2025/09/10 22:23:59 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
-#include "PmergeMe.hpp"
+#include <vector>
+#include <deque>
+#include <list>
+#include <algorithm>
+
+template<typename Container>
+class PmergeMe {
+	private:
+		static size_t	_comparisons;
+
+		static Container	sortIndices(const Container &value);
+		static Container	sortSmall(const Container &values, int32_t n);
+
+		static void			createPairs(const Container &values, Container &largerIndices,
+			Container &smallerIndices, Container &pairMap, int32_t n);
+		static void			binaryInsert(Container &chain, const Container &values,
+			int32_t indexToInsert, const Container &pairMap);
+
+		static Container	generateJacobsthal(int32_t n);
+		static Container	calculateInsertionOrder(int32_t n);
+		static Container	orderToSortedLarger(Container smallerIndices,
+			Container largerIndices, Container sortedLargerIndices);
+	public:
+		PmergeMe() = delete;
+		PmergeMe(const PmergeMe &src) = delete;
+		PmergeMe(PmergeMe &&other) = delete;
+		PmergeMe& operator=(const PmergeMe &rhs) = delete;
+		PmergeMe& operator=(PmergeMe &&other) = delete;
+		~PmergeMe() = delete;
+
+		static Container	sort(const Container &values, size_t &comparisons);
+};
+
+/**
+ * Template function implementations
+**/
 
 template<typename Container>
 size_t PmergeMe<Container>::_comparisons = 0;
+
+/**
+ * Sorts the container using index-based tracking
+**/
+template<typename Container>
+Container PmergeMe<Container>::sort(const Container &values, size_t &comparisons)
+{
+	comparisons = 0;
+	if (values.size() <= 1)
+		return values;
+	Container sortedIndices = sortIndices(values);
+	Container sorted(values.size());
+	for (size_t i = 0; i < values.size(); ++i)
+		sorted[i] = values[sortedIndices[i]];
+	comparisons = _comparisons;
+	return sorted;
+}
 
 /**
  * Sort a sequence when n <= 2
@@ -220,18 +272,33 @@ Container PmergeMe<Container>::generateJacobsthal(int32_t n)
 }
 
 /**
- * Sorts the container using index-based tracking
+ * Specialized function declarations for list
 **/
-template<typename Container>
-Container PmergeMe<Container>::sort(const Container &values, size_t &comparisons)
-{
-	comparisons = 0;
-	if (values.size() <= 1)
-		return values;
-	Container sortedIndices = sortIndices(values);
-	Container sorted(values.size());
-	for (size_t i = 0; i < values.size(); ++i)
-		sorted[i] = values[sortedIndices[i]];
-	comparisons = _comparisons;
-	return sorted;
-}
+
+template<>
+std::list<int32_t> PmergeMe<std::list<int32_t>>::sort(const std::list<int32_t> &values, size_t &comparisons);
+
+template<>
+std::list<int32_t>	PmergeMe<std::list<int32_t>>::sortSmall(const std::list<int32_t> &values, int32_t n);
+
+template<>
+void PmergeMe<std::list<int32_t>>::createPairs(const std::list<int32_t> &values,
+	std::list<int32_t> &largerIndices, std::list<int32_t> &smallerIndices,
+	std::list<int32_t> &pairMap, int32_t n);
+
+template<>
+std::list<int32_t> PmergeMe<std::list<int32_t>>::orderToSortedLarger(std::list<int32_t> smallerIndices,
+		std::list<int32_t> pairMap, std::list<int32_t> sortedLargerIndices);
+
+template<>
+std::list<int32_t> PmergeMe<std::list<int32_t>>::sortIndices(const std::list<int32_t> &values);
+
+template<>
+void PmergeMe<std::list<int32_t>>::binaryInsert(std::list<int32_t> &chain, const std::list<int32_t> &values,
+		int32_t indexToInsert, const std::list<int32_t> &pairMap);
+
+template<>
+std::list<int32_t> PmergeMe<std::list<int32_t>>::calculateInsertionOrder(int32_t n);
+
+template<>
+std::list<int32_t> PmergeMe<std::list<int32_t>>::generateJacobsthal(int32_t n);
