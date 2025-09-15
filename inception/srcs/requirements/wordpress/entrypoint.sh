@@ -7,16 +7,6 @@ WP_ADMIN_PASSWORD=$(cat /run/secrets/wp_admin_password | tr -d '\n')
 WP_PASSWORD=$(cat /run/secrets/wp_password | tr -d '\n')
 REDIS_PASSWORD=$(cat /run/secrets/redis_password | tr -d '\n')
 
-echo "Waiting for db to be ready.."
-while ! nc -z mariadb 3306; do
-    sleep 1
-done
-
-echo "Waiting for redis to be ready.."
-while ! nc -z redis 6379; do
-    sleep 1
-done
-
 if [ ! -d "/var/www/html" ]; then
     mkdir -p /var/www/html
 fi

@@ -44,7 +44,10 @@ services:
       context: ./requirements/wordpress
       dockerfile: Dockerfile
     depends_on:
-      - mariadb
+      mariadb:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
     environment:
       - DOMAIN_NAME=${DOMAIN_NAME}
       - MYSQL_DATABASE=${MYSQL_DATABASE}
@@ -84,6 +87,11 @@ services:
       - docker-network
     volumes:
        - mariadb_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "sh", "-c", "mariadb-admin ping -h localhost -u root -p$$(cat /run/secrets/mysql_root_password)"]
+      timeout: 5s
+      retries: 5
+      start_period: 20s
 
   redis:
     container_name: redis
@@ -98,6 +106,11 @@ services:
       - docker-network
     volumes:
       - redis_data:/data
+    healthcheck:
+      test: ["CMD", "sh", "-c", "redis-cli --no-auth-warning -a $$(cat /run/secrets/redis_password) ping"]
+      timeout: 3s
+      retries: 5
+      start_period: 10s
 
   portfolio:
     container_name: portfolio
