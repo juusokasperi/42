@@ -6,7 +6,7 @@
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 16:08:35 by jrinta-           #+#    #+#             */
-/*   Updated: 2025/02/04 16:05:14 by jrinta-          ###   ########.fr       */
+/*   Updated: 2025/10/01 14:00:00 by jrinta-          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,9 @@ char	*find_env_value_malloced(t_env *env, char *key)
 			&& ft_strlen(temp->key) == key_len)
 		{
 			ft_free((void **)&key);
-			return (ft_strdup(temp->value));
+			if (temp->value)
+				return (ft_strdup(temp->value));
+			return (ft_strdup(""));
 		}
 		temp = temp->next;
 	}
