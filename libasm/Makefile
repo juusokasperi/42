@@ -11,6 +11,8 @@ OBJS = $(addprefix $(OBJS_DIR), $(SRCS:.s=.o))
 
 BIN_DIR = bin/
 
+NAME = $(BIN_DIR)tester
+
 DEPS = $(OBJS:.o=.d)
 
 CFLAGS = -Wall -g
@@ -26,24 +28,23 @@ LDFLAGS = -L. -lasm $(ARCH_FLAGS)
 
 LIB = libasm.a
 
-all: tester
+all: $(NAME)
 
-ensure_dir:
+$(OBJS_DIR)%.o: $(SRCS_DIR)%.s
 	@mkdir -p $(OBJS_DIR)
-	@mkdir -p $(BIN_DIR)
-
-$(OBJS_DIR)%.o: $(SRCS_DIR)%.s ensure_dir
 	$(NASM) $(ASMFLAGS) $(INCS) -MD $(@:.o=.d) -MP $< -o $@
 
 -include $(DEPS)
 
-tester: ensure_dir objs/main.o $(LIB)
-	$(CC) -o $(BIN_DIR)tester objs/main.o $(LDFLAGS)
+$(NAME): objs/main.o $(LIB)
+	@mkdir -p $(BIN_DIR)
+	$(CC) -o $@ objs/main.o $(LDFLAGS)
 
 $(LIB): $(OBJS)
 	ar rcs $(LIB) $(OBJS)
 
-objs/main.o: srcs/main.c ensure_dir
+objs/main.o: srcs/main.c
+	@mkdir -p $(OBJS_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
@@ -53,6 +54,6 @@ fclean:
 	rm -rf $(OBJS_DIR) $(BIN_DIR) $(LIB)
 
 
-re: clean all
+re: fclean all
 
-.PHONY: all clean re
+.PHONY: all clean re fclean
