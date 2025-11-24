@@ -15,7 +15,7 @@ FN(ft_strdup):
 	call FN(ft_strlen)			; rax = length of s1
 	inc rax						; len + 1 for NULL terminator
 	mov rdi, rax				; argument for malloc (size)
-	call REL_ADDR(FN(malloc))	; rax = new ptr or 0 if failed
+	call PLT(FN(malloc))	; rax = new ptr or 0 if failed
 	cmp rax, 0
 	je .error					; if 0, malloc failed
 

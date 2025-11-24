@@ -6,7 +6,7 @@
 	%define SYS_READ	0x2000003
 	%define FN(x)		_ %+ x		; Helper: Prepend underscore
 	%define ERRNO_FUNC	___error
-	%define REL_ADDR(x)	x
+	%define PLT(x)	x
 
 	%macro CHECK_ERROR 1
 		jc %1			; Jump if Carry to label %1
@@ -22,7 +22,7 @@
 	%define SYS_READ	0
 	%define FN(x)		x
 	%define ERRNO_FUNC	__errno_location wrt ..plt
-	%define REL_ADDR(x)	x wrt ..plt
+	%define PLT(x)	x wrt ..plt
 
 	%macro CHECK_ERROR 1
 		cmp rax, 0
