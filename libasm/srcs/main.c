@@ -1,18 +1,18 @@
-#include <stdio.h>
-#include <stdint.h>
-#include <unistd.h>
-#include <errno.h>
-#include <fcntl.h>
-#include <stdlib.h>
-#include <string.h>
+#include "tester.h"
 
-extern size_t ft_strlen(const char *str);
-extern char *ft_strcpy(char *dst, const char *src);
-extern int ft_strcmp(const char *s1, const char *s2);
-extern ssize_t ft_write(int fd, const void *buffer, size_t count);
-extern ssize_t ft_read(int fd, const void *buffer, size_t count);
-extern char *ft_strdup(const char *s);
-extern int ft_atoi_base(const char *str, const char *base);
+static void print_list(t_list *l) {
+	while (l) { printf("[%s] -> ", (char*)l->data); l = l->next; }
+	printf("NULL\n");
+}
+
+
+static t_list *create_elem(void *data) {
+	t_list *node = malloc(sizeof(t_list));
+	if (!node) return NULL;
+	node->data = data;
+	node->next = NULL;
+	return node;
+}
 
 int main() {
 
@@ -40,9 +40,9 @@ int main() {
 		printf("Dest Buffer: %s\n", buffer);
 		printf("Return Val:  %s\n", ret);
 		if (ret == buffer) {
-			printf("Success: Return value matches buffer address.\n");
+			printf(">> SUCCESS: Return value matches buffer address.\n");
 		} else {
-			printf("Error: Return value is wrong.\n");
+			printf(">> FAILURE: Return value is wrong.\n");
 		}
 		printf("\n");
 	}
@@ -113,29 +113,63 @@ int main() {
 			printf("Copy:     %s\n", copy);
 
 			if (copy != original) {
-				printf("Address Check: Different (Good!)\n");
+				printf(">> SUCCESS: Address Check: Different (Good!)\n");
 			} else {
-				printf("Address Check: SAME (Bad! You just returned the pointer!)\n");
+				printf(">> FAILURE: Address Check: SAME (Bad! You just returned the pointer!)\n");
 			}
 
 			if (strcmp(copy, original) == 0) {
-				printf("Content Check: Match (Good!)\n");
+				printf(">> SUCCESS: Content Check: Match (Good!)\n");
 			} else {
-				printf("Content Check: Mismatch (Bad!)\n");
+				printf(">> FAILURE: Content Check: Mismatch (Bad!)\n");
 			}
 
 			free(copy);
-			printf("Memory freed successfully.\n");
+			printf(">> SUCCESS: Memory freed successfully.\n");
 		}
+		printf("\n");
 	}
 	/* Atoi_base */
-    {
-        printf("--- Testing ft_atoi_base ---\n");
-        printf("Binary '101' (base 2):  %d (Exp: 5)\n", ft_atoi_base("101", "01"));
-        printf("Hex 'FF' (base 16):     %d (Exp: 255)\n", ft_atoi_base("FF", "0123456789ABCDEF"));
-        printf("Octal '-7' (base 8):    %d (Exp: -7)\n", ft_atoi_base("-7", "01234567"));
-        printf("Invalid Base (+):       %d (Exp: 0)\n", ft_atoi_base("123", "01+"));
-        printf("Invalid Base (dup):     %d (Exp: 0)\n", ft_atoi_base("123", "001"));
-    }
+	{
+		printf("--- Testing ft_atoi_base ---\n");
+		printf("Binary '101' (base 2):  %d (Exp: 5)\n", ft_atoi_base("101", "01"));
+		printf("Hex 'FF' (base 16):     %d (Exp: 255)\n", ft_atoi_base("FF", "0123456789ABCDEF"));
+		printf("Octal '-7' (base 8):    %d (Exp: -7)\n", ft_atoi_base("-7", "01234567"));
+		printf("Invalid Base (+):       %d (Exp: 0)\n", ft_atoi_base("123", "01+"));
+		printf("Invalid Base (dup):     %d (Exp: 0)\n", ft_atoi_base("123", "001"));
+		printf("\n");
+	}
+	/* List remove if */
+	{
+		printf("--- Testing ft_list_remove_if ---\n");
+
+		// Setup List: A -> B -> A -> C -> A
+		t_list *head = NULL;
+		ft_list_push_front(&head, create_elem(ft_strdup("A")));
+		ft_list_push_front(&head, create_elem(ft_strdup("C")));
+		ft_list_push_front(&head, create_elem(ft_strdup("A")));
+		ft_list_push_front(&head, create_elem(ft_strdup("B")));
+		ft_list_push_front(&head, create_elem(ft_strdup("A")));
+
+		printf("Before: ");
+		print_list(head);
+
+		// Remove 'A'
+		char *ref = "A";
+		ft_list_remove_if(&head, ref, ft_strcmp, free);
+
+		printf("After:  ");
+		print_list(head);
+
+		// Verify only B -> C -> NULL remains
+		if (head && ft_strcmp(head->data, "B") == 0 &&
+			head->next && ft_strcmp(head->next->data, "C") == 0 &&
+			head->next->next == NULL) {
+			printf(">> SUCCESS: List filtered correctly.\n");
+		} else {
+			printf(">> FAILURE: List structure is wrong.\n");
+		}
+		printf("\n");
+	}
 	return 0;
 }
