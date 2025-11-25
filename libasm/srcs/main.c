@@ -12,6 +12,7 @@ extern int ft_strcmp(const char *s1, const char *s2);
 extern ssize_t ft_write(int fd, const void *buffer, size_t count);
 extern ssize_t ft_read(int fd, const void *buffer, size_t count);
 extern char *ft_strdup(const char *s);
+extern int ft_atoi_base(const char *str, const char *base);
 
 int main() {
 
@@ -127,5 +128,14 @@ int main() {
 			printf("Memory freed successfully.\n");
 		}
 	}
+	/* Atoi_base */
+    {
+        printf("--- Testing ft_atoi_base ---\n");
+        printf("Binary '101' (base 2):  %d (Exp: 5)\n", ft_atoi_base("101", "01"));
+        printf("Hex 'FF' (base 16):     %d (Exp: 255)\n", ft_atoi_base("FF", "0123456789ABCDEF"));
+        printf("Octal '-7' (base 8):    %d (Exp: -7)\n", ft_atoi_base("-7", "01234567"));
+        printf("Invalid Base (+):       %d (Exp: 0)\n", ft_atoi_base("123", "01+"));
+        printf("Invalid Base (dup):     %d (Exp: 0)\n", ft_atoi_base("123", "001"));
+    }
 	return 0;
 }
