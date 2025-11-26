@@ -1,12 +1,16 @@
 #include "tester.h"
 
-static void print_list(t_list *l) {
-	while (l) { printf("[%s] -> ", (char*)l->data); l = l->next; }
+static void print_list(t_list *l)
+{
+	while (l)
+	{
+		printf("[%s] -> ", (char*)l->data); l = l->next;
+	}
 	printf("NULL\n");
 }
 
-
-static t_list *create_elem(void *data) {
+static t_list *create_elem(void *data)
+{
 	t_list *node = malloc(sizeof(t_list));
 	if (!node) return NULL;
 	node->data = data;
@@ -14,11 +18,11 @@ static t_list *create_elem(void *data) {
 	return node;
 }
 
-int main() {
-
+int main()
+{
 	/* Strlen */
 	{
-		printf("--- Testing ft_strlen ---\n");
+		printf("\033[0;33m--- Testing ft_strlen ---\033[0m\n");
 
 		const char *test1 = "Hello Assembly";
 		const char *test2 = "";
@@ -31,7 +35,7 @@ int main() {
 	}
 	/* Strcpy */
 	{
-		printf("--- Testing ft_strcpy ---\n");
+		printf("\033[0;33m--- Testing ft_strcpy ---\033[0m\n");
 
 		char buffer[100];
 		const char *source = "Copy this string!";
@@ -48,7 +52,7 @@ int main() {
 	}
 	/* Strcmp */
 	{
-		printf("--- Testing ft_strcmp ---\n");
+		printf("\033[0;33m--- Testing ft_strcmp ---\033[0m\n");
 
 		printf("strcmp('A', 'A') = %d\n", ft_strcmp("A", "A"));
 		printf("strcmp('A', 'B') = %d\n", ft_strcmp("A", "B"));
@@ -58,7 +62,7 @@ int main() {
 	}
 	/* Write */
 	{
-		printf("--- Testing ft_write ---\n");
+		printf("\033[0;33m--- Testing ft_write ---\033[0m\n");
 
 		printf("Writing to stdout: ");
 		fflush(stdout); // Force flush before we use raw write
@@ -77,7 +81,7 @@ int main() {
 	}
 	/* Read */
 	{
-		printf("--- Testing ft_read ---\n");
+		printf("\033[0;33m--- Testing ft_read ---\033[0m\n");
 		int fd = open("srcs/main.c", O_RDONLY);
 		if (fd > 0) {
 			char buf[50];
@@ -103,7 +107,7 @@ int main() {
 	}
 	/* Strdup */
 	{
-		printf("--- Testing ft_strdup ---\n");
+		printf("\033[0;33m--- Testing ft_strdup ---\033[0m\n");
 		const char *original = "I am a duplicate!";
 		char *copy = ft_strdup(original);
 		if (copy == NULL) {
@@ -131,7 +135,7 @@ int main() {
 	}
 	/* Atoi_base */
 	{
-		printf("--- Testing ft_atoi_base ---\n");
+		printf("\033[0;33m--- Testing ft_atoi_base ---\033[0m\n");
 		printf("Binary '101' (base 2):  %d (Exp: 5)\n", ft_atoi_base("101", "01"));
 		printf("Hex 'FF' (base 16):     %d (Exp: 255)\n", ft_atoi_base("FF", "0123456789ABCDEF"));
 		printf("Octal '-7' (base 8):    %d (Exp: -7)\n", ft_atoi_base("-7", "01234567"));
@@ -139,10 +143,10 @@ int main() {
 		printf("Invalid Base (dup):     %d (Exp: 0)\n", ft_atoi_base("123", "001"));
 		printf("\n");
 	}
-	/* List remove if */
+	/* List tests */
 	{
-		printf("--- Testing ft_list_remove_if ---\n");
-
+		printf("\033[0;33m--- Testing ft_list tests ---\033[0m\n");
+		printf("1. PUSH_FRONT & SIZE\n");
 		// Setup List: A -> B -> A -> C -> A
 		t_list *head = NULL;
 		ft_list_push_front(&head, create_elem(ft_strdup("A")));
@@ -150,21 +154,54 @@ int main() {
 		ft_list_push_front(&head, create_elem(ft_strdup("A")));
 		ft_list_push_front(&head, create_elem(ft_strdup("B")));
 		ft_list_push_front(&head, create_elem(ft_strdup("A")));
+		ft_list_push_front(&head, create_elem(ft_strdup("D")));
 
-		printf("Before: ");
+		print_list(head);
+		int size = ft_list_size(head);
+		printf("Size: %d (expected 6)\n", size);
+
+		if (size == 6 && strcmp(head->data, "D") == 0)
+			printf("    \033[0;32m[OK]\033[0m Push/Size working.\n\n");
+		else
+			printf("    \033[0;31m[KO]\033[0m Push/Size failed.\n\n");
+
+		printf("2. SORT\n");
+		printf("    Before Sort: ");
 		print_list(head);
 
+		ft_list_sort(&head, ft_strcmp);
+
+		printf("    After Sort:  ");
+		print_list(head);
+
+		t_list *curr = head;
+		int sorted = 1;
+		while (curr && curr->next)
+		{
+			if (ft_strcmp(curr->data, curr->next->data) > 0)
+			{
+				sorted = 0;
+				break;
+			}
+			curr = curr->next;
+		}
+		if (sorted)
+			printf("    \033[0;32m[OK]\033[0m List is sorted.\n\n");
+		else
+			printf("    \033[0;31m[KO]\033[0m Sorting failed.\n\n");
+
+		printf("3. REMOVE_IF\n");
 		// Remove 'A'
 		char *ref = "A";
+		printf("Removing 'A'...\n");
 		ft_list_remove_if(&head, ref, ft_strcmp, free);
-
-		printf("After:  ");
 		print_list(head);
 
 		// Verify only B -> C -> NULL remains
 		if (head && ft_strcmp(head->data, "B") == 0 &&
 			head->next && ft_strcmp(head->next->data, "C") == 0 &&
-			head->next->next == NULL) {
+			head->next->next && ft_strcmp(head->next->next->data, "D") == 0 &&
+			head->next->next->next == NULL) {
 			printf(">> SUCCESS: List filtered correctly.\n");
 		} else {
 			printf(">> FAILURE: List structure is wrong.\n");
