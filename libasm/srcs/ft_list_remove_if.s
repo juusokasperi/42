@@ -65,3 +65,5 @@ FN(ft_list_remove_if):
 	pop r12
 	pop rbx
 	ret
+
+GNU_STACK_NOTE

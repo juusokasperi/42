@@ -20,3 +20,5 @@ FN(ft_read):
 	mov [rax], edx
 	mov rax, -1
 	ret
+
+GNU_STACK_NOTE

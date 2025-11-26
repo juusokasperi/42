@@ -28,3 +28,5 @@ FN(ft_strdup):
 	; Malloc failed
 	pop rdi				; Clear s1 from stack
 	ret					; malloc has already set rax to 0
+
+GNU_STACK_NOTE

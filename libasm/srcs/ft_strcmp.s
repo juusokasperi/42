@@ -30,3 +30,5 @@ FN(ft_strcmp):
 	movzx edx, dl
 	sub eax, edx
 	ret
+
+GNU_STACK_NOTE

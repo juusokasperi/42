@@ -19,3 +19,5 @@ FN(ft_list_push_front):
 
 .done:
 	ret
+
+GNU_STACK_NOTE

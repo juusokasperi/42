@@ -29,3 +29,5 @@ FN(ft_strcpy):
 .done:
 	; rax already holds the starting point of dst
 	ret
+
+GNU_STACK_NOTE

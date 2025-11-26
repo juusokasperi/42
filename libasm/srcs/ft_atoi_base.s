@@ -178,3 +178,5 @@ _check_base:
 .error:
 	xor rax, rax
 	ret
+
+GNU_STACK_NOTE

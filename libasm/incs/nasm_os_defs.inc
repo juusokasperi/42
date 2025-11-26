@@ -7,6 +7,7 @@
 	%define FN(x)		_ %+ x		; Helper: Prepend underscore
 	%define ERRNO_FUNC	___error
 	%define PLT(x)	x
+	%define GNU_STACK_NOTE
 
 	%macro CHECK_ERROR 1
 		jc %1			; Jump if Carry to label %1
@@ -23,7 +24,7 @@
 	%define FN(x)		x
 	%define ERRNO_FUNC	__errno_location wrt ..plt
 	%define PLT(x)	x wrt ..plt
-
+	%define GNU_STACK_NOTE .section .note.GNU-stack
 	%macro CHECK_ERROR 1
 		cmp rax, 0
 		jl %1

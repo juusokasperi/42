@@ -25,3 +25,5 @@ check_null:
 
 done:
 	ret
+
+GNU_STACK_NOTE

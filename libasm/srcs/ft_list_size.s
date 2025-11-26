@@ -18,3 +18,5 @@ FN(ft_list_size):
 
 .end:
 	ret
+
+GNU_STACK_NOTE
