@@ -2,7 +2,7 @@ CC = cc
 NASM = nasm
 
 SRCS =	ft_strlen.s ft_strcpy.s ft_strcmp.s ft_write.s ft_read.s ft_strdup.s \
-		ft_atoi_base.s ft_list_size.s ft_list_push_front.s ft_list_size.s \
+		ft_atoi_base.s ft_list_size.s ft_list_push_front.s \
 		ft_list_remove_if.s ft_list_sort.s
 SRCS_DIR = srcs/
 
@@ -12,8 +12,8 @@ OBJS_DIR = objs/
 OBJS = $(addprefix $(OBJS_DIR), $(SRCS:.s=.o))
 
 BIN_DIR = bin/
+TESTER_BIN = $(BIN_DIR)tester
 
-NAME = $(BIN_DIR)tester
 
 DEPS = $(OBJS:.o=.d)
 
@@ -28,7 +28,7 @@ endif
 
 LDFLAGS = -L. -lasm $(ARCH_FLAGS)
 
-LIB = libasm.a
+NAME = libasm.a
 
 all: $(NAME)
 
@@ -38,24 +38,27 @@ $(OBJS_DIR)%.o: $(SRCS_DIR)%.s
 
 -include $(DEPS)
 
-$(NAME): objs/main.o $(LIB)
+$(TESTER_BIN): objs/main.o $(NAME)
 	@mkdir -p $(BIN_DIR)
 	$(CC) -o $@ objs/main.o $(LDFLAGS)
 
-$(LIB): $(OBJS)
-	ar rcs $(LIB) $(OBJS)
+$(NAME): $(OBJS)
+	ar rcs $(NAME) $(OBJS)
 
 objs/main.o: srcs/main.c
 	@mkdir -p $(OBJS_DIR)
 	$(CC) $(CFLAGS) $(INCS) -c $< -o $@
 
+tester: $(TESTER_BIN)
+
+
 clean:
 	rm -rf $(OBJS_DIR)
 
 fclean:
-	rm -rf $(OBJS_DIR) $(BIN_DIR) $(LIB)
+	rm -rf $(OBJS_DIR) $(BIN_DIR) $(NAME)
 
 
 re: fclean all
 
-.PHONY: all clean re fclean
+.PHONY: all clean re fclean tester
