@@ -22,9 +22,9 @@
 	%define SYS_WRITE	1
 	%define SYS_READ	0
 	%define FN(x)		x
-	%define ERRNO_FUNC	__errno_location wrt ..plt
+	%define ERRNO_FUNC	__errno_location
 	%define PLT(x)	x wrt ..plt
-	%define GNU_STACK_NOTE .section .note.GNU-stack
+	%define GNU_STACK_NOTE section .note.GNU-stack noalloc noexec nowrite
 	%macro CHECK_ERROR 1
 		cmp rax, 0
 		jl %1

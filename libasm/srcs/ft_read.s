@@ -15,7 +15,7 @@ FN(ft_read):
 .error:
 	PREPARE_ERRNO
 	push rax
-	call ERRNO_FUNC
+	call PLT(ERRNO_FUNC)
 	pop rdx
 	mov [rax], edx
 	mov rax, -1

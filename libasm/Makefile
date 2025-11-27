@@ -23,7 +23,7 @@ ifeq ($(shell uname -m), arm64)
 	CFLAGS += $(ARCH_FLAGS)
 	ASMFLAGS = -f macho64 -g
 else
-	ASMFLAGS = -f elf64 -g -F -dwarf
+	ASMFLAGS = -f elf64 -g -F dwarf
 endif
 
 LDFLAGS = -L. -lasm $(ARCH_FLAGS)
