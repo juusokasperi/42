@@ -2,6 +2,7 @@ Exercises in extracting info from binary, reading assembly, and reverse engineer
 
 ## Useful commands
 `file <binary>`
+
 `strings <binary>` might show you some interesting information, such as function calls, and other stuff too.
 
 Setting up `pwndbg` is recommended
