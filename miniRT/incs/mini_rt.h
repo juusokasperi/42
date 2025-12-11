@@ -16,6 +16,7 @@
 # include <stdlib.h>
 # include <math.h>
 # include <stdbool.h>
+# include <pthread.h>
 # include <stdio.h> // for printf
 # include <unistd.h> // for read, close.
 # include <fcntl.h> // for open
@@ -37,9 +38,25 @@
 #  define M_PI 3.14159265358979323846
 # endif
 
+# define BACKGROUND_COLOR 0x000000FF
+
+# ifndef NUM_THREADS
+#  define NUM_THREADS 4
+# endif
+
+# define TILE_SIZE 128
+
 # define EPSILON 0.0001f
 # define SHADOW_EPSILON 0.001f
 # define PLANE_EPSILON 0.00001f
+
+// threads
+void			cleanup_thread_pool(t_data *data);
+int				get_system_thread_count(void);
+int				init_thread_pool(t_data *data);
+void			print_threading_info(int thread_count);
+void			raycast_threaded(t_data *data);
+void			*thread_tile_worker(void *arg);
 
 //	color/calculate_color.c
 t_rgb			calculate_color(t_data *data, t_object obj, t_ray ray, float t);

@@ -43,11 +43,13 @@ static bool	setup_scene(t_data *data, char *scene_file)
 	parse_status = parse_scene(scene_file, data);
 	if (!parse_status)
 		return (false);
+	data->bvh = init_bvh(data);
 	return (true);
 }
 
 void	cleanup_data(t_data *data)
 {
+	cleanup_thread_pool(data);
 	if (data->scene.objects)
 		free(data->scene.objects);
 	if (data->scene.lights)
@@ -66,6 +68,11 @@ int	main(int argc, char **argv)
 		return (1);
 	if (!setup_scene(&data, scene_file))
 		return (1);
+	if (!init_thread_pool(data))
+	{
+		cleanup_data(&data);
+		return (1);
+	}
 	setup_rendering(&data);
 	mlx_loop_hook(data.mlx_ptr, loop_hook, &data);
 	mlx_resize_hook(data.mlx_ptr, &resize_hook, &data);

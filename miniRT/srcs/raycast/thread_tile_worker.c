@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   thread_tile_worker_bonus.c                         :+:      :+:    :+:   */
+/*   thread_tile_worker.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jrinta- <jrinta-@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "thread_bonus.h"
+#include "mini_rt.h"
 
-static int	get_next_tile_index(t_thread_context *ctx, int max_tiles)
+static int	get_next_tile_index(t_thread_ctx *ctx, int max_tiles)
 {
 	int	tile_index;
 
@@ -59,6 +59,7 @@ static void	raytrace_tile(t_data *data, t_tile tile)
 	float		t;
 	t_ray		ray;
 	t_object	closest;
+	uint32_t	color;
 
 	y = tile.start_y - 1;
 	while (++y < tile.end_y)
@@ -70,30 +71,55 @@ static void	raytrace_tile(t_data *data, t_tile tile)
 			ray = get_ray_for_px(data, x, y);
 			t = find_closest_intersection(ray, data, &closest);
 			if (closest.type != NONE)
-				mlx_put_pixel(data->mlx_img, x, y,
-					rgb_to_uint(calculate_color(data, closest, ray, t)));
+				color = rgb_to_uint(calculate_color(data, closest, ray, t));
+			else
+				color = BACKGROUND_COLOR;
+			mlx_put_pixel(data->mlx_img, x, y, color);
 		}
 	}
 }
 
 void	*thread_tile_worker(void *arg)
 {
-	t_thread_context	*ctx;
+	t_thread_ctx		*ctx;
+	t_data				*data;
 	int					tile_index;
 	int					tiles_x;
 	int					max_tiles;
 	t_tile				tile;
+	long				local_frame_id;
 
-	ctx = (t_thread_context *)arg;
-	max_tiles = get_max_tiles(ctx->data->width, ctx->data->height, &tiles_x);
+	ctx = (t_thread_ctx *)arg;
+	data = ctx->data;
+	local_frame_id = 0;
 	while (1)
 	{
-		tile_index = get_next_tile_index(ctx, max_tiles);
-		if (tile_index == -1)
+		pthread_mutex_lock(&data->pool.work_mutex);
+		while ((local_frame_id == data->pool.frame_id || !data->pool.working)
+			&& !data->pool.stop)
+			pthread_cond_wait(&data->pool.work_cond, &data->pool.work_mutex);
+		if (data->pool.stop)
+		{
+			pthread_mutex_unlock(&data->pool.work_mutex);
 			break ;
-		tile = get_tile(
-				ctx->data->width, ctx->data->height, tile_index, tiles_x);
-		raytrace_tile(ctx->data, tile);
+		}
+		local_frame_id = data->pool.frame_id;
+		pthread_mutex_unlock(&data->pool.work_mutex);
+		max_tiles = get_max_tiles(data->width, data->height, &tiles_x);
+		while (1)
+		{
+			tile_index = get_next_tile_index(ctx, max_tiles);
+			if (tile_index == -1)
+				break ;
+			tile = get_tile(
+					ctx->data->width, ctx->data->height, tile_index, tiles_x);
+			raytrace_tile(ctx->data, tile);
+		}
+		pthread_mutex_lock(&data->pool.done_mutex);
+		data->pool.finished_count++;
+		if (data->pool.finished_count == data->pool.thread_count)
+			pthread_cond_signal(&data->pool.done_cond);
+		pthread_mutex_unlock(&data->pool.done_mutex);
 	}
 	return (NULL);
 }

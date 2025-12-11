@@ -6,7 +6,7 @@
 /*   By: phuocngu <phuocngu@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 13:04:59 by phuocngu          #+#    #+#             */
-/*   Updated: 2025/05/13 20:15:31 by phuocngu         ###   ########.fr       */
+/*   Updated: 2025/05/13 20:15:15 by phuocngu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ t_cam_controls	init_cam_controls(void)
 
 void	update_camera(t_data *data)
 {
-	fill_black(data);
-	raycast(data);
+	raycast_threaded(data);
 }
 
 void	print_controls(void)

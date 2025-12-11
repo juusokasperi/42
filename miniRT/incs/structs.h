@@ -14,6 +14,7 @@
 # define STRUCTS_H
 
 # include "MLX42/MLX42.h"
+# include <pthread.h>
 
 typedef enum e_shape
 {
@@ -161,6 +162,37 @@ typedef struct s_scene
 	int			light_count;
 }	t_scene;
 
+typedef struct s_data		t_data;
+
+typedef struct s_thread_pool
+{
+	pthread_t		*threads;
+	int				thread_count;
+	pthread_mutex_t	work_mutex;
+	pthread_cond_t	work_cond;
+	pthread_mutex_t	done_mutex;
+	pthread_cond_t	done_cond;
+	int				finished_count;
+	bool			working;
+	bool			stop;
+	long			frame_id;
+}	t_thread_pool;
+
+typedef struct s_tile
+{
+	int	start_x;
+	int	start_y;
+	int	end_x;
+	int	end_y;
+}	t_tile;
+
+typedef struct s_thread_context
+{
+	t_data			*data;
+	int				next_tile;
+	pthread_mutex_t	tile_mutex;
+}	t_thread_ctx;
+
 typedef struct s_data
 {
 	t_camera		cam;
@@ -170,12 +202,13 @@ typedef struct s_data
 	t_scene			scene;
 	t_bvh			bvh;
 	t_cam_controls	cam_controls;
-	int				thread_count;
 	int				width;
 	int				height;
 	bool			should_update;
 	int				camera_count;
 	int				ambient_count;
+	t_thread_pool	pool;
+	t_thread_ctx	ctx;
 }	t_data;
 
 typedef struct s_obj_t

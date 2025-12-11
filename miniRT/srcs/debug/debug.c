@@ -28,3 +28,11 @@ void	print_cam_info(t_data data)
 	printf("Viewport: Width=%.2f, Height=%.2f\n",
 		camera.vp.width, camera.vp.height);
 }
+
+void	print_threading_info(int thread_count)
+{
+	printf("Threading information:\n");
+	printf("  - Thread count: %d\n", thread_count);
+	printf("  - Threading approach: Tiles (%dx%d pixels)\n", TILE_SIZE,
+		TILE_SIZE);
+}
