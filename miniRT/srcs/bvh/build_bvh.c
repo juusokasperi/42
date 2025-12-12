@@ -38,7 +38,6 @@ t_bvh	init_bvh(t_data *data)
 		size = sizeof(t_bvh_node) * 1;
 	else
 		size = sizeof(t_bvh_node) * (2 * data->scene.object_count - 1);
-
 	bvh.nodes = arena_alloc(&data->arena, size);
 	if (!bvh.nodes)
 	{

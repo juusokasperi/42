@@ -221,12 +221,22 @@ typedef struct s_obj_t
 	t_object	*objects;
 }	t_obj_t;
 
-typedef struct s_calc_context
+typedef struct s_surface_info
 {
-	t_rgb	diffuse;
-	t_rgb	final_color;
-	t_ray	light_ray;
-	t_point	hit_point;
-}	t_calc_context;
+	t_point		point;
+	t_vector	normal;
+	t_vector	view_dir;
+	t_object	*obj;
+}	t_surface;
+
+typedef struct s_light_calc
+{
+	float		n_dot_l;
+	float		r_dot_v;
+	float		attenuation;
+	t_vector	reflect_dir;
+	t_rgb		diffuse_contrib;
+	t_rgb		specular_contrib;
+}	t_light_calc;
 
 #endif

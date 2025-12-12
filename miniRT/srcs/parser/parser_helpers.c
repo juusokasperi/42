@@ -36,8 +36,9 @@ bool	validate_scene_content(t_data *data)
 
 bool	allocate_scene_memory(t_data *data)
 {
-	size_t align = 16;
+	size_t	align;
 
+	align = 16;
 	data->scene.objects = (t_object *)arena_alloc_aligned(&data->arena,
 			sizeof(t_object) * data->scene.object_count, align);
 	data->scene.lights = (t_light *)arena_alloc_aligned(&data->arena,

@@ -15,8 +15,6 @@ SRCS = main.c							\
 	hooks/resize.c						\
 	debug/bvh_debug.c					\
 	debug/debug.c						\
-	vector_utils/vector.c				\
-	vector_utils/vector_2.c				\
 	rgb_utils/rgb.c						\
 	rgb_utils/rgb_2.c					\
 	bvh/build_bvh.c						\

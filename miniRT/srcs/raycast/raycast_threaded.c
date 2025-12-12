@@ -67,8 +67,8 @@ int	init_thread_pool(t_data *data)
 	data->pool.thread_count = get_system_thread_count();
 	data->ctx.data = data;
 	atomic_init(&data->ctx.next_tile, 0);
-	data->pool.threads = arena_alloc(&data->arena, 
-		sizeof(pthread_t) * data->pool.thread_count);
+	data->pool.threads = arena_alloc(&data->arena,
+			sizeof(pthread_t) * data->pool.thread_count);
 	pthread_mutex_init(&data->pool.work_mutex, NULL);
 	pthread_cond_init(&data->pool.work_cond, NULL);
 	pthread_mutex_init(&data->pool.done_mutex, NULL);

@@ -26,6 +26,7 @@
 # include "structs.h"
 # include "parser.h"
 # include "bvh.h"
+# include "vector_math.h"
 # define WIDTH 800
 # define HEIGHT 640
 # define BOTTOM_DISK 0
@@ -101,30 +102,21 @@ bool			light_visible(t_vector cam_pos, t_vector light_pos,
 bool			in_shadow(t_ray light_ray, t_data *data, t_light light);
 //	shadows/calculate_normals.c
 t_point			calculate_normal(t_vector view_direction,
-					t_ray light_ray, t_object obj);
+					t_point hit_point, t_object obj);
+
 //	shadows/diffuse.c
-t_rgb			diffuse_specular_falloff(t_light light, t_ray light_ray,
-					t_ray view_ray, t_object obj);
+t_rgb			calculate_light_contribution(t_light light, t_surface *surf,
+					t_ray light_ray, float light_dist);
 t_rgb			calculate_ambient(t_object obj, t_ambient ambient);
 
 //	utils/ray_utils.c
+t_ray			build_light_ray(t_point hit_point, t_light light,
+					t_vector normal, float *out_dist);
 t_ray			get_ray_for_px(t_data *data, int px, int py);
 t_point			get_point(t_ray ray, float t);
-t_ray			build_light_ray(t_ray ray, float t, t_light light,
-					bool near_plane);
+
 //	utils/main_utils.c
 void			setup_rendering(t_data *data);
-
-// vector_utils/vector.c && vector_2.c
-t_vector		vector(float x, float y, float z);
-t_vector		vector_add(t_vector a, t_vector b);
-t_vector		vector_cross(t_vector a, t_vector b);
-t_vector		vector_subtract(t_vector a, t_vector b);
-t_vector		vector_multiply(t_vector a, float scalar);
-float			vector_dot(t_vector a, t_vector b);
-float			vector_magnitude(t_vector a);
-void			vector_normalize(t_vector *a);
-t_vector		rotate_vector(t_vector v, t_vector a, float angle);
 
 //	debug/debug.c
 void			print_cam_info(t_data data);

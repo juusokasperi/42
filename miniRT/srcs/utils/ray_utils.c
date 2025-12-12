@@ -14,23 +14,22 @@
 
 /*
 	Builds a ray from an intersection point towards a light source.
-	The boolean 'near_plane' is used to decide whether to use a small or
-	large offset.
-*/
-t_ray	build_light_ray(t_ray ray, float t, t_light light, bool near_plane)
-{
-	t_ray	res;
-	float	offset;
 
-	if (near_plane)
-		offset = EPSILON;
+	Sets the distance to the light source into *out_dist.
+*/
+t_ray	build_light_ray(t_point hit_point, t_light light,
+			t_vector normal, float *out_dist)
+{
+	t_ray		res;
+	t_vector	raw_dir;
+
+	res.origin = vector_add(hit_point, vector_multiply(normal, SHADOW_EPSILON));
+	raw_dir = vector_subtract(light.pos, res.origin);
+	*out_dist = vector_magnitude(raw_dir);
+	if (*out_dist > EPSILON)
+		res.direction = vector_multiply(raw_dir, 1.0f / *out_dist);
 	else
-		offset = 0.01f;
-	res.origin = get_point(ray, t);
-	res.direction = vector_subtract(light.pos, res.origin);
-	vector_normalize(&res.direction);
-	res.origin = vector_add(res.origin,
-			vector_multiply(res.direction, offset));
+		res.direction = raw_dir;
 	return (res);
 }
 
