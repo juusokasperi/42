@@ -15,99 +15,27 @@
 /*
 	@return Boolean stating whether the ray intersect the AABB.
 */
-bool	ray_aabb_intersect(t_ray ray, t_aabb_bounds bounds,
-	float *t_min, float *t_max)
+bool	ray_aabb_intersect(t_ray *ray, t_aabb_bounds bounds,
+	float *t_enter, float *t_exit)
 {
-	t_aabb_bounds	bounds_store;
+	float	t0;
+	float	t1;
+	float	t_min;
+	float	t_max;
 
-	if (!check_axis_bounds(
-			ray.origin.x, ray.direction.x, bounds.min.x, bounds.max.x)
-		|| !check_axis_bounds(
-			ray.origin.y, ray.direction.y, bounds.min.y, bounds.max.y)
-		|| !check_axis_bounds(
-			ray.origin.z, ray.direction.z, bounds.min.z, bounds.max.z))
-		return (false);
-	bounds_store = calc_axis_intervals(ray, bounds);
-	*t_min = fmaxf(bounds_store.min.x,
-			fmaxf(bounds_store.min.y, bounds_store.min.z));
-	*t_max = fminf(bounds_store.max.x,
-			fminf(bounds_store.max.y, bounds_store.max.z));
-	return (*t_max > *t_min && *t_max > 0);
-}
-
-/*
-	Checks if the ray's direction along an axis is nearly zero,
-	in which case an intersection is possible only if the
-	ray's origin is between the min/max bounds on the axis.
-*/
-bool	check_axis_bounds(float origin, float direction,
-	float min, float max)
-{
-	if (fabsf(direction) < EPSILON)
-		if (origin < min || origin > max)
-			return (false);
-	return (true);
-}
-
-/*
-	Calculates where a ray enter and exits a space between two
-	parallel planes for a single axis.
-
-	In case the axis moves parallel to the planes, min and max values for
-	said axis will be set to i and FLT_MAX so they are non-constraining
-	in the later intersection calculation.
-
-	@return t_interval, which contains two parameters;
-		res.min: when the ray first enters a plane along the axis
-		res.max: when the ray exits through the second plane
-*/
-t_interval	calc_single_axis(float origin, float dir,
-		float min, float max)
-{
-	t_interval	res;
-	float		tmp;
-
-	if (fabsf(dir) < EPSILON)
-	{
-		res.min = 0;
-		res.max = FLT_MAX;
-	}
-	else
-	{
-		res.min = (min - origin) / dir;
-		res.max = (max - origin) / dir;
-		if (res.min > res.max)
-		{
-			tmp = res.min;
-			res.min = res.max;
-			res.max = tmp;
-		}
-	}
-	return (res);
-}
-
-/*
-	@return t_aabb_bounds struct containing the entry and exit points
-			for each axis between two parallel planes.
-*/
-t_aabb_bounds	calc_axis_intervals(t_ray ray, t_aabb_bounds bounds)
-{
-	t_aabb_bounds	res;
-	t_interval		x;
-	t_interval		y;
-	t_interval		z;
-
-	x = calc_single_axis(ray.origin.x, ray.direction.x,
-			bounds.min.x, bounds.max.x);
-	y = calc_single_axis(ray.origin.y, ray.direction.y,
-			bounds.min.y, bounds.max.y);
-	z = calc_single_axis(ray.origin.z, ray.direction.z,
-			bounds.min.z, bounds.max.z);
-	res.min.x = x.min;
-	res.max.x = x.max;
-	res.min.y = y.min;
-	res.max.y = y.max;
-	res.min.z = z.min;
-	res.max.z = z.max;
-	return (res);
+	t0 = (bounds.min.x - ray->origin.x) * ray->inv_dir.x;
+	t1 = (bounds.max.x - ray->origin.x) * ray->inv_dir.x;
+	t_min = fminf(t0, t1);
+	t_max = fmaxf(t0, t1);
+	t0 = (bounds.min.y - ray->origin.y) * ray->inv_dir.y;
+	t1 = (bounds.max.y - ray->origin.y) * ray->inv_dir.y;
+	t_min = fmaxf(t_min, fminf(t0, t1));
+	t_max = fminf(t_max, fmaxf(t0, t1));
+	t0 = (bounds.min.z - ray->origin.z) * ray->inv_dir.z;
+	t1 = (bounds.max.z - ray->origin.z) * ray->inv_dir.z;
+	t_min = fmaxf(t_min, fminf(t0, t1));
+	t_max = fminf(t_max, fmaxf(t0, t1));
+	*t_enter = t_min;
+	*t_exit = t_max;
+	return (t_max >= t_min && t_max > 0.0f);
 }

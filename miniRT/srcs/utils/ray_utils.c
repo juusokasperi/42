@@ -12,6 +12,25 @@
 
 #include "mini_rt.h"
 
+static void	init_ray_inv(t_ray *ray)
+{
+	if (fabsf(ray->direction.x) < EPSILON)
+		ray->inv_dir.x = 1.0f / EPSILON;
+	else
+		ray->inv_dir.x = 1.0f / ray->direction.x;
+	if (fabsf(ray->direction.y) < EPSILON)
+		ray->inv_dir.y = 1.0f / EPSILON;
+	else
+		ray->inv_dir.y = 1.0f / ray->direction.y;
+	if (fabsf(ray->direction.z) < EPSILON)
+		ray->inv_dir.z = 1.0f / EPSILON;
+	else
+		ray->inv_dir.z = 1.0f / ray->direction.z;
+	ray->sign[0] = (ray->inv_dir.x < 0);
+	ray->sign[1] = (ray->inv_dir.y < 0);
+	ray->sign[2] = (ray->inv_dir.z < 0);
+}
+
 /*
 	Builds a ray from an intersection point towards a light source.
 
@@ -30,6 +49,7 @@ t_ray	build_light_ray(t_point hit_point, t_light light,
 		res.direction = vector_multiply(raw_dir, 1.0f / *out_dist);
 	else
 		res.direction = raw_dir;
+	init_ray_inv(&res);
 	return (res);
 }
 
@@ -70,6 +90,7 @@ t_ray	get_ray_for_px(t_data *data, int px, int py)
 	ray.direction = vector_add(camera.forward, vector_add(right, up));
 	vector_normalize(&ray.direction);
 	ray.origin = camera.pos;
+	init_ray_inv(&ray);
 	return (ray);
 }
 

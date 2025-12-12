@@ -110,6 +110,8 @@ typedef struct s_ray
 {
 	t_vector	origin;
 	t_vector	direction;
+	t_vector	inv_dir;
+	int			sign[3];
 }	t_ray;
 
 typedef struct s_checkerboard

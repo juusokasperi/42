@@ -40,8 +40,8 @@ uint16_t		get_left_child(uint32_t left_right);
 uint16_t		get_right_child(uint32_t left_right);
 uint32_t		pack_children(uint16_t left, uint16_t right);
 //	ray_aabb_utils.c
-bool			ray_aabb_intersect(t_ray ray, t_aabb_bounds bounds,
-					float *t_min, float *t_max);
+bool			ray_aabb_intersect(t_ray *ray, t_aabb_bounds bounds,
+					float *t_enter, float *t_exit);
 bool			check_axis_bounds(float origin, float direction,
 					float min, float max);
 t_interval		calc_single_axis(float origin, float dir,
