@@ -39,11 +39,17 @@ bool	allocate_scene_memory(t_data *data)
 	size_t	align;
 
 	align = 16;
-	data->scene.objects = (t_object *)arena_alloc_aligned(&data->arena,
+	if (data->scene.object_count > 0)
+		data->scene.objects = (t_object *)arena_alloc_aligned(&data->arena,
 			sizeof(t_object) * data->scene.object_count, align);
-	data->scene.lights = (t_light *)arena_alloc_aligned(&data->arena,
+	if (data->scene.plane_count > 0)
+		data->scene.planes = (t_object *)arena_alloc_aligned(&data->arena,
+			sizeof(t_object) * data->scene.plane_count, align);
+	if (data->scene.light_count > 0)
+		data->scene.lights = (t_light *)arena_alloc_aligned(&data->arena,
 			sizeof(t_light) * data->scene.light_count, align);
 	data->scene.object_count = 0;
+	data->scene.plane_count = 0;
 	data->scene.light_count = 0;
 	return (true);
 }

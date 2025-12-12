@@ -75,8 +75,10 @@ static bool	process_trimmed_line(char *trimmed, t_data *data)
 			data->camera_count++;
 		else if (trimmed[0] == 'L')
 			data->scene.light_count++;
-		else if (strncmp(trimmed, "sp", 2) == 0 || strncmp(trimmed,
-				"pl", 2) == 0 || strncmp(trimmed, "cy", 2) == 0
+		else if (strncmp(trimmed, "pl", 2) == 0)
+			data->scene.plane_count++;
+		else if (strncmp(trimmed, "sp", 2) == 0 
+			|| strncmp(trimmed, "cy", 2) == 0
 			|| strncmp(trimmed, "co", 2) == 0)
 			data->scene.object_count++;
 	}

@@ -20,13 +20,13 @@ float	find_closest_intersection(t_ray ray, t_data *data, t_object *closest)
 {
 	t_obj_t		context;
 
-	if (data->scene.object_count < 1)
-		return (-1);
 	context.min_t = -1;
 	context.closest = closest;
 	context.objects = data->scene.objects;
-	intersect_planes(ray, data->scene, &context);
-	bvh_traverse(ray, &data->bvh, &context, 0);
+	if (data->scene.plane_count > 0)
+		intersect_planes(ray, data->scene, &context);
+	if (data->scene.object_count > 0)
+		bvh_traverse(ray, &data->bvh, &context, 0);
 	if (context.min_t > 0)
 		return (context.min_t);
 	return (-1);
@@ -43,17 +43,14 @@ static void	intersect_planes(t_ray ray, t_scene scene, t_obj_t *context)
 
 	t = -1;
 	i = -1;
-	while (++i < scene.object_count)
+	while (++i < scene.plane_count)
 	{
-		if (scene.objects[i].type == PLANE)
+		t = ray_intersect(ray, &scene.planes[i]);
+		if (t > EPSILON
+			&& (t <= context->min_t || context->min_t == -1))
 		{
-			t = ray_intersect(ray, &scene.objects[i]);
-			if (t > EPSILON
-				&& (t <= context->min_t || context->min_t == -1))
-			{
-				context->min_t = t;
-				*(context->closest) = scene.objects[i];
-			}
+			context->min_t = t;
+			*(context->closest) = scene.objects[i];
 		}
 	}
 }

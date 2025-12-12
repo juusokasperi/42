@@ -42,11 +42,6 @@ uint32_t		pack_children(uint16_t left, uint16_t right);
 //	ray_aabb_utils.c
 bool			ray_aabb_intersect(t_ray *ray, t_aabb_bounds bounds,
 					float *t_enter, float *t_exit);
-bool			check_axis_bounds(float origin, float direction,
-					float min, float max);
-t_interval		calc_single_axis(float origin, float dir,
-					float min, float max);
-t_aabb_bounds	calc_axis_intervals(t_ray ray, t_aabb_bounds bounds);
 //	ray_aabb.c
 float			find_closest_intersection(t_ray ray, t_data *data,
 					t_object *closest);

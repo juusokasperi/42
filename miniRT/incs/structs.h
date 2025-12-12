@@ -163,6 +163,8 @@ typedef struct s_scene
 {
 	t_object	*objects;
 	int			object_count;
+	t_object	*planes;
+	int			plane_count;
 	t_light		*lights;
 	int			light_count;
 }	t_scene;

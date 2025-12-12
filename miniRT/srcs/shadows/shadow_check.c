@@ -14,6 +14,21 @@
 
 static bool	shadow_bvh(t_ray ray, t_data *data, float max_dist);
 
+static bool shadow_planes(t_ray ray, t_data *data, float max_dist)
+{
+	int		i;
+	float	t;
+
+	i = -1;
+	while (++i < data->scene.plane_count)
+	{
+		t = ray_intersect(ray, &data->scene.planes[i]);
+		if (t > SHADOW_EPSILON && t < max_dist)
+			return (true);
+	}
+	return (false);
+}
+
 /*
 	Traverses through the BVH structure to find for possible
 	intersections between the intersection point and the light source.
@@ -29,7 +44,12 @@ bool	in_shadow(t_ray light_ray, t_data *data, t_light light)
 	light_dist = vector_magnitude(vector_subtract(light.pos, light_ray.origin));
 	if (light_dist < EPSILON)
 		return (false);
-	return (shadow_bvh(light_ray, data, light_dist));
+	if (data->scene.plane_count > 0)
+		if (shadow_planes(light_ray, data, light_dist))
+			return (true);
+	if (data->scene.object_count > 0)
+		return (shadow_bvh(light_ray, data, light_dist));
+	return (false);
 }
 
 /*
