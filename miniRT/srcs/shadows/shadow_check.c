@@ -48,7 +48,8 @@ bool	in_shadow(t_ray light_ray, t_data *data, t_light light)
 		if (shadow_planes(light_ray, data, light_dist))
 			return (true);
 	if (data->scene.object_count > 0)
-		return (shadow_bvh(light_ray, data, light_dist));
+		if (shadow_bvh(light_ray, data, light_dist))
+			return (true);
 	return (false);
 }
 

@@ -53,7 +53,10 @@ bool	validate_and_init_object(t_data *data, t_object **obj,
 		obj_type = "plane";
 	if (!validate_parts_count(parts, expected_count, obj_type))
 		return (false);
-	*obj = &data->scene.objects[data->scene.object_count];
+	if (type == PLANE)
+		*obj = &data->scene.planes[data->scene.plane_count];
+	else
+		*obj = &data->scene.objects[data->scene.object_count];
 	(*obj)->type = type;
 	return (true);
 }

@@ -50,7 +50,7 @@ static void	intersect_planes(t_ray ray, t_scene scene, t_obj_t *context)
 			&& (t <= context->min_t || context->min_t == -1))
 		{
 			context->min_t = t;
-			*(context->closest) = scene.objects[i];
+			*(context->closest) = scene.planes[i];
 		}
 	}
 }
@@ -115,8 +115,6 @@ static bool	process_leaf_node(t_ray ray, t_obj_t *context, t_bvh_node *node)
 	i = -1;
 	while (++i < count)
 	{
-		if (context->objects[first + i].type == PLANE)
-			continue ;
 		t = ray_intersect(ray, &context->objects[first + i]);
 		if (t > EPSILON && (t < context->min_t || context->min_t == -1))
 		{
