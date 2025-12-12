@@ -21,11 +21,6 @@ t_cam_controls	init_cam_controls(void)
 	return (controls);
 }
 
-void	update_camera(t_data *data)
-{
-	raycast_threaded(data);
-}
-
 void	print_controls(void)
 {
 	printf("\nCamera Controls:\n");
@@ -59,6 +54,8 @@ void	loop_hook(void *param)
 	handle_camera_movement(data);
 	handle_camera_rotation(data);
 	if (data->should_update == true)
-		update_camera(data);
+		data->frame.sample_count = 0;
+	if (data->frame.sample_count < MAX_SAMPLES)
+		raycast_threaded(data);
 	data->should_update = false;
 }

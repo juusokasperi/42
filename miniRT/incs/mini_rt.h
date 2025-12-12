@@ -43,6 +43,8 @@
 
 # define BACKGROUND_COLOR 0x000000FF
 
+# define MAX_SAMPLES 16
+
 # ifndef NUM_THREADS
 #  define NUM_THREADS 4
 # endif
@@ -74,7 +76,6 @@ bool			handle_camera_movement(t_data *data);
 bool			handle_camera_rotation(t_data *data);
 //	hooks/camera_controls.c
 t_cam_controls	init_cam_controls(void);
-void			update_camera(t_data *data);
 void			print_controls(void);
 void			loop_hook(void *param);
 
@@ -95,6 +96,8 @@ t_rgb			rgb_scalar_multiply(t_rgb a, float scalar);
 t_rgb			rgb_add(t_rgb a, t_rgb b);
 t_rgb			rgb(int r, int g, int b);
 uint32_t		rgb_to_uint(t_rgb a);
+t_vector		rgb_to_vec(t_rgb rgb);
+t_rgb			vec_to_rgb(t_vector vec);
 
 //	shadows/shadow_check.c && shadow_check_2.c
 bool			light_visible(t_vector cam_pos, t_vector light_pos,
@@ -112,7 +115,7 @@ t_rgb			calculate_ambient(t_object obj, t_ambient ambient);
 //	utils/ray_utils.c
 t_ray			build_light_ray(t_point hit_point, t_light light,
 					t_vector normal, float *out_dist);
-t_ray			get_ray_for_px(t_data *data, int px, int py);
+t_ray			get_ray_for_px(t_data *data, float px, float py);
 t_point			get_point(t_ray ray, float t);
 
 //	utils/main_utils.c

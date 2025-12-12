@@ -74,7 +74,7 @@ t_ray	build_light_ray(t_point hit_point, t_light light,
 	Direction = .. adds right and up to the cam.forward (which is initially at
 		center of screen, moving the ray along.)
 */
-t_ray	get_ray_for_px(t_data *data, int px, int py)
+t_ray	get_ray_for_px(t_data *data, float px, float py)
 {
 	t_ray		ray;
 	t_vector	right;
@@ -83,8 +83,8 @@ t_ray	get_ray_for_px(t_data *data, int px, int py)
 	t_camera	camera;
 
 	camera = data->cam;
-	pixels[X] = (2.0f * (px + 0.5f) / (float)data->width - 1.0f);
-	pixels[Y] = 1.0f - 2.0f * (py + 0.5f) / (float)data->height;
+	pixels[X] = (2.0f * px / (float)data->width - 1.0f);
+	pixels[Y] = 1.0f - 2.0f * py / (float)data->height;
 	right = vector_multiply(camera.right, camera.vp.width * pixels[X]);
 	up = vector_multiply(camera.up, camera.vp.height * pixels[Y]);
 	ray.direction = vector_add(camera.forward, vector_add(right, up));

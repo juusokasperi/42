@@ -197,7 +197,15 @@ typedef struct s_thread_context
 {
 	t_data			*data;
 	_Atomic int		next_tile __attribute__((aligned(64)));
+	unsigned int	rng_state;
 }	t_thread_ctx;
+
+typedef struct s_frame
+{
+	t_vector	*accum_buffer;
+	Arena		f_arena;
+	int			sample_count;
+}	t_frame;
 
 typedef struct s_data
 {
@@ -216,6 +224,7 @@ typedef struct s_data
 	t_thread_pool	pool;
 	t_thread_ctx	ctx;
 	Arena			arena;
+	t_frame			frame;
 }	t_data;
 
 typedef struct s_obj_t
@@ -242,5 +251,14 @@ typedef struct s_light_calc
 	t_rgb		diffuse_contrib;
 	t_rgb		specular_contrib;
 }	t_light_calc;
+
+typedef struct s_pixel_ctx
+{
+	t_data			*data;
+	unsigned int	*rng_state;
+	int				x;
+	int				y;
+	int				idx;
+}	t_pixel_ctx;
 
 #endif

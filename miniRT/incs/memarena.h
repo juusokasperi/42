@@ -115,6 +115,7 @@ void			arena_reset(Arena *a);
 void			*arena_alloc(Arena *a, size_t size);
 void			*arena_alloc_aligned(Arena *a, size_t size, size_t align);
 void			*arena_alloc_zeroed(Arena *a, size_t size);
+void			*arena_alloc_zeroed_aligned(Arena *a, size_t size, size_t align);
 
 ArenaTemp		arena_temp_begin(Arena *a);
 void			arena_temp_end(ArenaTemp temp);
@@ -298,6 +299,14 @@ void *arena_alloc_aligned(Arena *a, size_t size, size_t align)
 void *arena_alloc_zeroed(Arena *a, size_t size)
 {
     void *ptr = arena_alloc(a, size);
+    if (ptr)
+		memset(ptr, 0, size);
+    return (ptr);
+}
+
+void *arena_alloc_zeroed_aligned(Arena *a, size_t size, size_t align)
+{
+    void *ptr = arena_alloc_aligned(a, size, align);
     if (ptr)
 		memset(ptr, 0, size);
     return (ptr);

@@ -53,6 +53,7 @@ void	cleanup_data(t_data *data)
 {
 	cleanup_thread_pool(data);
 	arena_free(&data->arena);
+	arena_free(&data->frame.f_arena);
 }
 
 int	main(int argc, char **argv)
@@ -62,6 +63,9 @@ int	main(int argc, char **argv)
 
 	memset(&data, 0, sizeof(t_data));
 	data.arena = arena_init(PROT_READ | PROT_WRITE);
+	data.frame.f_arena = arena_init(PROT_READ | PROT_WRITE);
+	data.frame.accum_buffer = (t_vector *)arena_alloc_aligned(&data.frame.f_arena,
+			sizeof(t_vector) * WIDTH * HEIGHT, 16);
 	if (!check_arguments(argc, argv, &scene_file))
 		return (1);
 	if (!setup_scene(&data, scene_file))

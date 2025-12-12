@@ -97,4 +97,8 @@ void	raycast_threaded(t_data *data)
 	while (data->pool.finished_count < data->pool.thread_count)
 		pthread_cond_wait(&data->pool.done_cond, &data->pool.done_mutex);
 	pthread_mutex_unlock(&data->pool.done_mutex);
+	pthread_mutex_lock(&data->pool.work_mutex);
+	data->pool.working = false;
+	pthread_mutex_unlock(&data->pool.work_mutex);
+	data->frame.sample_count++;
 }

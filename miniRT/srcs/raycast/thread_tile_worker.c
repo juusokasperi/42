@@ -11,68 +11,68 @@
 /* ************************************************************************** */
 
 #include "mini_rt.h"
+#include "thread_tile_inline.h"
 
-static int	get_next_tile_index(t_thread_ctx *ctx, int max_tiles)
+static inline t_vector	accumulate_sample(t_data *data, int idx, t_vector new_color)
 {
-	int	tile_index;
+	t_vector	accum;
+	float		weight;
 
-	tile_index = atomic_fetch_add(&ctx->next_tile, 1);
-	if (tile_index >= max_tiles)
-		return (-1);
-	return (tile_index);
+	if (data->frame.sample_count == 0)
+	{
+		data->frame.accum_buffer[idx] = new_color;
+		return (new_color);
+	}
+	weight = (float)(data->frame.sample_count + 1);
+	accum = data->frame.accum_buffer[idx];
+	accum = vector_multiply(accum, weight - 1.0f);
+	accum = vector_add(accum, new_color);
+	accum = vector_multiply(accum, 1.0f / weight);
+	data->frame.accum_buffer[idx] = accum;
+	return (accum);
 }
 
-static t_tile	get_tile(int width, int height, int tile_index, int tiles_x)
+static inline t_vector	trace_pixel(t_pixel_ctx *ctx)
 {
-	t_tile	tile;
-	int		tile_x;
-	int		tile_y;
-
-	tile_x = tile_index % tiles_x;
-	tile_y = tile_index / tiles_x;
-	tile.start_x = tile_x * TILE_SIZE;
-	tile.start_y = tile_y * TILE_SIZE;
-	tile.end_x = (tile_x + 1) * TILE_SIZE;
-	tile.end_y = (tile_y + 1) * TILE_SIZE;
-	if (tile.end_x > width)
-		tile.end_x = width;
-	if (tile.end_y > height)
-		tile.end_y = height;
-	return (tile);
-}
-
-static int	get_max_tiles(int width, int height, int *tiles_x)
-{
-	int	tiles_y;
-
-	*tiles_x = (width + TILE_SIZE - 1) / TILE_SIZE;
-	tiles_y = (height + TILE_SIZE - 1) / TILE_SIZE;
-	return (*tiles_x * tiles_y);
-}
-
-static void	raytrace_tile(t_data *data, t_tile tile)
-{
-	int			x;
-	int			y;
-	float		t;
 	t_ray		ray;
 	t_object	closest;
-	uint32_t	color;
+	t_rgb		color;
+	float		jitter[2];
+	float		t;
 
-	y = tile.start_y - 1;
-	while (++y < tile.end_y)
+	jitter[0] = random_float(ctx->rng_state);
+	jitter[1] = random_float(ctx->rng_state);
+	closest.type = NONE;
+	ray = get_ray_for_px(ctx->data, ctx->x + jitter[0], ctx->y + jitter[1]);
+	t = find_closest_intersection(ray, ctx->data, &closest);
+	if (closest.type != NONE)
+		color = calculate_color(ctx->data, closest, ray, t);
+	else
+		color = (t_rgb){0, 0, 0};
+	return (rgb_to_vec(color));
+}
+
+static void	raytrace_tile(t_data *data, t_tile tile, unsigned int *rng_state)
+{
+	t_pixel_ctx	ctx;
+	t_vector	new_color;
+	t_vector	accum_color;
+	t_rgb		final_rgb;
+
+	ctx.data = data;
+	ctx.rng_state = rng_state;
+	ctx.y = tile.start_y - 1;
+	while(++ctx.y < tile.end_y)
 	{
-		x = tile.start_x - 1;
-		while (++x < tile.end_x)
+		ctx.x = tile.start_x - 1;
+		while (++ctx.x < tile.end_x)
 		{
-			closest.type = NONE;
-			ray = get_ray_for_px(data, x, y);
-			t = find_closest_intersection(ray, data, &closest);
-			if (closest.type != NONE)
-				color = rgb_to_uint(calculate_color(data, closest, ray, t));
-			else
-				color = BACKGROUND_COLOR;
-			mlx_put_pixel(data->mlx_img, x, y, color);
+			ctx.idx = ctx.y * data->width + ctx.x;
+			new_color = trace_pixel(&ctx);
+			accum_color = accumulate_sample(ctx.data, ctx.idx, new_color);
+			final_rgb = vec_to_rgb(accum_color);
+			mlx_put_pixel(ctx.data->mlx_img, 
+					ctx.x, ctx.y, rgb_to_uint(final_rgb));
 		}
 	}
 }
@@ -86,15 +86,17 @@ void	*thread_tile_worker(void *arg)
 	int					max_tiles;
 	t_tile				tile;
 	long				local_frame_id;
+	unsigned int		rng_state;
 
 	ctx = (t_thread_ctx *)arg;
 	data = ctx->data;
-	local_frame_id = 0;
+	local_frame_id = -1;
+	rng_state = (unsigned int)(uintptr_t)pthread_self() ^ (uintptr_t)time(NULL);
 	while (1)
 	{
 		pthread_mutex_lock(&data->pool.work_mutex);
-		while ((local_frame_id == data->pool.frame_id || !data->pool.working)
-			&& !data->pool.stop)
+		while ((local_frame_id == data->pool.frame_id 
+			|| !data->pool.working) && !data->pool.stop)
 			pthread_cond_wait(&data->pool.work_cond, &data->pool.work_mutex);
 		if (data->pool.stop)
 		{
@@ -111,7 +113,7 @@ void	*thread_tile_worker(void *arg)
 				break ;
 			tile = get_tile(
 					ctx->data->width, ctx->data->height, tile_index, tiles_x);
-			raytrace_tile(ctx->data, tile);
+			raytrace_tile(ctx->data, tile, &rng_state);
 		}
 		pthread_mutex_lock(&data->pool.done_mutex);
 		data->pool.finished_count++;
