@@ -20,6 +20,8 @@
 # include <stdio.h> // for printf
 # include <unistd.h> // for read, close.
 # include <fcntl.h> // for open
+# include <ctype.h>
+# include "memarena.h"
 # include "libft.h"
 # include "structs.h"
 # include "parser.h"
@@ -44,7 +46,7 @@
 #  define NUM_THREADS 4
 # endif
 
-# define TILE_SIZE 128
+# define TILE_SIZE 32
 
 # define EPSILON 0.0001f
 # define SHADOW_EPSILON 0.001f

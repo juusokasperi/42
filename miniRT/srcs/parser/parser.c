@@ -18,19 +18,19 @@ static bool	process_identifier(char *identifier, t_line_context *ctx)
 	char	*current_line;
 
 	current_line = ctx->line;
-	if (ft_strncmp(identifier, "A", 1) == 0)
+	if (strncmp(identifier, "A", 1) == 0)
 		result = parse_ambient(&current_line[ctx->idx], ctx->data);
-	else if (ft_strncmp(identifier, "C", 1) == 0)
+	else if (strncmp(identifier, "C", 1) == 0)
 		result = parse_camera(&current_line[ctx->idx], ctx->data);
-	else if (ft_strncmp(identifier, "L", 1) == 0)
+	else if (strncmp(identifier, "L", 1) == 0)
 		result = parse_light(&current_line[ctx->idx], ctx->data);
-	else if (ft_strncmp(identifier, "sp", 2) == 0)
+	else if (strncmp(identifier, "sp", 2) == 0)
 		result = parse_sphere(&current_line[ctx->idx], ctx);
-	else if (ft_strncmp(identifier, "pl", 2) == 0)
+	else if (strncmp(identifier, "pl", 2) == 0)
 		result = parse_plane(&current_line[ctx->idx], ctx);
-	else if (ft_strncmp(identifier, "cy", 2) == 0)
+	else if (strncmp(identifier, "cy", 2) == 0)
 		result = parse_cylinder(&current_line[ctx->idx], ctx);
-	else if (ft_strncmp(identifier, "co", 2) == 0)
+	else if (strncmp(identifier, "co", 2) == 0)
 		result = parse_cone(&current_line[ctx->idx], ctx);
 	else
 	{
@@ -75,9 +75,9 @@ static bool	process_trimmed_line(char *trimmed, t_data *data)
 			data->camera_count++;
 		else if (trimmed[0] == 'L')
 			data->scene.light_count++;
-		else if (ft_strncmp(trimmed, "sp", 2) == 0 || ft_strncmp(trimmed,
-				"pl", 2) == 0 || ft_strncmp(trimmed, "cy", 2) == 0
-			|| ft_strncmp(trimmed, "co", 2) == 0)
+		else if (strncmp(trimmed, "sp", 2) == 0 || strncmp(trimmed,
+				"pl", 2) == 0 || strncmp(trimmed, "cy", 2) == 0
+			|| strncmp(trimmed, "co", 2) == 0)
 			data->scene.object_count++;
 	}
 	return (true);

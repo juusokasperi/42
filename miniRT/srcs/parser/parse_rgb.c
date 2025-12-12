@@ -43,7 +43,7 @@ static bool	is_valid_number(char *str)
 		return (false);
 	while (str[i])
 	{
-		if (!ft_isdigit(str[i]))
+		if (!isdigit(str[i]))
 			return (false);
 		i++;
 	}
@@ -66,9 +66,9 @@ bool	parse_rgb(char *str, t_rgb *color)
 		free_split(parts);
 		return (false);
 	}
-	color->r = ft_atoi(parts[0]);
-	color->g = ft_atoi(parts[1]);
-	color->b = ft_atoi(parts[2]);
+	color->r = atoi(parts[0]);
+	color->g = atoi(parts[1]);
+	color->b = atoi(parts[2]);
 	free_split(parts);
 	if (!validate_rgb_range(color))
 		return (false);

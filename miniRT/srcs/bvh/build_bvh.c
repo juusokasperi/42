@@ -32,16 +32,18 @@ static uint32_t	build_bvh(t_bvh *bvh, t_object *objects, int start, int end);
 t_bvh	init_bvh(t_data *data)
 {
 	t_bvh	bvh;
+	size_t	size;
 
 	if (data->scene.object_count == 0)
-		bvh.nodes = malloc(sizeof(t_bvh_node) * 1);
+		size = sizeof(t_bvh_node) * 1;
 	else
-		bvh.nodes = malloc(
-				sizeof(t_bvh_node) * (2 * data->scene.object_count - 1));
+		size = sizeof(t_bvh_node) * (2 * data->scene.object_count - 1);
+
+	bvh.nodes = arena_alloc(&data->arena, size);
 	if (!bvh.nodes)
 	{
-		cleanup_data(data);
 		printf("Error\nMemory error in init_bvh().\n");
+		cleanup_data(data);
 		exit(1);
 	}
 	bvh.node_count = 0;

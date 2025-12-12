@@ -16,9 +16,7 @@ static int	get_next_tile_index(t_thread_ctx *ctx, int max_tiles)
 {
 	int	tile_index;
 
-	pthread_mutex_lock(&ctx->tile_mutex);
-	tile_index = ctx->next_tile++;
-	pthread_mutex_unlock(&ctx->tile_mutex);
+	tile_index = atomic_fetch_add(&ctx->next_tile, 1);
 	if (tile_index >= max_tiles)
 		return (-1);
 	return (tile_index);

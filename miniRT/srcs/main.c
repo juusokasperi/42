@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#define MEMARENA_IMPLEMENTATION
+#include "memarena.h"
 #include "mini_rt.h"
 
 void	init_data(t_data *data)
@@ -50,12 +52,7 @@ static bool	setup_scene(t_data *data, char *scene_file)
 void	cleanup_data(t_data *data)
 {
 	cleanup_thread_pool(data);
-	if (data->scene.objects)
-		free(data->scene.objects);
-	if (data->scene.lights)
-		free(data->scene.lights);
-	if (data->bvh.nodes)
-		destroy_bvh(&data->bvh);
+	arena_free(&data->arena);
 }
 
 int	main(int argc, char **argv)
@@ -63,12 +60,13 @@ int	main(int argc, char **argv)
 	t_data		data;
 	char		*scene_file;
 
-	ft_memset(&data, 0, sizeof(t_data));
+	memset(&data, 0, sizeof(t_data));
+	data.arena = arena_init(PROT_READ | PROT_WRITE);
 	if (!check_arguments(argc, argv, &scene_file))
 		return (1);
 	if (!setup_scene(&data, scene_file))
 		return (1);
-	if (!init_thread_pool(data))
+	if (!init_thread_pool(&data))
 	{
 		cleanup_data(&data);
 		return (1);

@@ -15,6 +15,9 @@
 
 # include "MLX42/MLX42.h"
 # include <pthread.h>
+# include <stdatomic.h>
+# include <stdbool.h>
+# include "memarena.h"
 
 typedef enum e_shape
 {
@@ -189,8 +192,7 @@ typedef struct s_tile
 typedef struct s_thread_context
 {
 	t_data			*data;
-	int				next_tile;
-	pthread_mutex_t	tile_mutex;
+	_Atomic int		next_tile __attribute__((aligned(64)));
 }	t_thread_ctx;
 
 typedef struct s_data
@@ -209,6 +211,7 @@ typedef struct s_data
 	int				ambient_count;
 	t_thread_pool	pool;
 	t_thread_ctx	ctx;
+	Arena			arena;
 }	t_data;
 
 typedef struct s_obj_t

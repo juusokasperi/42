@@ -20,9 +20,9 @@ static bool	parse_decimal_part(char **endptr, float *result, int sign)
 
 	(*endptr)++;
 	decimal_start = *endptr;
-	if (!ft_isdigit(**endptr))
+	if (!isdigit(**endptr))
 		return (true);
-	decimal_part = (float)ft_strtol(*endptr, endptr, 10);
+	decimal_part = (float)strtol(*endptr, endptr, 10);
 	decimal_places = *endptr - decimal_start;
 	if (sign < 0)
 		*result = *result - (decimal_part / powf(10, decimal_places));
@@ -43,7 +43,7 @@ bool	parse_float(char *str, float *result)
 		sign = -1;
 	else
 		sign = 1;
-	value = ft_strtol(str, &endptr, 10);
+	value = strtol(str, &endptr, 10);
 	*result = (float)value;
 	if (*endptr == '.')
 		parse_decimal_part(&endptr, result, sign);

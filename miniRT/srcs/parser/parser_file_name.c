@@ -18,10 +18,10 @@ static bool	check_file_extension(const char *filename, const char *extension)
 
 	if (!filename || !extension)
 		return (false);
-	dot = ft_strrchr(filename, '.');
+	dot = strrchr(filename, '.');
 	if (!dot || dot == filename)
 		return (false);
-	return (ft_strcmp(dot, extension) == 0);
+	return (strcmp(dot, extension) == 0);
 }
 
 bool	validate_scene_file(const char *filename, int *fd)

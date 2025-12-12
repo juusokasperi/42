@@ -30,7 +30,7 @@ static bool	handle_identifiers(char **parts,
 		free_split(parts);
 		return (false);
 	}
-	*idx = ft_strlen((*identifier_parts)[0]);
+	*idx = strlen((*identifier_parts)[0]);
 	return (true);
 }
 
@@ -39,7 +39,7 @@ static bool	process_checkered_params(char **identifier_parts,
 {
 	if (!identifier_parts[1])
 		return (true);
-	if (ft_strcmp(identifier_parts[1], "ck") != 0)
+	if (strcmp(identifier_parts[1], "ck") != 0)
 	{
 		printf("Error\nInvalid checkered pattern identifier: %s\n",
 			identifier_parts[1]);
@@ -51,7 +51,7 @@ static bool	process_checkered_params(char **identifier_parts,
 	{
 		if (!validate_range_float(ctx->scale, 0.1, 20.0, "Checkered scale"))
 			return (false);
-		ctx->idx += ft_strlen(identifier_parts[2]) + 1;
+		ctx->idx += strlen(identifier_parts[2]) + 1;
 	}
 	return (true);
 }

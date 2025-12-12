@@ -28,21 +28,21 @@ void	update_camera(t_data *data)
 
 void	print_controls(void)
 {
-	ft_printf("\nCamera Controls:\n");
-	ft_printf("Move:\n");
-	ft_printf("  W: Forward\n");
-	ft_printf("  S: Backward\n");
-	ft_printf("  A: Left\n");
-	ft_printf("  D: Right\n");
-	ft_printf("  Q: Up\n");
-	ft_printf("  E: Down\n");
-	ft_printf("Rotate:\n");
-	ft_printf("  Up Arrow: Look up\n");
-	ft_printf("  Down Arrow: Look down\n");
-	ft_printf("  Left Arrow: Turn left\n");
-	ft_printf("  Right Arrow: Turn right\n");
-	ft_printf("Other:\n");
-	ft_printf("  ESC: Quit\n");
+	printf("\nCamera Controls:\n");
+	printf("Move:\n");
+	printf("  W: Forward\n");
+	printf("  S: Backward\n");
+	printf("  A: Left\n");
+	printf("  D: Right\n");
+	printf("  Q: Up\n");
+	printf("  E: Down\n");
+	printf("Rotate:\n");
+	printf("  Up Arrow: Look up\n");
+	printf("  Down Arrow: Look down\n");
+	printf("  Left Arrow: Turn left\n");
+	printf("  Right Arrow: Turn right\n");
+	printf("Other:\n");
+	printf("  ESC: Quit\n");
 }
 
 void	loop_hook(void *param)

@@ -36,21 +36,12 @@ bool	validate_scene_content(t_data *data)
 
 bool	allocate_scene_memory(t_data *data)
 {
-	data->scene.objects = (t_object *)malloc(sizeof(t_object)
-			* data->scene.object_count);
-	if (!data->scene.objects)
-	{
-		printf("Error\nFailed to allocate memory for objects\n");
-		return (false);
-	}
-	data->scene.lights = (t_light *)malloc(sizeof(t_light)
-			* data->scene.light_count);
-	if (!data->scene.lights)
-	{
-		free(data->scene.objects);
-		printf("Error\nFailed to allocate memory for lights\n");
-		return (false);
-	}
+	size_t align = 16;
+
+	data->scene.objects = (t_object *)arena_alloc_aligned(&data->arena,
+			sizeof(t_object) * data->scene.object_count, align);
+	data->scene.lights = (t_light *)arena_alloc_aligned(&data->arena,
+			sizeof(t_light) * data->scene.light_count, align);
 	data->scene.object_count = 0;
 	data->scene.light_count = 0;
 	return (true);
