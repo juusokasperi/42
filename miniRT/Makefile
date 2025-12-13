@@ -39,7 +39,6 @@ SRCS = main.c							\
 	parser/parse_dual_rgb.c				\
 	parser/parse_float.c				\
 	parser/parser_vector.c				\
-	parser/ft_split_isspace.c			\
 	parser/parse_identifier.c			\
 	parser/parse_object.c				\
 	parser/parse_common_utils.c			\
@@ -49,6 +48,9 @@ SRCS = main.c							\
 	hooks/camera_controls.c				\
 	raycast/raycast_threaded.c			\
 	raycast/thread_tile_worker.c		\
+	arena/arena_strtrim.c				\
+	arena/arena_split_isspace.c			\
+	arena/arena_strdup.c
 
 SRCS_DIR =		srcs/
 OBJS_DIR =		objs/
@@ -59,17 +61,16 @@ DEPS =			$(OBJS:.o=.d)
 
 NAME =			miniRT
 
-HDRS_PATH =	-I./incs -I$(LIBMLX_DIR)/include -I./libft/includes
+HDRS_PATH =	-I./incs -I$(LIBMLX_DIR)/include
 
 CC =		cc
 CFLAGS +=	-Wall -Wextra -Werror -O3 -march=native -mtune=native \
 			-fomit-frame-pointer -DNDEBUG -flto -MMD -MP
 
-LIBFT =			libft/libft.a
 LIBMLX_DIR =	./MLX42
 LIBMLX =		$(LIBMLX_DIR)/build/libmlx42.a
 LIBMLX_GIT =	https://github.com/codam-coding-college/MLX42.git
-LIBS =			$(LIBMLX) -ldl -lglfw -pthread -lm -L./libft -lft
+LIBS =			$(LIBMLX) -ldl -lglfw -pthread -lm
 
 # Terminal colors
 GREEN =		\033[0;32m
@@ -78,7 +79,7 @@ ENDCOLOR =	\033[0m
 
 all:	$(NAME)
 
-$(NAME): $(LIBFT) $(LIBMLX) $(OBJS)
+$(NAME): $(LIBMLX) $(OBJS)
 	@$(CC) $(CFLAGS) $(OBJS) $(LIBS) $(HDRS_PATH) -o $(NAME)
 	@echo "$(GREEN)✅ $(NAME): Compilation complete!$(ENDCOLOR)"
 
@@ -88,9 +89,6 @@ $(OBJS_DIR)%.o: $(SRCS_DIR)%.c
 
 -include $(DEPS)
 
-$(LIBFT):
-	@make -C ./libft
-
 $(LIBMLX):
 	@if [ ! -d "$(LIBMLX_DIR)" ] || [ -z "$$(ls -A $(LIBMLX_DIR) 2>/dev/null)" ]; then \
 		git clone $(LIBMLX_GIT) $(LIBMLX_DIR); \
@@ -99,12 +97,10 @@ $(LIBMLX):
 	@echo "$(GREEN)✅ MLX42: Library compiled.$(ENDCOLOR)"
 
 clean:
-	@make -C ./libft clean
 	@rm -rf $(OBJS_DIR)
 	@echo "$(RED)✅ $(NAME): Clean complete.$(ENDCOLOR)"
 
 fclean:
-	@make -C ./libft fclean
 	@rm -rf $(OBJS_DIR) $(NAME) $(LIBMLX_DIR)
 	@echo "$(RED)✅ $(NAME): FClean complete.$(ENDCOLOR)"
 

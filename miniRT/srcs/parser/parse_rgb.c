@@ -17,7 +17,6 @@ static bool	validate_rgb_components(char **parts, char *str)
 	if (!parts || !parts[0] || !parts[1] || !parts[2] || parts[3])
 	{
 		printf("Error\nRGB color needs exactly 3 components: %s\n", str);
-		free_split(parts);
 		return (false);
 	}
 	return (true);
@@ -50,26 +49,24 @@ static bool	is_valid_number(char *str)
 	return (true);
 }
 
-bool	parse_rgb(char *str, t_rgb *color)
+bool	parse_rgb(Arena *a, char *str, t_rgb *color)
 {
 	char	**parts;
 
 	if (!str || !color)
 		return (false);
-	parts = ft_split(str, ',');
+	parts = arena_split(a, str, ",");
 	if (!validate_rgb_components(parts, str))
 		return (false);
 	if (!is_valid_number(parts[0]) || !is_valid_number(parts[1])
 		|| !is_valid_number(parts[2]))
 	{
 		printf("Error\nRGB values must be numeric: %s\n", str);
-		free_split(parts);
 		return (false);
 	}
 	color->r = atoi(parts[0]);
 	color->g = atoi(parts[1]);
 	color->b = atoi(parts[2]);
-	free_split(parts);
 	if (!validate_rgb_range(color))
 		return (false);
 	return (true);

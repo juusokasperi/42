@@ -28,7 +28,7 @@ typedef struct s_line_context
 /* Main parsing functions */
 bool	parse_scene(const char *filename, t_data *data);
 bool	validate_scene_file(const char *filename, int *fd);
-bool	parse_identifier(char *line, char **identifier, t_line_context *ctx);
+bool	parse_identifier(Arena *a, char *line, char **identifier, t_line_context *ctx);
 
 /* Scene element parsing functions */
 bool	validate_scene_content(t_data *data);
@@ -46,9 +46,9 @@ bool	parse_cone(char *line, t_line_context *ctx);
 bool	validate_object_count(t_data *data);
 
 /* Object property parsing utilities */
-bool	parse_object_position(char **parts, t_vector *position);
-bool	parse_object_direction(char **parts, t_vector *direction);
-bool	parse_object_color(char *color_str, t_object *object,
+bool	parse_object_position(Arena *a, char **parts, t_vector *position);
+bool	parse_object_direction(Arena *a, char **parts, t_vector *direction);
+bool	parse_object_color(Arena *a, char *color_str, t_object *object,
 			bool is_checkered, t_rgb *color_2);
 void	setup_checkered_object(t_object *obj, t_line_context *ctx);
 
@@ -65,14 +65,12 @@ bool	parse_fov(char **parts, int index, int *fov);
 
 /* Basic parsing functions */
 bool	parse_float(char *str, float *result);
-bool	parse_vector(char *str, t_vector *vec);
-bool	parse_normalized_vector(char *str, t_vector *vec);
-bool	parse_rgb(char *str, t_rgb *color);
-bool	parse_dual_rgb(char *str, t_rgb *color_1, t_rgb *color_2);
+bool	parse_vector(Arena *a, char *str, t_vector *vec);
+bool	parse_normalized_vector(Arena *a, char *str, t_vector *vec);
+bool	parse_rgb(Arena *a, char *str, t_rgb *color);
+bool	parse_dual_rgb(Arena *a, char *str, t_rgb *color_1, t_rgb *color_2);
 
 /* String utilities */
-void	free_split(char **arr);
-char	**ft_split_isspace(char const *s);
-bool	trim_line(char **line);
+bool	trim_line(Arena *a, char **line);
 
 #endif

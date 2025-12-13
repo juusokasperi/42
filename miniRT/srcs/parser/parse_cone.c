@@ -12,16 +12,16 @@
 
 #include "mini_rt.h"
 
-static bool	parse_cone_attrs(char **parts, t_object *cone,
+static bool	parse_cone_attrs(Arena *a, char **parts, t_object *cone,
 				t_line_context *ctx)
 {
-	if (!parse_object_position(parts, &cone->data.cylinder.center)
-		|| !parse_object_direction(parts, &cone->data.cylinder.axis)
+	if (!parse_object_position(a, parts, &cone->data.cylinder.center)
+		|| !parse_object_direction(a, parts, &cone->data.cylinder.axis)
 		|| !parse_positive_float(parts, 2, &cone->data.cylinder.radius,
 			"Cone radius must be positive")
 		|| !parse_positive_float(parts, 3, &cone->data.cylinder.height,
 			"Cone height must be positive")
-		|| !parse_object_color(parts[4], cone, ctx->is_checkered,
+		|| !parse_object_color(a, parts[4], cone, ctx->is_checkered,
 			&ctx->color_2))
 		return (false);
 	cone->data.cone.radius /= 2.0;
@@ -34,18 +34,16 @@ bool	parse_cone(char *line, t_line_context *ctx)
 	char			**parts;
 	t_object		*cone;
 	t_data			*data;
+	Arena			*a;
 
 	data = ctx->data;
+	a = &data->arena;
 	if (!line || !data || !validate_object_count(data))
 		return (false);
-	parts = ft_split_isspace(line);
+	parts = arena_split_isspace(a, line);
 	if (!validate_and_init_object(data, &cone, parts, CONE)
-		|| !parse_cone_attrs(parts, cone, ctx))
-	{
-		free_split(parts);
+		|| !parse_cone_attrs(a, parts, cone, ctx))
 		return (false);
-	}
-	free_split(parts);
 	data->scene.object_count++;
 	return (true);
 }

@@ -12,16 +12,16 @@
 
 #include "mini_rt.h"
 
-static bool	parse_cylinder_attrs(char **parts, t_object *cylinder,
+static bool	parse_cylinder_attrs(Arena *a, char **parts, t_object *cylinder,
 				t_line_context *ctx)
 {
-	if (!parse_object_position(parts, &cylinder->data.cylinder.center)
-		|| !parse_object_direction(parts, &cylinder->data.cylinder.axis)
+	if (!parse_object_position(a, parts, &cylinder->data.cylinder.center)
+		|| !parse_object_direction(a, parts, &cylinder->data.cylinder.axis)
 		|| !parse_positive_float(parts, 2, &cylinder->data.cylinder.radius,
 			"Cylinder radius must be positive")
 		|| !parse_positive_float(parts, 3, &cylinder->data.cylinder.height,
 			"Cylinder height must be positive")
-		|| !parse_object_color(parts[4], cylinder, ctx->is_checkered,
+		|| !parse_object_color(a, parts[4], cylinder, ctx->is_checkered,
 			&ctx->color_2))
 		return (false);
 	cylinder->data.cylinder.radius /= 2.0;
@@ -34,18 +34,16 @@ bool	parse_cylinder(char *line, t_line_context *ctx)
 	char			**parts;
 	t_object		*cylinder;
 	t_data			*data;
+	Arena			*a;
 
 	data = ctx->data;
+	a = &data->arena;
 	if (!line || !data || !validate_object_count(data))
 		return (false);
-	parts = ft_split_isspace(line);
+	parts = arena_split_isspace(a, line);
 	if (!validate_and_init_object(data, &cylinder, parts, CYLINDER)
-		|| !parse_cylinder_attrs(parts, cylinder, ctx))
-	{
-		free_split(parts);
+		|| !parse_cylinder_attrs(a, parts, cylinder, ctx))
 		return (false);
-	}
-	free_split(parts);
 	data->scene.object_count++;
 	return (true);
 }

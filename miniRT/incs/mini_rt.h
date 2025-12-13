@@ -21,8 +21,8 @@
 # include <unistd.h> // for read, close.
 # include <fcntl.h> // for open
 # include <ctype.h>
+# include <sys/stat.h> // fstat
 # include "memarena.h"
-# include "libft.h"
 # include "structs.h"
 # include "parser.h"
 # include "bvh.h"
@@ -126,5 +126,10 @@ void			print_cam_info(t_data data);
 //	main.c
 void			cleanup_data(t_data *data);
 void			init_data(t_data *data);
+// arena/ utils 
+char			*arena_strtrim(Arena *a, char const *s1, char const *set);
+char 			**arena_split_isspace(Arena *a, const char *s);
+char			**arena_split(Arena *a, const char *s, const char *delims);
+char			*arena_strdup(Arena *a, const char *s);
 
 #endif

@@ -77,22 +77,22 @@ bool	parse_positive_float(char **parts, int index, float *value,
 	return (true);
 }
 
-bool	parse_object_position(char **parts, t_vector *position)
+bool	parse_object_position(Arena *a, char **parts, t_vector *position)
 {
 	bool	result;
 
 	if (!parts || !parts[0] || !position)
 		return (false);
-	result = parse_vector(parts[0], position);
+	result = parse_vector(a, parts[0], position);
 	return (result);
 }
 
-bool	parse_object_direction(char **parts, t_vector *direction)
+bool	parse_object_direction(Arena *a, char **parts, t_vector *direction)
 {
 	bool	result;
 
 	if (!parts || !parts[1] || !direction)
 		return (false);
-	result = parse_normalized_vector(parts[1], direction);
+	result = parse_normalized_vector(a, parts[1], direction);
 	return (result);
 }

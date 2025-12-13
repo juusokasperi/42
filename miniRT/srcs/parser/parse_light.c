@@ -23,21 +23,19 @@ bool	parse_light(char *line, t_data *data)
 {
 	char	**parts;
 	int		light_idx;
+	Arena	*a;
 
+	a = &data->arena;
 	if (!line || !data || !validate_light_count(data))
 		return (false);
-	parts = ft_split_isspace(line);
+	parts = arena_split_isspace(a, line);
 	light_idx = data->scene.light_count;
 	if (!validate_parts_count(parts, 3, "light")
-		|| !parse_object_position(parts, &data->scene.lights[light_idx].pos)
+		|| !parse_object_position(a, parts, &data->scene.lights[light_idx].pos)
 		|| !parse_ratio(parts, 1, &data->scene.lights[light_idx].ratio,
 			"Light ratio")
-		|| !parse_rgb(parts[2], &data->scene.lights[light_idx].color))
-	{
-		free_split(parts);
+		|| !parse_rgb(a, parts[2], &data->scene.lights[light_idx].color))
 		return (false);
-	}
-	free_split(parts);
 	data->scene.light_count++;
 	return (true);
 }

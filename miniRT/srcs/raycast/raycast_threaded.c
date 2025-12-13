@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "mini_rt.h"
-#include <unistd.h>
 
 void	cleanup_thread_pool(t_data *data)
 {

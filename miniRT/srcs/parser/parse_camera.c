@@ -15,11 +15,13 @@
 static bool	parse_camera_vectors(char **parts, t_data *data)
 {
 	bool	result;
+	Arena	*a;
 
-	result = parse_object_position(parts, &data->cam.pos);
+	a = &data->arena;
+	result = parse_object_position(a, parts, &data->cam.pos);
 	if (!result)
 		return (false);
-	result = parse_object_direction(parts, &data->cam.forward);
+	result = parse_object_direction(a, parts, &data->cam.forward);
 	if (!result)
 		return (false);
 	return (true);
@@ -65,18 +67,16 @@ static void	setup_camera_basis(t_data *data)
 bool	parse_camera(char *line, t_data *data)
 {
 	char	**parts;
+	Arena	*a;
 
+	a = &data->arena;
 	if (!line || !data)
 		return (false);
-	parts = ft_split_isspace(line);
+	parts = arena_split_isspace(a, line);
 	if (!validate_parts_count(parts, 3, "camera")
 		|| !parse_camera_vectors(parts, data)
 		|| !parse_fov(parts, 2, &data->cam.vp.fov))
-	{
-		free_split(parts);
 		return (false);
-	}
 	setup_camera_basis(data);
-	free_split(parts);
 	return (true);
 }

@@ -12,24 +12,17 @@
 
 #include "parser.h"
 
-bool	cleanup(t_data *data)
-{
-	free(data->scene.objects);
-	free(data->scene.lights);
-	return (true);
-}
-
 bool	validate_scene_content(t_data *data)
 {
 	if (data->camera_count > 1)
 	{
 		printf("Error\nScene must contain exactly one camera (C)\n");
-		return (cleanup(data) && false);
+		return (false);
 	}
 	if (data->ambient_count > 1)
 	{
 		printf("Error\nScene must contain max one ambient light (A)\n");
-		return (cleanup(data) && false);
+		return (false);
 	}
 	return (true);
 }
@@ -54,12 +47,11 @@ bool	allocate_scene_memory(t_data *data)
 	return (true);
 }
 
-bool	trim_line(char **line)
+bool	trim_line(Arena *a, char **line)
 {
 	char	*new;
 
-	new = ft_strtrim(*line, " \t\n\r");
-	free(*line);
+	new = arena_strtrim(a, *line, " \t\n\r");
 	if (!new)
 	{
 		*line = NULL;

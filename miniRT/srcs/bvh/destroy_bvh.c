@@ -14,7 +14,6 @@
 
 void	destroy_bvh(t_bvh *bvh)
 {
-	free(bvh->nodes);
 	bvh->nodes = NULL;
 	bvh->node_count = 0;
 }

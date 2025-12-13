@@ -12,22 +12,19 @@
 
 #include "mini_rt.h"
 
-static bool	handle_identifiers(char **parts,
+static bool	handle_identifiers(Arena *a, char **parts,
 	char ***identifier_parts, char **identifier, int *idx)
 {
-	*identifier_parts = ft_split(parts[0], ':');
+	*identifier_parts = arena_split(a, parts[0], ":");
 	if (!*identifier_parts)
 	{
 		printf("Error\nMemory allocation failed\n");
-		free_split(parts);
 		return (false);
 	}
-	*identifier = ft_strdup((*identifier_parts)[0]);
+	*identifier = arena_strdup(a, (*identifier_parts)[0]);
 	if (!*identifier)
 	{
 		printf("Error\nMemory allocation failed\n");
-		free_split(*identifier_parts);
-		free_split(parts);
 		return (false);
 	}
 	*idx = strlen((*identifier_parts)[0]);
@@ -56,7 +53,7 @@ static bool	process_checkered_params(char **identifier_parts,
 	return (true);
 }
 
-bool	parse_identifier(char *line, char **identifier, t_line_context *ctx)
+bool	parse_identifier(Arena *a, char *line, char **identifier, t_line_context *ctx)
 {
 	char	**parts;
 	char	**identifier_parts;
@@ -65,22 +62,12 @@ bool	parse_identifier(char *line, char **identifier, t_line_context *ctx)
 		return (false);
 	ctx->is_checkered = false;
 	ctx->idx = 0;
-	parts = ft_split_isspace(line);
+	parts = arena_split_isspace(a, line);
 	if (!parts || !parts[0])
-	{
-		if (parts)
-			free_split(parts);
 		return (false);
-	}
-	if (!handle_identifiers(parts, &identifier_parts, identifier, &ctx->idx))
+	if (!handle_identifiers(a, parts, &identifier_parts, identifier, &ctx->idx))
 		return (false);
 	if (!process_checkered_params(identifier_parts, ctx))
-	{
-		free_split(identifier_parts);
-		free_split(parts);
 		return (false);
-	}
-	free_split(identifier_parts);
-	free_split(parts);
 	return (true);
 }

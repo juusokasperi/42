@@ -15,17 +15,15 @@
 bool	parse_ambient(char *line, t_data *data)
 {
 	char	**parts;
+	Arena	*a;
 
+	a = &data->arena;
 	if (!line || !data)
 		return (false);
-	parts = ft_split_isspace(line);
+	parts = arena_split_isspace(a, line);
 	if (!validate_parts_count(parts, 2, "ambient light")
 		|| !parse_ratio(parts, 0, &data->ambient.ratio, "Ambient light ratio")
-		|| !parse_rgb(parts[1], &data->ambient.color))
-	{
-		free_split(parts);
+		|| !parse_rgb(a, parts[1], &data->ambient.color))
 		return (false);
-	}
-	free_split(parts);
 	return (true);
 }

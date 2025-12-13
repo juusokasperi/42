@@ -35,7 +35,7 @@ void	setup_checkered_object(t_object *obj, t_line_context *ctx)
 	}
 }
 
-bool	parse_object_color(char *color_str, t_object *object,
+bool	parse_object_color(Arena *a, char *color_str, t_object *object,
 		bool is_checkered, t_rgb *color_2)
 {
 	bool	result;
@@ -43,8 +43,8 @@ bool	parse_object_color(char *color_str, t_object *object,
 	if (!color_str || !object || !color_2)
 		return (false);
 	if (is_checkered)
-		result = parse_dual_rgb(color_str, &object->color, color_2);
+		result = parse_dual_rgb(a, color_str, &object->color, color_2);
 	else
-		result = parse_rgb(color_str, &object->color);
+		result = parse_rgb(a, color_str, &object->color);
 	return (result);
 }
